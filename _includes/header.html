@@ -1,40 +1,5 @@
 <header class="bg-dark-blue text-white font-body shadow-md sticky top-0 z-50">
-    <style>
-    /*
-      Force hide submenus on touch devices.
-      The default browser behavior on some touch devices (like iPad) is to trigger
-      a :hover state on the first tap, which causes the CSS-only dropdowns to
-      appear and get "stuck". This media query targets devices that do not
-      support true hover and forces the submenus to remain hidden, ensuring
-      that a tap always navigates to the link.
-    */
-        .main-nav a {
-        position: relative;
-    }
-    .main-nav a::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: white;
-        transform: scaleX(0);
-        transform-origin: center; /* Animate from the center */
-        transition: transform 0.3s ease-out;
-    }
-    .main-nav a.active::after {
-        transform: scaleX(1);
-    }
 
-    @media (hover: none) {
-        .main-nav .group:hover > ul {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transform: translateY(0.25rem) !important; /* Corresponds to translate-y-1 */
-        }
-    }
-</style>
     <!-- Top Bar -->
     <div class="bg-dark-blue text-white">
         <div class="max-w-6xl mx-auto px-5 h-20 flex justify-between items-center">

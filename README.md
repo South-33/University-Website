@@ -17,7 +17,9 @@ Welcome to the university website project! This is a static website built with H
 
 1.  **Dynamic Header & Footer:** Instead of repeating HTML, each page uses placeholders (`<div id="header-placeholder"></div>`). The `js/main.js` script fetches the content from `_includes/header.html` and `_includes/footer.html` and injects it into the page on load.
 
-2.  **Centralized Styling:** The entire site's look and feel is controlled by Tailwind CSS. To change a color or font everywhere, you only need to edit `js/theme.js`.
+2.  **Centralized Styling:** The site's look and feel is controlled by a combination of Tailwind CSS and a central stylesheet.
+    -   **Theme Configuration:** Site-wide colors and fonts are defined in `js/theme.js` for Tailwind CSS.
+    -   **Global Component Styles:** Custom styles for shared components, like the navigation menu and dropdown animations, are centralized in `css/main.css`. This ensures a consistent appearance and behavior across all pages.
 
 3.  **Centralized Scripts:** All interactive features, like the navigation menu, are managed in `js/main.js`. This avoids code duplication and makes updates easy.
 
@@ -33,4 +35,7 @@ Welcome to the university website project! This is a static website built with H
     -   From `index.html`, link to them using `Picture/your-image.png`.
     -   From a page in a subdirectory (e.g., `/programs/undergraduate.html`), link to them using `../Picture/your-image.png`.
 -   **Modifying Navigation:** To change the navigation links, edit `_includes/header.html`.
--   **Modifying Styles:** To change site-wide styles, edit `js/theme.js`. For page-specific styles, add a `<style>` tag to the HTML file's `<head>`.
+-   **Modifying Styles:**
+    -   To change site-wide **colors and fonts**, edit `js/theme.js`.
+    -   To modify or add styles for **global components** (like the header or navigation), edit `css/main.css`.
+    -   Avoid adding page-specific `<style>` blocks. If a component needs unique styling, first consider if it can be a reusable utility class in Tailwind or a new component style in `css/main.css`.

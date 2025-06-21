@@ -12,6 +12,7 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/main.css">
 
     <!-- Page Transition Styles -->
     <link rel="stylesheet" href="../css/transition.css">
@@ -34,105 +35,7 @@
         }
     </script>
 
-    <!-- Custom Styles for Animations and Components -->
-    <style>
-        /* Hamburger Menu Animation */
-        .hamburger {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background-color: white;
-            position: relative;
-            transition: background-color 0.3s ease-out;
-        }
-        .hamburger::before,
-        .hamburger::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background-color: white;
-            left: 0;
-            transition: transform 0.3s ease-out;
-        }
-        .hamburger::before {
-            top: -8px;
-        }
-        .hamburger::after {
-            bottom: -8px;
-        }
-        .nav-toggle.is-active .hamburger {
-            background-color: transparent;
-        }
-        .nav-toggle.is-active .hamburger::before {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-        .nav-toggle.is-active .hamburger::after {
-            transform: rotate(-45deg) translate(5px, -6px);
-        }
-        .dropdown-menu {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            text-align: center; /* Center-align submenu items */
-            /* A very fast, responsive closing animation */
-            transition: max-height 0.2s ease-out, opacity 0.1s ease-out;
-        }
 
-        /* Style submenu items for clarity */
-        .dropdown-menu a {
-            font-size: 1rem;
-            opacity: 0.9;
-            padding: 0.5rem 0;
-            position: relative; /* Establish positioning context for the hyphen */
-            display: inline-block; /* Allow centering of the link itself */
-        }
-
-        /* Add a hyphen before each submenu item for clarity */
-        .dropdown-menu a::before {
-            content: "-";
-            position: absolute;
-            right: 100%; /* Position to the immediate left of the text */
-            margin-right: 0.5em; /* Add a small gap */
-            /* Vertically center the hyphen relative to the text */
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .dropdown-menu.is-open {
-            opacity: 1;
-            max-height: 500px; /* Adjust if submenus are taller */
-            /* Smooth opening animation */
-            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
-        }
-
-        /* Mobile dropdown alignment */
-        .mobile-dropdown-link {
-            position: relative; /* Establish positioning context for the arrow */
-            display: inline-block; /* Ensure it doesn't take full width */
-        }
-        .mobile-dropdown-link .arrow {
-            position: absolute;
-            right: 100%; /* Position to the left of the text */
-            top: 50%;
-            transform: translateY(-50%) rotate(0deg); /* Point right by default */
-            margin-right: 0.5em; /* Add a small gap */
-            font-size: 0.8em;
-            transition: transform 0.3s ease-out;
-        }
-        .mobile-dropdown-link .arrow.is-open {
-            transform: translateY(-50%) rotate(90deg); /* Point down when open */
-        }
-
-        /* Dim inactive items when a submenu is open */
-        #mobile-menu ul.has-active-submenu > li {
-            opacity: 0.5;
-            transition: opacity 0.3s ease-out;
-        }
-        #mobile-menu ul.has-active-submenu > li.submenu-active {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body class="bg-white">
 

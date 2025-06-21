@@ -77,5 +77,6 @@
     - All shared, interactive logic **must** be added to `js/main.js`.
 
 4.  **Styling:**
-    - For site-wide style changes (e.g., changing the primary color), modify `js/theme.js`.
-    - For styles specific to a single page, use a `<style>` tag within that page's `<head>`.
+    - **Theme Configuration (`js/theme.js`):** For site-wide style changes related to the Tailwind theme (e.g., changing the primary color, fonts), modify `js/theme.js`.
+    - **Global Component Styles (`css/main.css`):** For custom styles applied to shared components across the site (e.g., header animations, dropdown menus), use the central stylesheet at `css/main.css`.
+    - **Inline Styles:** Avoid adding inline `<script>` or `<style>` blocks. All global styles have been centralized into `css/main.css` to ensure consistency and maintainability. Page-specific styles should be used sparingly and only if a component's style cannot be generalized..

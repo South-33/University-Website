@@ -33,47 +33,7 @@
     </script>
 
     <!-- Custom Styles for Animations and Components -->
-    <style>
-        /* Hamburger Menu Animation */
-        .hamburger {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background-color: white;
-            position: relative;
-            transition: background-color 0.3s ease-out;
-        }
-        .hamburger::before,
-        .hamburger::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background-color: white;
-            left: 0;
-            transition: transform 0.3s ease-out;
-        }
-        .hamburger::before {
-            top: -8px;
-        }
-        .hamburger::after {
-            bottom: -8px;
-        }
-        .nav-toggle.is-active .hamburger {
-            background-color: transparent;
-        }
-        .nav-toggle.is-active .hamburger::before {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-        .nav-toggle.is-active .hamburger::after {
-            transform: rotate(-45deg) translate(5px, -6px);
-        }
-        .dropdown-menu {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            text-align: center; /* Center-align submenu items */
-            /* A very fast, responsive closing animation */
+    <link rel="stylesheet" href="css/main.css">
             transition: max-height 0.2s ease-out, opacity 0.1s ease-out;
         }
 

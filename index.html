@@ -9,113 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/theme.js"></script>
-    <style>
-        /* Hamburger Menu Animation */
-        .hamburger {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background-color: white;
-            position: relative;
-            transition: background-color 0.3s ease-out;
-        }
-        .hamburger::before,
-        .hamburger::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background-color: white;
-            left: 0;
-            transition: transform 0.3s ease-out;
-        }
-        .hamburger::before {
-            top: -8px;
-        }
-        .hamburger::after {
-            bottom: -8px;
-        }
-        .nav-toggle.is-active .hamburger {
-            background-color: transparent;
-        }
-        .nav-toggle.is-active .hamburger::before {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-        .nav-toggle.is-active .hamburger::after {
-            transform: rotate(-45deg) translate(5px, -6px);
-        }
-        .dropdown-menu {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            text-align: center; /* Center-align submenu items */
-            /* A very fast, responsive closing animation */
-            transition: max-height 0.2s ease-out, opacity 0.1s ease-out;
-        }
-
-        /* Style submenu items for clarity */
-        .dropdown-menu a {
-            font-size: 1rem;
-            opacity: 0.9;
-            padding: 0.5rem 0;
-            position: relative; /* Establish positioning context for the hyphen */
-            display: inline-block; /* Allow centering of the link itself */
-        }
-
-        /* Add a hyphen before each submenu item for clarity */
-        .dropdown-menu a::before {
-            content: "-";
-            position: absolute;
-            right: 100%; /* Position to the immediate left of the text */
-            margin-right: 0.5em; /* Add a small gap */
-            /* Vertically center the hyphen relative to the text */
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .dropdown-menu.is-open {
-            opacity: 1;
-            max-height: 500px; /* Adjust if submenus are taller */
-            /* Smooth opening animation */
-            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
-        }
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        /* Mobile dropdown alignment */
-        .mobile-dropdown-link {
-            position: relative; /* Establish positioning context for the arrow */
-            display: inline-block; /* Ensure it doesn't take full width */
-        }
-        .mobile-dropdown-link .arrow {
-            position: absolute;
-            right: 100%; /* Position to the left of the text */
-            top: 50%;
-            transform: translateY(-50%) rotate(0deg); /* Point right by default */
-            margin-right: 0.5em; /* Add a small gap */
-            font-size: 0.8em;
-            transition: transform 0.3s ease-out;
-        }
-        .mobile-dropdown-link .arrow.is-open {
-            transform: translateY(-50%) rotate(90deg); /* Point down when open */
-        }
-
-        /* Dim inactive items when a submenu is open */
-        #mobile-menu ul.has-active-submenu > li {
-            opacity: 0.5;
-            transition: opacity 0.3s ease-out;
-        }
-        #mobile-menu ul.has-active-submenu > li.submenu-active {
-            opacity: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="bg-light-lavender">
-
-    <!-- Facebook SDK for Page Plugin -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="A5B1C2D3"></script>
 
     <div id="header-placeholder"></div>
 
@@ -217,38 +113,50 @@
             </div>
         </section>
 
-        <section class="bg-white py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="font-heading text-4xl text-dark-blue">Recent Highlights</h2>
-                    <a href="#" class="text-dark-blue font-semibold hover:underline">See More →</a>
-                </div>
-                <article>
-                    <p class="text-gray-500 text-sm mb-2">May 10, 2025</p>
-                    <h3 class="font-heading text-3xl text-dark-blue mb-3">Online Seminar on Thesis Writing</h3>
-                    <p class="text-gray-700">The National University of Management-School of Public Policy (NUM-SPP) held an online seminar focused on sharing experiences in writing master’s and doctoral theses. The session was aimed at students of the Master of Public Policy and Master of Science in Digital Economy programs. <a href="https://spp.num.edu.kh/" class="text-dark-blue font-semibold hover:underline">Read More</a></p>
-                </article>
-            </div>
-        </section>
-        
-
             <section id="recent-highlights" class="bg-white py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5 text-center">
-                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-12">Recent Highlights & News</h2>
-                <div class="flex justify-center">
-                    <div class="fb-page" 
-                         data-href="https://www.facebook.com/num.edu.kh" 
-                         data-tabs="timeline" 
-                         data-width="500" 
-                         data-height="600" 
-                         data-small-header="false" 
-                         data-adapt-container-width="true" 
-                         data-hide-cover="false" 
-                         data-show-facepile="true">
-                        <blockquote cite="https://www.facebook.com/num.edu.kh" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/num.edu.kh">National University of Management</a>
-                        </blockquote>
+            <div class="max-w-6xl mx-auto px-5">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-12 text-center">Recent Highlights & News</h2>
+                
+                <!-- Highlights Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+
+                    <!-- Highlight Card 1 -->
+                    <div class="bg-light-lavender rounded-[20px] overflow-hidden flex flex-col group">
+                        <img src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Guest Lecture on Logistics" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="font-heading text-xl text-dark-blue mb-2">Guest Lecture on Logistics</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow">Join our upcoming guest lecture on Logistics Practices in Cambodia, covering customs clearance and container transport. A great opportunity for students to gain industry insights.</p>
+                            <a href="https://www.facebook.com/photo/?fbid=888494116642299&set=a.624959129662467" target="_blank" class="text-dark-blue font-bold self-start mt-4">Read More →</a>
+                        </div>
                     </div>
+
+                    <!-- Highlight Card 2: Placeholder -->
+                    <div class="bg-light-lavender rounded-[20px] overflow-hidden flex flex-col group">
+                        <img src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Placeholder Image" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="font-heading text-xl text-dark-blue mb-2">New Scholarship Opportunities</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow">We are excited to announce new scholarship programs for the upcoming academic year. Discover how you can apply and fund your education at NUM.</p>
+                            <a href="#" target="_blank" class="text-dark-blue font-bold self-start mt-4">Read More →</a>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Card 3: Placeholder -->
+                    <div class="bg-light-lavender rounded-[20px] overflow-hidden flex flex-col group">
+                        <img src="https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Placeholder Image" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="font-heading text-xl text-dark-blue mb-2">Campus Career Fair</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow">Connect with leading companies and explore internship and job opportunities at our annual career fair. Don't miss this chance to kickstart your career.</p>
+                            <a href="#" target="_blank" class="text-dark-blue font-bold self-start mt-4">Read More →</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- See More Button -->
+                <div class="text-center">
+                    <a href="https://www.facebook.com/num.edu.kh" target="_blank" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">
+                        See More on Facebook
+                    </a>
                 </div>
             </div>
         </section>
