@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs - National University of Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#0A0A3E',
+                        'light-lavender': '#E9E8F5',
+                    },
+                    fontFamily: {
+                        heading: ['Lora', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hamburger { display: block; width: 25px; height: 2px; background-color: white; position: relative; transition: background-color 0.3s ease-out; }
+        .hamburger::before, .hamburger::after { content: ''; position: absolute; width: 100%; height: 2px; background-color: white; left: 0; transition: transform 0.3s ease-out; }
+        .hamburger::before { top: -8px; }
+        .hamburger::after { bottom: -8px; }
+        .nav-toggle.is-active .hamburger { background-color: transparent; }
+        .nav-toggle.is-active .hamburger::before { transform: rotate(45deg) translate(5px, 6px); }
+        .nav-toggle.is-active .hamburger::after { transform: rotate(-45deg) translate(5px, -6px); }
+        .dropdown-menu { max-height: 0; overflow: hidden; opacity: 0; text-align: center; transition: max-height 0.2s ease-out, opacity 0.1s ease-out; }
+        .dropdown-menu a { font-size: 1rem; opacity: 0.9; padding: 0.5rem 0; position: relative; display: inline-block; }
+        .dropdown-menu a::before { content: "-"; position: absolute; right: 100%; margin-right: 0.5em; top: 50%; transform: translateY(-50%); }
+        .dropdown-menu.is-open { opacity: 1; max-height: 500px; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in; }
+        .mobile-dropdown-link { position: relative; display: inline-block; }
+        .mobile-dropdown-link .arrow { position: absolute; right: 100%; top: 50%; transform: translateY(-50%) rotate(0deg); margin-right: 0.5em; font-size: 0.8em; transition: transform 0.3s ease-out; }
+        .mobile-dropdown-link .arrow.is-open { transform: translateY(-50%) rotate(90deg); }
+        #mobile-menu ul.has-active-submenu > li { opacity: 0.5; transition: opacity 0.3s ease-out; }
+        #mobile-menu ul.has-active-submenu > li.submenu-active { opacity: 1; }
+    </style>
+</head>
+<body class="bg-white">
+    <div id="header-placeholder"></div>
+    <main>
+        <div class="bg-white pt-28 pb-16">
+            <div class="max-w-6xl mx-auto px-5 text-center">
+                <h1 class="text-4xl md:text-5xl font-heading text-dark-blue">Our Academic Programs</h1>
+                <p class="text-lg text-gray-700 font-body mt-4 max-w-3xl mx-auto">
+                    Explore our diverse range of programs designed to foster innovation, critical thinking, and leadership, from undergraduate studies to doctoral research.
+                </p>
+            </div>
+        </div>
+        <div class="bg-light-lavender py-20">
+            <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-3 gap-10">
+                <a href="/programs/undergraduate.html" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <h2 class="text-2xl font-heading text-dark-blue">Undergraduate</h2>
+                    <p class="mt-2 font-body text-gray-600 min-h-[7rem]">Build a strong foundation for your career with our comprehensive bachelor's degrees.</p>
+                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                </a>
+                <a href="/programs/graduate.html" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <h2 class="text-2xl font-heading text-dark-blue">Graduate</h2>
+                    <p class="mt-2 font-body text-gray-600 min-h-[7rem]">Advance your expertise and career opportunities with our specialized master's programs.</p>
+                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                </a>
+                <a href="/programs/doctoral.html" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <h2 class="text-2xl font-heading text-dark-blue">Doctoral</h2>
+                    <p class="mt-2 font-body text-gray-600 min-h-[7rem]">Engage in cutting-edge research and contribute to your field with our doctoral programs.</p>
+                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../js/main.js" data-base-path=".."></script>
+</body>
+</html>

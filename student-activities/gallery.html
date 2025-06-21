@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - National University of Management</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <!-- Tailwind CSS Theme Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#0A0A3E',
+                        'light-lavender': '#E9E8F5',
+                    },
+                    fontFamily: {
+                        heading: ['Lora', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles for Animations and Components -->
+    <style>
+        /* Hamburger Menu Animation */
+        .hamburger {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: white;
+            position: relative;
+            transition: background-color 0.3s ease-out;
+        }
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            left: 0;
+            transition: transform 0.3s ease-out;
+        }
+        .hamburger::before {
+            top: -8px;
+        }
+        .hamburger::after {
+            bottom: -8px;
+        }
+        .nav-toggle.is-active .hamburger {
+            background-color: transparent;
+        }
+        .nav-toggle.is-active .hamburger::before {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .nav-toggle.is-active .hamburger::after {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+        .dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            text-align: center; /* Center-align submenu items */
+            /* A very fast, responsive closing animation */
+            transition: max-height 0.2s ease-out, opacity 0.1s ease-out;
+        }
+
+        /* Style submenu items for clarity */
+        .dropdown-menu a {
+            font-size: 1rem;
+            opacity: 0.9;
+            padding: 0.5rem 0;
+            position: relative; /* Establish positioning context for the hyphen */
+            display: inline-block; /* Allow centering of the link itself */
+        }
+
+        /* Add a hyphen before each submenu item for clarity */
+        .dropdown-menu a::before {
+            content: "-";
+            position: absolute;
+            right: 100%; /* Position to the immediate left of the text */
+            margin-right: 0.5em; /* Add a small gap */
+            /* Vertically center the hyphen relative to the text */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dropdown-menu.is-open {
+            opacity: 1;
+            max-height: 500px; /* Adjust if submenus are taller */
+            /* Smooth opening animation */
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
+        }
+
+        /* Mobile dropdown alignment */
+        .mobile-dropdown-link {
+            position: relative; /* Establish positioning context for the arrow */
+            display: inline-block; /* Ensure it doesn't take full width */
+        }
+        .mobile-dropdown-link .arrow {
+            position: absolute;
+            right: 100%; /* Position to the left of the text */
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg); /* Point right by default */
+            margin-right: 0.5em; /* Add a small gap */
+            font-size: 0.8em;
+            transition: transform 0.3s ease-out;
+        }
+        .mobile-dropdown-link .arrow.is-open {
+            transform: translateY(-50%) rotate(90deg); /* Point down when open */
+        }
+
+        /* Dim inactive items when a submenu is open */
+        #mobile-menu ul.has-active-submenu > li {
+            opacity: 0.5;
+            transition: opacity 0.3s ease-out;
+        }
+        #mobile-menu ul.has-active-submenu > li.submenu-active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- 
+        ===================================================================
+        YOUR PAGE CONTENT GOES HERE
+        ===================================================================
+        
+        Instructions:
+        1. Copy this file and rename it (e.g., "about-us.html").
+        2. Place it in the "pages" directory.
+        3. Change the <title> in the <head> to match your new page.
+        4. Add your HTML content inside this <main> tag.
+        
+        Everything else (header, footer, styles, scripts) will
+        be handled automatically.
+        -->
+
+        <div class="h-screen flex items-center justify-center">
+            <h1 class="text-4xl font-heading text-dark-blue">Your Content Here</h1>
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <!-- Site-wide Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const headerPlaceholder = document.getElementById('header-placeholder');
+            const footerPlaceholder = document.getElementById('footer-placeholder');
+
+            // Base path for includes, relative to the root
+            const basePath = '/';
+
+            if (headerPlaceholder) {
+                fetch(basePath + '_includes/header.html')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok for header.html');
+                        return response.text();
+                    })
+                    .then(data => {
+                        headerPlaceholder.innerHTML = data;
+                        initializeHeaderScripts();
+                    })
+                    .catch(error => console.error('Error fetching header:', error));
+            }
+
+            if (footerPlaceholder) {
+                fetch(basePath + '_includes/footer.html')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok for footer.html');
+                        return response.text();
+                    })
+                    .then(data => {
+                        footerPlaceholder.innerHTML = data;
+                    })
+                    .catch(error => console.error('Error fetching footer:', error));
+            }
+
+            function initializeHeaderScripts() {
+                const navToggle = document.querySelector('.nav-toggle');
+                const nav = document.querySelector('#mobile-menu');
+                if (navToggle && nav) {
+                    navToggle.addEventListener('click', () => {
+                        navToggle.style.pointerEvents = 'none';
+                        nav.classList.toggle('translate-x-full');
+                        const isVisible = !nav.classList.contains('translate-x-full');
+                        navToggle.classList.toggle('is-active');
+                        document.body.style.overflow = isVisible ? 'hidden' : 'auto';
+                        setTimeout(() => {
+                            navToggle.style.pointerEvents = 'auto';
+                        }, 300);
+                    });
+                }
+
+                const dropdowns = document.querySelectorAll('#mobile-menu .dropdown > a');
+                dropdowns.forEach(dropdownLink => {
+                    dropdownLink.classList.add('mobile-dropdown-link');
+                    if (dropdownLink.querySelector('.arrow') === null) {
+                        const arrow = document.createElement('span');
+                        arrow.classList.add('arrow');
+                        arrow.innerHTML = '&#8250;'; 
+                        dropdownLink.appendChild(arrow);
+                    }
+                    dropdownLink.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 1024) {
+                            e.preventDefault();
+                            const parentLi = this.closest('li');
+                            const menu = parentLi.querySelector('.dropdown-menu');
+                            const arrow = this.querySelector('.arrow');
+                            const mobileMenuList = document.querySelector('#mobile-menu ul');
+                            if (menu && mobileMenuList) {
+                                const isAlreadyOpen = menu.classList.contains('is-open');
+                                if (isAlreadyOpen) {
+                                    menu.classList.remove('is-open');
+                                    arrow.classList.remove('is-open');
+                                    parentLi.classList.remove('submenu-active');
+                                } else {
+                                    document.querySelectorAll('.dropdown-menu.is-open').forEach(openMenu => {
+                                        const openParentLi = openMenu.closest('li');
+                                        const openArrow = openParentLi.querySelector('.arrow');
+                                        openMenu.classList.remove('is-open');
+                                        if (openArrow) openArrow.classList.remove('is-open');
+                                        openParentLi.classList.remove('submenu-active');
+                                    });
+                                    menu.classList.add('is-open');
+                                    arrow.classList.add('is-open');
+                                    parentLi.classList.add('submenu-active');
+                                }
+                                if (document.querySelector('#mobile-menu .submenu-active')) {
+                                    mobileMenuList.classList.add('has-active-submenu');
+                                } else {
+                                    mobileMenuList.classList.remove('has-active-submenu');
+                                }
+                            }
+                        }
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.dropdown')) {
+                        document.querySelectorAll('.dropdown-menu.is-open').forEach(menu => menu.classList.remove('is-open'));
+                        document.querySelectorAll('.mobile-dropdown-link .arrow.is-open').forEach(arrow => arrow.classList.remove('is-open'));
+                        document.querySelectorAll('#mobile-menu li.submenu-active').forEach(li => li.classList.remove('submenu-active'));
+                        const mobileMenuList = document.querySelector('#mobile-menu ul');
+                        if (mobileMenuList) {
+                            mobileMenuList.classList.remove('has-active-submenu');
+                        }
+                    }
+                });
+
+                const tabletNavContainer = document.querySelector('header .lg\:hidden nav');
+                if (tabletNavContainer) {
+                    const tabletNavLinks = tabletNavContainer.querySelectorAll('a');
+                    tabletNavLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            if (window.innerWidth > 1024) return;
+                            e.preventDefault();
+                            const targetText = this.textContent.trim();
+                            const mobileMenu = document.querySelector('#mobile-menu');
+                            const navToggle = document.querySelector('.nav-toggle');
+                            const isMenuOpen = !mobileMenu.classList.contains('translate-x-full');
+                            if (!isMenuOpen) {
+                                navToggle.click();
+                            }
+                            setTimeout(() => {
+                                const mobileDropdownLinks = mobileMenu.querySelectorAll('.mobile-dropdown-link');
+                                mobileDropdownLinks.forEach(mobileLink => {
+                                    const linkTextOnly = mobileLink.cloneNode(true);
+                                    const arrow = linkTextOnly.querySelector('.arrow');
+                                    if (arrow) arrow.remove();
+                                    if (linkTextOnly.textContent.trim() === targetText) {
+                                        const parentLi = mobileLink.closest('li');
+                                        const submenu = parentLi.querySelector('.dropdown-menu');
+                                        if (submenu && !submenu.classList.contains('is-open')) {
+                                            mobileLink.click();
+                                        }
+                                    }
+                                });
+                            }, 350);
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

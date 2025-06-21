@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National University of Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/theme.js"></script>
+    <style>
+        /* Hamburger Menu Animation */
+        .hamburger {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: white;
+            position: relative;
+            transition: background-color 0.3s ease-out;
+        }
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            left: 0;
+            transition: transform 0.3s ease-out;
+        }
+        .hamburger::before {
+            top: -8px;
+        }
+        .hamburger::after {
+            bottom: -8px;
+        }
+        .nav-toggle.is-active .hamburger {
+            background-color: transparent;
+        }
+        .nav-toggle.is-active .hamburger::before {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .nav-toggle.is-active .hamburger::after {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+        .dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            text-align: center; /* Center-align submenu items */
+            /* A very fast, responsive closing animation */
+            transition: max-height 0.2s ease-out, opacity 0.1s ease-out;
+        }
+
+        /* Style submenu items for clarity */
+        .dropdown-menu a {
+            font-size: 1rem;
+            opacity: 0.9;
+            padding: 0.5rem 0;
+            position: relative; /* Establish positioning context for the hyphen */
+            display: inline-block; /* Allow centering of the link itself */
+        }
+
+        /* Add a hyphen before each submenu item for clarity */
+        .dropdown-menu a::before {
+            content: "-";
+            position: absolute;
+            right: 100%; /* Position to the immediate left of the text */
+            margin-right: 0.5em; /* Add a small gap */
+            /* Vertically center the hyphen relative to the text */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dropdown-menu.is-open {
+            opacity: 1;
+            max-height: 500px; /* Adjust if submenus are taller */
+            /* Smooth opening animation */
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Mobile dropdown alignment */
+        .mobile-dropdown-link {
+            position: relative; /* Establish positioning context for the arrow */
+            display: inline-block; /* Ensure it doesn't take full width */
+        }
+        .mobile-dropdown-link .arrow {
+            position: absolute;
+            right: 100%; /* Position to the left of the text */
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg); /* Point right by default */
+            margin-right: 0.5em; /* Add a small gap */
+            font-size: 0.8em;
+            transition: transform 0.3s ease-out;
+        }
+        .mobile-dropdown-link .arrow.is-open {
+            transform: translateY(-50%) rotate(90deg); /* Point down when open */
+        }
+
+        /* Dim inactive items when a submenu is open */
+        #mobile-menu ul.has-active-submenu > li {
+            opacity: 0.5;
+            transition: opacity 0.3s ease-out;
+        }
+        #mobile-menu ul.has-active-submenu > li.submenu-active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+                <section id="hero" class="relative flex items-center justify-center text-center text-white overflow-hidden">
+            <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover object-top z-0">
+                <source src="/Video/NumdronestableboomerangCompressed.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- Hero Content -->
+            <div class="relative z-20 flex flex-col items-center justify-center h-full w-full">
+                <!-- Centered Title -->
+                <h1 class="font-heading text-4xl md:text-6xl text-center mb-8 drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">National University of Management</h1>
+                
+                <!-- Lower Third Explore Link -->
+                <div class="absolute bottom-16">
+                    <a href="#intro" class="explore-link flex flex-col items-center gap-4 text-3xl uppercase tracking-[2px] text-white drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+                        <span>Explore</span>
+                        <span class="animate-bounce text-[2.7rem]">↓</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+                        <section id="intro" class="bg-light-lavender py-20">
+            <div class="max-w-6xl mx-auto px-5 text-center">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue leading-tight">National University of Management: <br>Research, Entrepreneurship, and Innovation</h2>
+            </div>
+        </section>
+
+        <section class="bg-white py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-8">
+                <!-- Welcome Card -->
+                <div class="relative flex items-end p-10 text-white rounded-[20px] bg-cover bg-center min-h-[500px]" style="background-image: url('https://images.pexels.com/photos/764529/pexels-photo-764529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-[20px]"></div>
+                    <div class="relative z-10 flex flex-col justify-end h-full">
+                        <div class="mt-auto">
+                            <h4 class="font-heading text-2xl mb-4">Our Mission & Vision</h4>
+                            <p class="mb-6">We are committed to developing competent and socially responsible human resources with high intellectual knowledge, skills, and ethics. Our key mission is to improve and apply the best quality standards in education, research, and innovation, transforming NUM into a leading research university in entrepreneurship and innovation.</p>
+                            <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-8">
+                    <!-- Visit Card -->
+                    <div class="bg-dark-blue text-white p-10 rounded-[20px]">
+                        <h4 class="font-heading text-3xl mb-4">Arrange a Personal Visit</h4>
+                        <p class="mb-6">Experience NUM Academy firsthand. Tailored to your child's interests and admission stage, we offer visits year-round, from Nursery to Prep School.</p>
+                        <a href="#" class="bg-transparent border border-white text-white rounded-full px-8 py-3 inline-block font-medium hover:bg-white hover:text-dark-blue transition-colors">Arrange a Visit</a>
+                    </div>
+                    
+                    <!-- Admissions Group -->
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8">
+                        <div class="bg-dark-blue rounded-[20px] flex w-full h-full">
+                            <img src="https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg?auto=compress&w=1000&q=80" alt="Campus Life" class="w-full h-full object-cover rounded-[20px]">
+                        </div>
+                        <div class="bg-light-lavender text-dark-blue p-10 rounded-[20px]">
+                            <h4 class="font-heading text-3xl mb-4">Admissions</h4>
+                            <p class="mb-6">Selecting the ideal educational environment for your child is a significant and profound choice.</p>
+                            <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-light-lavender py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-stretch">
+                <div class="text-dark-blue">
+                    <h3 class="font-heading text-5xl mb-6">The Ethos and the Environment</h3>
+                    <p class="mb-6">At NUM Academy, our ethos goes beyond academia. We believe in nurturing the whole child, promoting resilience, creativity, and global awareness. Set against the backdrop of Kent's natural beauty, our campus offers an environment where students are inspired daily, both by the lessons in the classroom and the serenity outside.</p>
+                    <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
+                </div>
+                <div class="h-full flex">
+                    <img src="Picture/School/num_front.jpg" alt="Happy students waving" class="w-full h-full rounded-[20px] block object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 text-center text-white bg-cover bg-center font-body" style="background-image: linear-gradient(rgba(10, 10, 62, 0.85), rgba(10, 10, 62, 0.85)), url('https://images.pexels.com/photos/1206101/pexels-photo-1206101.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <div class="max-w-3xl mx-auto px-5">
+                <h3 class="font-heading text-5xl mb-6">Why Choose NUM?</h3>
+                <p class="text-lg mb-8">At the National University of Management, we are committed to fostering a dynamic and supportive learning environment. Our experienced faculty, modern facilities, and industry-aligned curriculum ensure that our students receive a world-class education. We emphasize practical skills, critical thinking, and innovation to prepare our graduates for the challenges of the global workforce.</p>
+                <a href="#" class="bg-transparent border border-white text-white rounded-full px-8 py-3 inline-block font-medium hover:bg-white hover:text-dark-blue transition-colors">Explore Programs</a>
+            </div>
+        </section>
+
+        <section class="font-body">
+            <div class="grid lg:grid-cols-2">
+                <div class="bg-dark-blue text-white flex items-center justify-center py-20">
+                    <div class="max-w-md px-5">
+                        <h3 class="font-heading text-5xl mb-6">Academic Excellence</h3>
+                        <p class="mb-8">Discover our comprehensive range of degree programs designed to meet the demands of today's job market. From Business Administration to Information Technology, our curriculum combines theoretical knowledge with practical application. Join over 15,000 students who have chosen NUM for quality education and career success.</p>
+                        <a href="#" class="bg-transparent border border-white text-white rounded-full px-8 py-3 inline-block font-medium hover:bg-white hover:text-dark-blue transition-colors">View Programs</a>
+                    </div>
+                </div>
+                <div class="bg-cover bg-center min-h-[400px] lg:min-h-0" style="background-image: url('https://images.pexels.com/photos/1618903/pexels-photo-1618903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');"></div>
+            </div>
+        </section>
+
+        <section class="bg-white py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="font-heading text-4xl text-dark-blue">Recent Highlights</h2>
+                    <a href="#" class="text-dark-blue font-semibold hover:underline">See More →</a>
+                </div>
+                <article>
+                    <p class="text-gray-500 text-sm mb-2">May 10, 2025</p>
+                    <h3 class="font-heading text-3xl text-dark-blue mb-3">Online Seminar on Thesis Writing</h3>
+                    <p class="text-gray-700">The National University of Management-School of Public Policy (NUM-SPP) held an online seminar focused on sharing experiences in writing master’s and doctoral theses. The session was aimed at students of the Master of Public Policy and Master of Science in Digital Economy programs. <a href="https://spp.num.edu.kh/" class="text-dark-blue font-semibold hover:underline">Read More</a></p>
+                </article>
+            </div>
+        </section>
+        
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script src="js/main.js" data-base-path="."></script>
+
+
+</body>
+</html>
