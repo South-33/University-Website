@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadHeader.then(() => {
         // Initialize navigation and transitions immediately after header is ready.
         initializeNavigation();
+        initializeSearch(basePath); // Initialize site search
         initializePageTransitions(triggerPageAnimations); // Pass the animation function to the SPA loader
 
         // Adjust layout after all page resources (images, etc.) are loaded to ensure correct height.
@@ -252,5 +253,117 @@ document.addEventListener('DOMContentLoaded', function() {
             setHeroHeight();
             window.addEventListener('resize', setHeroHeight);
         }
+    }
+
+    function initializeSearch(basePath) {
+        let fuse = null;
+        let searchResults = [];
+        const searchInput = document.querySelector('input[type="search"]');
+        
+        if (!searchInput) {
+            console.warn('Search input with type="search" not found.');
+            return;
+        }
+
+        const searchContainer = searchInput.parentNode;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden';
+        document.body.appendChild(overlay);
+
+        const searchResultsContainer = document.createElement('div');
+        searchResultsContainer.className = 'fixed hidden bg-white shadow-2xl rounded-lg z-50 border border-dark-blue/10 overflow-y-auto max-h-[70vh]';
+        document.body.appendChild(searchResultsContainer);
+
+        fetch(`${basePath}/js/search-index.json`)
+            .then(response => response.json())
+            .then(data => {
+                fuse = new Fuse(data, {
+                    keys: ['title', 'description', 'tags'],
+                    includeScore: true,
+                    threshold: 0.4,
+                    minMatchCharLength: 2,
+                });
+                console.log('Search index loaded:', data.length, 'items.');
+            }).catch(error => console.error('Error loading search index:', error));
+
+        const renderResults = (results) => {
+            searchResultsContainer.innerHTML = '';
+            if (results.length === 0) return;
+
+            const ul = document.createElement('ul');
+            const limitedResults = results.slice(0, 10);
+            limitedResults.forEach((result, index) => {
+                const { item } = result;
+                const li = document.createElement('li');
+                if (index < limitedResults.length - 1) {
+                    li.classList.add('border-b', 'border-dark-blue/5');
+                }
+                const fullUrl = new URL(item.url, window.location.origin).href;
+                li.innerHTML = `
+                    <a href="${fullUrl}" class="block w-full px-5 py-3 hover:bg-light-lavender/60 transition-colors duration-150">
+                        <span class="font-body font-medium text-dark-blue">${item.title}</span>
+                        <span class="block text-sm text-dark-blue/70 font-body mt-1">${item.description || ''}</span>
+                    </a>
+                `;
+                ul.appendChild(li);
+            });
+            searchResultsContainer.appendChild(ul);
+        };
+
+        const positionResults = () => {
+            if (searchResultsContainer.classList.contains('hidden')) return;
+
+            const searchRect = searchContainer.getBoundingClientRect();
+            
+            if (window.innerWidth < 768) { // Mobile: Centered modal
+                overlay.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+                searchResultsContainer.style.position = 'fixed';
+                searchResultsContainer.style.width = '90vw';
+                searchResultsContainer.style.maxWidth = '600px';
+                searchResultsContainer.style.top = `${searchRect.bottom + 15}px`;
+                searchResultsContainer.style.left = '50%';
+                searchResultsContainer.style.transform = 'translateX(-50%)';
+            } else { // Desktop: Attached to search bar
+                overlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+                searchResultsContainer.style.position = 'absolute';
+                searchResultsContainer.style.width = `${searchRect.width}px`;
+                searchResultsContainer.style.top = `${window.scrollY + searchRect.bottom + 5}px`;
+                searchResultsContainer.style.left = `${searchRect.left}px`;
+                searchResultsContainer.style.transform = 'none';
+            }
+        };
+
+        const performSearch = () => {
+            if (!fuse || searchInput.value.length < 2) {
+                hideResults();
+                return;
+            }
+            searchResults = fuse.search(searchInput.value);
+            if (searchResults.length === 0) {
+                hideResults();
+                return;
+            }
+            
+            renderResults(searchResults);
+            searchResultsContainer.classList.remove('hidden');
+            positionResults();
+        };
+
+        const hideResults = () => {
+            searchResultsContainer.classList.add('hidden');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        searchInput.addEventListener('input', performSearch);
+        searchInput.addEventListener('focus', performSearch);
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') e.preventDefault();
+        });
+        searchInput.addEventListener('blur', () => setTimeout(hideResults, 200));
+        window.addEventListener('resize', positionResults);
     }
 });

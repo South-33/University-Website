@@ -33,17 +33,135 @@
     </script>
 
 </head>
-<body class="bg-white">
-
+<body class="bg-white font-body">
     <div id="header-placeholder"></div>
-
     <main>
         <!-- Hero Section -->
-        <section class="bg-gradient-to-r from-dark-blue via-indigo-900 to-light-lavender py-16 mb-12 shadow-lg">
+        <section class="relative h-64 md:h-80 flex items-center justify-center bg-dark-blue overflow-hidden mb-10">
+            <img src="image/num_front.jpg" alt="NUM Campuses" class="absolute inset-0 w-full h-full object-cover opacity-40">
+            <div class="relative z-10 text-center w-full">
+                <nav class="mb-4 text-light-lavender text-sm">
+                    <a href="/" class="hover:underline">Home</a> /
+                    <a href="/campus/map" class="underline font-semibold">Campuses</a>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4 drop-shadow-lg">Explore Our Campuses</h1>
+                <p class="text-lg md:text-xl text-light-lavender font-medium">Discover locations, facilities, and highlights of NUM's campuses.</p>
+            </div>
+        </section>
+
+        <!-- Campus Selector Tabs -->
+        <div class="max-w-4xl mx-auto px-4 mb-8">
+            <div id="campus-tabs" class="flex gap-4 justify-center">
+                <button class="campus-tab px-6 py-2 rounded-full font-semibold text-dark-blue bg-light-lavender border-2 border-dark-blue shadow-sm transition-colors active" data-campus="main">Main Campus</button>
+                <button class="campus-tab px-6 py-2 rounded-full font-semibold text-dark-blue bg-light-lavender border-2 border-dark-blue shadow-sm transition-colors" data-campus="second">Second Campus</button>
+            </div>
+        </div>
+
+        <!-- Campuses Wrapper -->
+        <div id="campuses-wrapper" class="max-w-6xl mx-auto px-4">
+            <!-- Main Campus Card -->
+            <section id="main-campus-section" class="campus-section bg-white rounded-[24px] shadow-2xl flex flex-col md:flex-row items-stretch overflow-hidden border border-light-lavender mb-10 transition-all">
+                <!-- Left: Image & Quick Facts -->
+                <div class="md:w-1/2 w-full flex flex-col p-6 gap-6">
+                    <div class="relative w-full h-56 md:h-80">
+                        <img src="image/num_front.jpg" alt="Main Campus" class="object-cover w-full h-full rounded-[20px] shadow-md">
+                        <span class="absolute top-4 left-4 bg-dark-blue text-white px-4 py-1 rounded-full text-xs font-heading font-semibold shadow">Main Campus</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>123 Main St, Phnom Penh</div>
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8h18M3 16h18M3 12h18"/></svg>Mon-Fri 7:30am-5:30pm</div>
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 10V3H7v7"/><circle cx="12" cy="17" r="4"/></svg>8,000+ students</div>
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10a6 6 0 1 1 12 0v10"/></svg>Accredited by MoEYS</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-2 text-xs">
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Bus: 2, 5, 7</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Parking</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Library</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Tech Labs</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Sports Center</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Cafeteria</span>
+                    </div>
+                </div>
+                <!-- Right: Info & Map -->
+                <div class="md:w-1/2 w-full flex flex-col justify-center gap-4 p-8">
+                    <h2 class="text-3xl font-heading font-bold text-dark-blue mb-1">Main Campus</h2>
+                    <p class="text-indigo-900 mb-2 font-medium">123 Main St, Phnom Penh</p>
+                    <ul class="list-disc list-inside text-indigo-800 mb-2 text-base space-y-1">
+                        <li>Library, Tech Labs, Sports Center</li>
+                        <li>Student Services & Cafeteria</li>
+                        <li>Parking & Public Transport Access</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4 mb-2">
+                        <a href="main-campus-details" class="px-6 py-2 bg-dark-blue text-white rounded-full font-medium shadow hover:bg-indigo-800 transition-colors">See Details</a>
+                        <a href="#main-campus-map" class="px-6 py-2 border-2 border-dark-blue text-dark-blue bg-white rounded-full font-medium shadow hover:bg-dark-blue hover:text-white transition-colors">Directions</a>
+                    </div>
+                    <div class="rounded-[20px] overflow-hidden shadow-lg mt-2 w-full flex-grow border-2 border-indigo-200">
+                        <iframe id="main-campus-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4025.736926494208!2d104.9160520751368!3d11.574775143960865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951431e152d17%3A0x9b79af8befbd4a18!2sNational%20University%20of%20Management!5e1!3m2!1sen!2skh!4v1750758520427!5m2!1sen!2skh" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full"></iframe>
+                    </div>
+                </div>
+            </section>
+            <!-- Second Campus Card -->
+            <section id="second-campus-section" class="campus-section bg-white rounded-[24px] shadow-2xl flex flex-col md:flex-row-reverse items-stretch overflow-hidden border border-light-lavender mb-10 transition-all hidden">
+                <!-- Right: Image & Quick Facts -->
+                <div class="md:w-1/2 w-full flex flex-col p-6 gap-6">
+                    <div class="relative w-full h-56 md:h-80">
+                        <img src="image/num_veal_sbov.jpg" alt="Second Campus" class="object-cover w-full h-full rounded-[20px] shadow-md">
+                        <span class="absolute top-4 left-4 bg-dark-blue text-white px-4 py-1 rounded-full text-xs font-heading font-semibold shadow">Second Campus</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>456 Second Ave, Phnom Penh</div>
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8h18M3 16h18M3 12h18"/></svg>Mon-Sat 8:00am-6:00pm</div>
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 10V3H7v7"/><circle cx="12" cy="17" r="4"/></svg>Research & Innovation</div>
+                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10a6 6 0 1 1 12 0v10"/></svg>Modern Classrooms</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-2 text-xs">
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Bus: 3, 8</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Parking</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Innovation Hub</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Research Center</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Modern Classrooms</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Lounges</span>
+                    </div>
+                </div>
+                <!-- Left: Info & Map -->
+                <div class="md:w-1/2 w-full flex flex-col justify-center gap-4 p-8">
+                    <h2 class="text-3xl font-heading font-bold text-dark-blue mb-1">Second Campus</h2>
+                    <p class="text-indigo-900 mb-2 font-medium">456 Second Ave, Phnom Penh</p>
+                    <ul class="list-disc list-inside text-indigo-800 mb-2 text-base space-y-1">
+                        <li>Innovation Hub & Research Center</li>
+                        <li>Modern Classrooms & Study Spaces</li>
+                        <li>Nearby Cafes & Student Lounges</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4 mb-2">
+                        <a href="second-campus-details" class="px-6 py-2 bg-dark-blue text-white rounded-full font-medium shadow hover:bg-indigo-800 transition-colors">See Details</a>
+                        <a href="#second-campus-map" class="px-6 py-2 border-2 border-dark-blue text-dark-blue bg-white rounded-full font-medium shadow hover:bg-dark-blue hover:text-white transition-colors">Directions</a>
+                    </div>
+                    <div class="rounded-[20px] overflow-hidden shadow-lg mt-2 w-full flex-grow border-2 border-indigo-200">
+                        <iframe id="second-campus-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4026.4901303685083!2d104.96323757513625!3d11.522317744992845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095764e0ab95c1%3A0xf0eb18a89a0ff44d!2sNUM%20SATELLITE%20Campus%20Veal%20Sbov!5e1!3m2!1sen!2skh!4v1750758393127!5m2!1sen!2skh" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Tabs Interactivity Script -->
+        <script>
+            const tabs = document.querySelectorAll('.campus-tab');
+            const sections = document.querySelectorAll('.campus-section');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active', 'bg-dark-blue', 'text-white'));
+                    this.classList.add('active', 'bg-dark-blue', 'text-white');
+                    sections.forEach(sec => sec.classList.add('hidden'));
+                    document.getElementById(this.dataset.campus + '-campus-section').classList.remove('hidden');
+                });
+            });
+        </script>
+
+        <!-- Hero Section -->
+        <section class="bg-dark-blue text-white py-16 mb-12">
             <div class="max-w-3xl mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl font-heading font-bold text-white mb-6 drop-shadow-lg" style="text-shadow: 2px 2px 8px #0A0A3E;">Our Campuses</h1>
-                <div class="w-24 h-2 mx-auto mb-6 rounded-full bg-gradient-to-r from-indigo-400 via-indigo-600 to-dark-blue"></div>
-                <p class="text-xl md:text-2xl text-light-lavender font-medium">
+                <h1 class="text-4xl md:text-5xl font-heading text-white font-bold mb-4">Our Campuses</h1>
+                <div class="w-24 h-1 mx-auto mb-6 rounded-full bg-white"></div>
+                <p class="text-lg md:text-xl font-body text-white mt-4">
                     Explore the locations of National University of Management's two branches. Find directions, facilities, and key information for each campus.
                 </p>
             </div>
@@ -51,48 +169,50 @@
 
         <!-- Main Campus Feature Section -->
         <section class="max-w-6xl mx-auto px-4 mb-20">
-            <div class="bg-gradient-to-br from-white via-light-lavender to-indigo-100 rounded-[28px] shadow-2xl flex flex-col md:flex-row items-stretch overflow-hidden border-4 border-indigo-200">
-                <!-- Image -->
-                <div class="md:w-1/2 w-full flex flex-col">
-                    <div class="w-full h-80 md:h-[400px] relative flex items-center justify-center">
-                        <img src="image/num_front.jpg" alt="Main Campus" class="object-cover w-full h-full rounded-full p-4 shadow-lg border-r-4 border-indigo-200">
-                        <div class="absolute bottom-4 left-4 bg-gradient-to-r from-dark-blue via-indigo-700 to-indigo-400 bg-opacity-90 text-white px-5 py-2 rounded-xl shadow-lg border-2 border-indigo-400 font-heading text-xl font-bold">
+            <div class="bg-white rounded-[20px] shadow-2xl flex flex-col md:flex-row items-stretch overflow-hidden border border-light-lavender">
+                <!-- Left Column: Image and Details -->
+                <div class="md:w-1/2 w-full p-6 flex flex-col gap-6">
+                    <div class="relative">
+                        <img src="image/num_front.jpg" alt="Main Campus" class="object-cover w-full h-full rounded-[20px] shadow-md">
+                        <div class="absolute bottom-4 left-4 bg-dark-blue text-white px-4 py-1 rounded-full text-sm font-heading font-semibold">
                             Main Campus
                         </div>
                     </div>
-                    <!-- Info Bar under image -->
-                    <div class="w-full py-4 px-4 font-medium text-base md:text-lg flex flex-col gap-1 text-left text-indigo-900">
-                        <span class="font-semibold text-lg">Open: Mon-Fri 7:30am-5:30pm</span>
-                        <span>Hotline: <a href="tel:+85512345678" class="underline hover:text-indigo-700">+855 12 345 678</a></span>
-                        <span>📍 <b>Address:</b> 123 Main St, Phnom Penh</span>
-                        <span>🚌 <b>Transport:</b> Bus lines 2, 5, 7 | Parking available</span>
-                        <span>🏫 <b>Facilities:</b> Library, Tech Labs, Sports Center, Cafeteria</span>
-                        <span>🌐 <b>Website:</b> <a href="https://num.edu.kh" class="underline hover:text-indigo-700" target="_blank">num.edu.kh</a></span>
-                        <span>👨‍🎓 <b>Students:</b> 8,000+ enrolled</span>
-                        <span>⭐ <b>Accreditation:</b> Ministry of Education, Youth and Sport</span>
-                        <span>🎉 <b>Events:</b> Annual Career Fair, Open House, Sports Day</span>
+                    <div class="font-body text-indigo-900 mt-6">
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4 font-heading">Campus Information</h3>
+                        <ul class="space-y-2 text-base">
+                            <li><span class="font-semibold">Open:</span> Mon-Fri 7:30am-5:30pm</li>
+                            <li><span class="font-semibold">Hotline:</span> <a href="tel:+85512345678" class="underline hover:text-indigo-700">+855 12 345 678</a></li>
+                            <li><span class="font-semibold">Address:</span> 123 Main St, Phnom Penh</li>
+                            <li><span class="font-semibold">Transport:</span> Bus lines 2, 5, 7 | Parking available</li>
+                            <li><span class="font-semibold">Facilities:</span> Library, Tech Labs, Sports Center, Cafeteria</li>
+                            <li><span class="font-semibold">Website:</span> <a href="https://num.edu.kh" class="underline hover:text-indigo-700" target="_blank">num.edu.kh</a></li>
+                            <li><span class="font-semibold">Students:</span> 8,000+ enrolled</li>
+                            <li><span class="font-semibold">Accreditation:</span> Ministry of Education, Youth and Sport</li>
+                            <li><span class="font-semibold">Events:</span> Annual Career Fair, Open House, Sports Day</li>
+                        </ul>
                     </div>
                 </div>
-                <!-- Info -->
-                <div class="md:w-1/2 w-full flex flex-col justify-center gap-5 p-8 bg-gradient-to-br from-white via-light-lavender to-indigo-100">
-                    <h2 class="text-4xl font-bold text-indigo-700 mb-1 font-heading">Main Campus</h2>
-                    <div class="w-16 h-1 mb-2 rounded-full bg-gradient-to-r from-indigo-400 to-dark-blue"></div>
+                <!-- Right Column: Map and Info -->
+                <div class="md:w-1/2 w-full p-8 flex flex-col gap-5 justify-center">
+                    <h2 class="text-4xl font-bold text-dark-blue mb-1 font-heading">Main Campus</h2>
+                    <div class="w-16 h-1 mb-2 rounded-full bg-dark-blue"></div>
                     <p class="text-indigo-900 mb-2 font-semibold text-lg">123 Main St, Phnom Penh</p>
-                    <ul class="list-disc list-inside text-indigo-800 mb-2 text-base">
+                    <ul class="list-disc list-inside text-indigo-800 mb-2 text-base space-y-1">
                         <li>Library, Tech Labs, Sports Center</li>
                         <li>Student Services & Cafeteria</li>
                         <li>Parking & Public Transport Access</li>
                     </ul>
                     <div class="flex flex-wrap gap-4 mb-2">
-                        <a href="main-campus-details.html" class="px-7 py-2 border-2 border-indigo-600 text-white bg-indigo-600 rounded-full font-semibold shadow hover:bg-white hover:text-indigo-600 transition">See Details</a>
-                        <a href="#main-campus-map" class="px-7 py-2 border-2 border-dark-blue text-dark-blue bg-light-lavender rounded-full font-semibold shadow hover:bg-dark-blue hover:text-white transition">View Map</a>
+                        <a href="main-campus-details" class="px-6 py-2 bg-dark-blue text-white rounded-full font-medium shadow hover:bg-indigo-800 transition-colors">See Details</a>
+                        <a href="#main-campus-map" class="px-6 py-2 border-2 border-dark-blue text-dark-blue bg-white rounded-full font-medium shadow hover:bg-dark-blue hover:text-white transition-colors">View Map</a>
                     </div>
-                    <div class="rounded-[20px] overflow-hidden shadow-xl mt-2 w-full h-80 md:h-[300px] border-2 border-indigo-200">
+                    <div class="rounded-[20px] overflow-hidden shadow-lg mt-2 w-full flex-grow border-2 border-indigo-200">
                         <iframe 
                             id="main-campus-map"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4025.736926494208!2d104.9160520751368!3d11.574775143960865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951431e152d17%3A0x9b79af8befbd4a18!2sNational%20University%20of%20Management!5e1!3m2!1sen!2skh!4v1750758520427!5m2!1sen!2skh"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                            class="w-full h-full rounded-[20px]"></iframe>
+                            class="w-full h-full"></iframe>
                     </div>
                 </div>
             </div>
@@ -100,45 +220,47 @@
 
         <!-- Second Campus Feature Section -->
         <section class="max-w-6xl mx-auto px-4 mb-16">
-            <div class="bg-gradient-to-br from-indigo-100 via-light-lavender to-white rounded-[28px] shadow-2xl flex flex-col md:flex-row-reverse items-stretch overflow-hidden border-4 border-indigo-200">
-                <!-- Image -->
-                <div class="md:w-1/2 w-full flex flex-col">
-                    <div class="w-full h-80 md:h-[400px] relative flex items-center justify-center">
-                        <img src="image/num_veal_sbov.jpg" alt="Second Campus" class="object-cover w-full h-full rounded-full p-4 shadow-lg border-r-4 border-indigo-200">
-                        <div class="absolute bottom-4 right-4 bg-gradient-to-r from-dark-blue via-indigo-700 to-indigo-400 bg-opacity-90 text-white px-5 py-2 rounded-xl shadow-lg border-2 border-indigo-400 font-heading text-xl font-bold">
+            <div class="bg-white rounded-[20px] shadow-2xl flex flex-col md:flex-row-reverse items-stretch overflow-hidden border border-light-lavender">
+                <!-- Right Column: Image and Details -->
+                <div class="md:w-1/2 w-full p-6 flex flex-col gap-6">
+                    <div class="relative">
+                        <img src="image/num_veal_sbov.jpg" alt="Second Campus" class="object-cover w-full h-full rounded-[20px] shadow-md">
+                        <div class="absolute bottom-4 left-4 bg-dark-blue text-white px-4 py-1 rounded-full text-sm font-heading font-semibold">
                             Second Campus
                         </div>
                     </div>
-                    <!-- Info Bar under image -->
-                    <div class="w-full py-4 px-4 font-medium text-base md:text-lg flex flex-col gap-1 text-left text-indigo-900">
-                        <span class="font-semibold text-lg">Open: Mon-Sat 8:00am-6:00pm</span>
-                        <span>Hotline: <a href="tel:+85598765432" class="underline hover:text-indigo-700">+855 98 765 432</a></span>
-                        <span>📍 <b>Address:</b> 456 Second Ave, Phnom Penh</span>
-                        <span>🚌 <b>Transport:</b> Bus lines 3, 8 | Parking available</span>
-                        <span>🏢 <b>Facilities:</b> Innovation Hub, Research Center, Modern Classrooms, Lounges</span>
-                        <span>🌐 <b>Website:</b> <a href="https://num.edu.kh" class="underline hover:text-indigo-700" target="_blank">num.edu.kh</a></span>
+                    <div class="font-body text-indigo-900 mt-6">
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4 font-heading">Campus Information</h3>
+                        <ul class="space-y-2 text-base">
+                            <li><span class="font-semibold">Open:</span> Mon-Sat 8:00am-6:00pm</li>
+                            <li><span class="font-semibold">Hotline:</span> <a href="tel:+85598765432" class="underline hover:text-indigo-700">+855 98 765 432</a></li>
+                            <li><span class="font-semibold">Address:</span> 456 Second Ave, Phnom Penh</li>
+                            <li><span class="font-semibold">Transport:</span> Bus lines 3, 8 | Parking available</li>
+                            <li><span class="font-semibold">Facilities:</span> Innovation Hub, Research Center, Modern Classrooms, Lounges</li>
+                            <li><span class="font-semibold">Website:</span> <a href="https://num.edu.kh" class="underline hover:text-indigo-700" target="_blank">num.edu.kh</a></li>
+                        </ul>
                     </div>
                 </div>
-                <!-- Info -->
-                <div class="md:w-1/2 w-full flex flex-col justify-center gap-5 p-8 bg-gradient-to-br from-white via-light-lavender to-indigo-100">
-                    <h2 class="text-4xl font-bold text-indigo-700 mb-1 font-heading">Second Campus</h2>
-                    <div class="w-16 h-1 mb-2 rounded-full bg-gradient-to-r from-indigo-400 to-dark-blue"></div>
+                <!-- Left Column: Map and Info -->
+                <div class="md:w-1/2 w-full p-8 flex flex-col gap-5 justify-center">
+                    <h2 class="text-4xl font-bold text-dark-blue mb-1 font-heading">Second Campus</h2>
+                    <div class="w-16 h-1 mb-2 rounded-full bg-dark-blue"></div>
                     <p class="text-indigo-900 mb-2 font-semibold text-lg">456 Second Ave, Phnom Penh</p>
-                    <ul class="list-disc list-inside text-indigo-800 mb-2 text-base">
+                    <ul class="list-disc list-inside text-indigo-800 mb-2 text-base space-y-1">
                         <li>Innovation Hub & Research Center</li>
                         <li>Modern Classrooms & Study Spaces</li>
                         <li>Nearby Cafes & Student Lounges</li>
                     </ul>
                     <div class="flex flex-wrap gap-4 mb-2">
-                        <a href="second-campus-details.html" class="px-7 py-2 border-2 border-indigo-600 text-white bg-indigo-600 rounded-full font-semibold shadow hover:bg-white hover:text-indigo-600 transition">See Details</a>
-                        <a href="#second-campus-map" class="px-7 py-2 border-2 border-dark-blue text-dark-blue bg-light-lavender rounded-full font-semibold shadow hover:bg-dark-blue hover:text-white transition">View Map</a>
+                        <a href="second-campus-details" class="px-6 py-2 bg-dark-blue text-white rounded-full font-medium shadow hover:bg-indigo-800 transition-colors">See Details</a>
+                        <a href="#second-campus-map" class="px-6 py-2 border-2 border-dark-blue text-dark-blue bg-white rounded-full font-medium shadow hover:bg-dark-blue hover:text-white transition-colors">View Map</a>
                     </div>
-                    <div class="rounded-[20px] overflow-hidden shadow-xl mt-2 w-full h-80 md:h-[300px] border-2 border-indigo-200">
+                    <div class="rounded-[20px] overflow-hidden shadow-lg mt-2 w-full flex-grow border-2 border-indigo-200">
                         <iframe 
                             id="second-campus-map"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4026.4901303685083!2d104.96323757513625!3d11.522317744992845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095764e0ab95c1%3A0xf0eb18a89a0ff44d!2sNUM%20SATELLITE%20Campus%20Veal%20Sbov!5e1!3m2!1sen!2skh!4v1750758393127!5m2!1sen!2skh"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                            class="w-full h-full rounded-[20px]"></iframe>
+                            class="w-full h-full"></iframe>
                     </div>
                 </div>
             </div>

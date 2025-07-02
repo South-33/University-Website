@@ -52,6 +52,15 @@
     display: inline-block; /* Allow centering of the link itself */
 }
 
+.main-nav ul.absolute a {
+    font-size: 1rem;
+    opacity: 0.9;
+    padding: 0.5rem 0;
+    position: relative; /* Establish positioning context for the hyphen */
+    display: inline-block; /* Allow centering of the link itself */
+    transition: color 200ms cubic-bezier(0.4,0,0.2,1), text-shadow 200ms cubic-bezier(0.4,0,0.2,1);
+}
+
 /* Add a hyphen before each submenu item for clarity */
 .dropdown-menu a::before {
     content: "-";
@@ -115,6 +124,20 @@
 }
 .main-nav a.active::after {
     transform: scaleX(1);
+}
+/* Prevent underline on submenu links */
+.main-nav ul.absolute a.active::after {
+    transform: scaleX(0) !important;
+}
+
+.main-nav ul.absolute a:focus,
+.main-nav ul.absolute a:active,
+.main-nav ul.absolute a:hover {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    background-color: transparent !important;
+    color: #264ada !important;
+    text-shadow: 0 1px 6px rgba(59,91,219,0.08);
 }
 
 /* Touch Device Hover Fix */

@@ -1,0 +1,11 @@
+[
+  {"title": "Faculty of Management", "url": "/programs/undergraduate.html", "description": "Bachelor's degrees in Management, Marketing, and Entrepreneurship."},
+  {"title": "Faculty of Finance and Accounting", "url": "/programs/undergraduate.html", "description": "Bachelor's degrees in Accounting, Finance, Banking, and related fields."},
+  {"title": "Faculty of Information Technology", "url": "/programs/undergraduate.html", "description": "Cutting-edge programs in Computer Science, Data Analytics, and Cybersecurity."},
+  {"title": "Faculty of Economics", "url": "/programs/undergraduate.html", "description": "Bachelor's degrees in Economics, Business Economics, and International Economics."},
+  {"title": "Faculty of Tourism", "url": "/programs/undergraduate.html", "description": "Bachelor's degrees in Tourism Management, Hospitality, and Event Management."},
+  {"title": "Faculty of Digital Economy", "url": "/programs/undergraduate.html", "description": "Bachelor's degrees in E-Commerce, Digital Business, and related fields."},
+  {"title": "Campus Map", "url": "/campus/map.html", "description": "Find your way around the campus with our interactive map."},
+  {"title": "Student Clubs", "url": "/student-activities/clubs.html", "description": "Join a variety of student clubs and organizations."},
+  {"title": "Student Events", "url": "/student-activities/events.html", "description": "Upcoming and past student events."}
+]
