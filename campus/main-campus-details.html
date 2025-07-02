@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Campus Details - National University of Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                setTimeout(() => el.classList.add('visible'), 200);
+            });
+        });
+    </script>
+</head>
+<body class="bg-light-lavender">
+    <div id="header-placeholder"></div>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative flex items-center justify-center min-h-[60vh] bg-cover bg-center text-white"
+            style="background-image: linear-gradient(rgba(34,36,78,0.55),rgba(34,36,78,0.55)), url('image/num_building.png');">
+            <div class="relative z-10 flex flex-col items-center justify-center w-full text-center py-20">
+                <h1 class="font-heading text-5xl md:text-7xl mb-4 drop-shadow-lg tracking-tight" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+                    Main Campus
+                </h1>
+                <div class="w-24 h-1 bg-white mx-auto mb-6 rounded-full"></div>
+                <p class="text-xl md:text-2xl font-body max-w-2xl mx-auto mb-8 text-white">
+                    Discover facilities, services, and directions for the NUM Main Campus.
+                </p>
+                <a href="#about-campus"
+                   class="bg-white text-dark-blue rounded-full px-8 py-3 font-semibold text-lg shadow hover:bg-dark-blue hover:text-white transition-colors">
+                    Explore Campus
+                </a>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-dark-blue/70 to-transparent pointer-events-none"></div>
+        </section>
+
+        <!-- About Campus Section -->
+        <section id="about-campus" class="bg-white py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-8 items-center">
+                <div class="relative flex items-end p-10 text-white rounded-[20px] bg-cover bg-center min-h-[350px]" style="background-image: url('image/num_front.jpg');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-[20px]"></div>
+                    <div class="relative z-10">
+                        <h2 class="font-heading text-2xl mb-4">About the Campus</h2>
+                        <p>Our main campus is a vibrant hub of learning, innovation, and community. With modern facilities and a welcoming atmosphere, NUM is dedicated to empowering students for success.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-8">
+                    <div class="bg-dark-blue text-white p-10 rounded-[20px] shadow-lg flex items-start gap-4">
+                        <span class="material-icons text-4xl">visibility</span>
+                        <div>
+                            <h3 class="font-heading text-2xl mb-2">Our Vision & Mission</h3>
+                            <p>We strive to develop competent, ethical, and innovative leaders. Our mission is to provide high-quality education, foster research, and nurture entrepreneurship for a better future.</p>
+                        </div>
+                    </div>
+                    <div class="bg-light-lavender text-dark-blue p-10 rounded-[20px] shadow-lg flex items-start gap-4">
+                        <span class="material-icons text-4xl">history_edu</span>
+                        <div>
+                            <h3 class="font-heading text-2xl mb-2">History & Development</h3>
+                            <p>Since its founding, NUM has grown into a leading institution, recognized for academic excellence and a commitment to student success.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facilities Section -->
+        <section class="bg-light-lavender py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-stretch">
+                <div class="text-dark-blue flex flex-col justify-center">
+                    <h3 class="font-heading text-4xl mb-6">Campus Facilities</h3>
+                    <ul class="mb-6 list-disc list-inside text-lg">
+                        <li>Modern Academic Buildings</li>
+                        <li>Advanced Laboratories & Research Centers</li>
+                        <li>Extensive Library & Computer Labs</li>
+                        <li>Lecture Halls & Auditoriums</li>
+                        <li>Sports Center & Recreation Areas</li>
+                        <li>Cafeterias & Social Spaces</li>
+                    </ul>
+                    <a href="facilities.html" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">See All Facilities</a>
+                </div>
+                <div class="h-full flex">
+                    <img src="image/library-interior.jpg" alt="Library" class="w-full h-full rounded-[20px] object-cover">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <span class="material-icons text-3xl text-dark-blue">school</span>
+                    <div>
+                        <h4 class="font-heading text-lg mb-1">Modern Academic Buildings</h4>
+                        <p class="text-base text-gray-600">State-of-the-art classrooms and lecture halls.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <span class="material-icons text-3xl text-dark-blue">science</span>
+                    <div>
+                        <h4 class="font-heading text-lg mb-1">Advanced Laboratories</h4>
+                        <p class="text-base text-gray-600">Cutting-edge research and innovation spaces.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <span class="material-icons text-3xl text-dark-blue">local_library</span>
+                    <div>
+                        <h4 class="font-heading text-lg mb-1">Library & Computer Labs</h4>
+                        <p class="text-base text-gray-600">Extensive resources and digital access for students.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <span class="material-icons text-3xl text-dark-blue">event_seat</span>
+                    <div>
+                        <h4 class="font-heading text-lg mb-1">Lecture Halls & Auditoriums</h4>
+                        <p class="text-base text-gray-600">Spacious venues for learning and events.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <span class="material-icons text-3xl text-dark-blue">sports_basketball</span>
+                    <div>
+                        <h4 class="font-heading text-lg mb-1">Sports & Recreation</h4>
+                        <p class="text-base text-gray-600">Modern sports center and recreation areas.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <span class="material-icons text-3xl text-dark-blue">restaurant</span>
+                    <div>
+                        <h4 class="font-heading text-lg mb-1">Cafeterias & Social Spaces</h4>
+                        <p class="text-base text-gray-600">Comfortable spaces for dining and socializing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="py-24 text-center text-white bg-cover bg-center font-body" style="background-image: linear-gradient(rgba(10,10,62,0.85),rgba(10,10,62,0.85)), url('image/campus-gallery-bg.jpg');">
+            <div class="max-w-4xl mx-auto px-5">
+                <h3 class="font-heading text-4xl mb-8">Campus Gallery</h3>
+                <p class="text-lg mb-10">Explore our vibrant campus life, modern facilities, and beautiful environment through our gallery.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="relative bg-white/10 rounded-xl shadow-lg p-2 overflow-hidden group hover:scale-105 transition-transform duration-300">
+                        <img src="image/library-interior.jpg" alt="Library" class="rounded-xl object-cover w-full h-48 shadow group-hover:brightness-75 transition">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition bg-black/40 rounded-xl">
+                            <span class="text-white text-lg font-semibold">View Photo</span>
+                        </div>
+                        <div class="mt-2 text-base">Library</div>
+                    </div>
+                    <div class="bg-white/10 rounded-xl shadow-lg p-2 hover:scale-105 transition-transform duration-300">
+                        <img src="image/tech lab.jpg" alt="Tech Lab" class="rounded-xl object-cover w-full h-48 shadow">
+                        <div class="mt-2 text-base">Tech Lab</div>
+                    </div>
+                    <div class="bg-white/10 rounded-xl shadow-lg p-2 hover:scale-105 transition-transform duration-300">
+                        <img src="image/sport center.jpg" alt="Sports Center" class="rounded-xl object-cover w-full h-48 shadow">
+                        <div class="mt-2 text-base">Sports Center</div>
+                    </div>
+                    <div class="bg-white/10 rounded-xl shadow-lg p-2 hover:scale-105 transition-transform duration-300">
+                        <img src="image/classroom.jpg" alt="Classroom" class="rounded-xl object-cover w-full h-48 shadow">
+                        <div class="mt-2 text-base">Classroom</div>
+                    </div>
+                    <div class="bg-white/10 rounded-xl shadow-lg p-2 hover:scale-105 transition-transform duration-300">
+                        <img src="image/campus1.webp" alt="Campus Life" class="rounded-xl object-cover w-full h-48 shadow">
+                        <div class="mt-2 text-base">Campus Life</div>
+                    </div>
+                    <div class="bg-white/10 rounded-xl shadow-lg p-2 hover:scale-105 transition-transform duration-300">
+                        <img src="image/cafeteria.jpg" alt="Cafeteria" class="rounded-xl object-cover w-full h-48 shadow">
+                        <div class="mt-2 text-base">Cafeteria</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Student Life & Arts Section -->
+        <section class="bg-white py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5">
+                <!-- Student Life -->
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-center mb-12">Student Life</h2>
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <!-- Student Affairs -->
+                    <div>
+                        <img src="image/student1.jpg" alt="Student Affairs" class="rounded-lg w-full h-48 object-cover mb-4 shadow">
+                        <h3 class="font-semibold text-lg mb-2">Student Affairs</h3>
+                        <p class="text-gray-700 mb-2 text-base">
+                            Comprising more than 25 offices and centers, Student Affairs provides a broad range of services and support to NUM students, including leadership development, residential programs, public service, career exploration and community engagement.
+                        </p>
+                        <a href="#" class="text-blue-700 hover:underline font-medium">Student Affairs &gt;</a>
+                    </div>
+                    <!-- Housing & Dining -->
+                    <div>
+                        <img src="image/student2.jpg" alt="Housing and Dining" class="rounded-lg w-full h-48 object-cover mb-4 shadow">
+                        <h3 class="font-semibold text-lg mb-2">Housing &amp; Dining</h3>
+                        <p class="text-gray-700 mb-2 text-base">
+                            Nearly all undergraduates and about 72% of graduate students reside in on-campus residences. NUM offers dining halls, a teaching kitchen, and organic gardens providing the campus community with healthy, sustainable meals.
+                        </p>
+                        <a href="#" class="text-blue-700 hover:underline font-medium">Residential &amp; Dining Enterprises &gt;</a>
+                    </div>
+                    <!-- Community Engagement & Diversity -->
+                    <div>
+                        <img src="image/image3.jpg" alt="Community Engagement" class="rounded-lg w-full h-48 object-cover mb-4 shadow">
+                        <h3 class="font-semibold text-lg mb-2">Community Engagement &amp; Diversity</h3>
+                        <p class="text-gray-700 mb-2 text-base">
+                            Other programs supporting the student community:
+                        </p>
+                        <ul class="list-disc list-inside text-blue-700 text-base space-y-1 mb-2">
+                            <li><a href="#" class="hover:underline">Diversity Works</a></li>
+                            <li><a href="#" class="hover:underline">Center for Public Service</a></li>
+                            <li><a href="#" class="hover:underline">Office for Religious &amp; Spiritual Life</a></li>
+                            <li><a href="#" class="hover:underline">Graduate Life Office</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Arts & Culture -->
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-center mb-12">Arts &amp; Culture</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- The Arts at NUM -->
+                    <div>
+                        <img src="image/art1.jpg" alt="The Arts at NUM" class="rounded-lg w-full h-48 object-cover mb-4 shadow">
+                        <h3 class="font-semibold text-lg mb-2">The Arts at NUM</h3>
+                        <p class="text-gray-700 mb-2 text-base">
+                            NUM has a rich tradition of fostering creativity and the arts. A vibrant campus “arts district” is situated along the main drive near the campus center.
+                        </p>
+                        <a href="#" class="text-blue-700 hover:underline font-medium">The Arts at NUM &gt;</a>
+                    </div>
+                    <!-- Museums -->
+                    <div>
+                        <img src="image/art2.jpg" alt="Museums" class="rounded-lg w-full h-48 object-cover mb-4 shadow">
+                        <h3 class="font-semibold text-lg mb-2">Museums</h3>
+                        <p class="text-gray-700 mb-2 text-base">
+                            The NUM campus is home to two world-class art museums.
+                        </p>
+                        <a href="#" class="text-blue-700 hover:underline font-medium">Campus Art Center &gt;</a>
+                    </div>
+                    <!-- Performing Arts -->
+                    <div>
+                        <img src="image/art3.jpg" alt="Performing Arts" class="rounded-lg w-full h-48 object-cover mb-4 shadow">
+                        <h3 class="font-semibold text-lg mb-2">Performing Arts</h3>
+                        <p class="text-gray-700 mb-2 text-base">
+                            NUM Live presents a wide range of performances and distinctive performing arts experiences.
+                        </p>
+                        <a href="#" class="text-blue-700 hover:underline font-medium">NUM Live &gt;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map & Directions Section -->
+        <section class="bg-white py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="font-heading text-3xl mb-4 text-dark-blue">Campus Map & Directions</h3>
+                    <p class="mb-6 text-dark-blue">Find your way around the NUM campus with our interactive map and detailed directions. Parking is available for students and visitors.</p>
+                    <ul class="mb-6 list-disc list-inside text-dark-blue">
+                        <li>Easy access by public transport</li>
+                        <li>On-campus parking</li>
+                        <li>Clear signage and campus guides</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-4 animate-pulse hover:animate-none transition">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4025.736926494208!2d104.9160520751368!3d11.574775143960865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951431e152d17%3A0x9b79af8befbd4a18!2sNational%20University%20of%20Management!5e1!3m2!1sen!2skh!4v1750758520427!5m2!1sen!2skh"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-xl w-full shadow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="py-20 text-center bg-dark-blue text-white font-body">
+            <div class="max-w-3xl mx-auto px-5">
+                <div class="w-16 h-1 bg-white mx-auto mb-4 rounded-full"></div>
+                <h3 class="font-heading text-4xl mb-6">Ready to Visit?</h3>
+                <p class="text-lg mb-8">Book a campus tour or arrange a personal visit to experience NUM firsthand. Our team is ready to welcome you and answer all your questions.</p>
+                <a href="#" class="bg-white text-dark-blue rounded-full px-8 py-3 inline-block font-medium hover:bg-light-lavender hover:text-dark-blue transition-colors">Book a Visit</a>
+            </div>
+        </section>
+    </main>
+    <div id="footer-placeholder"></div>
+    <!-- After each major section, add: -->
+    <div class="overflow-hidden leading-none">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-12">
+        <path fill="#f4f6fb" d="M0,32L1440,80L1440,0L0,0Z"></path>
+      </svg>
+    </div>
+</body>
+</html>

@@ -1,206 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undergraduate Programs - National University of Management</title>
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/theme.js"></script>
     <link rel="stylesheet" href="../css/main.css">
-
-    <!-- Tailwind CSS Theme Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'dark-blue': '#0A0A3E',
-                        'light-lavender': '#E9E8F5',
-                    },
-                    fontFamily: {
-                        heading: ['Lora', 'serif'],
-                        body: ['Montserrat', 'sans-serif'],
-                    }
-                }
-            }
+    <!-- Page-specific styles for advanced components (e.g., timeline) -->
+    <style>
+        .timeline-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 2rem; /* Align with the center of the number circle */
+            left: 50%;
+            height: 2px;
+            width: 100%;
+            background-color: #e5e7eb; /* gray-200 */
+            z-index: -1;
         }
-    </script>
 
+        .fade-in-section > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s,
+                        transform 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s;
+        }
+
+        .fade-in-section.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body class="bg-white">
+<body class="bg-light-lavender">
 
     <div id="header-placeholder"></div>
 
     <main>
-        <!-- 
-        ===================================================================
-        YOUR PAGE CONTENT GOES HERE
-        ===================================================================
-        
-        Instructions:
-        1. Copy this file and rename it (e.g., "about-us.html").
-        2. Place it in the "pages" directory.
-        3. Change the <title> in the <head> to match your new page.
-        4. Add your HTML content inside this <main> tag.
-        
-        Everything else (header, footer, styles, scripts) will
-        be handled automatically.
-        -->
+        <!-- Hero Section -->
+        <section class="relative h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white font-body">
+            <div class="absolute inset-0">
+                <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="University Library" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-dark-blue/70"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
+                <h1 class="font-heading text-4xl md:text-6xl mb-4">Undergraduate Programs</h1>
+                <p class="text-lg md:text-xl text-white/90">Explore bachelor's degrees designed to foster innovation, critical thinking, and career readiness.</p>
+            </div>
+        </section>
 
-        <div class="h-screen flex items-center justify-center">
-            <h1 class="text-4xl font-heading text-dark-blue">Your Content Here</h1>
-        </div>
+        <!-- Introduction Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="wow-fade-in-left">
+                        <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Foundation for Your Future</h2>
+                        <p class="text-dark-blue/80 text-lg leading-relaxed">
+                            Our undergraduate programs provide a comprehensive education that combines rigorous academic theory with practical, real-world application. We are dedicated to nurturing the next generation of leaders, entrepreneurs, and innovators. With a focus on industry-relevant skills and a supportive learning environment, NUM is the perfect place to begin your academic and professional journey.
+                        </p>
+                    </div>
+                    <div class="wow-fade-in-right">
+                        <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students collaborating on a project" class="rounded-xl shadow-2xl w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Grid Section -->
+        <section id="programs-grid" class="bg-light-lavender py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">Explore Our Faculties</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Program Card 1: Business and Economics -->
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="p-8 flex-grow flex flex-col text-center items-center">
+                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+</svg></div>
+                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Business & Economics</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow mb-6">Majors in Accounting, Finance, Management, and Marketing to build strategic business leaders.</p>
+                            <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Program Card 2: Tourism and Hospitality -->
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="p-8 flex-grow flex flex-col text-center items-center">
+                             <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
+</svg></div>
+                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Tourism & Hospitality</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow mb-6">Specialized programs in Hotel Management and Eco-Tourism for a global industry.</p>
+                            <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Program Card 3: Law -->
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="p-8 flex-grow flex flex-col text-center items-center">
+                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z" />
+</svg></div>
+                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Law</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow mb-6">A comprehensive curriculum covering all aspects of law to develop sharp legal minds.</p>
+                            <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Program Card 4: Information Technology -->
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="p-8 flex-grow flex flex-col text-center items-center">
+                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+</svg></div>
+                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Information Technology</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow mb-6">Cutting-edge programs in Computer Science, Data Analytics, and Cybersecurity.</p>
+                            <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Program Card 5: Foreign Languages -->
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="p-8 flex-grow flex flex-col text-center items-center">
+                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
+</svg></div>
+                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Foreign Languages</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow mb-6">Immersive programs in English, Chinese, and Japanese for international communication.</p>
+                            <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Program Card 6: Engineering -->
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="p-8 flex-grow flex flex-col text-center items-center">
+                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg></div>
+                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Engineering</h3>
+                            <p class="text-dark-blue/80 font-body flex-grow mb-6">Programs in Civil, Electrical, and Mechanical Engineering focused on innovation.</p>
+                            <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Life & Testimonial Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">A Vibrant Campus Community</h3>
+                    <p class="mb-8 text-lg text-dark-blue/80 leading-relaxed">Life at NUM is more than just lectures and assignments. We foster a supportive and dynamic community where students can grow personally and professionally. Join student clubs, participate in events, and build lifelong friendships.</p>
+                    
+                    <div class="bg-light-lavender/60 p-8 rounded-xl shadow-lg">
+                        <p class="text-dark-blue/80 italic mb-4">"Choosing NUM was the best decision I ever made. The professors are incredibly supportive, and the hands-on projects prepared me for my career long before I graduated. I felt like part of a real community here."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student Testimonial" class="w-14 h-14 rounded-full mr-4 object-cover ring-2 ring-dark-blue/20">
+                            <div>
+                                <p class="font-bold text-dark-blue">Sokun David</p>
+                                <p class="text-dark-blue/70">B.S. in Computer Science, Class of 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 h-full flex">
+                    <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students celebrating graduation" class="w-full h-full rounded-xl block object-cover shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <!-- Admissions Guide Section -->
+        <section class="bg-light-lavender py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">How to Apply</h2>
+                <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Step 1 -->
+                    <div class="timeline-step relative flex flex-col items-center px-4">
+                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">1</div>
+                        <h4 class="font-heading text-xl text-dark-blue mb-2">Explore Programs</h4>
+                        <p class="text-dark-blue/80">Review our faculties and choose the program that aligns with your career goals.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="timeline-step relative flex flex-col items-center px-4">
+                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">2</div>
+                        <h4 class="font-heading text-xl text-dark-blue mb-2">Prepare Documents</h4>
+                        <p class="text-dark-blue/80">Gather your academic transcripts, national ID, and other required documents.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="relative flex flex-col items-center px-4">
+                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">3</div>
+                        <h4 class="font-heading text-xl text-dark-blue mb-2">Submit Application</h4>
+                        <p class="text-dark-blue/80">Complete the online application form and upload your documents before the deadline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
+            <div class="max-w-4xl mx-auto px-5 text-center">
+                <h3 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Ready to Begin Your Journey?</h3>
+                <p class="text-lg text-dark-blue/80 mb-8">Take the next step in your education. Our admissions team is here to guide you through the application process and answer any questions you may have.</p>
+                <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Contact Admissions</a>
+            </div>
+        </section>
 
     </main>
 
     <div id="footer-placeholder"></div>
     
-    <!-- Site-wide Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const headerPlaceholder = document.getElementById('header-placeholder');
-            const footerPlaceholder = document.getElementById('footer-placeholder');
+    <script src="../js/main.js" data-base-path=".."></script>
 
-            // Base path for includes, relative to the root
-            const basePath = '/';
 
-            if (headerPlaceholder) {
-                fetch(basePath + '_includes/header.html')
-                    .then(response => {
-                        if (!response.ok) throw new Error('Network response was not ok for header.html');
-                        return response.text();
-                    })
-                    .then(data => {
-                        headerPlaceholder.innerHTML = data;
-                        initializeHeaderScripts();
-                    })
-                    .catch(error => console.error('Error fetching header:', error));
-            }
 
-            if (footerPlaceholder) {
-                fetch(basePath + '_includes/footer.html')
-                    .then(response => {
-                        if (!response.ok) throw new Error('Network response was not ok for footer.html');
-                        return response.text();
-                    })
-                    .then(data => {
-                        footerPlaceholder.innerHTML = data;
-                    })
-                    .catch(error => console.error('Error fetching footer:', error));
-            }
-
-            function initializeHeaderScripts() {
-                const navToggle = document.querySelector('.nav-toggle');
-                const nav = document.querySelector('#mobile-menu');
-                if (navToggle && nav) {
-                    navToggle.addEventListener('click', () => {
-                        navToggle.style.pointerEvents = 'none';
-                        nav.classList.toggle('translate-x-full');
-                        const isVisible = !nav.classList.contains('translate-x-full');
-                        navToggle.classList.toggle('is-active');
-                        document.body.style.overflow = isVisible ? 'hidden' : 'auto';
-                        setTimeout(() => {
-                            navToggle.style.pointerEvents = 'auto';
-                        }, 300);
-                    });
-                }
-
-                const dropdowns = document.querySelectorAll('#mobile-menu .dropdown > a');
-                dropdowns.forEach(dropdownLink => {
-                    dropdownLink.classList.add('mobile-dropdown-link');
-                    if (dropdownLink.querySelector('.arrow') === null) {
-                        const arrow = document.createElement('span');
-                        arrow.classList.add('arrow');
-                        arrow.innerHTML = '&#8250;'; 
-                        dropdownLink.appendChild(arrow);
-                    }
-                    dropdownLink.addEventListener('click', function(e) {
-                        if (window.innerWidth <= 1024) {
-                            e.preventDefault();
-                            const parentLi = this.closest('li');
-                            const menu = parentLi.querySelector('.dropdown-menu');
-                            const arrow = this.querySelector('.arrow');
-                            const mobileMenuList = document.querySelector('#mobile-menu ul');
-                            if (menu && mobileMenuList) {
-                                const isAlreadyOpen = menu.classList.contains('is-open');
-                                if (isAlreadyOpen) {
-                                    menu.classList.remove('is-open');
-                                    arrow.classList.remove('is-open');
-                                    parentLi.classList.remove('submenu-active');
-                                } else {
-                                    document.querySelectorAll('.dropdown-menu.is-open').forEach(openMenu => {
-                                        const openParentLi = openMenu.closest('li');
-                                        const openArrow = openParentLi.querySelector('.arrow');
-                                        openMenu.classList.remove('is-open');
-                                        if (openArrow) openArrow.classList.remove('is-open');
-                                        openParentLi.classList.remove('submenu-active');
-                                    });
-                                    menu.classList.add('is-open');
-                                    arrow.classList.add('is-open');
-                                    parentLi.classList.add('submenu-active');
-                                }
-                                if (document.querySelector('#mobile-menu .submenu-active')) {
-                                    mobileMenuList.classList.add('has-active-submenu');
-                                } else {
-                                    mobileMenuList.classList.remove('has-active-submenu');
-                                }
-                            }
-                        }
-                    });
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (!e.target.closest('.dropdown')) {
-                        document.querySelectorAll('.dropdown-menu.is-open').forEach(menu => menu.classList.remove('is-open'));
-                        document.querySelectorAll('.mobile-dropdown-link .arrow.is-open').forEach(arrow => arrow.classList.remove('is-open'));
-                        document.querySelectorAll('#mobile-menu li.submenu-active').forEach(li => li.classList.remove('submenu-active'));
-                        const mobileMenuList = document.querySelector('#mobile-menu ul');
-                        if (mobileMenuList) {
-                            mobileMenuList.classList.remove('has-active-submenu');
-                        }
-                    }
-                });
-
-                const tabletNavContainer = document.querySelector('header .lg\:hidden nav');
-                if (tabletNavContainer) {
-                    const tabletNavLinks = tabletNavContainer.querySelectorAll('a');
-                    tabletNavLinks.forEach(link => {
-                        link.addEventListener('click', function(e) {
-                            if (window.innerWidth > 1024) return;
-                            e.preventDefault();
-                            const targetText = this.textContent.trim();
-                            const mobileMenu = document.querySelector('#mobile-menu');
-                            const navToggle = document.querySelector('.nav-toggle');
-                            const isMenuOpen = !mobileMenu.classList.contains('translate-x-full');
-                            if (!isMenuOpen) {
-                                navToggle.click();
-                            }
-                            setTimeout(() => {
-                                const mobileDropdownLinks = mobileMenu.querySelectorAll('.mobile-dropdown-link');
-                                mobileDropdownLinks.forEach(mobileLink => {
-                                    const linkTextOnly = mobileLink.cloneNode(true);
-                                    const arrow = linkTextOnly.querySelector('.arrow');
-                                    if (arrow) arrow.remove();
-                                    if (linkTextOnly.textContent.trim() === targetText) {
-                                        const parentLi = mobileLink.closest('li');
-                                        const submenu = parentLi.querySelector('.dropdown-menu');
-                                        if (submenu && !submenu.classList.contains('is-open')) {
-                                            mobileLink.click();
-                                        }
-                                    }
-                                });
-                            }, 350);
-                        });
-                    });
-                }
-            }
-        });
-    </script>
 </body>
 </html>

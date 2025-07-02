@@ -1,9 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // --- Reusable Animation Function ---
+    function triggerPageAnimations(container) {
+        const sections = container.querySelectorAll('.fade-in-section');
+        if (sections.length > 0) {
+            sections.forEach((section, index) => {
+                // A small, staggered delay ensures the browser has time to apply initial styles
+                // before the transition class is added, making the animation reliable.
+                setTimeout(() => {
+                    section.classList.add('is-visible');
+                }, 50 * (index + 1));
+            });
+        }
+    }
+
+    // --- Initial Page Load ---
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
-    
     const scriptTag = document.querySelector('script[src*="js/main.js"]');
     const basePath = scriptTag ? (scriptTag.dataset.basePath || '.') : '.';
+
+    // Trigger animations for the initial content that's already on the page.
+    triggerPageAnimations(document);
 
     const loadHeader = headerPlaceholder ? fetch(`${basePath}/_includes/header.html`)
         .then(response => response.ok ? response.text() : Promise.reject('Failed to load header'))
@@ -19,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadHeader.then(() => {
         // Initialize navigation and transitions immediately after header is ready.
         initializeNavigation();
-        initializePageTransitions();
+        initializePageTransitions(triggerPageAnimations); // Pass the animation function to the SPA loader
 
         // Adjust layout after all page resources (images, etc.) are loaded to ensure correct height.
         window.addEventListener('load', adjustLayoutForHeader);
@@ -29,51 +46,78 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function updateActiveNav() {
         const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.main-nav > ul > li > a');
+        // Select all links within the main navigation to correctly handle submenus.
+        const navLinks = document.querySelectorAll('.main-nav a');
 
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
-            if (!linkHref) {
+            if (!linkHref || linkHref === '#') {
                 link.classList.remove('active');
                 return;
             }
 
-            const linkBasePath = linkHref.replace('index.html', '');
-            const isActive = (linkHref === '/' && currentPath === '/') || (linkHref !== '/' && currentPath.startsWith(linkBasePath));
+            // Make path comparison more robust.
+            const linkUrl = new URL(link.href);
+            const linkPath = linkUrl.pathname;
+
+            // Check for an exact match or if the current path is a child of the link path.
+            const isActive = currentPath === linkPath || (linkPath !== '/' && currentPath.startsWith(linkPath) && link.href.includes('index.html'));
             
             link.classList.toggle('active', isActive);
+
+            // Also activate the parent menu item.
+            if (isActive && link.closest('ul')?.classList.contains('absolute')) {
+                link.closest('.relative.group')?.querySelector('a')?.classList.add('active');
+            }
         });
     }
 
     function initializeNavigation() {
         updateActiveNav(); // Set active link on initial load
+
+        // --- Desktop & Mobile Dropdown Logic ---
+        document.querySelectorAll('.main-nav .group').forEach(item => {
+            const link = item.querySelector('a:not(ul a)'); // The top-level link
+            const submenu = item.querySelector('ul');
+            if (!link || !submenu) return;
+
+            link.addEventListener('click', (e) => {
+                // For touch devices, the first tap should open the menu.
+                // If the menu is already open, the click should proceed as a normal navigation.
+                if (window.innerWidth < 768 && !item.classList.contains('is-open')) {
+                    e.preventDefault();
+                    // Close other open menus
+                    document.querySelectorAll('.main-nav .group.is-open').forEach(openItem => {
+                        if (openItem !== item) openItem.classList.remove('is-open');
+                    });
+                    item.classList.add('is-open');
+                }
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.main-nav .group')) {
+                document.querySelectorAll('.main-nav .group.is-open').forEach(item => {
+                    item.classList.remove('is-open');
+                });
+            }
+        });
+
         // Smooth scroll for the "Explore" link
         document.body.addEventListener('click', function(e) {
             const exploreLink = e.target.closest('.explore-link, a[href="#intro"]');
             if (exploreLink) {
                 e.preventDefault();
-
-                // Find the section containing the link, then find the *next* section to scroll to.
                 const currentSection = exploreLink.closest('section');
                 if (!currentSection) return;
-
                 const nextSection = currentSection.nextElementSibling;
                 if (!nextSection) return;
-
                 const header = document.querySelector('header');
                 const headerHeight = header ? header.offsetHeight : 0;
-
-                // Calculate the top position of the next section relative to the document.
                 const targetPosition = nextSection.getBoundingClientRect().top + window.pageYOffset;
-                
-                // Adjust the position by subtracting the header's height.
                 const offsetPosition = targetPosition - headerHeight;
-
-                // Scroll to the adjusted position.
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
             }
         });
 
@@ -83,23 +127,17 @@ document.addEventListener('DOMContentLoaded', function() {
             navToggle.addEventListener('click', () => {
                 const nav = document.querySelector('#mobile-menu');
                 if (!nav) return;
-
                 navToggle.style.pointerEvents = 'none';
                 nav.classList.toggle('translate-x-full');
                 const isVisible = !nav.classList.contains('translate-x-full');
                 navToggle.classList.toggle('is-active');
                 document.body.style.overflow = isVisible ? 'hidden' : 'auto';
-                setTimeout(() => {
-                    navToggle.style.pointerEvents = 'auto';
-                }, 300);
+                setTimeout(() => { navToggle.style.pointerEvents = 'auto'; }, 300);
             });
         }
-        
-        // Dropdown functionality is now handled purely by CSS group-hover on desktop.
-        // No JavaScript is needed for mobile/tablet dropdowns as per the new requirement.
     }
 
-    function initializePageTransitions() {
+    function initializePageTransitions(triggerPageAnimations) {
         const mainContent = document.querySelector('main');
         if (!mainContent) return;
 
@@ -127,26 +165,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (newMain && newTitle) {
                     setTimeout(() => {
                         mainContent.innerHTML = newMain.innerHTML;
+                        document.title = newTitle.innerText;
 
                         // Manually play video on homepage when navigating via SPA
                         if (url.endsWith('/') || url.endsWith('index.html')) {
                             const heroVideo = mainContent.querySelector('#hero video');
                             if (heroVideo) {
-                                // Wait for the 'canplay' event before trying to play the video.
                                 const onCanPlay = () => {
-                                    heroVideo.play().catch(error => {
-                                        console.error("Video autoplay failed:", error);
-                                    });
-                                    // Clean up the event listener once it has fired.
+                                    heroVideo.play().catch(error => console.error("Video autoplay failed:", error));
                                     heroVideo.removeEventListener('canplay', onCanPlay);
                                 };
                                 heroVideo.addEventListener('canplay', onCanPlay);
-                                // Kickstart the loading process.
                                 heroVideo.load();
                             }
                         }
 
-                        document.title = newTitle.innerText;
+                        // Trigger animations for the new content
+                        triggerPageAnimations(mainContent);
                         
                         if (push) {
                             history.pushState({ path: url }, document.title, url);
@@ -154,9 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         window.scrollTo({ top: 0, behavior: 'instant' });
                         
-                        // This is the critical fix for the hero section resizing
                         adjustLayoutForHeader();
-                        updateActiveNav(); // Update active link after page transition
+                        updateActiveNav();
 
                         mainContent.style.opacity = '1';
                         document.body.style.cursor = 'default';
