@@ -4,15 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Ecosystem - National University of Management</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../js/theme.js"></script>
+    <!-- Your Custom Tailwind Config -->
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-blue': '#0A0A3E',
+            'light-lavender': '#E9E8F5',
+          },
+          fontFamily: {
+            heading: ['Lora', 'serif'],
+            body: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+    </script>
+    
     <link rel="stylesheet" href="../css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @keyframes slideOverlay {
+            0% { transform: translateX(0%); opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+
+         .slide-in-text-container .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Cover the entire width of the container */
+            height: 100%;
+            background-color: #E9E8F5; /* light-lavender */
+            z-index: 5; /* Below the text, above the background */
+            animation: slideOverlay 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Slower, smoother animation */
+            animation-delay: 0.3s;
+         }
+    </style>
 </head>
-<body class="bg-white">
+<body class="bg-white font-body">
     <div id="header-placeholder"></div>
+
     <main>
         <div class="bg-white pt-28 pb-16">
             <div class="max-w-6xl mx-auto px-5 text-center">
@@ -22,27 +58,142 @@
                 </p>
             </div>
         </div>
+
         <div class="bg-light-lavender py-20">
             <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-3 gap-10">
-                <a href="/academic-ecosystem/research" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                <a href="research.html" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <h2 class="text-2xl font-heading text-dark-blue">Research</h2>
                     <p class="mt-2 font-body text-gray-600">Driving discovery and creating impact through our research initiatives.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
                 </a>
-                <a href="/academic-ecosystem/partners" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                <a href="partners.html" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <h2 class="text-2xl font-heading text-dark-blue">Partners</h2>
                     <p class="mt-2 font-body text-gray-600">Collaborating with industry leaders to provide real-world opportunities.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
                 </a>
-                <a href="/academic-ecosystem/innovation" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                <a href="innovation.html" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <h2 class="text-2xl font-heading text-dark-blue">Innovation</h2>
                     <p class="mt-2 font-body text-gray-600">Fostering a culture of creativity and entrepreneurial thinking.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
                 </a>
             </div>
         </div>
+
+        <div class="bg-white py-20">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="relative inline-block mb-16 mx-auto block text-center overflow-hidden" data-aos="fade-right">
+                    <div class="slide-in-text-container">
+                        <h2 class="text-3xl font-heading text-dark-blue text-content">Key Centers and Institutions</h2>
+                        <div class="overlay"></div>
+                    </div>
+                </div>
+
+
+                <!-- Center of Excellence for R&D and Innovation (CERI) -->
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                        <img src="image/ceri_logo.jpeg" alt="CERI Logo" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Center of Excellence for R&D and Innovation (CERI)</h3>
+                        <p class="font-body text-gray-700">The National University of Management’s Center of Excellence for R&D and Innovation (CERI), previously NUM-Research Center, was established in 2013. It emerged from the university’s initiative to bridge academia and the business community, fostering collaboration and promoting research activities among faculty members and researchers worldwide.</p>
+                    </div>
+                </div>
+
+                <!-- ASEAN Economic Research Institution (AERI) -->
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">ASEAN Economic Research Institution (AERI)</h3>
+                        <p class="font-body text-gray-700">Chosen by the Ministry of Education, Youth, and Sports, this institute supports academic research on economic issues and policy development, aligning with the goals of the ASEAN Economic Community (AEC). It confirms NUM’s commitment to enhance and encourage research in economic strategy and policy, driven by Cambodia’s ASEAN chairmanship.</p>
+                    </div>
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                        <img src="image/aeri_logo.jpeg" alt="AERI Logo" class="max-w-full max-h-full object-contain">
+                    </div>
+                </div>
+
+                <!-- Center for Digital Law -->
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                        <img src="image/digital_law.jpeg" alt="Center for Digital Law Logo" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Center for Digital Law</h3>
+                        <p class="font-body text-gray-700">Located at the NUM Veal Sbov Campus, this center collaborates with various faculties to support technology transfer, conduct research on technology and digital laws, and provide specialized legal training in the digital domain.</p>
+                    </div>
+                </div>
+
+                <!-- The CamboVerse Center -->
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">The CamboVerse Center</h3>
+                        <p class="font-body text-gray-700">This center focuses on developing virtual and augmented reality experiences to preserve and disseminate Cambodian cultural heritage. By merging modern technology with cultural education, it aims to foster a deeper global appreciation of Cambodian culture and history.</p>
+                    </div>
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                        <img src="image/cambo.jpeg" alt="CamboVerse Center Logo" class="max-w-full max-h-full object-contain">
+                    </div>
+                </div>
+
+                <!-- ===== START: NEW SECTIONS ===== -->
+
+                <!-- Administration and Student Services -->
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                        <!-- Replace this with the actual logo image when available -->
+                        <img src="image/service.jpg" alt="Administration and Student Services Logo" class="max-w-full max-h-full object-contain rounded-sm">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Administration and Student Services</h3>
+                        <p class="font-body text-gray-700">Located at the NUM Veal Sbov Campus, this section provides essential administrative support, streamlines student enrollment, monitors academic progress, and offers comprehensive guidance and counseling to enhance the overall student experience and support their holistic development.</p>
+                    </div>
+                </div>
+
+                <!-- NUM Social Innovation Lab -->
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">NUM Social Innovation Lab</h3>
+                        <p class="font-body text-gray-700">Part of the EU-funded South-East Asian Social Innovation Network (SEASIN) and supported by SMART Axiata, this lab is a space for seminars, workshops, and an incubator to develop and launch new social ventures and promote social entrepreneurship.</p>
+                    </div>
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                        <img src="image/num_social.png" alt="NUM Social Innovation Lab Logo" class="max-w-full max-h-full object-contain rounded-sm">
+                    </div>
+                </div>
+
+                <!-- NUM Career Center -->
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                        <img src="image/num_career.jpeg" alt="NUM Career Center Logo" class="max-w-full max-h-full object-contain rounded-sm">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">NUM Career Center</h3>
+                        <p class="font-body text-gray-700">Supported by USAID, this center is part of the “Digital Career Development” project with UC Berkeley. It aims to enhance digital employment skills, increase scholarships and internships, and build relationship opportunities to support the careers of Cambodian youth.</p>
+                    </div>
+                </div>
+
+                <!-- Digital Technology Center (DTC) -->
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                    <div>
+                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Digital Technology Center (DTC)</h3>
+                        <p class="font-body text-gray-700">Donated by the Ministry of Post and Telecommunication, the DTC is dedicated to developing a university research hub, corporate innovation facilities, and a community tech hub. It provides essential infrastructure, training, and support to advance digital skills, technologies, and transformation.</p>
+                    </div>
+                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
+                         <img src="image/lap.jpg" alt="Digital Technology Center Logo" class="max-w-full max-h-full object-contain rounded-sm">
+                    </div>
+                </div>
+                 <!-- ===== END: NEW SECTIONS ===== -->
+
+            </div>
+        </div>
     </main>
+
     <div id="footer-placeholder"></div>
+
     <script src="../js/main.js" data-base-path=".."></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    </script>
 </body>
 </html>

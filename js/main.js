@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeNavigation();
         initializeSearch(basePath); // Initialize site search
         initializePageTransitions(triggerPageAnimations); // Pass the animation function to the SPA loader
+        initializeHidingHeader(); // Add hiding header for mobile
 
         // Adjust layout after all page resources (images, etc.) are loaded to ensure correct height.
         window.addEventListener('load', adjustLayoutForHeader);
@@ -71,6 +72,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.closest('.relative.group')?.querySelector('a')?.classList.add('active');
             }
         });
+    }
+
+    function initializeHidingHeader() {
+        const header = document.querySelector('header');
+        if (!header) return;
+
+        let lastScrollTop = 0;
+        const scrollThreshold = 0; // Pixels to scroll before hiding header
+
+        window.addEventListener('scroll', () => {
+            // Only apply on mobile
+            if (window.innerWidth >= 768) {
+                header.style.transform = 'translateY(0)';
+                return;
+            }
+
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                // Scrolling Down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling Up
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+        }, { passive: true });
     }
 
     function initializeNavigation() {
