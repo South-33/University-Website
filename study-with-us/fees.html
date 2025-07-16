@@ -244,13 +244,10 @@
     <!-- Main JS file (for header/footer loading and other interactions) -->
     <script src="../js/main.js" data-base-path=".."></script>
     
-    <!-- Site-wide Scripts -->
+    <!-- Page-specific Scripts -->
     <script>
-        // Existing Header/Footer loader script...
+        // FAQ Accordion
         document.addEventListener('DOMContentLoaded', function() {
-            // ... (Your header and footer fetching logic would go here)
-            // For now, we'll just include the FAQ script.
-
             const faqItems = document.querySelectorAll('.faq-item');
 
             faqItems.forEach(item => {
@@ -262,22 +259,19 @@
                     const isExpanded = answerDiv.classList.contains('max-h-96');
 
                     // Close all other open FAQs
-                    faqItems.forEach(otherItem => {
+                    document.querySelectorAll('.faq-item').forEach(otherItem => {
                         if (otherItem !== item) {
-                            otherItem.querySelector('.faq-answer').classList.remove('max-h-96', 'p-6', 'border-t');
-                            otherItem.querySelector('.faq-answer').classList.add('max-h-0');
+                            otherItem.querySelector('.faq-answer').classList.remove('max-h-96');
                             otherItem.querySelector('.faq-arrow').classList.remove('rotate-45');
                         }
                     });
 
                     // Toggle the clicked FAQ
                     if (isExpanded) {
-                        answerDiv.classList.remove('max-h-96', 'p-6', 'border-t');
-                        answerDiv.classList.add('max-h-0');
+                        answerDiv.classList.remove('max-h-96');
                         arrow.classList.remove('rotate-45');
                     } else {
-                        answerDiv.classList.add('max-h-96', 'p-6', 'border-t');
-                        answerDiv.classList.remove('max-h-0');
+                        answerDiv.classList.add('max-h-96');
                         arrow.classList.add('rotate-45');
                     }
                 });

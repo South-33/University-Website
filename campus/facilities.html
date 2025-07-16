@@ -246,61 +246,32 @@
     </main>
 
     <div id="footer-placeholder"></div>
-    
-    <!-- Site-wide Scripts -->
-    <script>
-        // Animate On Scroll
-        AOS.init({ once: true });
 
-        // Swiper Carousel for mobile
-        new Swiper('.facility-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 24,
+    <script>
+        // Initialize Swiper for mobile
+        const swiper = new Swiper('.facility-swiper', {
+            slidesPerView: 1.2,
+            spaceBetween: 20,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
             },
-        });
-
-        // Facility Filter Tabs
-        const tabs = document.querySelectorAll('.facility-tab');
-        const cards = document.querySelectorAll('.facility-card');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                tabs.forEach(t => t.classList.remove('active', 'bg-dark-blue', 'text-white'));
-                this.classList.add('active', 'bg-dark-blue', 'text-white');
-                const category = this.getAttribute('data-category');
-                cards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Add Facility Button Handler
-        document.getElementById('add-facility-btn').addEventListener('click', function() {
-            alert('Add Facility button clicked! (Implement your add logic here)');
-        });
-
-        // FAQ Accordion
-        document.querySelectorAll('.faq-toggle').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const answer = this.nextElementSibling;
-                const icon = this.querySelector('span');
-                if (answer.classList.contains('hidden')) {
-                    document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
-                    document.querySelectorAll('.faq-toggle span').forEach(i => i.style.transform = 'rotate(0deg)');
-                    answer.classList.remove('hidden');
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    answer.classList.add('hidden');
-                    icon.style.transform = 'rotate(0deg)';
+            breakpoints: {
+                640: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 30,
                 }
-            });
+            }
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
         });
     </script>
+
+    <script src="../js/main.js" data-base-path=".."></script>
+
 </body>
 </html>

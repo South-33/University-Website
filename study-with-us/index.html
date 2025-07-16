@@ -8,46 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../js/theme.js"></script>
+    <!-- Tailwind CSS Theme Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'dark-blue': '#0A0A3E',
+              'light-lavender': '#E9E8F5',
+            },
+            fontFamily: {
+              heading: ['Lora', 'serif'],
+              body: ['Montserrat', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
     <link rel="stylesheet" href="../css/main.css">
-    <style>
-        /* Custom light lavender background */
-        .bg-light-lavender {
-            background-color: #000000; /* Light lavender */
-        }
-        
-        /* Custom border color for section */
-        .border-lavender-dark {
-            border-color: #1a0082;
-        }
-        .text-lavender-dark {
-            color: #000000; /* Indigo for good contrast */
-        }
-        
-        .text-lavender-medium {
-            color: #000000; /* Medium purple for secondary text */
-        }
-        
-        /* Button styling adjustments */
-        .btn-primary {
-            background-color: #0e19ab;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #0c0172;
-        }
-        
-        .btn-secondary {
-            border-color: #0d0691;
-            color: #0b0b1d;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #f11032;
-            color: white;
-        }
-    </style>
 </head>
 <body class="bg-white">
 

@@ -5,27 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student activity | Your University Name</title>
     
-    <!-- Tailwind CSS via CDN -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- RULE ADHERENCE: Loading the centralized Tailwind theme configuration. -->
-    <script src="../js/theme.js"></script>
+    <!-- Tailwind CSS Theme Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'dark-blue': '#0A0A3E',
+              'light-lavender': '#E9E8F5',
+            },
+            fontFamily: {
+              heading: ['Lora', 'serif'],
+              body: ['Montserrat', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
     
     <!-- RULE ADHERENCE: Loading centralized global styles. -->
     <link rel="stylesheet" href="../css/main.css">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
-   <style>
-        /* Applying the modern font to the body */
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-    </style>
 
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
