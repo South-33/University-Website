@@ -74,26 +74,7 @@
 }
 
 /* Program Tab Content Animation */
-.program-content-wrapper {
-    position: relative;
-    transition: height 0.35s ease-in-out;
-}
 
-.program-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.program-content.active {
-    opacity: 1;
-    visibility: visible;
-    position: static; /* Let the active tab define the height */
-}
 
 .dropdown-menu.is-open {
     opacity: 1;
@@ -135,27 +116,7 @@
 }
 
 /* --- Curriculum Card Lists --- */
-.course-list {
-    list-style: none;
-    padding: 0;
-}
 
-.course-list li {
-    position: relative; /* Anchor for the ::before pseudo-element */
-    padding-left: 1.25rem; /* Create space for the dash */
-    margin-bottom: 0.5rem; /* Space between courses */
-}
-
-.course-list li:last-child {
-    margin-bottom: 0;
-}
-.course-list li::before {
-    content: '-'; /* Dash icon */
-    position: absolute;
-    left: 0;
-    color: #4299e1; /* Tailwind's blue-500 */
-    font-weight: bold;
-}
 .main-nav a::after {
     content: '';
     position: absolute;
@@ -201,109 +162,25 @@ main.spa-transition {
 }
 
 /* --- Page-specific styles moved to global --- */
-.timeline-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 2rem;
-    left: 50%;
-    height: 2px;
-    width: 100%;
-    background-color: #e5e7eb;
-    z-index: -1;
-}
 
-.fade-in-section > * {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.17, 0.55, 0.55, 1),
-                transform 0.6s cubic-bezier(0.17, 0.55, 0.55, 1);
-}
-
-.fade-in-section.is-visible > * {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 /* --- Search Results Dropdown --- */
-.search-results-dropdown {
-    position: absolute;
-    top: 100%; /* Position directly below the parent */
-    left: 0;
-    right: 0;
-    z-index: 50; /* Should be on top of other content */
-    background-color: white;
-    border-radius: 0.5rem; /* Corresponds to rounded-lg */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Corresponds to shadow-2xl */
-    border: 1px solid rgba(49, 46, 129, 0.1); /* Corresponds to border-dark-blue/10 */
-    overflow-y: auto;
-    max-height: 70vh;
-    margin-top: 8px; /* Add a small gap between search bar and results */
+
+
+/* ============================================= */
+/*       PAGE TRANSITION STYLES (NEW)            */
+/* ============================================= */
+
+body.fade-in {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* On mobile, the dropdown was previously a wide, fixed modal. 
-   This keeps it attached but allows it to be wider than the search bar for readability. */
-@media (max-width: 767px) {
-    .search-results-dropdown {
-        position: fixed; /* Position relative to the viewport */
-        top: 72px; /* Position below the 72px */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90vw;
-        max-width: 600px;
-    }
+body.is-visible {
+    opacity: 1;
 }
 
-/* --- Curriculum Tabs --- */
-.curriculum-tab {
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 500;
-    color: rgba(49, 46, 129, 0.7);
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease-in-out;
-}
-
-.curriculum-tab.active-tab {
-    color: #ffffff;
-    background-color: #312e81; /* dark-blue */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transform: scale(1.05);
-}
-
-/* --- Program Tabs (bachelors.html) --- */
-.program-tab {
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 500;
-    color: rgba(49, 46, 129, 0.7);
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease-in-out;
-}
-
-.program-tab.active,
-.program-tab.active-tab {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transform: scale(1.05);
-}
-
-.curriculum-pane {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.curriculum-pane.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { 
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to { 
-        opacity: 1;
-        transform: translateY(0);
-    }
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }

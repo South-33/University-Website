@@ -1,13 +1,13 @@
 # AI-Specific Project Documentation
 
-**Objective:** This document provides a comprehensive, technical overview of the university website project for AI assistants. Use this as the primary source of truth for understanding the codebase, architecture, and development patterns.
+**Objective:** This document provides a comprehensive, technical overview of the university website project for AI assistants. The primary design goal is for each HTML file to be as self-contained as possible, relying only on `js/main.js` and `css/main.css` for truly global logic and styles. Page-specific scripts and styles should be placed in dedicated files and only included on the relevant pages.
 
 ## 1. Core Technologies & Architecture
 
 - **Frontend Framework:** None. The project uses static HTML files.
-- **Styling:** Tailwind CSS, loaded via a CDN. The theme configuration is centralized.
-- **JavaScript:** Vanilla JavaScript for all client-side logic.
-- **Architecture:** Static Site Generation (SSG) model where pages are individual HTML files. The URL structure is flat, with content directories at the root level. Key components like the header and footer are dynamically loaded via JavaScript to ensure maintainability.
+- **Styling:** Tailwind CSS (via CDN) for utility classes. All global custom styles go in `css/main.css`. Page-specific styles should be placed in separate CSS files and included only on the relevant HTML page.
+- **JavaScript:** Vanilla JavaScript for all client-side logic. All global/shared logic must go in `js/main.js`. Page-specific scripts should be placed in their own JS files and included only on the relevant HTML page.
+- **Architecture:** Static Site Generation (SSG) model where pages are individual HTML files. The URL structure is flat, with content directories at the root level. Key components like the header and footer are dynamically loaded via JavaScript to ensure maintainability. Each page should avoid unnecessary dependencies on global resources except for `main.js` and `css/main.css`.
 
 ## 2. Project File Structure
 
@@ -64,7 +64,10 @@
 1.  **Creating New Pages:**
     - Start by duplicating `template.html` into the appropriate content subdirectory (e.g., `programs/`).
     - Do **not** write static header or footer HTML. Use the placeholder divs: `<div id="header-placeholder"></div>` and `<div id="footer-placeholder"></div>`.
-    - Ensure the page includes links to `js/theme.js` in the `<head>` and `js/main.js` at the end of the `<body>`, setting the `data-base-path` correctly based on the file's location.
+    - Each page should only include `js/main.js` and `css/main.css` for global logic and styles.
+    - If a page requires custom logic or styles, create a dedicated JS or CSS file (e.g., `js/programs-bachelors.js`, `css/programs-bachelors.css`) and include it **only** on that page.
+    - Avoid inline `<script>` or `<style>` blocks.
+    - Set the `data-base-path` attribute on `main.js` correctly based on the file's location.
 
 2.  **Image Pathing:**
     - All images are stored in the root `/Picture` directory.
@@ -74,9 +77,10 @@
 
 3.  **JavaScript Modifications:**
     - **DO NOT** add inline `<script>` blocks to HTML pages for navigation or other global features.
-    - All shared, interactive logic **must** be added to `js/main.js`.
+    - All global/shared logic **must** be added to `js/main.js`.
+    - Page-specific logic must be placed in a dedicated JS file and included only on the relevant page.
 
 4.  **Styling:**
     - **Theme Configuration (`js/theme.js`):** For site-wide style changes related to the Tailwind theme (e.g., changing the primary color, fonts), modify `js/theme.js`.
     - **Global Component Styles (`css/main.css`):** For custom styles applied to shared components across the site (e.g., header animations, dropdown menus), use the central stylesheet at `css/main.css`.
-    - **Inline Styles:** Avoid adding inline `<script>` or `<style>` blocks. All global styles have been centralized into `css/main.css` to ensure consistency and maintainability. Page-specific styles should be used sparingly and only if a component's style cannot be generalized..
+    - **Page-Specific Styles:** If a page requires unique styles, create a dedicated CSS file and include it **only** on that page. Avoid inline styles and keep global styles in `css/main.css`.

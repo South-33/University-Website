@@ -13,31 +13,24 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Custom Theme & JS (paths based on your example) -->
-    <script src="../js/theme.js"></script> <!-- Assumes this file configures Tailwind theme -->
-    <link rel="stylesheet" href="../css/main.css"> <!-- Assumes this has base styles -->
-
-    <style>
-        /* Custom styles adapted from your example for consistency */
-        body {
-            font-family: 'Montserrat', sans-serif;
+    <!-- Tailwind CSS Theme Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'dark-blue': '#0A0A3E',
+              'light-lavender': '#E9E8F5',
+            },
+            fontFamily: {
+              heading: ['Lora', 'serif'],
+              body: ['Montserrat', 'sans-serif'],
+            }
+          }
         }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Lora', serif;
-        }
-        .bg-light-lavender {
-            background-color: #F7F7FF; 
-        }
-        .bg-dark-blue {
-            background-color: #0A2240;
-        }
-        .text-dark-blue {
-            color: #0A2240;
-        }
-        .text-primary-blue {
-            color: #0e19ab;
-        }
-    </style>
+      }
+    </script>
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body class="bg-white">
 
