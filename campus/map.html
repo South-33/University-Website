@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Campus Map - Explore Our Campuses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/theme.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="font-sans antialiased bg-gray-100 text-gray-800">
+
+    <div id="header-placeholder"></div>
+
+    <main class="container mx-auto my-8 px-4 sm:px-6 lg:px-8">
+        <section class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-blue-800 leading-tight mb-4 animate-fade-in-down">Discover Our Vibrant Campuses</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up">Navigate through our state-of-the-art facilities and green spaces. Select a campus below to explore its unique features.</p>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 animate-fade-in-up delay-200">
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <a href="main-campus-details.html" class="block">
+                    <img src="image/num_front.jpg" alt="Main Campus Aerial View" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h2 class="text-3xl font-bold text-blue-700 mb-3">Main Campus</h2>
+                        <p class="text-gray-700 mb-4">Our sprawling main campus is the heart of academic life, featuring diverse faculties, research centers, and student amenities.</p>
+                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full hover:bg-blue-200 transition-colors duration-200">Explore Main Campus &rarr;</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <a href="second-campus-details.html" class="block">
+                    <img src="image/num_veal_sbov1.jpg" alt="Second Campus Building" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <h2 class="text-3xl font-bold text-green-700">Veal Sbov Campus</h2>
+                            <span class="inline-block bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full ml-3 shadow">
+                                International Program
+                            </span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Dedicated to technology and innovation, this campus fosters groundbreaking research and entrepreneurial spirit.</p>
+                        <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full hover:bg-green-200 transition-colors duration-200">Explore Veal Sbov Campus &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <section class="mt-16 text-center">
+            <h2 class="text-4xl font-bold text-blue-800 mb-6">Interactive Map Overview</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-4xl mx-auto">Get a quick glimpse of our campus locations. Click on any campus above for a detailed interactive map and specific building information.</p>
+            <div class="bg-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center h-96 w-full animate-fade-in delay-500">
+                <img src="../Picture/university-map-placeholder.png" alt="University Map Overview" class="max-w-full h-auto object-contain">
+            </div>
+            <p class="text-sm text-gray-500 mt-4">Note: Full interactive features available on individual campus detail pages.</p>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/main.js" data-base-path=".."></script>
+</body>
+</html>

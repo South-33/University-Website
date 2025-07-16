@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Fees & Payment - National University of Management</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/main.css"> <!-- Assumes a base stylesheet -->
+
+    <!-- Tailwind CSS Theme Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#0A0A3E',
+                        'light-lavender': '#E9E8F5',
+                        'brand-green': '#10B981', // For CTAs
+                        'brand-gray': '#F3F4F6', // For light backgrounds
+                    },
+                    fontFamily: {
+                        heading: ['Lora', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white font-body">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+        <!-- 1. Hero Section -->
+        <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center text-center bg-dark-blue text-white">
+            <div class="relative z-10 px-6">
+                <h1 class="text-4xl md:text-5xl font-heading font-bold">Student Fees & Payment</h1>
+                <p class="mt-4 text-lg md:text-xl text-light-lavender">Transparent, Flexible, and Easy to Manage.</p>
+            </div>
+        </section>
+
+        <!-- 2. Fee Overview -->
+        <section class="py-16 md:py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-dark-blue">Overview of Fees</h2>
+                <p class="mt-4 text-lg text-gray-700 leading-relaxed">
+                    Your university fees are an investment in a world-class education. They cover all essential academic and administrative services, including tuition for your courses, registration processing, and access to our state-of-the-art library, computer labs, and other student support facilities.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Fee Breakdown Table -->
+        <section class="py-16 md:py-20 bg-brand-gray">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-dark-blue">Fee Breakdown (Per Semester)</h2>
+                    <p class="mt-4 text-lg text-gray-700">All fees are listed in USD and are subject to change.</p>
+                </div>
+                <!-- Responsive Table Wrapper -->
+                <div class="mt-12 overflow-x-auto rounded-lg border border-gray-200 shadow-md">
+                    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                        <thead class="bg-gray-100 text-left">
+                            <tr>
+                                <th class="whitespace-nowrap px-4 py-3 font-semibold text-gray-900">Fee Category</th>
+                                <th class="whitespace-nowrap px-4 py-3 font-semibold text-gray-900 text-center">Domestic Rate</th>
+                                <th class="whitespace-nowrap px-4 py-3 font-semibold text-gray-900 text-center">International Rate</th>
+                                <th class="whitespace-nowrap px-4 py-3 font-semibold text-gray-900">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">Tuition Fee</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$1,500</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$2,500</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700">Based on a standard 15-credit load.</td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">Registration Fee</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$100</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$150</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700">One-time fee per semester.</td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">Lab Fee</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$75</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$75</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700">Applicable to Science & Engineering students only.</td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">Library Fee</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$50</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$50</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700">Includes digital and physical resource access.</td>
+                            </tr>
+                             <tr>
+                                <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">Student Services Fee</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$125</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700 text-center">$125</td>
+                                <td class="whitespace-nowrap px-4 py-4 text-gray-700">Covers career services, wellness, etc.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Payment Deadlines & 5. Payment Methods (Combined Section) -->
+        <section class="py-16 md:py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+                <!-- Deadlines -->
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-dark-blue">Important Deadlines</h2>
+                    <ul class="mt-8 space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <span class="mr-3 text-brand-green font-bold">➔</span>
+                            <div><strong>Fall Semester Deadline:</strong> August 15, 2024</div>
+                        </li>
+                        <li class="flex items-start">
+                           <span class="mr-3 text-brand-green font-bold">➔</span>
+                            <div><strong>Spring Semester Deadline:</strong> January 15, 2025</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-brand-green font-bold">➔</span>
+                            <div><strong>Late Payment Penalty Date:</strong> 7 days after deadline</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Methods -->
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-dark-blue">How to Pay</h2>
+                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-brand-gray p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-dark-blue">Online Transfer</h3>
+                            <p class="mt-2 text-gray-700">Pay directly via our <a href="#" class="text-green-600 underline">secure payment portal</a>.</p>
+                        </div>
+                         <div class="bg-brand-gray p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-dark-blue">Credit/Debit Card</h3>
+                            <p class="mt-2 text-gray-700">We accept Visa, Mastercard, and other major cards.</p>
+                        </div>
+                         <div class="bg-brand-gray p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-dark-blue">On-Campus Cashier</h3>
+                            <p class="mt-2 text-gray-700">Visit the Office of Student Accounts during office hours.</p>
+                        </div>
+                         <div class="bg-brand-gray p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-dark-blue">Installment Plan</h3>
+                            <p class="mt-2 text-gray-700">Eligible students can split payments into installments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Scholarships & Waivers -->
+        <section class="py-16 md:py-20 bg-brand-gray">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-dark-blue">Scholarship & Waiver Opportunities</h2>
+                <p class="mt-4 text-lg text-gray-700 leading-relaxed">
+                    We are committed to making education accessible. Explore these options to help fund your studies.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-6">
+                    <a href="#" class="bg-white border-2 border-brand-green text-brand-green font-semibold py-3 px-6 rounded-lg hover:bg-brand-green hover:text-white transition-colors">Merit-Based Scholarships</a>
+                    <a href="#" class="bg-white border-2 border-brand-green text-brand-green font-semibold py-3 px-6 rounded-lg hover:bg-brand-green hover:text-white transition-colors">Financial Aid Application</a>
+                    <a href="#" class="bg-white border-2 border-brand-green text-brand-green font-semibold py-3 px-6 rounded-lg hover:bg-brand-green hover:text-white transition-colors">Early-Bird Discounts</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 7. FAQ Accordion -->
+        <section class="py-16 md:py-20 bg-white">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-dark-blue">Frequently Asked Questions</h2>
+                </div>
+                <div class="mt-12 space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <button class="faq-question w-full text-left flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="text-lg font-semibold text-dark-blue">Can I pay in installments?</span>
+                            <span class="faq-arrow text-2xl text-dark-blue transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="p-6 border-t border-gray-200 text-gray-700">
+                                Yes, eligible students may apply for an installment plan to break the semester fees into three smaller payments. Please contact the Office of Student Accounts before the payment deadline to inquire about eligibility and set up a plan.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <button class="faq-question w-full text-left flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="text-lg font-semibold text-dark-blue">What happens if I miss the deadline?</span>
+                            <span class="faq-arrow text-2xl text-dark-blue transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="p-6 border-t border-gray-200 text-gray-700">
+                                Failure to pay by the deadline may result in a late payment penalty of $50 and a hold on your student account, which can prevent you from registering for future classes. We encourage you to contact us immediately if you anticipate payment issues.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                         <button class="faq-question w-full text-left flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="text-lg font-semibold text-dark-blue">Are there extra fees for late registration?</span>
+                            <span class="faq-arrow text-2xl text-dark-blue transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="p-6 border-t border-gray-200 text-gray-700">
+                                Yes, a late registration fee of $100 is applied to students who do not complete their course registration by the specified date for each semester. This is separate from any late payment penalties.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Contact & Support -->
+        <section class="bg-dark-blue text-white">
+            <div class="max-w-4xl mx-auto px-6 py-16 text-center">
+                <h2 class="text-3xl font-heading font-bold">Need Help or Have Questions?</h2>
+                <p class="mt-4 text-lg text-light-lavender max-w-2xl mx-auto">Our Office of Student Accounts is here to assist you with all your fee-related inquiries.</p>
+                <div class="mt-8 space-y-2 text-lg">
+                    <p><strong>Email:</strong> <a href="mailto:fees@university.edu" class="underline hover:text-brand-green">fees@university.edu</a></p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Office Hours:</strong> Mon - Fri, 9:00 AM - 4:00 PM</p>
+                </div>
+                <a href="mailto:fees@university.edu" class="mt-8 inline-block bg-brand-green text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition-colors">
+                    Contact Us
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <!-- Main JS file (for header/footer loading and other interactions) -->
+    <script src="../js/main.js" data-base-path=".."></script>
+    
+    <!-- Site-wide Scripts -->
+    <script>
+        // Existing Header/Footer loader script...
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... (Your header and footer fetching logic would go here)
+            // For now, we'll just include the FAQ script.
+
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const questionButton = item.querySelector('.faq-question');
+                const answerDiv = item.querySelector('.faq-answer');
+                const arrow = item.querySelector('.faq-arrow');
+
+                questionButton.addEventListener('click', () => {
+                    const isExpanded = answerDiv.classList.contains('max-h-96');
+
+                    // Close all other open FAQs
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.querySelector('.faq-answer').classList.remove('max-h-96', 'p-6', 'border-t');
+                            otherItem.querySelector('.faq-answer').classList.add('max-h-0');
+                            otherItem.querySelector('.faq-arrow').classList.remove('rotate-45');
+                        }
+                    });
+
+                    // Toggle the clicked FAQ
+                    if (isExpanded) {
+                        answerDiv.classList.remove('max-h-96', 'p-6', 'border-t');
+                        answerDiv.classList.add('max-h-0');
+                        arrow.classList.remove('rotate-45');
+                    } else {
+                        answerDiv.classList.add('max-h-96', 'p-6', 'border-t');
+                        answerDiv.classList.remove('max-h-0');
+                        arrow.classList.add('rotate-45');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

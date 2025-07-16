@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title - National University of Management</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <!-- Tailwind CSS Theme Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#0A0A3E',
+                        'light-lavender': '#E9E8F5',
+                    },
+                    fontFamily: {
+                        heading: ['Lora', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles for Animations and Components -->
+    <link rel="stylesheet" href="css/main.css">
+            transition: max-height 0.2s ease-out, opacity 0.1s ease-out;
+        }
+
+        /* Style submenu items for clarity */
+        .dropdown-menu a {
+            font-size: 1rem;
+            opacity: 0.9;
+            padding: 0.5rem 0;
+            position: relative; /* Establish positioning context for the hyphen */
+            display: inline-block; /* Allow centering of the link itself */
+        }
+
+        /* Add a hyphen before each submenu item for clarity */
+        .dropdown-menu a::before {
+            content: "-";
+            position: absolute;
+            right: 100%; /* Position to the immediate left of the text */
+            margin-right: 0.5em; /* Add a small gap */
+            /* Vertically center the hyphen relative to the text */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dropdown-menu.is-open {
+            opacity: 1;
+            max-height: 500px; /* Adjust if submenus are taller */
+            /* Smooth opening animation */
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
+        }
+
+        /* Mobile dropdown alignment */
+        .mobile-dropdown-link {
+            position: relative; /* Establish positioning context for the arrow */
+            display: inline-block; /* Ensure it doesn't take full width */
+        }
+        .mobile-dropdown-link .arrow {
+            position: absolute;
+            right: 100%; /* Position to the left of the text */
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg); /* Point right by default */
+            margin-right: 0.5em; /* Add a small gap */
+            font-size: 0.8em;
+            transition: transform 0.3s ease-out;
+        }
+        .mobile-dropdown-link .arrow.is-open {
+            transform: translateY(-50%) rotate(90deg); /* Point down when open */
+        }
+
+        /* Dim inactive items when a submenu is open */
+        #mobile-menu ul.has-active-submenu > li {
+            opacity: 0.5;
+            transition: opacity 0.3s ease-out;
+        }
+        #mobile-menu ul.has-active-submenu > li.submenu-active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-light-lavender">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- 
+        ===================================================================
+        YOUR PAGE CONTENT GOES HERE
+        ===================================================================
+        
+        Instructions:
+        1. Copy this file and rename it (e.g., "about-us.html").
+        2. Place it in the "pages" directory.
+        3. Change the <title> in the <head> to match your new page.
+        4. Add your HTML content inside this <main> tag.
+        
+        Everything else (header, footer, styles, scripts) will
+        be handled automatically.
+        -->
+
+        <div class="h-screen flex items-center justify-center">
+            <h1 class="text-4xl font-heading text-dark-blue">Your Content Here</h1>
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <!-- Site-wide Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+    <script src="../js/main.js" data-base-path=".."></script>
+</body>
+</html>

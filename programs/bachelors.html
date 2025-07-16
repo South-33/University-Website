@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bachelor's Programs - National University of Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/theme.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- Page-specific styles for advanced components (e.g., timeline) -->
+    <style>
+        .timeline-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 2rem; /* Align with the center of the number circle */
+            left: 50%;
+            height: 2px;
+            width: 100%;
+            background-color: #e5e7eb; /* gray-200 */
+            z-index: -1;
+        }
+
+        .fade-in-section > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s,
+                        transform 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s;
+        }
+
+        .fade-in-section.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-light-lavender">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-[35vh] min-h-[250px] flex items-center justify-center text-center text-white font-body">
+            <div class="absolute inset-0">
+                <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="University Library" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-dark-blue/70"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
+                <h1 class="font-heading text-4xl md:text-6xl mb-4">Bachelor's Programs</h1>
+                <p class="text-lg md:text-xl text-white/90">Explore bachelor's degrees designed to foster innovation, critical thinking, and career readiness.</p>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="wow-fade-in-left">
+                        <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Foundation for Your Future</h2>
+                        <p class="text-dark-blue/80 text-lg leading-relaxed">
+                            Our Bachelors programs provide a comprehensive education that combines rigorous academic theory with practical, real-world application. We are dedicated to nurturing the next generation of leaders, entrepreneurs, and innovators. With a focus on industry-relevant skills and a supportive learning environment, NUM is the perfect place to begin your academic and professional journey.
+                        </p>
+                    </div>
+                    <div class="wow-fade-in-right">
+                        <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students collaborating on a project" class="rounded-xl shadow-2xl w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Grid Section -->
+        <section id="programs-grid" class="bg-light-lavender py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">Explore Our Faculties</h2>
+
+                <!-- Program Type Tabs -->
+                <div class="mb-12">
+                    <div class="flex flex-col md:flex-row flex-wrap justify-center gap-4">
+                        <button class="w-full md:w-auto program-tab active bg-dark-blue text-white px-6 py-3 rounded-full font-medium" data-tab="national">
+                            National
+                        </button>
+                        <button class="w-full md:w-auto program-tab bg-white text-dark-blue px-6 py-3 rounded-full font-medium" data-tab="international">
+                            International
+                        </button>
+                    </div>
+                </div>
+
+                <div class="program-content-wrapper relative">
+                    <!-- National Programs Tab Content -->
+                    <div class="program-content active" id="national-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- Program Card: Faculty of Management -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="flex-grow flex flex-col items-center">
+                                        <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+                                        </svg></div>
+                                        <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Management</h3>
+                                        <p class="text-base text-dark-blue/80 font-body mb-6">Bachelor’s degrees in Management, Marketing, and Entrepreneurship.</p>
+                                    </div>
+                                    <a href="faculty-of-management.html" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Finance and Accounting -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="flex-grow flex flex-col items-center">
+                                        <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Finance and Accounting</h3>
+                                        <div class="w-full h-40 overflow-hidden rounded-lg mt-3">
+                                            <img src="../Picture/FInance.jpg" alt="Faculty of Finance and Accounting" class="w-full h-full object-cover scale-125">
+                                        </div>
+                                    </div>
+                                    <a href="faculty-of-management.html" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Information Technology -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="flex-grow flex flex-col items-center">
+                                        <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="1.5 1.5 21 21" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-dark-blue"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 15h-6a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h6" /><path d="M13 4m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" /><path d="M7 19l3 0" /><path d="M17 8l0 .01" /><path d="M17 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M9 15l0 4" /></svg></div>
+                                        <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Information Technology</h3>
+                                        <p class="text-base text-dark-blue/80 font-body mb-6">Bachelor's degrees in IT, Business IT, Robotic Engineering, and Computer Science.</p>
+                                    </div>
+                                    <a href="faculty-of-it.html" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Economics -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-dark-blue"><path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/></svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Economics</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor’s degrees in Economics, Business Economics, and International Economics.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Tourism -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
+                                    </svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Tourism</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor’s degrees in Tourism Management, Hospitality, and Event Management.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Law -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="1.5 1.5 21 21" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scale-icon lucide-scale"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Law</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor’s degrees in Law, specializing in areas like Constitutional Law, International Law, and Business Law.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Foreign Languages -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
+                                    </svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Foreign Languages</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor’s degrees in various Foreign Languages, focusing on linguistic proficiency and cultural understanding.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Card: School of Public Policy -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                                    </svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">School of Public Policy</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor's degrees in Public Administration, International Relations, and Public Policy.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Digital Economy -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                                    </svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Digital Economy</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Innovative programs focusing on E-commerce, Digital Marketing, and Fintech.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- International Programs Tab Content -->
+                    <div class="program-content" id="international-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- Program Card: Faculty of Information Technology -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="1.5 1.5 21 21" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-dark-blue"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 15h-6a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h6" /><path d="M13 4m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" /><path d="M7 19l3 0" /><path d="M17 8l0 .01" /><path d="M17 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M9 15l0 4" /></svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Information Technology</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Cutting-edge programs in Computer Science, Data Analytics, and Cybersecurity.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: School of Public Policy -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                                    </svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">School of Public Policy</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor's degrees in Public Administration, International Relations, and Public Policy.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+
+                            <!-- Program Card: Faculty of Digital Economy -->
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-center h-full">
+                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                                    </svg></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Digital Economy</h3>
+                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Innovative programs focusing on E-commerce, Digital Marketing, and Fintech.</p>
+                                    <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Life & Testimonial Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">A Vibrant Campus Community</h3>
+                    <p class="mb-8 text-lg text-dark-blue/80 leading-relaxed">Life at NUM is more than just lectures and assignments. We foster a supportive and dynamic community where students can grow personally and professionally. Join student clubs, participate in events, and build lifelong friendships.</p>
+                    
+                    <div class="bg-light-lavender/60 p-8 rounded-xl shadow-lg group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative will-change-transform">
+                        <p class="text-lg text-dark-blue/80 italic mb-4">"Choosing NUM was the best decision I ever made. The professors are incredibly supportive, and the hands-on projects prepared me for my career long before I Masterd. I felt like part of a real community here."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student Testimonial" class="w-14 h-14 rounded-full mr-4 object-cover ring-2 ring-dark-blue/20 z-10">
+                            <div>
+                                <p class="font-bold text-dark-blue">Sokun David</p>
+                                <p class="text-dark-blue/70">B.S. in Computer Science, Class of 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 h-full flex">
+                    <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students celebrating graduation" class="w-full h-full rounded-xl block object-cover shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <!-- Admissions Guide Section -->
+        <section class="bg-light-lavender py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">How to Apply</h2>
+                <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Step 1 -->
+                    <div class="timeline-step relative flex flex-col items-center px-4">
+                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">1</div>
+                        <h4 class="font-heading text-2xl text-dark-blue mb-2">Explore Programs</h4>
+                        <p class="text-lg text-dark-blue/80">Review our faculties and choose the program that aligns with your career goals.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="timeline-step relative flex flex-col items-center px-4">
+                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">2</div>
+                        <h4 class="font-heading text-2xl text-dark-blue mb-2">Prepare Documents</h4>
+                        <p class="text-lg text-dark-blue/80">Gather your academic transcripts, national ID, and other required documents.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="relative flex flex-col items-center px-4">
+                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">3</div>
+                        <h4 class="font-heading text-2xl text-dark-blue mb-2">Submit Application</h4>
+                        <p class="text-lg text-dark-blue/80">Complete the online application form and upload your documents before the deadline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
+            <div class="max-w-4xl mx-auto px-5 text-center">
+                <h3 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Ready to Begin Your Journey?</h3>
+                <p class="text-lg text-dark-blue/80 mb-8">Take the next step in your education. Our admissions team is here to guide you through the application process and answer any questions you may have.</p>
+                <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Contact Admissions</a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+    <script src="../js/main.js" data-base-path=".."></script>
+
+
+
+</body>
+</html>

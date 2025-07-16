@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Academic Ecosystem - National University of Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- UPDATED: Added weight 900 for Montserrat for the main title -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Your Custom Tailwind Config -->
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-blue': '#0A0A3E',
+            'light-lavender': '#E9E8F5',
+          },
+          fontFamily: {
+            heading: ['Lora', 'serif'],
+            body: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="../css/main.css"> <!-- Your main.css can override things if needed -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-white font-body"> <!-- Set default font to body, background to white -->
+    <div id="header-placeholder"></div>
+    <main>
+        <!-- ===== 1. Dynamic Hero Section (On-Brand) ===== -->
+        <section class="relative bg-cover bg-center text-white py-40" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop');">
+            <!-- Replace with a real photo of your university labs or campus -->
+            <div class="absolute inset-0 bg-dark-blue opacity-80"></div>
+            <div class="relative max-w-4xl mx-auto px-5 text-center z-10" data-aos="fade-in">
+                <h1 class="text-4xl md:text-6xl font-black font-heading tracking-tight">Driving the Future of Discovery</h1>
+                <p class="text-lg md:text-xl font-body mt-6 max-w-3xl mx-auto">
+                    Dive deep into our cutting-edge research, driving innovation and creating significant impact across various fields.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== 2. Research Focus Areas (On-Brand) ===== -->
+        <section class="py-24 bg-white">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Our Research Focus Areas</h2>
+                    <p class="mt-4 text-lg text-gray-600 font-body max-w-3xl mx-auto">NUM is committed to advancing knowledge and addressing global challenges through interdisciplinary research.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1: Using light-lavender for the icon background -->
+                    <div class="bg-light-lavender/50 p-8 rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mb-6">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.881 4.043A9 9 0 1016.119 4.043M12 21a9 9 0 000-18h.008v18h-.008z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-heading text-dark-blue mb-3">Sustainable Development</h3>
+                        <p class="font-body text-gray-700">Exploring environmental studies and green solutions for a sustainable future.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-light-lavender/50 p-8 rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mb-6">
+                             <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        </div>
+                        <h3 class="text-xl font-heading text-dark-blue mb-3">Digital Transformation</h3>
+                        <p class="font-body text-gray-700">Investigating digital economies, AI ethics, and the societal impact of technology.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-light-lavender/50 p-8 rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mb-6">
+                             <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+                        </div>
+                        <h3 class="text-xl font-heading text-dark-blue mb-3">Public Policy & Growth</h3>
+                        <p class="font-body text-gray-700">Analyzing economic policies that foster equitable growth and social progress.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 3. Strong Call to Action (On-Brand) ===== -->
+        <section class="py-20 bg-dark-blue">
+            <div class="max-w-4xl mx-auto px-5 text-center" data-aos="zoom-in">
+                <h2 class="text-3xl font-heading text-white">Join Our Research Community</h2>
+                <!-- Using light-lavender for the paragraph text for a branded, soft contrast -->
+                <p class="text-lg text-light-lavender mt-4 mb-8 font-body">
+                    We welcome aspiring researchers, faculty, and industry partners to collaborate with us. Our state-of-the-art facilities provide an ideal environment for impactful work.
+                </p>
+                <a href="#" class="inline-block bg-white text-dark-blue px-8 py-3 rounded-md font-bold font-body hover:bg-light-lavender transition-colors">
+                    Explore Opportunities
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== 4. Featured Publications (On-Brand) ===== -->
+        <section class="py-24 bg-light-lavender">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Featured Publications</h2>
+                    <p class="mt-4 text-lg text-gray-700 font-body">A glimpse into the impactful work from our researchers.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Publication Card 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" data-aos="fade-right">
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">The Role of AI in Cambodian Economic Forecasting</h3>
+                        <p class="text-sm text-gray-500 font-body mb-3">By Dr. S. Chanmony | Journal of Southeast Asian Economies</p>
+                        <p class="font-body text-gray-700 mb-4">This study leverages machine learning models to predict GDP growth, offering a new paradigm for policy-making...</p>
+                        <a href="#" class="font-bold font-body text-dark-blue hover:underline">Read Paper →</a>
+                    </div>
+                    <!-- Publication Card 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" data-aos="fade-left">
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">Sustainable Tourism Models for Cultural Heritage Sites</h3>
+                        <p class="text-sm text-gray-500 font-body mb-3">By Prof. T. Votey | Annals of Tourism Research</p>
+                        <p class="font-body text-gray-700 mb-4">A comparative analysis of community-based tourism initiatives and their long-term viability and impact...</p>
+                        <a href="#" class="font-bold font-body text-dark-blue hover:underline">Read Paper →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../js/main.js" data-base-path=".."></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+    </script>
+</body>
+</html>

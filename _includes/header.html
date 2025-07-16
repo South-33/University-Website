@@ -1,0 +1,117 @@
+<header class="bg-dark-blue text-white font-body shadow-md sticky top-0 z-50 transition-transform duration-300">
+
+    <!-- Top Bar -->
+    <div class="bg-dark-blue text-white">
+        <div class="max-w-6xl mx-auto px-5 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="/" class="flex-shrink-0">
+                <img src="/Picture/logos/numlogo.png" alt="University Logo" class="h-[50px]">
+            </a>
+            
+            <!-- Search Bar (always visible, responsive) -->
+            <div class="relative flex-grow max-w-xs xs:max-w-sm sm:max-w-md md:max-w-lg mx-2">
+                <div class="relative w-full max-w-lg mx-auto">
+                    <style>
+/* Style the search clear (X) button to be solid white */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  background: none;
+  color: white;
+  background-color: white;
+  border-radius: 50%;
+  mask: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6.225 4.811a1 1 0 1 0-1.414 1.415L8.586 10l-3.775 3.774a1 1 0 0 0 1.414 1.415L10 11.414l3.774 3.775a1 1 0 0 0 1.415-1.415L11.414 10l3.775-3.774a1 1 0 0 0-1.415-1.415L10 8.586 6.225 4.811z"/></svg>');
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6.225 4.811a1 1 0 1 0-1.414 1.415L8.586 10l-3.775 3.774a1 1 0 0 0 1.414 1.415L10 11.414l3.774 3.775a1 1 0 0 0 1.415-1.415L11.414 10l3.775-3.774a1 1 0 0 0-1.415-1.415L10 8.586 6.225 4.811z"/></svg>');
+}
+input[type="search"]::-ms-clear {
+  display: none;
+}
+input[type="search"]::-moz-search-clear {
+  color: white;
+  background: white;
+}
+</style>
+<input type="search" placeholder="Search..." class="w-full bg-white/20 text-white placeholder-gray-300 rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm md:text-base">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-300">
+  <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+</svg>
+                </div>
+            </div>
+            
+            <!-- Register Button -->
+            <div class="flex-shrink-0">
+                 <a href="https://numregister.com/" class="border border-white rounded-full px-5 py-2 text-sm md:text-base font-medium hover:bg-white hover:text-dark-blue transition-colors" target="_blank" rel="noopener noreferrer">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar (Navigation) -->
+    <div class="bg-dark-blue text-white border-t border-white/10 py-3 md:py-4">
+        <div class="max-w-6xl mx-auto px-5">
+            <nav class="main-nav flex justify-center items-center w-full">
+                <ul class="flex items-center justify-center flex-wrap gap-x-6 gap-y-2 md:gap-x-8">
+                    <li><a href="/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5">
+  <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
+</svg><span>Home</span></a></li>
+                    
+                    <li class="relative group">
+                        <a href="/programs/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5">
+  <path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" />
+</svg><span>Programs</span></a>
+                        <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-indigo-100 rounded-md shadow-lg py-2 min-w-[180px] z-50 opacity-0 invisible transform transition-all duration-150 translate-y-1 md:group-hover:opacity-100 md:group-hover:visible md:group-hover:translate-y-0 ">
+                                                        <li><a href="/programs/bachelors.html" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Bachelors</a></li>
+                            <li><a href="/programs/masters.html" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Masters</a></li>
+                            <li><a href="/programs/doctoral" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Doctoral</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="relative group">
+                        <a href="/study-with-us/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5">
+  <path fill-rule="evenodd" d="M6 3.75A2.75 2.75 0 0 1 8.75 1h2.5A2.75 2.75 0 0 1 14 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 0 1 6 4.193V3.75Zm6.5 0v.325a41.622 41.622 0 0 0-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25ZM10 10a1 1 0 0 0-1 1v.01a1 1 0 0 0 1 1h.01a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H10Z" clip-rule="evenodd" />
+  <path d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z" />
+</svg><span>Study With Us</span></a>
+                        <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-indigo-100 rounded-md shadow-lg py-2 min-w-[180px] z-50 opacity-0 invisible transform transition-all duration-150 translate-y-1 md:group-hover:opacity-100 md:group-hover:visible md:group-hover:translate-y-0 ">
+                            <li><a href="/study-with-us/student-support" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Student Support</a></li>
+                            <li><a href="/study-with-us/student-mobility" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Student Mobility</a></li>
+                            <li><a href="/study-with-us/fees" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Fees</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="relative group">
+                        <a href="/student-activities/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5">
+  <path fill-rule="evenodd" d="M9.664 1.319a.75.75 0 0 1 .672 0 41.059 41.059 0 0 1 8.198 5.424.75.75 0 0 1-.254 1.285 31.372 31.372 0 0 0-7.86 3.83.75.75 0 0 1-.84 0 31.508 31.508 0 0 0-2.08-1.287V9.394c0-.244.116-.463.302-.592a35.504 35.504 0 0 1 3.305-2.033.75.75 0 0 0-.714-1.319 37 37 0 0 0-3.446 2.12A2.216 2.216 0 0 0 6 9.393v.38a31.293 31.293 0 0 0-4.28-1.746.75.75 0 0 1-.254-1.285 41.059 41.059 0 0 1 8.198-5.424ZM6 11.459a29.848 29.848 0 0 0-2.455-1.158 41.029 41.029 0 0 0-.39 3.114.75.75 0 0 0 .419.74c.528.256 1.046.53 1.554.82-.21.324-.455.63-.739.914a.75.75 0 1 0 1.06 1.06c.37-.369.69-.77.96-1.193a26.61 26.61 0 0 1 3.095 2.348.75.75 0 0 0 .992 0 26.547 26.547 0 0 1 5.93-3.95.75.75 0 0 0 .42-.739 41.053 41.053 0 0 0-.39-3.114 29.925 29.925 0 0 0-5.199 2.801 2.25 2.25 0 0 1-2.514 0c-.41-.275-.826-.541-1.25-.797a6.985 6.985 0 0 1-1.084 3.45 26.503 26.503 0 0 0-1.281-.78A5.487 5.487 0 0 0 6 12v-.54Z" clip-rule="evenodd" />
+</svg><span>Student Activities</span></a>
+                        <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-indigo-100 rounded-md shadow-lg py-2 min-w-[180px] z-50 opacity-0 invisible transform transition-all duration-150 translate-y-1 md:group-hover:opacity-100 md:group-hover:visible md:group-hover:translate-y-0 ">
+                            <li><a href="/student-activities/clubs" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Clubs</a></li>
+                            <li><a href="/student-activities/events" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Events</a></li>
+                            <li><a href="/student-activities/gallery" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Gallery</a></li>
+                            <li><a href="/student-activities/student-voice" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Student Voice</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="relative group">
+                        <a href="/campus/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5">
+  <path fill-rule="evenodd" d="M9.674 2.075a.75.75 0 0 1 .652 0l7.25 3.5A.75.75 0 0 1 17 6.957V16.5h.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H3V6.957a.75.75 0 0 1-.576-1.382l7.25-3.5ZM11 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7.5 9.75a.75.75 0 0 0-1.5 0v5.5a.75.75 0 0 0 1.5 0v-5.5Zm3.25 0a.75.75 0 0 0-1.5 0v5.5a.75.75 0 0 0 1.5 0v-5.5Zm3.25 0a.75.75 0 0 0-1.5 0v5.5a.75.75 0 0 0 1.5 0v-5.5Z" clip-rule="evenodd" />
+</svg><span>Campus</span></a>
+                        <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-indigo-100 rounded-md shadow-lg py-2 min-w-[180px] z-50 opacity-0 invisible transform transition-all duration-150 translate-y-1 md:group-hover:opacity-100 md:group-hover:visible md:group-hover:translate-y-0 ">
+                            <li><a href="/campus/map" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Map</a></li>
+                            <li><a href="/campus/facilities" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Facilities</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="relative group">
+                        <a href="/academic-ecosystem/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5">
+  <path fill-rule="evenodd" d="M1 2.75A.75.75 0 0 1 1.75 2h10.5a.75.75 0 0 1 0 1.5H12v13.75a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-2.5a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75v2.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5H2v-13h-.25A.75.75 0 0 1 1 2.75ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM8 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM8.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM14.25 6a.75.75 0 0 0-.75.75V17a1 1 0 0 0 1 1h3.75a.75.75 0 0 0 0-1.5H18v-9h.25a.75.75 0 0 0 0-1.5h-4Zm.5 3.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm.5 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z" clip-rule="evenodd" />
+</svg><span>Academic Ecosystem</span></a>
+                        <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-indigo-100 rounded-md shadow-lg py-2 min-w-[180px] z-50 opacity-0 invisible transform transition-all duration-150 translate-y-1 md:group-hover:opacity-100 md:group-hover:visible md:group-hover:translate-y-0 ">
+                            <li><a href="/academic-ecosystem/research" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Research</a></li>
+                            <li><a href="/academic-ecosystem/partners" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Partners</a></li>
+                            <li><a href="/academic-ecosystem/innovation" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center focus:outline-none active:outline-none">Innovation</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

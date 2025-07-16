@@ -1,0 +1,18 @@
+0000000000000000000000000000000000000000 436593b1735f6c6c20c23ea2a2cdf4f456c4bd14 South33 <126777514+nyxy33@users.noreply.github.com> 1750483845 +0700	commit (initial): Fresh start, removed all previous Git history
+436593b1735f6c6c20c23ea2a2cdf4f456c4bd14 436593b1735f6c6c20c23ea2a2cdf4f456c4bd14 South33 <126777514+nyxy33@users.noreply.github.com> 1750483905 +0700	Branch: renamed refs/heads/master to refs/heads/main
+436593b1735f6c6c20c23ea2a2cdf4f456c4bd14 c7ca52bbcdd7d5f54f4c73e2e6b1bb02f4a930b2 South33 <126777514+nyxy33@users.noreply.github.com> 1750495579 +0700	commit: fix video layout shift
+c7ca52bbcdd7d5f54f4c73e2e6b1bb02f4a930b2 a705d0cdc70d8cdc77b97bfcfd099b0d4ad03bad South33 <126777514+nyxy33@users.noreply.github.com> 1750496458 +0700	commit: facebook sdk
+a705d0cdc70d8cdc77b97bfcfd099b0d4ad03bad 0a3a870690f283a24d4d7a67a57bb7837ae3caad South33 <126777514+nyxy33@users.noreply.github.com> 1750506486 +0700	commit: better global css
+0a3a870690f283a24d4d7a67a57bb7837ae3caad 03694a3630d91b1a560301e9dab716f372a54d8d South33 <126777514+nyxy33@users.noreply.github.com> 1750657077 +0700	commit: added student voice
+03694a3630d91b1a560301e9dab716f372a54d8d 88f86f312c27a70912b40f5765e05dde3711afcc South33 <126777514+nyxy33@users.noreply.github.com> 1751425645 +0700	commit: combined dalin and me
+88f86f312c27a70912b40f5765e05dde3711afcc 39cd8b5d8753de9f4758cebda32842bfe841a897 South33 <126777514+nyxy33@users.noreply.github.com> 1751492388 +0700	commit: Working Search + UnderGrad Icon + submenu styling stuff
+39cd8b5d8753de9f4758cebda32842bfe841a897 c8181dd0951617cfc88445947aaa1c2e260ffbbd South33 <126777514+nyxy33@users.noreply.github.com> 1751708452 +0700	commit: undergrad + grad + doct, animation, logos
+c8181dd0951617cfc88445947aaa1c2e260ffbbd 19e8b19693f47e4bf294c62be077242edf313e3a South33 <126777514+nyxy33@users.noreply.github.com> 1751720117 +0700	commit: fix 404 vercel, + fix animation
+c8181dd0951617cfc88445947aaa1c2e260ffbbd 319b823ac54f4f06af7e5352516f5c9828a300e2 South33 <126777514+nyxy33@users.noreply.github.com> 1751720138 +0700	commit: fix 404 vercel, + fix animation
+c8181dd0951617cfc88445947aaa1c2e260ffbbd d347ddd5bdbe2cdf93fd6c08493b52860fb36361 South33 <126777514+nyxy33@users.noreply.github.com> 1751720164 +0700	commit: fix 404 vercel, + fix animation
+c8181dd0951617cfc88445947aaa1c2e260ffbbd fc72de2d22ef5ac99c85fd24a0ff8e1a827a77a1 South33 <126777514+nyxy33@users.noreply.github.com> 1751720252 +0700	commit: fix 404 vercel, + fix animation
+c8181dd0951617cfc88445947aaa1c2e260ffbbd 375b2457d8b9bdc912904d2879bdf48d76643b09 South33 <126777514+nyxy33@users.noreply.github.com> 1751720304 +0700	commit: fix 404 vercel, + fix animation
+c8181dd0951617cfc88445947aaa1c2e260ffbbd a63820ff66f39521161ad9f05445dc949bf6b294 South33 <126777514+nyxy33@users.noreply.github.com> 1751720329 +0700	commit: fix 404 vercel, + fix animation
+a63820ff66f39521161ad9f05445dc949bf6b294 45b22177103eece22e5e9a00d5fdb60e9767ac3b South33 <126777514+nyxy33@users.noreply.github.com> 1751722645 +0700	commit: fix underline bug
+45b22177103eece22e5e9a00d5fdb60e9767ac3b b78f7da9d54eea43c28d916d4f58b5cb3c23ccde South33 <126777514+nyxy33@users.noreply.github.com> 1751723948 +0700	commit: more bug fixes
+b78f7da9d54eea43c28d916d4f58b5cb3c23ccde e61238573f870e4183f372e9c24a980f39a6e3d7 South33 <126777514+nyxy33@users.noreply.github.com> 1751805184 +0700	commit: finishing up the program page

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Support Hub - National University of Management</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --light-lavender: #F3E8FF;
+            --dark-blue: #0A193E;
+            --accent-red: #F11032;
+            --off-white: #F8FAFC;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--off-white);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+        }
+
+        .bg-light-lavender { background-color: var(--light-lavender); }
+        .bg-dark-blue { background-color: var(--dark-blue); }
+        .text-dark-blue { color: var(--dark-blue); }
+        .text-accent-red { color: var(--accent-red); }
+        .bg-accent-red { background-color: var(--accent-red); }
+        .border-accent-red { border-color: var(--accent-red); }
+
+        .gradient-bg {
+            background: var(--gradient-primary);
+        }
+
+        .gradient-text {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-in {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chevron-rotate {
+            transition: transform 0.3s ease;
+        }
+
+        details[open] .chevron-rotate {
+            transform: rotate(180deg);
+        }
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @media (max-width: 768px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        .testimonial-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(241, 16, 50, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .testimonial-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--gradient-secondary);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(241, 16, 50, 0.3);
+        }
+
+        .section-spacing {
+            padding: 5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-spacing {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white overflow-x-hidden">
+    <div id="header-placeholder"></div>
+        <!-- Hero Section -->
+        <section id="home" class="relative gradient-bg text-white section-spacing parallax-bg overflow-hidden">
+            <div class="absolute inset-0 bg-black/30"></div>
+            
+            <!-- Floating Elements -->
+            <div class="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full floating-animation"></div>
+            <div class="absolute bottom-20 right-10 w-32 h-32 bg-white/5 rounded-full floating-animation" style="animation-delay: 1s;"></div>
+            
+            <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
+                    Your Success is Our <span class="gradient-text">Mission</span>
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl mb-8 max-w-4xl mx-auto animate-fade-in opacity-90" style="animation-delay: 0.2s;">
+                    Comprehensive support for your academic journey, mental wellness, and personal growth. We're here 24/7.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style="animation-delay: 0.4s;">
+                    <a href="#contact" class="btn-primary text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-comments mr-2"></i>Get Support Now
+                    </a>
+                    <a href="#services" class="glass-effect text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 hover:bg-white/20">
+                        <i class="fas fa-arrow-down mr-2"></i>Explore Services
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Contact Section -->
+        <section id="contact" class="section-spacing bg-light-lavender">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 lg:p-12 animate-fade-in">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <!-- Contact Info -->
+                        <div class="animate-slide-in">
+                            <h2 class="text-3xl lg:text-4xl font-bold text-dark-blue mb-6">
+                                Ready to Get Support?
+                            </h2>
+                            <p class="text-gray-600 mb-8 text-lg">
+                                Connect with our dedicated support team. We're here to help you succeed in every aspect of your university experience.
+                            </p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                    <div class="bg-accent-red text-white p-3 rounded-lg mr-4">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-dark-blue">Jane Doe</p>
+                                        <p class="text-gray-600">Director of Student Success</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid sm:grid-cols-2 gap-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-envelope text-accent-red w-6 mr-3"></i>
+                                        <span class="text-gray-700">j.doe@university.edu</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-clock text-accent-red w-6 mr-3"></i>
+                                        <span class="text-gray-700">Mon-Fri, 9 AM-5 PM</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-phone text-accent-red w-6 mr-3"></i>
+                                        <span class="text-gray-700">(555) 123-4567</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-map-marker-alt text-accent-red w-6 mr-3"></i>
+                                        <span class="text-gray-700">Student Union, Room 201</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Contact Form -->
+                        <div class="contact-form p-8 rounded-2xl animate-fade-in" style="animation-delay: 0.2s;">
+                            <h3 class="text-2xl font-bold text-dark-blue mb-6">Quick Contact</h3>
+                            <form id="contact-form" class="space-y-4">
+                                <div>
+                                    <input type="text" id="name" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <input type="email" id="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <select id="support-type" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors">
+                                        <option value="">Select Support Type</option>
+                                        <option value="academic">Academic Support</option>
+                                        <option value="counseling">Counseling & Mental Health</option>
+                                        <option value="technical">Technical Support</option>
+                                        <option value="career">Career Services</option>
+                                        <option value="financial">Financial Aid</option>
+                                        <option value="administrative">Administrative Help</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <textarea id="message" rows="4" placeholder="Describe how we can help you..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors resize-none"></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary w-full text-white font-semibold py-3 rounded-lg text-lg">
+                                    <i class="fas fa-paper-plane mr-2"></i>Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section-spacing bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16 animate-fade-in">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-dark-blue mb-4">
+                        Comprehensive Support Services
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        From academic excellence to personal wellbeing, we provide free, confidential support for every aspect of your student journey.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Academic Support -->
+                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.1s;">
+                        <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
+                            <i class="fas fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Academic Support</h3>
+                        <p class="text-gray-600 mb-6">Expert tutoring, study skills workshops, writing center assistance, and academic coaching to help you excel.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>One-on-one tutoring</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Study groups</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Writing assistance</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Exam preparation</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Mental Health -->
+                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="bg-gradient-to-br from-pink-500 to-red-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
+                            <i class="fas fa-heart text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Mental Health & Counseling</h3>
+                        <p class="text-gray-600 mb-6">Confidential counseling services, stress management, and wellness programs for your mental health.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Individual counseling</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Group therapy</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Crisis intervention</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Wellness workshops</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Technical Support -->
+                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.3s;">
+                        <div class="bg-gradient-to-br from-green-500 to-teal-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
+                            <i class="fas fa-laptop-code text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Technical Support</h3>
+                        <p class="text-gray-600 mb-6">Help with campus technology, online platforms, and digital learning tools.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Account assistance</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Platform training</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Wi-Fi support</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Software help</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Career Services -->
+                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.4s;">
+                        <div class="bg-gradient-to-br from-yellow-500 to-orange-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
+                            <i class="fas fa-briefcase text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Career Services</h3>
+                        <p class="text-gray-600 mb-6">Professional development, job search assistance, and career planning guidance.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Resume building</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Interview prep</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Job fairs</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Networking events</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Financial Aid -->
+                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.5s;">
+                        <div class="bg-gradient-to-br from-indigo-500 to-blue-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
+                            <i class="fas fa-hand-holding-dollar text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Financial Aid</h3>
+                        <p class="text-gray-600 mb-6">Support with financial aid applications, scholarships, and budget planning.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>FAFSA assistance</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Scholarship search</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Budget planning</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Payment plans</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Administrative Help -->
+                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.6s;">
+                        <div class="bg-gradient-to-br from-purple-500 to-pink-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
+                            <i class="fas fa-id-card text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Administrative Support</h3>
+                        <p class="text-gray-600 mb-6">Help with enrollment, registration, transcripts, and other administrative needs.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Registration help</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Transcript requests</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>ID card issues</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Policy guidance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section-spacing bg-light-lavender">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-16 animate-fade-in">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-dark-blue mb-4">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Quick answers to common questions about our support services
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.1s;">
+                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
+                            How do I reset my student portal password?
+                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <p class="text-gray-700 leading-relaxed">
+                                You can reset your password by visiting the student portal login page and clicking "Forgot Password?". You'll receive a reset link via email. If you need additional help, contact our Technical Support team at (555) 555-TECH or visit us in the IT Help Desk on the first floor of the library.
+                            </p>
+                        </div>
+                    </details>
+                    
+                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.2s;">
+                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
+                            Where can I get help with stress and anxiety?
+                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <p class="text-gray-700 leading-relaxed">
+                                Our Counseling & Mental Health services offer confidential support for stress, anxiety, and other mental health concerns. You can schedule an appointment online through the student portal, call (555) 123-HELP, or visit the Health & Wellness Center. All services are completely free and confidential for students.
+                            </p>
+                        </div>
+                    </details>
+                    
+                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.3s;">
+                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
+                            How do I find a tutor for my classes?
+                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <p class="text-gray-700 leading-relaxed">
+                                The Academic Support Center manages all tutoring services. Log into the student portal and navigate to "Academic Resources" to view available tutors, schedules, and book sessions. We offer both individual and group tutoring for most subjects, and all services are free for students.
+                            </p>
+                        </div>
+                    </details>
+                    
+                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.4s;">
+                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
+                            What financial aid resources are available?
+                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <p class="text-gray-700 leading-relaxed">
+                                Our Financial Aid office helps with FAFSA applications, scholarship searches, emergency grants, and budget planning. We also offer workshops on financial literacy and managing student debt. Visit us in the Student Services building or schedule an appointment online.
+                            </p>
+                        </div>
+                    </details>
+                    
+                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.5s;">
+                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
+                            How do I access career counseling services?
+                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <p class="text-gray-700 leading-relaxed">
+                                Career Services offers resume reviews, interview practice, job search assistance, and career planning. Book an appointment through the student portal under "Career Services" or visit us on the second floor of the Student Union. We also host regular career fairs and networking events.
+                            </p>
+                        </div>
+                    </details>
+                    
+                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.6s;">
+                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
+                            Are these services really free for all students?
+                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <p class="text-gray-700 leading-relaxed">
+                                Yes! All student support services are completely free and included in your student fees. This includes tutoring, counseling, career services, technical support, and administrative assistance. Our goal is to ensure every student has access to the resources they need to succeed.
+                            </p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section-spacing bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16 animate-fade-in">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-dark-blue mb-4">
+                        Student Success Stories
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Real experiences from students who found support when they needed it most
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg animate-fade-in" style="animation-delay: 0.1s;">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                                S
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-semibold text-dark-blue">Sarah M.</p>
+                                <p class="text-sm text-gray-600">Business Major</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic mb-4">
+                            "The tutoring program saved my GPA. I was struggling with statistics, but my tutor made everything click. Now I'm helping other students too!"
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold">
+                                M
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-semibold text-dark-blue">Marcus J.</p>
+                                <p class="text-sm text-gray-600">Psychology Major</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic mb-4">
+                            "The counseling services helped me through a really tough time. The staff is compassionate and really understands student challenges."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg animate-fade-in" style="animation-delay: 0.3s;">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold">
+                                A
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-semibold text-dark-blue">Aisha K.</p>
+                                <p class="text-sm text-gray-600">Computer Science</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic mb-4">
+                            "Career services helped me land my dream internship. The resume workshop and mock interviews made all the difference!"
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Resources Section -->
+        <section class="section-spacing bg-gradient-to-r from-red-600 to-pink-600 text-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div class="animate-fade-in">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                        Emergency Support Available 24/7
+                    </h2>
+                    <p class="text-xl mb-8 opacity-90">
+                        If you're experiencing a crisis or emergency, help is always available. Don't wait – reach out now.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="glass-effect p-6 rounded-xl">
+                            <i class="fas fa-phone text-4xl mb-4 pulse-animation"></i>
+                            <h3 class="text-2xl font-bold mb-2">Crisis Hotline</h3>
+                            <p class="text-lg font-semibold">(555) 123-9876</p>
+                            <p class="text-sm opacity-80">Available 24/7</p>
+                        </div>
+                        
+                        <div class="glass-effect p-6 rounded-xl">
+                            <i class="fas fa-comments text-4xl mb-4 pulse-animation"></i>
+                            <h3 class="text-2xl font-bold mb-2">Text Support</h3>
+                            <p class="text-lg font-semibold">Text "HELP" to 741741</p>
+                            <p class="text-sm opacity-80">Crisis Text Line</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md">
+                        <h4 class="text-xl font-bold mb-4">Other Emergency Contacts</h4>
+                        <div class="flex flex-wrap justify-center gap-6 text-sm">
+                            <div>
+                                <strong>Campus Security:</strong> (555) 555-SAFE
+                            </div>
+                            <div>
+                                <strong>Medical Emergency:</strong> 911
+                            </div>
+                            <div>
+                                <strong>Suicide Prevention:</strong> 988
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-blue text-white py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo and Mission -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-graduation-cap text-2xl text-accent-red mr-2"></i>
+                        <span class="text-xl font-bold">NUM Support</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Empowering student success through comprehensive support services. We're here to help you thrive academically, personally, and professionally.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-accent-red transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-accent-red transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-accent-red transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-accent-red transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-300 hover:text-accent-red transition-colors">Services</a></li>
+                        <li><a href="#faq" class="text-gray-300 hover:text-accent-red transition-colors">FAQ</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-accent-red transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-accent-red transition-colors">Student Portal</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-map-marker-alt w-4 mr-2"></i>Student Union, Room 201</p>
+                        <p><i class="fas fa-phone w-4 mr-2"></i>(555) 123-4567</p>
+                        <p><i class="fas fa-envelope w-4 mr-2"></i>support@university.edu</p>
+                        <p><i class="fas fa-clock w-4 mr-2"></i>Mon-Fri, 9 AM-5 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 National University of Management. All rights reserved. | 
+                   <a href="#" class="hover:text-accent-red transition-colors">Privacy Policy</a> | 
+                   <a href="#" class="hover:text-accent-red transition-colors">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/main.js" data-base-path=".."></script>
+</body>
+</html>

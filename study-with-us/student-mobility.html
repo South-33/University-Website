@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Mobility - National University of Management</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Theme & JS (paths based on your example) -->
+    <script src="../js/theme.js"></script> <!-- Assumes this file configures Tailwind theme -->
+    <link rel="stylesheet" href="../css/main.css"> <!-- Assumes this has base styles -->
+
+    <style>
+        /* Custom styles adapted from your example for consistency */
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+        }
+        .bg-light-lavender {
+            background-color: #F7F7FF; 
+        }
+        .bg-dark-blue {
+            background-color: #0A2240;
+        }
+        .text-dark-blue {
+            color: #0A2240;
+        }
+        .text-primary-blue {
+            color: #0e19ab;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Section 1: Hero Section -->
+        <section class="py-20 lg:py-28 bg-gradient-to-br from-white to-light-lavender">
+    <div class="container mx-auto px-6">
+        
+        <!-- Stylized Heading -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl lg:text-5xl font-heading text-dark-blue font-bold">What is Student Mobility?</h2>
+            <div class="mt-3 h-1 w-24 bg-dark-blue mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Two-Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-16 items-center">
+
+            <!-- Left Column: Main Text & Quote -->
+            <div class="lg:col-span-3">
+                <p class="text-md lg:text-lg text-gray-700 font-body mb-8">
+                    Student mobility is your opportunity to gain international experience during your studies. It allows you to study, intern, or conduct research abroad for a semester, a year, or even a few weeks. These experiences are designed to enrich your academic journey and enhance your future employability.
+                </p>
+                
+                <!-- Testimonial/Quote Block -->
+                <div class="bg-dark-blue text-white rounded-lg p-6 italic shadow-lg">
+                    <p class="mb-3">"My semester abroad was the single most important experience of my university life. It opened my eyes to new cultures and gave me the confidence to pursue a global career."</p>
+                    <p class="font-bold not-italic text-light-lavender">- A Former Exchange Student</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Key Benefits with Icons -->
+            <div class="lg:col-span-2 bg-white p-8 rounded-lg shadow-xl">
+                <h3 class="font-heading text-2xl font-bold text-dark-blue mb-6">Key Advantages</h3>
+                <ul class="space-y-5 font-body text-gray-700">
+                    <li class="flex items-start">
+                        <!-- Globe Icon -->
+                        <svg class="w-7 h-7 text-dark-blue mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.881 4.002l.027.027A2 2 0 0110 4h4a2 2 0 011.092.329l.027-.027M12 20.998V22m-7.119-2.002a2 2 0 01-1.092-.329l-.027.027m15.212-15.212a2 2 0 01.329 1.092l-.027-.027m-15.212 0a2 2 0 00-.329 1.092l.027-.027" /></svg>
+                        <div>
+                            <strong class="text-dark-blue">Develop Cross-Cultural Skills:</strong> Immerse yourself in a new environment and learn to navigate different social and professional landscapes.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <!-- Suitcase Icon -->
+                        <svg class="w-7 h-7 text-dark-blue mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2zm6 12V6" /></svg>
+                        <div>
+                            <strong class="text-dark-blue">Build a Global Career:</strong> Gain a competitive edge with international work or study experience that stands out to employers.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <!-- Graduation Cap Icon -->
+                        <svg class="w-7 h-7 text-dark-blue mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
+                        <div>
+                            <strong class="text-dark-blue">Enrich Your Academic Journey:</strong> Take specialized courses not available at NUM and bring a new perspective back to your studies.
+                        </div>
+                    </li>
+                </ul>
+                
+                <!-- Call-to-Action Button -->
+                <div class="mt-8 text-center">
+                    <a href="#" class="bg-dark-blue text-white font-body font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-colors duration-300 w-full block sm:w-auto">
+                        Explore Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- DYNAMIC PROGRAM SEARCH TOOL -->
+    <section class="py-16 lg:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl lg:text-4xl font-heading text-dark-blue text-center mb-12">Find Your Perfect Program</h2>
+            <!-- Filter Controls -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12 bg-light-lavender p-8 rounded-lg shadow-md">
+                <div>
+                    <label for="country-filter" class="block text-sm font-bold text-dark-blue mb-2">Country</label>
+                    <select id="country-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
+                        <option>All Countries</option>
+                        <option>Germany</option>
+                        <option>Japan</option>
+                        <option>Singapore</option>
+                        <option>Australia</option>
+                        <option>France</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="duration-filter" class="block text-sm font-bold text-dark-blue mb-2">Duration</label>
+                    <select id="duration-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
+                        <option>Any Duration</option>
+                        <option>Summer School</option>
+                        <option>One Semester</option>
+                        <option>Full Year</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="type-filter" class="block text-sm font-bold text-dark-blue mb-2">Program Type</label>
+                    <select id="type-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
+                        <option>All Types</option>
+                        <option>Exchange Program</option>
+                        <option>Internship</option>
+                        <option>Study Tour</option>
+                        <option>Double Degree</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="field-filter" class="block text-sm font-bold text-dark-blue mb-2">Field of Study</label>
+                    <select id="field-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
+                        <option>All Fields</option>
+                        <option>Business</option>
+                        <option>Computer Science</option>
+                        <option>Engineering</option>
+                        <option>Arts & Humanities</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Search Results Area -->
+            <div class="bg-gray-100 rounded-lg p-8 min-h-[300px]">
+                <p class="text-center text-gray-500 font-body">Your search results will appear here. Please select filters to begin.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE APPLICATION TIMELINE -->
+    <section class="py-16 lg:py-24">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl lg:text-4xl font-heading text-dark-blue text-center mb-16">Your Journey, Step-by-Step</h2>
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute left-4 top-0 h-full w-0.5 bg-dark-blue opacity-30"></div>
+                <div class="relative pl-12 pb-16 fade-in-section timeline-item">
+                    <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 1: Exploration</span></div>
+                    <p class="text-gray-500 text-sm font-bold mb-2">September - October</p>
+                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Research & Information Sessions</h3>
+                    <p class="font-body text-gray-700">Explore partner universities using our search tool and attend mandatory info sessions to understand the opportunities and requirements.</p>
+                </div>
+                <div class="relative pl-12 pb-16 fade-in-section timeline-item">
+                    <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 2: Application</span></div>
+                    <p class="text-gray-500 text-sm font-bold mb-2">November 15th - Deadline</p>
+                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Prepare & Submit Application</h3>
+                    <p class="font-body text-gray-700">Gather your documents (transcripts, motivation letter, recommendations) and submit your complete application through the online portal before the deadline.</p>
+                </div>
+                <div class="relative pl-12 pb-16 fade-in-section timeline-item">
+                     <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 3: Selection</span></div>
+                    <p class="text-gray-500 text-sm font-bold mb-2">December - January</p>
+                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Nomination & Acceptance</h3>
+                    <p class="font-body text-gray-700">Successful candidates are nominated to partner universities. You will receive an official acceptance letter from your host institution.</p>
+                </div>
+                <div class="relative pl-12 fade-in-section timeline-item">
+                     <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 4: Preparation</span></div>
+                    <p class="text-gray-500 text-sm font-bold mb-2">February - April</p>
+                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Pre-Departure Orientation</h3>
+                    <p class="font-body text-gray-700">Attend pre-departure workshops covering visas, accommodation, insurance, and cultural adaptation. Finalize your learning agreement and travel plans.</p>
+                </div>
+            </div>
+             <div class="text-center mt-16">
+                 <a href="#contact" class="bg-dark-blue text-white font-body py-3 px-8 rounded-full hover:bg-opacity-90 transition-colors duration-300">Contact an Advisor</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUCCESS STORY VIDEO INTEGRATION -->
+    <section class="py-16 lg:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl lg:text-4xl font-heading text-dark-blue text-center mb-12">Success Stories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-light-lavender rounded-lg shadow-lg overflow-hidden group">
+                    <div class="relative cursor-pointer video-thumbnail" data-video-id="VIDEO_ID_1">
+                        <img src="https://i.imgur.com/uGEn8A7.jpeg" alt="Student in Germany" class="w-full h-56 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-20">
+                            <svg class="w-16 h-16 text-white transform group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="font-body text-gray-600 mb-4 italic">"My semester in Germany was life-changing. It was the best decision of my university career."</p>
+                        <p class="font-body font-bold text-dark-blue">Sokha Chan</p>
+                        <p class="font-body text-sm text-gray-500">B.A. in Business, Exchange at Technical University of Munich</p>
+                    </div>
+                </div>
+                 <div class="bg-light-lavender rounded-lg shadow-lg overflow-hidden group">
+                    <div class="relative cursor-pointer video-thumbnail" data-video-id="VIDEO_ID_2">
+                        <img src="https://i.imgur.com/L7sF1vU.jpeg" alt="Student intern in Singapore" class="w-full h-56 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-20">
+                           <svg class="w-16 h-16 text-white transform group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="font-body text-gray-600 mb-4 italic">"The internship in Singapore gave me invaluable industry experience and I secured a job offer before graduation."</p>
+                        <p class="font-body font-bold text-dark-blue">Lyna Vong</p>
+                        <p class="font-body text-sm text-gray-500">B.S. in Computer Science, Internship at a Tech Startup</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal Structure -->
+    <div id="video-modal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="close-button" id="close-modal-button">×</span>
+            <div class="aspect-w-16 aspect-h-9" id="video-container"></div>
+        </div>
+    </div>
+    
+    <!-- FAQ & Contact Section (Original) -->
+    <section id="contact" class="py-16 lg:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- FAQs -->
+                <div>
+                    <h2 class="text-3xl font-heading text-dark-blue mb-8">Frequently Asked Questions</h2>
+                    <div class="space-y-6 font-body">
+                        <div>
+                            <h4 class="font-bold text-dark-blue mb-2">Who is eligible to apply?</h4>
+                            <p class="text-gray-600">Most programs are open to full-time undergraduate and graduate students who have completed at least one year of study and meet the minimum GPA requirement.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-dark-blue mb-2">Are there scholarships available?</h4>
+                            <p class="text-gray-600">Yes, the university offers several mobility scholarships. Additionally, many host institutions and external organizations provide funding opportunities. Visit our Financial Support page for details.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-dark-blue mb-2">How do course credits get transferred?</h4>
+                            <p class="text-gray-600">Before you go, you will complete a learning agreement to get your courses pre-approved by your academic advisor. This ensures a smooth credit transfer process upon your return.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contact Info -->
+                <div class="bg-dark-blue text-white rounded-lg p-8">
+                    <h3 class="text-2xl font-heading mb-6">Contact Us</h3>
+                    <p class="font-body mb-4">Have questions? Our Student Mobility team is here to help you every step of the way.</p>
+                    <ul class="font-body space-y-3">
+                        <li><strong>Coordinator:</strong> Ms. Leakhena Tep</li>
+                        <li><strong>Email:</strong> <a href="mailto:mobility@num.edu.kh" class="underline hover:text-light-lavender">mobility@num.edu.kh</a></li>
+                        <li><strong>Phone:</strong> +855 23 426 836</li>
+                        <li><strong>Office:</strong> Building A, Room 101</li>
+                        <li><strong>Hours:</strong> Mon - Fri, 9:00 AM - 4:00 PM</li>
+                    </ul>
+                     <a href="#" class="mt-6 inline-block bg-white text-dark-blue font-body font-bold py-3 px-6 rounded-full hover:bg-light-lavender transition-colors duration-300">Book an Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Main JS file (for header/footer loading and other interactions) -->
+    <script src="../js/main.js" data-base-path=".."></script>
+
+</body>
+</html>```

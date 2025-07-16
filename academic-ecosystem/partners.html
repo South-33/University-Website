@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partners - Academic Ecosystem - National University of Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Your Custom Tailwind Config -->
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-blue': '#0A0A3E',
+            'light-lavender': '#E9E8F5',
+          },
+          fontFamily: {
+            heading: ['Lora', 'serif'],
+            body: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-white font-body">
+    <div id="header-placeholder"></div>
+    <main>
+        <!-- ===== 1. Dynamic Hero Section (On-Brand) ===== -->
+        <section class="relative bg-cover bg-center text-white py-40" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop');">
+             <!-- Replace with a real photo of a partnership event or your campus -->
+            <div class="absolute inset-0 bg-dark-blue opacity-80"></div>
+            <div class="relative max-w-4xl mx-auto px-5 text-center z-10" data-aos="fade-in">
+                <h1 class="text-4xl md:text-6xl font-black font-heading tracking-tight">Building Bridges to Opportunity</h1>
+                <p class="text-lg md:text-xl font-body mt-6 max-w-3xl mx-auto">
+                    Explore our strong collaborations with industry leaders, offering students unparalleled real-world opportunities and insights.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== 2. Partnership Categories with Icons (On-Brand) ===== -->
+        <section class="py-24 bg-white">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Types of Partnership</h2>
+                    <p class="mt-4 text-lg text-gray-600 font-body max-w-3xl mx-auto">Our collaborations span across various sectors, creating a rich and diverse ecosystem for our students and faculty.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1: Industry -->
+                    <div class="bg-light-lavender/50 text-center p-8 rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mx-auto mb-6">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">Industry Collaborations</h3>
+                        <p class="font-body text-gray-700">Internships, joint research, and industry-relevant curricula with leading companies.</p>
+                    </div>
+
+                    <!-- Card 2: Academic -->
+                    <div class="bg-light-lavender/50 text-center p-8 rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mx-auto mb-6">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M1 12l5.354-3.06l5.354 3.06l-5.354 3.06L1 12z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">Academic Partnerships</h3>
+                        <p class="font-body text-gray-700">Student exchanges, faculty collaboration, and joint degree programs with global universities.</p>
+                    </div>
+
+                    <!-- Card 3: International -->
+                    <div class="bg-light-lavender/50 text-center p-8 rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mx-auto mb-6">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.881 4.043A9 9 0 1016.119 4.043M12 21a9 9 0 000-18h.008v18h-.008z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">International Organizations</h3>
+                        <p class="font-body text-gray-700">Engaging with NGOs and global bodies to provide students with international exposure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 3. NEW: Our Partners Logo Wall (On-Brand) ===== -->
+        <section class="py-24 bg-light-lavender">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">A Selection of Our Valued Partners</h2>
+                    <p class="mt-4 text-lg text-gray-600 font-body">We are proud to collaborate with a diverse range of leading organizations.</p>
+                </div>
+                <!-- This is where you would put the logos of your actual partners -->
+                <div class="flex flex-wrap justify-center items-center gap-x-12 sm:gap-x-16 gap-y-10" data-aos="zoom-in">
+                    <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/google.com" alt="Google Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/undp.org" alt="UNDP Logo" class="h-12 sm:h-14 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/samsung.com" alt="Samsung Logo" class="h-12 sm:h-14 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/unicef.org" alt="UNICEF Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/usaid.gov" alt="USAID Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 4. NEW: Call to Action (On-Brand) ===== -->
+        <section class="py-20 bg-dark-blue">
+            <div class="max-w-4xl mx-auto px-5 text-center" data-aos="zoom-in">
+                <h2 class="text-3xl font-heading text-white">Become a Partner</h2>
+                <p class="text-lg text-light-lavender mt-4 mb-8 font-body">
+                    Join us in shaping the next generation of leaders and innovators. We are always looking for new partners to expand our ecosystem and create new opportunities.
+                </p>
+                <a href="contact.html" class="inline-block bg-white text-dark-blue px-8 py-3 rounded-md font-bold font-body hover:bg-light-lavender transition-colors">
+                    Contact Us
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../js/main.js" data-base-path=".."></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+    </script>
+</body>
+</html>
