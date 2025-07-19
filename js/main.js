@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeSearch(basePath);
         initializeHidingHeader();
         updateActiveNav();
-        adjustLayoutForHeader(); // For homepage hero, harmless on other pages
+        // adjustLayoutForHeader removed - no longer needed
         initializePageTransitions(); // The new, simple transition logic
         triggerPageAnimations(document);
 
@@ -498,10 +498,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function adjustLayoutForHeader() {
-        // Hero height calculation is now self-contained in individual pages
-        // This function is kept for compatibility but no longer handles hero sections
-    }
+
 
     function initializeSearch(basePath) {
         let searchInitialized = false;

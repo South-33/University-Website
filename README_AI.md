@@ -48,10 +48,10 @@ This is a comprehensive guide for AI assistants working on our university websit
 
 ---
 
-## ⚡ **RECENT MAJOR IMPROVEMENTS (2024)**
+## ⚡ **Recent Major Improvements (2024)**
 
 ### 🚀 **SPA Navigation System**
-- ✅ **Seamless Transitions:** Fade-in/fade-out page transitions (200ms)
+- ✅ **Seamless Transitions:** Simple fade transitions for main content only
 - ✅ **Page Caching:** Intelligent caching with 5-minute expiration
 - ✅ **Link Preloading:** Hover-based preloading for instant navigation
 - ✅ **Error Handling:** Robust retry logic with exponential backoff
@@ -64,19 +64,24 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **Mobile Responsive:** Handles address bar changes and orientation
 - ✅ **Self-Contained:** All logic moved to homepage inline script
 
-### 📑 **Tab System Enhancement & Refactoring (LATEST)**
-- ✅ **SPA-Compatible:** Tabs work seamlessly during page transitions
+### 📑 **Modular Architecture & Code Cleanup (LATEST)**
+- ✅ **SPA-Compatible:** All features work seamlessly during page transitions
 - ✅ **Event Delegation:** Persistent functionality using delegated listeners
-- ✅ **Visual Consistency:** Eliminated bounce effects and loading delays
-- ✅ **Modular Architecture:** Extracted from main.js to page-specific inline scripts
-- ✅ **Self-Contained:** Program tabs logic now lives in bachelors.html & masters.html
-- ✅ **Cleaner main.js:** Removed ~100 lines of page-specific code from global SPA logic
+- ✅ **Modular Architecture:** Page-specific code lives in respective HTML files
+- ✅ **Self-Contained:** Program tabs, hero logic in individual pages
+- ✅ **Optimized Codebase:** Removed ~150 lines of unused CSS and JavaScript
+- ✅ **Vercel Ready:** Proper routing configuration for deployment
 
 ### 🛡️ **Error Handling & Reliability**
 - ✅ **Retry Logic:** Network requests retry with exponential backoff
 - ✅ **Fallback UI:** Graceful degradation when components fail to load
 - ✅ **User Feedback:** Transient error messages with auto-dismiss
 - ✅ **Global Listeners:** Catch uncaught errors and promise rejections
+
+### 🚀 **Deployment & Performance**
+- ✅ **Vercel Integration:** Clean URLs and proper routing with vercel.json
+- ✅ **Code Optimization:** Removed unused styles and functions
+- ✅ **Fast Loading:** Minimal CSS/JS footprint for better performance
 
 ---
 
@@ -252,6 +257,19 @@ This is a comprehensive guide for AI assistants working on our university websit
 - **Data Source:** The search data is generated dynamically in `main.js` by scanning all `<a>` tags in the header navigation.
 - **Functionality:** It creates an in-memory index of page titles and URLs.
 - **Customization:** To add or remove items from the search, modify the links in `_includes/header.html`. The search will update automatically.
+
+### 🚀 **Vercel Deployment Configuration**
+The project includes a `vercel.json` file that handles:
+- **Clean URLs:** Removes `.html` extensions from URLs
+- **Directory Routing:** Properly serves files from subdirectories
+- **SPA Compatibility:** Direct URL access works alongside SPA navigation
+- **Cache Headers:** Optimized caching for better performance
+
+**Supported URL Patterns:**
+- `/programs/bachelors` → `/programs/bachelors.html`
+- `/academic-ecosystem/research` → `/academic-ecosystem/research.html`
+- `/campus/facilities` → `/campus/facilities.html`
+- And all other subdirectory pages
 
 ---
 
