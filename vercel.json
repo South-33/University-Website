@@ -4,5 +4,40 @@
       "main": true,
       "other-branch": false
     }
-  }
+  },
+  "trailingSlash": false,
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/programs/(.*)",
+      "destination": "/programs/$1.html"
+    },
+    {
+      "source": "/academic-ecosystem/(.*)",
+      "destination": "/academic-ecosystem/$1.html"
+    },
+    {
+      "source": "/campus/(.*)",
+      "destination": "/campus/$1.html"
+    },
+    {
+      "source": "/student-activities/(.*)",
+      "destination": "/student-activities/$1.html"
+    },
+    {
+      "source": "/study-with-us/(.*)",
+      "destination": "/study-with-us/$1.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
 }
