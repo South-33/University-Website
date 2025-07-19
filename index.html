@@ -10,14 +10,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/theme.js"></script>
     <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Homepage-specific styles -->
+    <style>
+        /* Hero video loading transition - extracted from main.css for modularity */
+        #hero-image {
+            transition: opacity 1s ease-out;
+        }
+        
+        #hero-video {
+            transition: opacity 1s ease-out;
+        }
+        
+        /* Prevent hero section layout shift during SPA navigation */
+        #hero {
+            /* Set a reasonable default height immediately to prevent squishing */
+            min-height: calc(100vh - 80px); /* Assume ~80px header height */
+            height: calc(100vh - 80px);
+            /* No transition - we want instant height changes to prevent layout shift */
+        }
+    </style>
 </head>
 <body class="bg-light-lavender">
 
     <div id="header-placeholder"></div>
 
     <main>
-                <section id="hero" class="relative flex items-center justify-center h-screen overflow-hidden text-center text-white">
-            <video poster="Picture/School/numdronecompressedframe1.bmp" autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover object-top z-0">
+                <section id="hero" class="relative flex items-center justify-center overflow-hidden text-center text-white">
+            <!-- Static image shown first for instant loading -->
+            <img id="hero-image" src="Picture/School/numdronecompressedframe1.jpg" alt="NUM Campus" class="absolute top-0 left-0 w-full h-full object-cover object-top z-0 transition-opacity duration-1000">
+            
+            <!-- Video loads in the background and fades in when ready -->
+            <video id="hero-video" poster="Picture/School/numdronecompressedframe1.jpg" loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover object-top z-0 opacity-0 transition-opacity duration-1000">
                 <source src="/Video/NumdronestableboomerangCompressed.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -238,6 +262,115 @@
     </main>
 
     <div id="footer-placeholder"></div>
+    
+    <!-- PAGE-SPECIFIC JAVASCRIPT (Self-contained) -->
+    <script>
+        // Homepage Hero Management (Height + Video)
+        // This runs on both initial page load and SPA navigation
+        
+        function initializeHomepageHero() {
+            const heroSection = document.getElementById('hero');
+            if (!heroSection) return;
+            
+            const setHeroHeight = () => {
+                // Get the actual viewport height
+                const viewportHeight = window.innerHeight;
+                
+                // Get the header height (it's sticky, so it takes up space)
+                const header = document.querySelector('header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                
+                // Calculate hero height: full viewport minus header
+                const heroHeight = viewportHeight - headerHeight;
+                
+                heroSection.style.height = heroHeight + 'px';
+                heroSection.style.minHeight = heroHeight + 'px';
+            };
+            
+            // Set height immediately to prevent layout shift during SPA navigation
+            setHeroHeight();
+            
+            // Also set after a small delay to ensure header is fully rendered (fallback)
+            setTimeout(setHeroHeight, 50);
+            
+            // Update on resize and orientation change
+            window.addEventListener('resize', () => {
+                setTimeout(setHeroHeight, 50);
+            });
+            window.addEventListener('orientationchange', () => {
+                // Longer delay after orientation change to get correct dimensions
+                setTimeout(setHeroHeight, 200);
+            });
+            
+            // Also update when page becomes visible (handles some edge cases)
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    setTimeout(setHeroHeight, 100);
+                }
+            });
+        }
+        
+        function initializeHeroVideo() {
+            const heroImage = document.getElementById('hero-image');
+            const heroVideo = document.getElementById('hero-video');
+            
+            if (!heroImage || !heroVideo) return;
+            
+            // Start loading the video in the background
+            const loadVideo = () => {
+                // Check if video can play through without buffering
+                const canPlayThrough = new Promise((resolve) => {
+                    const handleCanPlayThrough = () => {
+                        heroVideo.removeEventListener('canplaythrough', handleCanPlayThrough);
+                        resolve();
+                    };
+                    heroVideo.addEventListener('canplaythrough', handleCanPlayThrough);
+                });
+                
+                // Load the video
+                heroVideo.load();
+                
+                // When video is ready, fade from image to video
+                canPlayThrough.then(() => {
+                    setTimeout(() => {
+                        // Start playing the video
+                        heroVideo.play().catch(err => {
+                            // Video autoplay failed - user interaction required
+                            // Keep the image if video fails to play
+                            console.warn('Video autoplay failed:', err);
+                            return;
+                        });
+                        
+                        // Fade in the video
+                        heroVideo.style.opacity = '1';
+                        
+                        // Fade out the image after video starts
+                        setTimeout(() => {
+                            heroImage.style.opacity = '0';
+                            
+                            // Remove image from DOM after fade completes
+                            setTimeout(() => {
+                                heroImage.style.display = 'none';
+                            }, 1000);
+                        }, 500);
+                    }, 1000); // Wait 1 second before starting transition
+                });
+            };
+            
+            // Start loading video after a short delay to prioritize page load
+            setTimeout(loadVideo, 500);
+        }
+        
+        // Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHomepageHero();
+            initializeHeroVideo();
+        });
+        
+        // Make functions globally available for SPA navigation
+        window.initializeHomepageHero = initializeHomepageHero;
+        window.initializeHeroVideo = initializeHeroVideo;
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
     <script src="js/main.js" data-base-path="."></script>

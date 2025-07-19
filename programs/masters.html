@@ -41,6 +41,8 @@
         }
         .program-tab.active,
         .program-tab.active-tab {
+            background-color: #1e1b4b !important; /* darker blue */
+            color: #ffffff !important; /* white text */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transform: scale(1.05);
         }
@@ -450,6 +452,124 @@
     </main>
 
     <div id="footer-placeholder"></div>
+    
+    <!-- PAGE-SPECIFIC JAVASCRIPT (Program Tabs) -->
+    <script>
+        // Program Tabs Management
+        // This runs on both initial page load and SPA navigation
+        
+        function initializeProgramTabs() {
+            const tabs = document.querySelectorAll('.program-tab');
+            const contentWrapper = document.querySelector('.program-content-wrapper');
+            
+            if (!tabs.length || !contentWrapper) {
+                return;
+            }
+
+            const setActiveTabHeight = () => {
+                const activeContent = contentWrapper.querySelector('.program-content.active');
+                if (activeContent) {
+                    contentWrapper.style.height = activeContent.scrollHeight + 'px';
+                }
+            };
+            
+            // Initial setup - ensure proper active states
+            let initialActiveTab = document.querySelector('.program-tab.active');
+            
+            // If no active tab found, make the first tab active
+            if (!initialActiveTab) {
+                initialActiveTab = tabs[0];
+                if (initialActiveTab) {
+                    // Clear all tab states first
+                    tabs.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Set first tab as active
+                    initialActiveTab.classList.add('active');
+                }
+            }
+            
+            if (initialActiveTab) {
+                const initialTabContentId = initialActiveTab.dataset.tab + '-content';
+                const initialContent = document.getElementById(initialTabContentId);
+                
+                if (initialContent) {
+                    // Clear all active states first
+                    contentWrapper.querySelectorAll('.program-content').forEach(c => c.classList.remove('active'));
+                    initialContent.classList.add('active');
+                }
+            }
+            
+            // Set height after a brief delay to ensure content is rendered
+            setTimeout(setActiveTabHeight, 100);
+
+            // Remove any existing program tab listeners to prevent duplicates
+            const existingHandler = window.programTabHandler;
+            if (existingHandler) {
+                document.body.removeEventListener('click', existingHandler);
+            }
+            
+            // Create new handler function and store reference
+            window.programTabHandler = function(e) {
+                const clickedTab = e.target.closest('.program-tab');
+                if (!clickedTab) return;
+                
+                e.preventDefault();
+                
+                const targetId = clickedTab.dataset.tab + '-content';
+                const targetContent = document.getElementById(targetId);
+                
+                if (!targetContent) {
+                    return;
+                }
+                
+                // Get fresh references
+                const currentContentWrapper = document.querySelector('.program-content-wrapper');
+                if (!currentContentWrapper) return;
+                
+                const allTabs = document.querySelectorAll('.program-tab');
+                
+                // Update tab states by only toggling the 'active' class
+                allTabs.forEach(t => t.classList.remove('active'));
+                clickedTab.classList.add('active');
+                
+                // Update content states
+                const allContent = currentContentWrapper.querySelectorAll('.program-content');
+                allContent.forEach(c => {
+                    c.classList.remove('active');
+                });
+                targetContent.classList.add('active');
+                
+                // Force a reflow to ensure styles are applied
+                targetContent.offsetHeight;
+                
+                // Update height
+                setTimeout(() => {
+                    const activeContent = currentContentWrapper.querySelector('.program-content.active');
+                    if (activeContent) {
+                        const newHeight = activeContent.scrollHeight + 'px';
+                        currentContentWrapper.style.height = newHeight;
+                    }
+                }, 50);
+            };
+            
+            // Add the event listener to document body for delegation
+            document.body.addEventListener('click', window.programTabHandler);
+            
+            // Add resize listener (remove existing first to prevent duplicates)
+            const resizeHandler = () => setActiveTabHeight();
+            window.removeEventListener('resize', resizeHandler);
+            window.addEventListener('resize', resizeHandler);
+        }
+        
+        // Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProgramTabs();
+        });
+        
+        // Make function globally available for SPA navigation
+        window.initializeProgramTabs = initializeProgramTabs;
+    </script>
+    
     <script src="../js/main.js" data-base-path=".."></script>
 
 </body>

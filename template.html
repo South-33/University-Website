@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +19,69 @@
     <!-- Global site-wide styles -->
     <link rel="stylesheet" href="css/main.css">
 
-    <!--
-      ===============================
-      To add PAGE-SPECIFIC styles:
-      <link rel="stylesheet" href="css/your-page.css">
-      ===============================
-    -->
+    <!-- PAGE-SPECIFIC STYLES (Recommended for team collaboration) -->
+    <style>
+        /*
+        ===============================
+        ADD YOUR PAGE-SPECIFIC CSS HERE
+        ===============================
+        
+        Benefits of inline styles:
+        - Self-contained pages for team collaboration
+        - No conflicts with other developers' CSS files
+        - Works perfectly with SPA navigation
+        - Easy to debug and maintain
+        
+        Common patterns you can copy:
+        
+        1. FADE-IN ANIMATIONS:
+        .fade-in-section > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s,
+                        transform 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s;
+        }
+        .fade-in-section.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        2. TAB FUNCTIONALITY:
+        .program-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            color: rgba(49, 46, 129, 0.7);
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .program-tab.active {
+            background-color: #1e1b4b !important;
+            color: #ffffff !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: scale(1.05);
+        }
+        .program-content-wrapper {
+            position: relative;
+            transition: height 0.35s ease-in-out;
+        }
+        .program-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .program-content.active {
+            opacity: 1;
+            visibility: visible;
+            position: static;
+        }
+        */
+    </style>
 </head>
 <body class="bg-light-lavender">
 
@@ -36,34 +93,145 @@
         YOUR PAGE CONTENT GOES HERE
         ===================================================================
         
-        Instructions:
-        1. Copy this file and rename it (e.g., "about-us.html").
-        2. Change the <title> in the <head> to match your new page.
-        3. Add your HTML content inside this <main> tag.
-        4. If you move this file into a subdirectory (e.g., "/campus/"),
-           you MUST update the script path at the bottom of this file.
-           Change src="js/main.js" to src="../js/main.js" and
-           data-base-path="." to data-base-path="..".
+        TEAM COLLABORATION INSTRUCTIONS:
+        1. Copy this file and rename it (e.g., "about-us.html")
+        2. Change the <title> in the <head> to match your new page
+        3. Add your custom CSS in the <style> section above
+        4. Add your HTML content inside this <main> tag
+        5. Add your custom JavaScript in the <script> section below
+        6. If you move this file into a subdirectory (e.g., "/programs/"),
+           update the script path: src="js/main.js" → src="../js/main.js"
+           and data-base-path="." → data-base-path=".."
         
-        Everything else (header, footer, global styles/scripts) is handled automatically.
+        SELF-CONTAINED PAGE BENEFITS:
+        ✅ No conflicts with teammates' code
+        ✅ Works perfectly with SPA navigation
+        ✅ Easy to debug and maintain
+        ✅ Custom animations and transitions per page
+        ✅ Independent development workflow
+        
+        EXAMPLE TAB STRUCTURE (if needed):
+        <div class="mb-12">
+            <div class="flex flex-col md:flex-row flex-wrap justify-center gap-4">
+                <button class="program-tab active" data-tab="tab1">Tab 1</button>
+                <button class="program-tab" data-tab="tab2">Tab 2</button>
+            </div>
+        </div>
+        <div class="program-content-wrapper">
+            <div class="program-content active" id="tab1-content">Content 1</div>
+            <div class="program-content" id="tab2-content">Content 2</div>
+        </div>
         -->
 
-        <div class="h-screen flex items-center justify-center">
-            <h1 class="text-4xl font-heading text-dark-blue">Your Content Here</h1>
-        </div>
+        <!-- Example Hero Section -->
+        <section class="relative h-[35vh] min-h-[250px] flex items-center justify-center text-center text-white font-body">
+            <div class="absolute inset-0">
+                <img src="https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg" alt="Hero Image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-dark-blue/70"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
+                <h1 class="font-heading text-4xl md:text-6xl mb-4">Your Page Title</h1>
+                <p class="text-lg md:text-xl text-white/90">Your page description goes here.</p>
+            </div>
+        </section>
+
+        <!-- Example Content Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6 text-center">Your Content Section</h2>
+                <p class="text-dark-blue/80 text-lg leading-relaxed text-center">
+                    Replace this with your actual content. This template provides a solid foundation for your page.
+                </p>
+            </div>
+        </section>
 
     </main>
 
     <div id="footer-placeholder"></div>
     
-    <!-- Site-wide Scripts (global logic) -->
+    <!-- PAGE-SPECIFIC JAVASCRIPT (Recommended for team collaboration) -->
+    <script>
+        /*
+        ===============================
+        ADD YOUR PAGE-SPECIFIC JS HERE
+        ===============================
+        
+        Benefits of inline JavaScript:
+        - Self-contained functionality
+        - No conflicts with teammates' JS files
+        - Works perfectly with SPA navigation
+        - Easy to debug and maintain
+        
+        COMMON PATTERNS:
+        
+        1. TAB FUNCTIONALITY (copy this if you have tabs):
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Only run if tabs exist on this page
+            if (document.querySelector('.program-tab')) {
+                initializePageTabs();
+            }
+        });
+        
+        function initializePageTabs() {
+            const tabs = document.querySelectorAll('.program-tab');
+            const contentWrapper = document.querySelector('.program-content-wrapper');
+            
+            if (!tabs.length || !contentWrapper) return;
+            
+            // Set first tab as active if none is active
+            if (!document.querySelector('.program-tab.active')) {
+                tabs[0].classList.add('active');
+                const firstContent = document.getElementById(tabs[0].dataset.tab + '-content');
+                if (firstContent) firstContent.classList.add('active');
+            }
+            
+            // Tab click handlers
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update tab states
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update content
+                    const targetId = this.dataset.tab + '-content';
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        contentWrapper.querySelectorAll('.program-content').forEach(c => c.classList.remove('active'));
+                        targetContent.classList.add('active');
+                        
+                        // Update wrapper height
+                        setTimeout(() => {
+                            contentWrapper.style.height = targetContent.scrollHeight + 'px';
+                        }, 50);
+                    }
+                });
+            });
+        }
+        
+        2. CUSTOM ANIMATIONS:
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Your custom animation code here
+        });
+        
+        3. FORM HANDLING:
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('#your-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Handle form submission
+                });
+            }
+        });
+        */
+    </script>
+    
+    <!-- Site-wide Scripts (global logic) - DO NOT MODIFY -->
     <script src="js/main.js" data-base-path="."></script>
-
-    <!--
-      ===============================
-      To add PAGE-SPECIFIC scripts:
-      <script src="js/your-page.js"></script>
-      ===============================
-    -->
 </body>
 </html>

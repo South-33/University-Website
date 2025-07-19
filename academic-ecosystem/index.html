@@ -1,49 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Ecosystem - National University of Management</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Your Custom Tailwind Config -->
-    <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'dark-blue': '#0A0A3E',
-            'light-lavender': '#E9E8F5',
-          },
-          fontFamily: {
-            heading: ['Lora', 'serif'],
-            body: ['Montserrat', 'sans-serif'],
-          }
-        }
-      }
-    }
-    </script>
     
+    <!-- Tailwind CSS Theme Configuration (global) -->
+    <script src="../js/theme.js"></script>
+    
+    <!-- Global site-wide styles -->
     <link rel="stylesheet" href="../css/main.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- PAGE-SPECIFIC STYLES -->
     <style>
+        /* Fade-in animations for SPA compatibility */
+        .fade-in-section > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s,
+                        transform 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s;
+        }
+        .fade-in-section.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Slide overlay animation */
         @keyframes slideOverlay {
             0% { transform: translateX(0%); opacity: 1; }
             100% { transform: translateX(100%); opacity: 0; }
         }
-
-         .slide-in-text-container .overlay {
+        
+        .slide-in-text-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .slide-in-text-container .overlay {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%; /* Cover the entire width of the container */
+            width: 100%;
             height: 100%;
-            background-color: #E9E8F5; /* light-lavender */
-            z-index: 5; /* Below the text, above the background */
-            animation: slideOverlay 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Slower, smoother animation */
+            background-color: #E9E8F5;
+            z-index: 5;
+            animation: slideOverlay 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             animation-delay: 0.3s;
-         }
+        }
+        
+        /* Card hover effects */
+        .ecosystem-card {
+            transition: all 0.3s ease-in-out;
+        }
+        .ecosystem-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Zoom-in animation */
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .zoom-in.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
     </style>
 </head>
 <body class="bg-white font-body">
@@ -81,16 +112,15 @@
 
         <div class="bg-white py-20">
             <div class="max-w-6xl mx-auto px-5">
-                <div class="relative inline-block mb-16 mx-auto block text-center overflow-hidden" data-aos="fade-right">
+                <div class="relative inline-block mb-16 mx-auto block text-center overflow-hidden fade-in-section">
                     <div class="slide-in-text-container">
                         <h2 class="text-3xl font-heading text-dark-blue text-content">Key Centers and Institutions</h2>
                         <div class="overlay"></div>
                     </div>
                 </div>
 
-
                 <!-- Center of Excellence for R&D and Innovation (CERI) -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
                         <img src="image/ceri_logo.jpeg" alt="CERI Logo" class="max-w-full max-h-full object-contain">
                     </div>
@@ -101,10 +131,10 @@
                 </div>
 
                 <!-- ASEAN Economic Research Institution (AERI) -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div>
                         <h3 class="text-2xl font-heading text-dark-blue mb-3">ASEAN Economic Research Institution (AERI)</h3>
-                        <p class="font-body text-gray-700">Chosen by the Ministry of Education, Youth, and Sports, this institute supports academic research on economic issues and policy development, aligning with the goals of the ASEAN Economic Community (AEC). It confirms NUM’s commitment to enhance and encourage research in economic strategy and policy, driven by Cambodia’s ASEAN chairmanship.</p>
+                        <p class="font-body text-gray-700">Chosen by the Ministry of Education, Youth, and Sports, this institute supports academic research on economic issues and policy development, aligning with the goals of the ASEAN Economic Community (AEC). It confirms NUM's commitment to enhance and encourage research in economic strategy and policy, driven by Cambodia's ASEAN chairmanship.</p>
                     </div>
                     <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
                         <img src="image/aeri_logo.jpeg" alt="AERI Logo" class="max-w-full max-h-full object-contain">
@@ -112,7 +142,7 @@
                 </div>
 
                 <!-- Center for Digital Law -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
                         <img src="image/digital_law.jpeg" alt="Center for Digital Law Logo" class="max-w-full max-h-full object-contain">
                     </div>
@@ -123,7 +153,7 @@
                 </div>
 
                 <!-- The CamboVerse Center -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div>
                         <h3 class="text-2xl font-heading text-dark-blue mb-3">The CamboVerse Center</h3>
                         <p class="font-body text-gray-700">This center focuses on developing virtual and augmented reality experiences to preserve and disseminate Cambodian cultural heritage. By merging modern technology with cultural education, it aims to foster a deeper global appreciation of Cambodian culture and history.</p>
@@ -136,9 +166,8 @@
                 <!-- ===== START: NEW SECTIONS ===== -->
 
                 <!-- Administration and Student Services -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <!-- Replace this with the actual logo image when available -->
                         <img src="image/service.jpg" alt="Administration and Student Services Logo" class="max-w-full max-h-full object-contain rounded-sm">
                     </div>
                     <div>
@@ -148,7 +177,7 @@
                 </div>
 
                 <!-- NUM Social Innovation Lab -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div>
                         <h3 class="text-2xl font-heading text-dark-blue mb-3">NUM Social Innovation Lab</h3>
                         <p class="font-body text-gray-700">Part of the EU-funded South-East Asian Social Innovation Network (SEASIN) and supported by SMART Axiata, this lab is a space for seminars, workshops, and an incubator to develop and launch new social ventures and promote social entrepreneurship.</p>
@@ -159,18 +188,18 @@
                 </div>
 
                 <!-- NUM Career Center -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
                         <img src="image/num_career.jpeg" alt="NUM Career Center Logo" class="max-w-full max-h-full object-contain rounded-sm">
                     </div>
                     <div>
                         <h3 class="text-2xl font-heading text-dark-blue mb-3">NUM Career Center</h3>
-                        <p class="font-body text-gray-700">Supported by USAID, this center is part of the “Digital Career Development” project with UC Berkeley. It aims to enhance digital employment skills, increase scholarships and internships, and build relationship opportunities to support the careers of Cambodian youth.</p>
+                        <p class="font-body text-gray-700">Supported by USAID, this center is part of the "Digital Career Development" project with UC Berkeley. It aims to enhance digital employment skills, increase scholarships and internships, and build relationship opportunities to support the careers of Cambodian youth.</p>
                     </div>
                 </div>
 
                 <!-- Digital Technology Center (DTC) -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" data-aos="zoom-in">
+                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
                     <div>
                         <h3 class="text-2xl font-heading text-dark-blue mb-3">Digital Technology Center (DTC)</h3>
                         <p class="font-body text-gray-700">Donated by the Ministry of Post and Telecommunication, the DTC is dedicated to developing a university research hub, corporate innovation facilities, and a community tech hub. It provides essential infrastructure, training, and support to advance digital skills, technologies, and transformation.</p>
@@ -187,13 +216,59 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="../js/main.js" data-base-path=".."></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- PAGE-SPECIFIC JAVASCRIPT -->
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAnimations();
         });
+        
+        function initializeAnimations() {
+            // Initialize fade-in sections
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            const zoomInElements = document.querySelectorAll('.zoom-in');
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            // Observe fade-in sections
+            fadeInSections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Observe zoom-in elements
+            zoomInElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Trigger animations immediately if already in viewport
+            setTimeout(() => {
+                fadeInSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        section.classList.add('is-visible');
+                    }
+                });
+                
+                zoomInElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        element.classList.add('is-visible');
+                    }
+                });
+            }, 100);
+        }
     </script>
+    
+    <!-- Site-wide Scripts (global logic) -->
+    <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>
