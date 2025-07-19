@@ -21,10 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
         triggerPageAnimations(document);
 
         // --- Run Page-Specific Logic ---
-        // Since every page is a full load, we can simply check for elements
-        // and initialize them directly.
-        if (document.querySelector('.program-tab')) {
-            initializeProgramTabs();
+        // Call page-specific functions if they exist (exposed by page inline scripts)
+        if (typeof window.initializeProgramTabs === 'function') {
+            try {
+                window.initializeProgramTabs();
+            } catch (error) {
+                console.error('Error initializing program tabs:', error);
+            }
         }
 
         // --- Make the page visible ---
@@ -38,46 +41,368 @@ document.addEventListener('DOMContentLoaded', function() {
     const scriptTag = document.querySelector('script[src*="js/main.js"]');
     const basePath = scriptTag ? (scriptTag.dataset.basePath || '.') : '.';
 
-    const loadHeader = headerPlaceholder ? fetch(`${basePath}/_includes/header.html`)
-        .then(response => response.ok ? response.text() : Promise.reject('Failed to load header'))
+    // Enhanced error handling with retries and fallbacks
+    const loadWithRetry = async (url, retries = 3, delay = 1000) => {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return await response.text();
+            } catch (error) {
+                console.warn(`Attempt ${i + 1} failed for ${url}:`, error.message);
+                if (i === retries - 1) throw error;
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+    };
+
+    const loadHeader = headerPlaceholder ? loadWithRetry(`${basePath}/_includes/header.html`)
         .then(data => {
             headerPlaceholder.outerHTML = data;
             // Use a timeout to ensure the header is in the DOM before we run scripts
-            setTimeout(initializeSite, 0);
-        }) : Promise.resolve();
+            setTimeout(() => {
+                try {
+                    initializeSite();
+                } catch (error) {
+                    console.error('Error during site initialization:', error);
+                    // Fallback: make page visible even if initialization fails
+                    document.body.classList.add('is-visible');
+                    showErrorMessage('Some features may not work properly. Please refresh the page.');
+                }
+            }, 0);
+        })
+        .catch(error => {
+            console.error('Failed to load header after retries:', error);
+            // Fallback: create a basic header
+            headerPlaceholder.innerHTML = `
+                <header class="bg-dark-blue text-white p-4">
+                    <div class="max-w-6xl mx-auto">
+                        <h1 class="text-xl font-bold">National University of Management</h1>
+                        <p class="text-sm opacity-75">Header failed to load - basic navigation active</p>
+                    </div>
+                </header>
+            `;
+            setTimeout(() => {
+                try {
+                    initializeSite();
+                } catch (error) {
+                    console.error('Error during fallback initialization:', error);
+                    document.body.classList.add('is-visible');
+                }
+            }, 0);
+        }) : Promise.resolve().then(() => {
+            try {
+                initializeSite();
+            } catch (error) {
+                console.error('Error during direct initialization:', error);
+                document.body.classList.add('is-visible');
+            }
+        });
 
-    const loadFooter = footerPlaceholder ? fetch(`${basePath}/_includes/footer.html`)
-        .then(response => response.text())
-        .then(data => { footerPlaceholder.innerHTML = data; }) : Promise.resolve();
-    
-    loadHeader.catch(error => console.error('Error during header loading or initialization:', error));
-    loadFooter.catch(error => console.error('Error fetching footer:', error));
+    const loadFooter = footerPlaceholder ? loadWithRetry(`${basePath}/_includes/footer.html`)
+        .then(data => { 
+            footerPlaceholder.innerHTML = data; 
+        })
+        .catch(error => {
+            console.error('Failed to load footer after retries:', error);
+            // Fallback: create a basic footer
+            footerPlaceholder.innerHTML = `
+                <footer class="bg-dark-blue text-white p-4 text-center">
+                    <p>&copy; ${new Date().getFullYear()} National University of Management</p>
+                </footer>
+            `;
+        }) : Promise.resolve();
 
 
     // =========================================================================
-    //  NEW, SIMPLIFIED PAGE TRANSITION LOGIC
+    //  SIMPLE PAGE TRANSITION SYSTEM
     // =========================================================================
     
     function initializePageTransitions() {
-        document.body.classList.add('fade-in'); // Set initial state for fade-in
-
+        // Handle link clicks for smooth transitions
         document.body.addEventListener('click', (e) => {
-            // Find the closest link that is internal and not a special link
             const link = e.target.closest('a');
-            if (link && link.hostname === window.location.hostname && !link.getAttribute('href').startsWith('#') && link.target !== '_blank') {
-                e.preventDefault(); // Stop the browser from navigating instantly
+            
+            // Check if it's an internal link that should be transitioned
+            if (link && 
+                link.hostname === window.location.hostname && 
+                !link.getAttribute('href').startsWith('#') && 
+                link.target !== '_blank' &&
+                !link.hasAttribute('data-no-transition')) {
+                
+                e.preventDefault();
                 const destination = link.href;
+                
+                // Don't transition if we're already on the same page
+                if (destination === window.location.href) {
+                    return;
+                }
+                
+                // Start simple fade transition
+                startPageTransition(destination);
+            }
+        });
 
-                // Add the fade-out class to the body
-                document.body.classList.add('fade-out');
-
-                // Wait for the animation to finish, then navigate
-                setTimeout(() => {
-                    window.location.href = destination;
-                }, 300); // This duration should match your CSS transition time
+        // Handle browser back/forward navigation
+        window.addEventListener('popstate', (e) => {
+            startPageTransition(window.location.href, false);
+        });
+    }    
+        
+    // Simple page cache for better performance
+    const pageCache = new Map();
+    
+    // Set to track URLs currently being preloaded
+    const preloadingUrls = new Set();
+    
+    function initializeLinkPreloading() {
+        // Preload pages on hover for instant transitions
+        document.body.addEventListener('mouseenter', (e) => {
+            const link = e.target.closest('a');
+            if (link && 
+                link.hostname === window.location.hostname && 
+                !link.getAttribute('href').startsWith('#') && 
+                link.target !== '_blank' &&
+                !pageCache.has(link.href)) {
+                
+                preloadPage(link.href);
+            }
+        }, true);
+    }
+    
+    function preloadPage(url) {
+        // Don't preload if already cached or currently loading
+        if (pageCache.has(url) || preloadingUrls.has(url)) {
+            return;
+        }
+        
+        preloadingUrls.add(url);
+        
+        // Use a shorter timeout for preloading to avoid blocking
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+        fetch(url, { signal: controller.signal })
+            .then(response => {
+                clearTimeout(timeoutId);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                if (!html || html.trim().length === 0) {
+                    throw new Error('Empty preload response');
+                }
+                const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+                const title = titleMatch ? titleMatch[1] : 'NUM';
+                pageCache.set(url, { html, title, timestamp: Date.now() });
+            })
+            .catch(error => {
+                clearTimeout(timeoutId);
+                if (error.name !== 'AbortError') {
+                    console.warn('Failed to preload page:', url, error.message);
+                }
+            })
+            .finally(() => {
+                preloadingUrls.delete(url);
+            });
+    }
+    
+    initializeLinkPreloading();
+    
+    function executePageScripts(doc) {
+        // Execute inline scripts from the new page
+        const scripts = doc.querySelectorAll('script:not([src])');
+        scripts.forEach(script => {
+            if (script.textContent.trim()) {
+                try {
+                    // Create a new script element and execute it
+                    const newScript = document.createElement('script');
+                    newScript.textContent = script.textContent;
+                    document.head.appendChild(newScript);
+                    document.head.removeChild(newScript);
+                } catch (error) {
+                    console.error('Error executing inline script:', error);
+                }
             }
         });
     }
+    
+
+    
+    function getCachedPage(url) {
+        const cached = pageCache.get(url);
+        return cached && cached.html ? cached : null;
+    }
+
+    // Simple transition timing
+    let transitionStartTime = 0;
+    
+    function startPageTransition(destination, pushState = true) {
+        transitionStartTime = Date.now();
+        
+        // Start fade out - only affect main content, not header
+        const mainContent = document.querySelector('main');
+        if (mainContent) {
+            mainContent.style.opacity = '0.85';
+            mainContent.style.transition = 'opacity 0.2s ease-out';
+        }
+        
+        // Get cached page or fetch new one
+        const cachedPage = getCachedPage(destination);
+        
+        if (cachedPage) {
+            // Use cached version
+            setTimeout(() => {
+                try {
+                    loadNewPage(cachedPage.html, cachedPage.title, destination, pushState);
+                } catch (error) {
+                    console.error('Error loading cached page:', error);
+                    handleTransitionError(destination, error);
+                }
+            }, 150);
+        } else {
+            // Fetch new page with enhanced error handling
+            loadWithRetry(destination, 2, 500)
+                .then(html => {
+                    // Validate HTML content
+                    if (!html || html.trim().length === 0) {
+                        throw new Error('Empty response received');
+                    }
+                    
+                    // Cache the page
+                    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+                    const title = titleMatch ? titleMatch[1] : 'NUM';
+                    pageCache.set(destination, { html, title, timestamp: Date.now() });
+                    
+                    setTimeout(() => {
+                        try {
+                            loadNewPage(html, title, destination, pushState);
+                        } catch (error) {
+                            console.error('Error loading new page:', error);
+                            handleTransitionError(destination, error);
+                        }
+                    }, 150);
+                })
+                .catch(error => {
+                    console.error('Page transition failed:', error);
+                    handleTransitionError(destination, error);
+                });
+        }
+    }
+
+    function loadNewPage(mainHTML, titleText, destination, pushState) {
+        try {
+            const parser = new DOMParser();
+            const newDoc = parser.parseFromString(mainHTML, 'text/html');
+            const newMain = newDoc.querySelector('main');
+            const currentMain = document.querySelector('main');
+            
+            if (!newMain) {
+                throw new Error('No main element found in new page content');
+            }
+            
+            if (!currentMain) {
+                throw new Error('No main element found in current page');
+            }
+            
+            // Update page title
+            document.title = titleText;
+            
+            // Update browser history
+            if (pushState) {
+                history.pushState({ path: destination }, titleText, destination);
+            }
+            
+            // Replace main content
+            currentMain.innerHTML = newMain.innerHTML;
+            
+            // Load and execute page-specific styles
+            const newStyles = newDoc.querySelectorAll('style');
+            newStyles.forEach(style => {
+                if (!document.querySelector(`style[data-page-style="${btoa(style.textContent.substring(0, 50))}"]`)) {
+                    const newStyle = document.createElement('style');
+                    newStyle.textContent = style.textContent;
+                    newStyle.setAttribute('data-page-style', btoa(style.textContent.substring(0, 50)));
+                    document.head.appendChild(newStyle);
+                }
+            });
+            
+            // Execute page-specific inline scripts
+            try {
+                executePageScripts(newDoc);
+            } catch (error) {
+                console.error('Error executing page scripts:', error);
+            }
+            
+            // Initialize page content after DOM update
+            setTimeout(initializePageContent, 0);
+            
+        } catch (error) {
+            console.error('Error in loadNewPage:', error);
+            throw error; // Re-throw to be handled by caller
+        }
+        
+        function initializePageContent() {
+            try {
+                // Update active navigation
+                updateActiveNav();
+                
+                // Initialize page-specific components if functions exist
+                if (typeof window.initializeProgramTabs === 'function') {
+                    try {
+                        window.initializeProgramTabs();
+                    } catch (error) {
+                        console.error('Error initializing program tabs during SPA navigation:', error);
+                    }
+                }
+                
+                // Initialize homepage hero if present (using global functions from page)
+                if (typeof window.initializeHomepageHero === 'function') {
+                    try {
+                        window.initializeHomepageHero();
+                    } catch (error) {
+                        console.error('Error initializing homepage hero:', error);
+                    }
+                }
+                
+                // Initialize hero video if on homepage (using global functions from page)
+                if (typeof window.initializeHeroVideo === 'function') {
+                    try {
+                        window.initializeHeroVideo();
+                    } catch (error) {
+                        console.error('Error initializing hero video:', error);
+                    }
+                }
+                
+                // Trigger animations for new content
+                triggerPageAnimations(document.querySelector('main'));
+                
+                // Fade page back in - only affect main content, not header
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                }
+            } catch (error) {
+                console.error('Error during page content initialization:', error);
+                // Still fade in even if initialization fails - only affect main content
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                }
+                showErrorMessage('Some page features may not work properly.');
+            }
+        }
+        
+        // Smooth scroll to top
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    
 
 
     // =========================================================================
@@ -99,48 +424,13 @@ document.addEventListener('DOMContentLoaded', function() {
         sections.forEach(section => observer.observe(section));
     }
 
-    function initializeProgramTabs() {
-        const tabs = document.querySelectorAll('.program-tab');
-        const contentWrapper = document.querySelector('.program-content-wrapper');
-        if (!tabs.length || !contentWrapper) return;
 
-        const setActiveTabHeight = () => {
-            const activeContent = contentWrapper.querySelector('.program-content.active');
-            if (activeContent) {
-                contentWrapper.style.height = activeContent.scrollHeight + 'px';
-            }
-        };
-        
-        // Initial setup
-        const initialActiveTab = document.querySelector('.program-tab.active');
-        if(initialActiveTab) {
-            const initialTabContentId = initialActiveTab.dataset.tab + '-content';
-            document.getElementById(initialTabContentId)?.classList.add('active');
-        }
-        setTimeout(setActiveTabHeight, 50); // Small delay for images/fonts
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', e => {
-                e.preventDefault();
-                const targetId = e.currentTarget.dataset.tab + '-content';
-                
-                tabs.forEach(t => t.classList.remove('active', 'bg-dark-blue', 'text-white'));
-                e.currentTarget.classList.add('active', 'bg-dark-blue', 'text-white');
-                
-                contentWrapper.querySelectorAll('.program-content').forEach(c => c.classList.remove('active'));
-                document.getElementById(targetId)?.classList.add('active');
-                
-                setActiveTabHeight();
-            });
-        });
-        
-        window.addEventListener('resize', setActiveTabHeight);
-    }
     
     function updateActiveNav() {
         const currentPath = window.location.pathname.replace(/\/$/, '').replace(/\.html$/, '');
         const navLinks = document.querySelectorAll('.main-nav a');
         let bestMatch = null;
+        
         navLinks.forEach(link => link.classList.remove('active'));
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
@@ -153,6 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        
         if (bestMatch) {
             bestMatch.link.classList.add('active');
             const parentDropdown = bestMatch.link.closest('.relative.group');
@@ -208,15 +499,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function adjustLayoutForHeader() {
-        const header = document.querySelector('header');
-        const heroSection = document.getElementById('hero');
-        if (header && heroSection) {
-            const setHeroHeight = () => {
-                heroSection.style.height = (window.innerHeight - header.offsetHeight) + 'px';
-            };
-            setHeroHeight();
-            window.addEventListener('resize', setHeroHeight);
-        }
+        // Hero height calculation is now self-contained in individual pages
+        // This function is kept for compatibility but no longer handles hero sections
     }
 
     function initializeSearch(basePath) {
@@ -289,4 +573,72 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+
+    
+    // Error handling utilities
+    function showErrorMessage(message, duration = 5000) {
+        // Remove any existing error messages
+        const existingError = document.querySelector('.spa-error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'spa-error-message fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 max-w-sm';
+        errorDiv.innerHTML = `
+            <div class="flex items-center gap-2">
+                <span>⚠️</span>
+                <span class="text-sm">${message}</span>
+                <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-white hover:text-gray-200">&times;</button>
+            </div>
+        `;
+        
+        document.body.appendChild(errorDiv);
+        
+        if (duration > 0) {
+            setTimeout(() => {
+                if (errorDiv.parentNode) {
+                    errorDiv.remove();
+                }
+            }, duration);
+        }
+    }
+    
+    function handleTransitionError(destination, error) {
+        console.error('Transition error for', destination, ':', error);
+        
+        // Reset page opacity - only affect main content, not header
+        const mainContent = document.querySelector('main');
+        if (mainContent) {
+            mainContent.style.opacity = '1';
+            mainContent.style.transition = 'opacity 0.3s ease-in';
+        }
+        
+        // Show user-friendly error message
+        showErrorMessage('Failed to load page. Redirecting...', 3000);
+        
+        // Fallback to regular navigation after a short delay
+        setTimeout(() => {
+            window.location.href = destination;
+        }, 1000);
+    }
+    
+    // Global error handler for unhandled errors
+    window.addEventListener('error', (event) => {
+        console.error('Global error:', event.error);
+        if (event.error && event.error.message && event.error.message.includes('fetch')) {
+            showErrorMessage('Network error detected. Some features may not work properly.');
+        }
+    });
+    
+    // Handle unhandled promise rejections
+    window.addEventListener('unhandledrejection', (event) => {
+        console.error('Unhandled promise rejection:', event.reason);
+        if (event.reason && event.reason.message && event.reason.message.includes('fetch')) {
+            showErrorMessage('Network error detected. Please check your connection.');
+        }
+    });
+    
+
 });

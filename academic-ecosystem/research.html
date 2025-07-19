@@ -28,17 +28,80 @@
     }
     </script>
 
+    <!-- PAGE-SPECIFIC STYLES -->
+    <style>
+        /* Fade-in sections */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Research cards with hover effects */
+        .research-card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.6s ease-out;
+        }
+        
+        .research-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .research-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Publication cards */
+        .publication-card {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.7s ease-out;
+        }
+        
+        .publication-card.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .publication-card:nth-child(even) {
+            transform: translateX(30px);
+        }
+        
+        .publication-card:nth-child(even).is-visible {
+            transform: translateX(0);
+        }
+        
+        /* CTA section zoom effect */
+        .cta-zoom {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease-out;
+        }
+        
+        .cta-zoom.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+    
     <link rel="stylesheet" href="../css/main.css"> <!-- Your main.css can override things if needed -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-white font-body"> <!-- Set default font to body, background to white -->
     <div id="header-placeholder"></div>
     <main>
         <!-- ===== 1. Dynamic Hero Section (On-Brand) ===== -->
-        <section class="relative bg-cover bg-center text-white py-40" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop');">
+        <section class="relative bg-cover bg-center text-white py-40 fade-in-section" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop');">
             <!-- Replace with a real photo of your university labs or campus -->
             <div class="absolute inset-0 bg-dark-blue opacity-80"></div>
-            <div class="relative max-w-4xl mx-auto px-5 text-center z-10" data-aos="fade-in">
+            <div class="relative max-w-4xl mx-auto px-5 text-center z-10">
                 <h1 class="text-4xl md:text-6xl font-black font-heading tracking-tight">Driving the Future of Discovery</h1>
                 <p class="text-lg md:text-xl font-body mt-6 max-w-3xl mx-auto">
                     Dive deep into our cutting-edge research, driving innovation and creating significant impact across various fields.
