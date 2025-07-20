@@ -454,22 +454,71 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeHidingHeader() {
+        // Only animate the <header> element, not the .header-bg-static background div
         const header = document.querySelector('header');
+        const headerBg = document.querySelector('.header-bg-static');
         if (!header) return;
+        
+        // Function to update background div height to match header
+        function updateBackgroundHeight() {
+            if (headerBg) {
+                headerBg.style.height = header.offsetHeight + 'px';
+            }
+        }
+        
+        // Set initial height and update on resize
+        updateBackgroundHeight();
+        window.addEventListener('resize', updateBackgroundHeight);
+        
         let lastScrollTop = 0;
+        let isHeaderHidden = false;
+        let ticking = false;
         const scrollThreshold = header.offsetHeight;
-        window.addEventListener('scroll', () => {
+        const minScrollDistance = 5; // Minimum pixels to scroll before triggering
+        
+        function updateHeader() {
+            // Skip on desktop
             if (window.innerWidth >= 768) {
-                header.style.transform = 'translateY(0)'; return;
+                if (isHeaderHidden) {
+                    header.style.transform = 'translateY(0)';
+                    isHeaderHidden = false;
+                }
+                return;
             }
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+            
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollDifference = Math.abs(scrollTop - lastScrollTop);
+            
+            // Only proceed if we've scrolled enough to avoid jitter
+            if (scrollDifference < minScrollDistance) {
+                return;
+            }
+            
+            // Hide header when scrolling down past threshold
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold && !isHeaderHidden) {
                 header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
+                isHeaderHidden = true;
             }
+            // Show header when scrolling up or at top
+            else if ((scrollTop < lastScrollTop || scrollTop <= scrollThreshold) && isHeaderHidden) {
+                header.style.transform = 'translateY(0)';
+                isHeaderHidden = false;
+            }
+            
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, { passive: true });
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateHeader();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', requestTick, { passive: true });
     }
 
     function initializeNavigation() {
