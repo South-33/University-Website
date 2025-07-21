@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +12,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <!-- Page-specific styles for advanced components (e.g., timeline) -->
     <style>
-        .timeline-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            height: 2px;
-            width: 100%;
-            background-color: #e5e7eb;
-            z-index: -1;
-        }
+
 
         .fade-in-section > * {
             opacity: 0;
@@ -135,6 +126,15 @@
                                 <p class="text-dark-blue/70">Ph.D. in Management, Class of 2023</p>
                             </div>
                         </div>
+                        <script>
+                            requestAnimationFrame(() => {
+                                const activeContent = currentContentWrapper.querySelector('.program-content.active');
+                                if (activeContent) {
+                                    const newHeight = activeContent.scrollHeight + 'px';
+                                    currentContentWrapper.style.height = newHeight;
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
                 <div class="order-1 lg:order-2 h-full flex">

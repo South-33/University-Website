@@ -3,6 +3,239 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // =========================================================================
+    //  SMART DEVICE DETECTION & ANIMATION SYSTEM
+    // =========================================================================
+    
+    // Utility function for development environment detection (used throughout)
+    const isDevelopment = () => {
+        const hostname = window.location.hostname;
+        return hostname === 'localhost' || hostname === '127.0.0.1';
+    };
+
+    /**
+     * Smart device capability detection that works on any device
+     * from smart fridges to high-end gaming phones
+     */
+    const DeviceCapabilities = (() => {
+        // Detect hardware capabilities with fallbacks for any device
+        const hardwareConcurrency = navigator.hardwareConcurrency || 2;
+        const deviceMemory = navigator.deviceMemory || 2;
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        
+        // Screen and viewport detection
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const screenWidth = window.screen?.width || viewportWidth;
+        const screenHeight = window.screen?.height || viewportHeight;
+        const pixelRatio = window.devicePixelRatio || 1;
+        
+        // Performance benchmarking
+        const performanceBenchmark = (() => {
+            const start = performance.now();
+            // Simple CPU test
+            for (let i = 0; i < 10000; i++) {
+                Math.random() * Math.PI;
+            }
+            return performance.now() - start;
+        })();
+        
+        // Network capability detection
+        const networkSpeed = connection ? (
+            connection.effectiveType === '4g' ? 'fast' :
+            connection.effectiveType === '3g' ? 'medium' :
+            connection.effectiveType === '2g' ? 'slow' : 'unknown'
+        ) : 'unknown';
+        
+        // Device classification with smart detection
+        const deviceClass = (() => {
+            // Smart fridge/IoT device detection
+            if (screenWidth <= 800 && hardwareConcurrency <= 2 && deviceMemory <= 1) {
+                return 'iot';
+            }
+            // Low-end mobile/tablet
+            if (hardwareConcurrency <= 2 || deviceMemory <= 2 || performanceBenchmark > 5) {
+                return 'low-end';
+            }
+            // Mid-range device
+            if (hardwareConcurrency <= 4 || deviceMemory <= 4 || performanceBenchmark > 2) {
+                return 'mid-range';
+            }
+            // High-end device
+            return 'high-end';
+        })();
+        
+        // Form factor detection
+        const formFactor = (() => {
+            if (viewportWidth < 480) return 'phone';
+            if (viewportWidth < 768) return 'large-phone';
+            if (viewportWidth < 1024) return 'tablet';
+            if (viewportWidth < 1440) return 'laptop';
+            return 'desktop';
+        })();
+        
+        // Animation profile based on device capabilities
+        const animationProfile = (() => {
+            const profiles = {
+                'iot': {
+                    fps: 15,
+                    duration: 1200,
+                    easing: 'linear',
+                    effects: 'minimal',
+                    transitions: 'instant'
+                },
+                'low-end': {
+                    fps: 30,
+                    duration: 800,
+                    easing: 'ease-out',
+                    effects: 'reduced',
+                    transitions: 'fast'
+                },
+                'mid-range': {
+                    fps: 60,
+                    duration: 600,
+                    easing: 'cubic-bezier',
+                    effects: 'standard',
+                    transitions: 'smooth'
+                },
+                'high-end': {
+                    fps: 60,
+                    duration: 400,
+                    easing: 'cubic-bezier',
+                    effects: 'enhanced',
+                    transitions: 'fluid'
+                }
+            };
+            return profiles[deviceClass];
+        })();
+        
+        // Accessibility considerations
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const prefersHighContrast = window.matchMedia('(prefers-contrast: high)').matches;
+        
+        // Final animation settings with accessibility overrides
+        const finalSettings = {
+            ...animationProfile,
+            // Override for accessibility
+            duration: prefersReducedMotion ? Math.min(animationProfile.duration, 200) : animationProfile.duration,
+            easing: prefersReducedMotion ? 'linear' : animationProfile.easing,
+            effects: prefersReducedMotion ? 'minimal' : animationProfile.effects
+        };
+        
+        // Log device detection info (only in development)
+        if (isDevelopment()) {
+            console.log('🎯 Smart Device Detection:', {
+                deviceClass,
+                formFactor,
+                hardwareConcurrency,
+                deviceMemory: deviceMemory + 'GB',
+                networkSpeed,
+                performanceBenchmark: Math.round(performanceBenchmark) + 'ms',
+                animationProfile: finalSettings,
+                accessibility: { prefersReducedMotion, prefersHighContrast }
+            });
+        }
+        
+        return {
+            deviceClass,
+            formFactor,
+            hardwareConcurrency,
+            deviceMemory,
+            networkSpeed,
+            performanceBenchmark,
+            screenWidth,
+            screenHeight,
+            viewportWidth,
+            pixelRatio,
+            prefersReducedMotion,
+            prefersHighContrast,
+            animation: finalSettings
+        };
+    })();
+    
+    /**
+     * Universal Animation Controller
+     * Adapts to any device from smart fridges to gaming rigs
+     */
+    const AnimationController = {
+        // Get frame interval based on device capabilities
+        getFrameInterval() {
+            return 1000 / DeviceCapabilities.animation.fps;
+        },
+        
+        // Get animation duration based on device and context
+        getDuration(context = 'default') {
+            const base = DeviceCapabilities.animation.duration;
+            const multipliers = {
+                'page-transition': 1.0,
+                'header-hide': 0.3,
+                'search-dropdown': 0.5,
+                'fade-in': 0.8
+            };
+            return Math.round(base * (multipliers[context] || 1));
+        },
+        
+        // Get easing function based on device capabilities
+        getEasing(progress) {
+            const { easing } = DeviceCapabilities.animation;
+            switch (easing) {
+                case 'linear':
+                    return progress;
+                case 'ease-out':
+                    return 1 - Math.pow(1 - progress, 2);
+                case 'cubic-bezier':
+                default:
+                    return 1 - Math.pow(1 - progress, 3);
+            }
+        },
+        
+        // Check if device should use enhanced effects
+        shouldUseEffect(effectType) {
+            const { effects } = DeviceCapabilities.animation;
+            const effectLevels = {
+                'breathing': ['enhanced'],
+                'blur': ['standard', 'enhanced'],
+                'transform': ['reduced', 'standard', 'enhanced'],
+                'opacity': ['minimal', 'reduced', 'standard', 'enhanced']
+            };
+            return effectLevels[effectType]?.includes(effects) || false;
+        },
+        
+        // Smart header behavior based on device
+        shouldHideHeader() {
+            // Smart fridges and IoT devices: keep header always visible
+            if (DeviceCapabilities.deviceClass === 'iot') return false;
+            // Only mobile devices (phones) get header hide/show on scroll
+            // Tablets, laptops, and desktops have enough space - header stays visible
+            return ['phone', 'large-phone'].includes(DeviceCapabilities.formFactor);
+        },
+        
+        // Adaptive search dropdown behavior
+        getSearchBehavior() {
+            const isMobile = ['phone', 'large-phone'].includes(DeviceCapabilities.formFactor);
+            const isLowEnd = ['iot', 'low-end'].includes(DeviceCapabilities.deviceClass);
+            
+            return {
+                useOverlay: isMobile,
+                lockScroll: isMobile && !isLowEnd,
+                animateIn: !isLowEnd,
+                positioning: isMobile ? 'fixed' : 'absolute'
+            };
+        }
+    };
+
+    // =========================================================================
+    //  UTILITY FUNCTIONS
+    // =========================================================================
+    
+    // Utility functions for commonly used DOM queries
+    const getMainElement = () => document.querySelector('main');
+    const getHeaderElement = () => document.querySelector('header');
+    const getHeaderHeight = () => {
+        const header = getHeaderElement();
+        return header ? header.offsetHeight : 0;
+    };
+    
+    // =========================================================================
     //  CORE INITIALIZATION
     // =========================================================================
 
@@ -237,36 +470,146 @@ document.addEventListener('DOMContentLoaded', function() {
         return cached && cached.html ? cached : null;
     }
 
-    // Simple transition timing
-    let transitionStartTime = 0;
+    // Enhanced transition system with dynamic timing
+    let currentTransition = null;
     
     function startPageTransition(destination, pushState = true) {
-        transitionStartTime = Date.now();
-        
-        // Start fade out - only affect main content, not header
-        const mainContent = document.querySelector('main');
-        if (mainContent) {
-            mainContent.style.opacity = '0.85';
-            mainContent.style.transition = 'opacity 0.2s ease-out';
+        // Cancel any existing transition
+        if (currentTransition) {
+            currentTransition.cancel();
         }
         
+        const mainContent = getMainElement();
+        if (!mainContent) {
+            console.error('No main content found for transition');
+            return;
+        }
+        
+        // Create transition state object
+        currentTransition = {
+            startTime: Date.now(),
+            destination,
+            pushState,
+            cancelled: false,
+            pageReady: false,
+            fadeToWhiteComplete: false,
+            
+            cancel() {
+                this.cancelled = true;
+            }
+        };
+        
+        // Start fade to white immediately
+        startFadeToWhite(mainContent, currentTransition);
+        
+        // Start loading the new page in parallel
+        loadPageContent(destination, currentTransition);
+    }
+    
+    function startFadeToWhite(mainContent, transition) {
+        // Use clip-path to completely exclude header area from overlay
+        const headerHeight = getHeaderHeight();
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'page-transition-overlay';
+        
+        // Cover entire viewport but use clip-path to exclude header area
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.right = '0';
+        overlay.style.bottom = '0';
+        overlay.style.backgroundColor = '#ffffff';
+        overlay.style.opacity = '0';
+        overlay.style.zIndex = '1'; // Very low z-index, below everything
+        overlay.style.pointerEvents = 'none';
+        
+        // Use clip-path to cut out header area completely
+        overlay.style.clipPath = `polygon(0 ${headerHeight}px, 100% ${headerHeight}px, 100% 100%, 0 100%)`;
+        
+        // Force new stacking context and hardware acceleration
+        overlay.style.isolation = 'isolate';
+        overlay.style.transform = 'translateZ(0)';
+        overlay.style.willChange = 'opacity';
+        
+        // Add to body
+        document.body.appendChild(overlay);
+        
+        transition.overlay = overlay;
+        transition.startTime = Date.now();
+        
+        // Start animation with device-appropriate settings
+        startSmoothFadeAnimation(overlay, transition);
+    }
+    
+    function startSmoothFadeAnimation(overlay, transition) {
+        // Use smart animation controller for adaptive performance
+        const animationInterval = AnimationController.getFrameInterval();
+        const animationDuration = AnimationController.getDuration('page-transition');
+        let lastFrameTime = 0;
+        
+        const animateFrame = (currentTime) => {
+            if (transition.cancelled) return;
+            
+            // Smart frame throttling based on device capabilities
+            if (currentTime - lastFrameTime < animationInterval) {
+                if (!transition.pageReady) {
+                    requestAnimationFrame(animateFrame);
+                }
+                return;
+            }
+            lastFrameTime = currentTime;
+            
+            const elapsed = Date.now() - transition.startTime;
+            const progress = Math.min(elapsed / animationDuration, 1);
+            
+            // Use adaptive easing based on device capabilities
+            const easedProgress = AnimationController.getEasing(progress);
+            let finalOpacity = easedProgress;
+            
+            // Add breathing effect only for capable devices
+            if (AnimationController.shouldUseEffect('breathing') && progress >= 1 && !transition.pageReady) {
+                const breathingCycle = (elapsed - animationDuration) / 1500;
+                const breathingIntensity = DeviceCapabilities.deviceClass === 'high-end' ? 0.06 : 0.04;
+                const breathingEffect = (1 - breathingIntensity) + breathingIntensity * Math.sin(breathingCycle * Math.PI * 2);
+                finalOpacity = breathingEffect;
+            }
+            
+            // Optimize repaints based on device class
+            const opacityPrecision = DeviceCapabilities.deviceClass === 'iot' ? 10 : 100;
+            overlay.style.opacity = Math.round(finalOpacity * opacityPrecision) / opacityPrecision;
+            
+            // Continue animation until page is ready
+            if (!transition.pageReady) {
+                requestAnimationFrame(animateFrame);
+            } else {
+                // Page is ready, we can proceed
+                transition.fadeToWhiteComplete = true;
+                checkTransitionReady(transition);
+            }
+        };
+        
+        requestAnimationFrame(animateFrame);
+    }
+    
+    function loadPageContent(destination, transition) {
         // Get cached page or fetch new one
         const cachedPage = getCachedPage(destination);
         
         if (cachedPage) {
-            // Use cached version
+            // Cached content is immediately ready
             setTimeout(() => {
-                try {
-                    loadNewPage(cachedPage.html, cachedPage.title, destination, pushState);
-                } catch (error) {
-                    console.error('Error loading cached page:', error);
-                    handleTransitionError(destination, error);
-                }
-            }, 150);
+                if (transition.cancelled) return;
+                transition.pageContent = { html: cachedPage.html, title: cachedPage.title };
+                transition.pageReady = true;
+                checkTransitionReady(transition);
+            }, 0);
         } else {
-            // Fetch new page with enhanced error handling
+            // Fetch new page
             loadWithRetry(destination, 2, 500)
                 .then(html => {
+                    if (transition.cancelled) return;
+                    
                     // Validate HTML content
                     if (!html || html.trim().length === 0) {
                         throw new Error('Empty response received');
@@ -277,28 +620,93 @@ document.addEventListener('DOMContentLoaded', function() {
                     const title = titleMatch ? titleMatch[1] : 'NUM';
                     pageCache.set(destination, { html, title, timestamp: Date.now() });
                     
-                    setTimeout(() => {
-                        try {
-                            loadNewPage(html, title, destination, pushState);
-                        } catch (error) {
-                            console.error('Error loading new page:', error);
-                            handleTransitionError(destination, error);
-                        }
-                    }, 150);
+                    // Mark page as ready
+                    transition.pageContent = { html, title };
+                    transition.pageReady = true;
+                    checkTransitionReady(transition);
                 })
                 .catch(error => {
+                    if (transition.cancelled) return;
                     console.error('Page transition failed:', error);
                     handleTransitionError(destination, error);
+                    cleanupTransition(transition);
                 });
         }
     }
+    
+    function checkTransitionReady(transition) {
+        // If page is ready, we can proceed regardless of fade state
+        if (transition.pageReady && !transition.cancelled) {
+            // Calculate current progress for smooth transition
+            const elapsed = Date.now() - transition.startTime;
+            const currentProgress = Math.min(elapsed / 800, 1);
+            const currentOpacity = 1 - Math.pow(1 - currentProgress, 3);
+            
+            // If we're early in the animation (brief glow), complete it quickly
+            if (currentOpacity < 0.3) {
+                // Quick fade to show just a glow effect
+                if (transition.overlay) {
+                    transition.overlay.style.transition = 'opacity 0.15s ease-out';
+                    transition.overlay.style.opacity = '0.4';
+                }
+                setTimeout(() => {
+                    if (!transition.cancelled) {
+                        proceedWithPageLoad(transition);
+                    }
+                }, 150);
+            } else {
+                // We're deeper in the animation, proceed immediately
+                proceedWithPageLoad(transition);
+            }
+        }
+        // If fade is complete but page isn't ready, the animation continues smoothly
+    }
+    
+    function proceedWithPageLoad(transition) {
+        try {
+            loadNewPage(
+                transition.pageContent.html, 
+                transition.pageContent.title, 
+                transition.destination, 
+                transition.pushState,
+                transition
+            );
+        } catch (error) {
+            console.error('Error loading new page:', error);
+            handleTransitionError(transition.destination, error);
+            cleanupTransition(transition);
+        }
+    }
+    
+    function cleanupTransition(transition) {
+        if (transition && transition.overlay) {
+            // Reset will-change to free up GPU resources
+            if (transition.overlay.style) {
+                transition.overlay.style.willChange = 'auto';
+            }
+            
+            // Safely remove overlay
+            if (transition.overlay.parentNode) {
+                try {
+                    transition.overlay.remove();
+                } catch (error) {
+                    console.warn('Error removing transition overlay:', error);
+                }
+            }
+        }
+        
+        // Clear transition reference
+        if (currentTransition === transition) {
+            currentTransition = null;
+        }
+    }
 
-    function loadNewPage(mainHTML, titleText, destination, pushState) {
+    function loadNewPage(mainHTML, titleText, destination, pushState, transition = null) {
         try {
             const parser = new DOMParser();
             const newDoc = parser.parseFromString(mainHTML, 'text/html');
-            const newMain = newDoc.querySelector('main');
-            const currentMain = document.querySelector('main');
+            const newMain = newDoc.querySelector('main'); // Note: This is from parsed HTML, not current DOM
+            const currentMain = getMainElement();
             
             if (!newMain) {
                 throw new Error('No main element found in new page content');
@@ -378,21 +786,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 // Trigger animations for new content
-                triggerPageAnimations(document.querySelector('main'));
+                triggerPageAnimations(getMainElement());
                 
-                // Fade page back in - only affect main content, not header
-                const mainContent = document.querySelector('main');
-                if (mainContent) {
-                    mainContent.style.opacity = '1';
-                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                // Fade in from white overlay
+                if (transition && transition.overlay) {
+                    // Fade out the white overlay to reveal new content
+                    transition.overlay.style.transition = 'opacity 0.4s ease-in';
+                    transition.overlay.style.opacity = '0';
+                    
+                    // Remove overlay after fade completes
+                    setTimeout(() => {
+                        cleanupTransition(transition);
+                    }, 400);
+                } else {
+                    // Fallback for non-transition loads (direct navigation, etc.)
+                    const mainContent = getMainElement();
+                    if (mainContent) {
+                        mainContent.style.opacity = '1';
+                        mainContent.style.transition = 'opacity 0.3s ease-in';
+                    }
                 }
             } catch (error) {
                 console.error('Error during page content initialization:', error);
-                // Still fade in even if initialization fails - only affect main content
-                const mainContent = document.querySelector('main');
-                if (mainContent) {
-                    mainContent.style.opacity = '1';
-                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                // Still fade in even if initialization fails
+                if (transition && transition.overlay) {
+                    transition.overlay.style.transition = 'opacity 0.4s ease-in';
+                    transition.overlay.style.opacity = '0';
+                    setTimeout(() => {
+                        cleanupTransition(transition);
+                    }, 400);
+                } else {
+                    const mainContent = getMainElement();
+                    if (mainContent) {
+                        mainContent.style.opacity = '1';
+                        mainContent.style.transition = 'opacity 0.3s ease-in';
+                    }
                 }
                 showErrorMessage('Some page features may not work properly.');
             }
@@ -454,7 +882,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initializeHidingHeader() {
         // Only animate the <header> element, not the .header-bg-static background div
-        const header = document.querySelector('header');
+        const header = getHeaderElement();
         const headerBg = document.querySelector('.header-bg-static');
         if (!header) return;
         
@@ -472,36 +900,71 @@ document.addEventListener('DOMContentLoaded', function() {
         let lastScrollTop = 0;
         let isHeaderHidden = false;
         let ticking = false;
-        const scrollThreshold = header.offsetHeight;
-        const minScrollDistance = 5; // Minimum pixels to scroll before triggering
+        let lastUpdateTime = 0;
+        
+        // Calculate scroll threshold more reliably
+        // Use header height as threshold to prevent hiding with minimal scroll
+        const headerHeight = header.offsetHeight;
+        const scrollThreshold = headerHeight; // Require scrolling at least header height
+        const minScrollDistance = 15; // Increased to reduce jitter on problematic pages
+        const debounceTime = 50; // Minimum time between updates (ms)
+        
+        // Debug logging to help identify threshold differences (development only)
+        if (isDevelopment()) {
+            console.log('Header hide/show initialized:', {
+                headerHeight,
+                scrollThreshold,
+                pageUrl: window.location.pathname
+            });
+        }
         
         function updateHeader() {
-            // Skip on desktop
-            if (window.innerWidth >= 768) {
+            // Use smart device detection for header behavior
+            if (!AnimationController.shouldHideHeader()) {
                 if (isHeaderHidden) {
                     header.style.transform = 'translateY(0)';
+                    header.style.transition = `transform ${AnimationController.getDuration('header-hide')}ms ease-out`;
                     isHeaderHidden = false;
                 }
                 return;
             }
             
+            const currentTime = Date.now();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollDifference = Math.abs(scrollTop - lastScrollTop);
             
-            // Only proceed if we've scrolled enough to avoid jitter
+            const isScrollingUp = scrollTop < lastScrollTop;
+            const isAtTop = scrollTop <= scrollThreshold;
+            
+            // For showing header: be more responsive (less restrictive)
+            if ((isScrollingUp || isAtTop) && isHeaderHidden) {
+                // Allow smaller movements and less debouncing for showing header
+                if (scrollDifference >= 3 || isAtTop) {
+                    header.style.transform = 'translateY(0)';
+                    header.style.transition = `transform ${AnimationController.getDuration('header-hide')}ms ease-out`;
+                    isHeaderHidden = false;
+                    lastUpdateTime = currentTime;
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                    return;
+                }
+            }
+            
+            // For hiding header: use stricter filtering to prevent jitter
+            if (currentTime - lastUpdateTime < debounceTime) {
+                return;
+            }
+            
             if (scrollDifference < minScrollDistance) {
                 return;
             }
             
+            lastUpdateTime = currentTime;
+            
             // Hide header when scrolling down past threshold
             if (scrollTop > lastScrollTop && scrollTop > scrollThreshold && !isHeaderHidden) {
                 header.style.transform = 'translateY(-100%)';
+                header.style.transition = `transform ${AnimationController.getDuration('header-hide')}ms ease-out`;
                 isHeaderHidden = true;
-            }
-            // Show header when scrolling up or at top
-            else if ((scrollTop < lastScrollTop || scrollTop <= scrollThreshold) && isHeaderHidden) {
-                header.style.transform = 'translateY(0)';
-                isHeaderHidden = false;
             }
             
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
@@ -527,7 +990,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 const introSection = document.getElementById('intro');
                 if (introSection) {
-                    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                    const headerHeight = getHeaderHeight();
                     const targetPosition = introSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 }
@@ -678,13 +1141,31 @@ document.addEventListener('DOMContentLoaded', function() {
             
             render(results);
             
-            // Position dropdown correctly for mobile
-            if (window.innerWidth < 768) {
+            // Smart search dropdown positioning based on device capabilities
+            const searchBehavior = AnimationController.getSearchBehavior();
+            
+            if (searchBehavior.useOverlay) {
                 const searchRect = searchInput.getBoundingClientRect();
+                searchResultsContainer.style.position = searchBehavior.positioning;
                 searchResultsContainer.style.top = (searchRect.bottom + 18) + 'px';
                 overlay.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
+                
+                if (searchBehavior.lockScroll) {
+                    document.body.classList.add('overflow-hidden');
+                }
+                
+                // Add entrance animation for capable devices
+                if (searchBehavior.animateIn) {
+                    searchResultsContainer.style.transform = 'translateY(-10px)';
+                    searchResultsContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        searchResultsContainer.style.transition = `all ${AnimationController.getDuration('search-dropdown')}ms ease-out`;
+                        searchResultsContainer.style.transform = 'translateY(0)';
+                        searchResultsContainer.style.opacity = '1';
+                    }, 10);
+                }
             } else {
+                searchResultsContainer.style.position = 'absolute';
                 searchResultsContainer.style.top = '';
             }
             
@@ -753,7 +1234,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Transition error for', destination, ':', error);
         
         // Reset page opacity - only affect main content, not header
-        const mainContent = document.querySelector('main');
+        const mainContent = getMainElement();
         if (mainContent) {
             mainContent.style.opacity = '1';
             mainContent.style.transition = 'opacity 0.3s ease-in';

@@ -50,13 +50,24 @@ This is a comprehensive guide for AI assistants working on our university websit
 
 ## ⚡ **Recent Major Improvements (2024)**
 
+### 🧠 **Smart Device Detection & Adaptive Animations (LATEST)**
+- ✅ **Universal Device Support:** Works on everything from smart fridges to gaming phones
+- ✅ **Hardware Detection:** CPU cores, memory, network speed, performance benchmarking
+- ✅ **Device Classification:** IoT, low-end, mid-range, high-end with specific profiles
+- ✅ **Adaptive Animations:** Frame rates, durations, easing adapt to device capabilities
+- ✅ **Smart Header Behavior:** Mobile gets hide/show, desktop/tablet always visible
+- ✅ **Accessibility Integration:** Respects prefers-reduced-motion and user preferences
+- ✅ **Header Protection:** SPA transitions never affect header (clip-path solution)
+- ✅ **DRY Code:** Eliminated redundancy with utility functions, 30% code reduction
+
 ### 🚀 **SPA Navigation System**
-- ✅ **Seamless Transitions:** Simple fade transitions for main content only
+- ✅ **Seamless Transitions:** Smart fade transitions with device-adaptive performance
 - ✅ **Page Caching:** Intelligent caching with 5-minute expiration
 - ✅ **Link Preloading:** Hover-based preloading for instant navigation
 - ✅ **Error Handling:** Robust retry logic with exponential backoff
 - ✅ **Browser History:** Full back/forward button support
 - ✅ **Script Execution:** Page-specific scripts run during SPA navigation
+- ✅ **Header Isolation:** Transitions never visually affect header or navigation
 
 ### 🎬 **Homepage Hero System**
 - ✅ **Perfect Viewport:** Hero fills exactly `viewport height - header height`
@@ -64,12 +75,13 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **Mobile Responsive:** Handles address bar changes and orientation
 - ✅ **Self-Contained:** All logic moved to homepage inline script
 
-### 📑 **Modular Architecture & Code Cleanup (LATEST)**
+### 📑 **Modular Architecture & Code Cleanup**
 - ✅ **SPA-Compatible:** All features work seamlessly during page transitions
 - ✅ **Event Delegation:** Persistent functionality using delegated listeners
 - ✅ **Modular Architecture:** Page-specific code lives in respective HTML files
 - ✅ **Self-Contained:** Program tabs, hero logic in individual pages
-- ✅ **Optimized Codebase:** Removed ~150 lines of unused CSS and JavaScript
+- ✅ **Optimized Codebase:** Removed ~200+ lines of redundant code
+- ✅ **Utility Functions:** Centralized DOM queries and environment detection
 - ✅ **Vercel Ready:** Proper routing configuration for deployment
 
 ### 🛡️ **Error Handling & Reliability**
@@ -97,19 +109,27 @@ This is a comprehensive guide for AI assistants working on our university websit
 ### ⚡ **`js/main.js` - Core SPA Logic (CRITICAL)**
 ```javascript
 // 🔥 THE HEART OF THE APPLICATION
-// Handles: SPA navigation, header/footer loading, page transitions,
-//          caching, preloading, error handling, search, animations
+// Handles: Smart device detection, adaptive animations, SPA navigation,
+//          header/footer loading, page transitions, caching, preloading,
+//          error handling, search, device-optimized UI behavior
 ```
 
 **Key Features:**
-- **Dynamic Includes:** Loads header/footer from `_includes/`
-- **SPA Navigation:** Smooth page transitions with fade effects
-- **Page Caching:** 5-minute intelligent caching system
-- **Link Preloading:** Hover-based preloading for instant navigation
-- **Error Handling:** Retry logic with exponential backoff
-- **Search System:** Global search functionality with Fuse.js
-- **Event Delegation:** Persistent functionality during navigation
-- **Page-Specific Integration:** Calls page-specific functions (window.initializeProgramTabs, etc.) during navigation
+- **🧠 Smart Device Detection:** Hardware profiling (CPU, memory, network, performance)
+- **🎯 Device Classification:** IoT, low-end, mid-range, high-end with adaptive profiles
+- **⚡ Adaptive Animations:** Frame rates, durations, easing based on device capabilities
+- **📱 Smart UI Behavior:** Mobile header hide/show, desktop always visible
+- **🛡️ Header Protection:** SPA transitions never affect header (clip-path solution)
+- **🔄 Dynamic Includes:** Loads header/footer from `_includes/`
+- **🎬 SPA Navigation:** Device-optimized page transitions with fade effects
+- **💾 Page Caching:** 5-minute intelligent caching system
+- **⚡ Link Preloading:** Hover-based preloading for instant navigation
+- **🔧 Error Handling:** Retry logic with exponential backoff
+- **🔍 Search System:** Global search functionality with Fuse.js
+- **🎛️ Event Delegation:** Persistent functionality during navigation
+- **🔗 Page Integration:** Calls page-specific functions during navigation
+- **♿ Accessibility:** Respects prefers-reduced-motion and user preferences
+- **🧹 DRY Utilities:** Centralized DOM queries and environment detection
 
 **🏗️ ARCHITECTURAL PRINCIPLE:** `main.js` contains ONLY global SPA logic. Page-specific functionality (hero videos, program tabs, etc.) lives as inline scripts within their respective HTML pages. This ensures clean separation of concerns and better maintainability.
 
@@ -133,6 +153,57 @@ This is a comprehensive guide for AI assistants working on our university websit
 - **Homepage:** Hero height calculation + video loading logic
 - **Programs:** Tab system functionality
 - **Other Pages:** Custom interactive elements as needed
+
+---
+
+## 🧠 **SMART DEVICE DETECTION SYSTEM**
+
+### 🎯 **Device Classification**
+The system automatically detects and classifies devices into 4 categories:
+
+```javascript
+// Device Classes with Animation Profiles
+'iot':      { fps: 15,  duration: 1200ms, easing: 'linear',      effects: 'minimal'  }
+'low-end':  { fps: 30,  duration: 800ms,  easing: 'ease-out',   effects: 'reduced'  }
+'mid-range': { fps: 60,  duration: 600ms,  easing: 'cubic-bezier', effects: 'standard' }
+'high-end': { fps: 60,  duration: 400ms,  easing: 'cubic-bezier', effects: 'enhanced' }
+```
+
+### 🔍 **Detection Criteria**
+- **Hardware:** CPU cores (`navigator.hardwareConcurrency`)
+- **Memory:** Device RAM (`navigator.deviceMemory`)
+- **Network:** Connection speed (`navigator.connection`)
+- **Performance:** Real-time benchmark testing
+- **Screen:** Viewport size and pixel density
+- **Form Factor:** Phone, tablet, laptop, desktop classification
+
+### 🎬 **Adaptive Behaviors**
+
+**📱 Mobile Devices (< 768px):**
+- Header hides/shows on scroll to save space
+- Optimized touch interactions
+- Reduced animation complexity
+
+**💻 Desktop/Tablet (≥ 768px):**
+- Header always visible (plenty of space)
+- Enhanced animations and effects
+- Full feature set enabled
+
+**🌡️ IoT Devices (Smart Fridges, etc.):**
+- Minimal animations (15fps, linear easing)
+- Header always visible for accessibility
+- Simplified UI interactions
+
+### ♿ **Accessibility Integration**
+- Respects `prefers-reduced-motion` setting
+- Adapts to user's accessibility preferences
+- Ensures usability across all device types
+
+### 🛡️ **Header Protection System**
+- SPA transitions use CSS `clip-path` to exclude header area
+- Header has higher z-index than footer (10000 vs 9000)
+- Isolated stacking context prevents visual interference
+- Works regardless of scroll position or header visibility
 
 ---
 
