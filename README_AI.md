@@ -69,6 +69,24 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **Script Execution:** Page-specific scripts run during SPA navigation
 - ✅ **Header Isolation:** Transitions never visually affect header or navigation
 
+### 🎭 **Advanced Page Transition Animation System**
+- ✅ **Fluid Fade-to-White:** Custom S-curve easing (fast-start, slow-end) to 20% visual white
+- ✅ **Smart Interruption:** Midway animation interruption (30-85% progress) for fast-loading content
+- ✅ **Loading Feedback:** Dramatic pulsing effect (20% to 50% visual white) for slow content
+- ✅ **Performance Optimized:** Minimal DOM updates, requestAnimationFrame loops, hardware acceleration
+- ✅ **Visual Continuity:** No opacity drops or snapping, smooth transitions throughout
+- ✅ **Cross-Fade Completion:** True cross-fade revealing new content while overlay fades out
+- ✅ **Timing Control:** 1650ms pulsing cycle (10% slower), 150ms minimum visibility
+- ✅ **Mathematical Precision:** Pre-calculated constants, sine wave pulsing with phase offset
+
+### 🔧 **Animation System Fixes (Latest)**
+- ✅ **Container Rising Fixed:** Removed page-specific CSS that caused layout containers to animate
+- ✅ **Global CSS Integration:** All pages now use consistent fade-in animations from `main.css`
+- ✅ **Template Updated:** `template.html` now provides proper guidance and prevents animation conflicts
+- ✅ **Consistent Behavior:** Doctoral, Masters, and Bachelors pages now have identical animation behavior
+- ✅ **Clean Selectors:** Animations target only `.fade-in-section` elements, not their children
+- ✅ **Zero Layout Shifts:** Content animates smoothly while containers remain stable
+
 ### 🎬 **Homepage Hero System**
 - ✅ **Perfect Viewport:** Hero fills exactly `viewport height - header height`
 - ✅ **Video Loading:** Smooth image-to-video transition with fallbacks
@@ -205,32 +223,98 @@ The system automatically detects and classifies devices into 4 categories:
 - Isolated stacking context prevents visual interference
 - Works regardless of scroll position or header visibility
 
+### 🎭 **Page Transition Animation Technical Details**
+
+**Animation Architecture:**
+```javascript
+// Overlay Configuration
+backgroundColor: 'rgba(255, 255, 255, 0.5)'  // 50% white background
+opacity: 0 → 0.4 (fade) → 0.4-1.0 (pulsing)  // Opacity control
+zIndex: 9999                                   // Above all content
+clipPath: excludes header area                 // Header protection
+```
+
+**Visual White Intensity Calculations:**
+```javascript
+// Visual White = Background Opacity × Overlay Opacity
+Fade End:    0.5 × 0.4 = 20% visual white
+Pulse Min:   0.5 × 0.4 = 20% visual white  
+Pulse Max:   0.5 × 1.0 = 50% visual white
+Pulse Range: 30% visual white difference (very noticeable)
+```
+
+**Animation Phases:**
+1. **Fade Phase:** Fast-start slow-end easing to 20% visual white (0.4 opacity)
+2. **Interruption Window:** 30-85% progress for fast-loading content
+3. **Pulsing Phase:** Sine wave breathing effect (20% ↔ 50% visual white)
+4. **Cross-Fade:** Overlay fades out while new content appears
+
+**Performance Optimizations:**
+- Pre-calculated mathematical constants (2π, π/2)
+- Minimal DOM updates (only when opacity changes significantly)
+- Hardware acceleration (`transform: translateZ(0)`, `will-change: opacity`)
+- RequestAnimationFrame loops for smooth 60fps animation
+- Isolated stacking context prevents layout thrashing
+
+**Timing Configuration:**
+```javascript
+Animation Duration: baseDuration × 2.5        // Encourages interruption
+Minimum Visibility: 150ms                     // Always visible
+Pulsing Cycle: 1650ms (10% slower than default)
+Interruption Range: 30-85% progress           // Wide window
+Cross-Fade Duration: 300ms                    // Quick reveal
+```
+
 ---
 
 ## 📄 **COMPLETE PAGE TEMPLATE**
 
-**Copy this template for ALL new pages:**
+**Use this exact template for all new pages:**
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title - NUM</title>
-    
+    <title>Page Title - National University of Management</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Theme Configuration -->
+
+    <!-- Tailwind Theme Config -->
     <script src="../js/theme.js"></script>
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="../css/main.css">
     
     <!-- PAGE-SPECIFIC STYLES (if needed) -->
     <style>
-        /* Add page-specific CSS here */
-        .page-specific-class {
-            /* Custom styles for this page only */
-        }
+        /*
+        ✅ FADE-IN ANIMATIONS: Already included in global CSS (main.css)
+        Just add class="fade-in-section" to any element you want to animate!
+        
+        ✅ SPA NAVIGATION: Already configured in main.js
+        All links automatically work with smooth page transitions!
+        
+        ✅ HEADER & FOOTER: Automatically loaded via main.js
+        No need to manually include them!
+        
+        Benefits of this template:
+        - Uses global CSS for consistent animations
+        - No conflicting fade-in styles
+        - Perfect SPA navigation out of the box
+        - Clean, maintainable code structure
+        
+        Add your page-specific styles here if needed...
+        */
+        
+        /* Removed conflicting fade-in-section styles - using global CSS instead */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans leading-relaxed">
@@ -287,11 +371,14 @@ The system automatically detects and classifies devices into 4 categories:
 ## 📝 **DEVELOPMENT RULES & PATTERNS**
 
 ### 🎯 **Creating New Pages**
-1. **Copy the template above** into appropriate directory
-2. **Update paths:** Adjust `data-base-path` and relative paths to `js/main.js`
+1. **Copy template.html** from the root directory (or use the template above)
+2. **Update paths:** Adjust `data-base-path` and relative paths based on file location
 3. **Add content:** Replace placeholder content with actual page content
-4. **Page-specific code:** Add inline `<style>` and `<script>` blocks as needed
-5. **Test SPA navigation:** Ensure page works both directly and via SPA
+4. **Use fade-in animations:** Add `class="fade-in-section"` to elements you want to animate
+5. **Page-specific code:** Add inline `<style>` and `<script>` blocks only if needed
+6. **Test SPA navigation:** Ensure page works both directly and via SPA
+
+**✅ IMPORTANT:** The template now uses global CSS from `main.css` for animations. Do NOT add custom fade-in animation CSS - it will conflict with the global system and cause container rising issues.
 
 ### 🖼️ **Image Pathing Rules**
 ```html

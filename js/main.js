@@ -86,21 +86,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 'low-end': {
                     fps: 30,
                     duration: 800,
-                    easing: 'ease-out',
+                    easing: 'ease-out', // Keep this as a faster, simpler curve for low-end
                     effects: 'reduced',
                     transitions: 'fast'
                 },
                 'mid-range': {
                     fps: 60,
                     duration: 600,
-                    easing: 'cubic-bezier',
+                    easing: 'ease-in-out', // CHANGED
                     effects: 'standard',
                     transitions: 'smooth'
                 },
                 'high-end': {
                     fps: 60,
                     duration: 400,
-                    easing: 'cubic-bezier',
+                    easing: 'ease-in-out', // CHANGED
                     effects: 'enhanced',
                     transitions: 'fluid'
                 }
@@ -180,10 +180,22 @@ document.addEventListener('DOMContentLoaded', function() {
             switch (easing) {
                 case 'linear':
                     return progress;
+
                 case 'ease-out':
+                    // Starts fast, slows down (Quadratic Ease-Out)
                     return 1 - Math.pow(1 - progress, 2);
-                case 'cubic-bezier':
+
+                case 'ease-in-out': // NEW S-CURVE
+                    // Starts slow, accelerates, ends slow (Cubic Ease-In-Out)
+                    if (progress < 0.5) {
+                        return 4 * progress * progress * progress;
+                    } else {
+                        return 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                    }
+                
+                case 'cubic-bezier': // This case is now a fallback
                 default:
+                    // The old default ease-out curve
                     return 1 - Math.pow(1 - progress, 3);
             }
         },
@@ -470,13 +482,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return cached && cached.html ? cached : null;
     }
 
-    // Enhanced transition system with dynamic timing
+    // Enhanced transition system with S-curve animation and midway interruption
     let currentTransition = null;
-    
+
     function startPageTransition(destination, pushState = true) {
-        // Cancel any existing transition
+        // Immediately clean up any existing transition
         if (currentTransition) {
             currentTransition.cancel();
+            cleanupTransition(currentTransition);
         }
         
         const mainContent = getMainElement();
@@ -485,201 +498,323 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Create transition state object
         currentTransition = {
             startTime: Date.now(),
             destination,
             pushState,
             cancelled: false,
-            pageReady: false,
-            fadeToWhiteComplete: false,
+            contentReady: false,
+            animationInterrupted: false,
+            overlay: null,
+            pageContent: null,
             
             cancel() {
                 this.cancelled = true;
+                // Immediately clean up when cancelled
+                cleanupTransition(this);
             }
         };
         
-        // Start fade to white immediately
         startFadeToWhite(mainContent, currentTransition);
-        
-        // Start loading the new page in parallel
         loadPageContent(destination, currentTransition);
     }
     
+    /**
+     * Fast-start then slow easing function for fade animation
+     */
+    function fastStartSlowEndEasing(t) {
+        // Faster start, then very gradual - good balance
+        if (t <= 0.5) {
+            // Faster start for first 50% - more noticeable feedback
+            return t * 1.1; // Faster than before but still subtle
+        } else {
+            // Slow progression for remaining 50% - exponential decay
+            const remaining = t - 0.5;
+            const normalizedRemaining = remaining / 0.5; // normalize to 0-1
+            // Use exponential decay for very slow finish
+            const slowPart = 1 - Math.pow(1 - normalizedRemaining, 4);
+            return 0.55 + (slowPart * 0.45); // 0.55 (from fast part) + slow part to reach 1.0
+        }
+    }
+    
+    /**
+     * Creates the semi-transparent white overlay and initiates the fade animation.
+     * Uses a 50% white background with opacity control for smooth transitions.
+     */
     function startFadeToWhite(mainContent, transition) {
-        // Use clip-path to completely exclude header area from overlay
-        const headerHeight = getHeaderHeight();
+        // Remove any existing transition overlays to prevent multiple overlays
+        const existingOverlays = document.querySelectorAll('.page-transition-overlay');
+        existingOverlays.forEach(overlay => {
+            try {
+                overlay.remove();
+            } catch (error) {
+                console.warn('Error removing existing overlay:', error);
+            }
+        });
         
+        const headerHeight = getHeaderHeight();
         const overlay = document.createElement('div');
         overlay.className = 'page-transition-overlay';
         
-        // Cover entire viewport but use clip-path to exclude header area
         overlay.style.position = 'fixed';
         overlay.style.top = '0';
         overlay.style.left = '0';
         overlay.style.right = '0';
         overlay.style.bottom = '0';
-        overlay.style.backgroundColor = '#ffffff';
+        overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // 50% white background
         overlay.style.opacity = '0';
-        overlay.style.zIndex = '1'; // Very low z-index, below everything
+        overlay.style.zIndex = '9999';
         overlay.style.pointerEvents = 'none';
-        
-        // Use clip-path to cut out header area completely
         overlay.style.clipPath = `polygon(0 ${headerHeight}px, 100% ${headerHeight}px, 100% 100%, 0 100%)`;
-        
-        // Force new stacking context and hardware acceleration
         overlay.style.isolation = 'isolate';
         overlay.style.transform = 'translateZ(0)';
         overlay.style.willChange = 'opacity';
         
-        // Add to body
         document.body.appendChild(overlay);
-        
         transition.overlay = overlay;
-        transition.startTime = Date.now();
         
-        // Start animation with device-appropriate settings
         startSmoothFadeAnimation(overlay, transition);
     }
     
+    /**
+     * Main animation loop implementing:
+     * - Fast-start slow-end easing fade to 20% visual white (0.4 opacity × 0.5 background)
+     * - Midway interruption logic (30-85% progress) for fast content loading
+     * - Dramatic pulsing effect (20% to 50% visual white) for slow content loading
+     * - Performance optimizations to prevent reflows
+     */
     function startSmoothFadeAnimation(overlay, transition) {
-        // Use smart animation controller for adaptive performance
-        const animationInterval = AnimationController.getFrameInterval();
-        const animationDuration = AnimationController.getDuration('page-transition');
-        let lastFrameTime = 0;
+        // Make animation significantly longer to encourage midway interruption
+        const baseDuration = AnimationController.getDuration('page-transition');
+        const animationDuration = baseDuration * 2.5; // 2.5x longer than normal
+        const minVisibleDuration = 150; // Slightly longer minimum visibility
+        let fadeCompleted = false;
+        let pulseStartTime = null;
         
-        const animateFrame = (currentTime) => {
-            if (transition.cancelled) return;
-            
-            // Smart frame throttling based on device capabilities
-            if (currentTime - lastFrameTime < animationInterval) {
-                if (!transition.pageReady) {
-                    requestAnimationFrame(animateFrame);
-                }
+        // Pre-calculate constants to avoid repeated calculations
+        // Using 50% white background (rgba(255,255,255,0.5)) with opacity control
+        // Fade ends at 0.4 opacity = 20% visual white (0.4 × 0.5 = 0.2)
+        // Dramatic pulsing: 20% to 50% visual white for clear loading feedback
+        const pulseMinOpacity = 0.4; // 20% visual white (0.4 × 0.5)
+        const pulseMaxOpacity = 1.0; // 50% visual white (1.0 × 0.5)
+        const pulseRange = (pulseMaxOpacity - pulseMinOpacity) / 2; // 0.3
+        const pulseAvgOpacity = (pulseMinOpacity + pulseMaxOpacity) / 2; // 0.7
+        
+        let lastOpacity = 0; // Track last opacity to avoid unnecessary DOM updates
+        
+        const animateFrame = () => {
+            if (transition.cancelled) {
                 return;
             }
-            lastFrameTime = currentTime;
             
             const elapsed = Date.now() - transition.startTime;
-            const progress = Math.min(elapsed / animationDuration, 1);
+            let newOpacity;
             
-            // Use adaptive easing based on device capabilities
-            const easedProgress = AnimationController.getEasing(progress);
-            let finalOpacity = easedProgress;
-            
-            // Add breathing effect only for capable devices
-            if (AnimationController.shouldUseEffect('breathing') && progress >= 1 && !transition.pageReady) {
-                const breathingCycle = (elapsed - animationDuration) / 1500;
-                const breathingIntensity = DeviceCapabilities.deviceClass === 'high-end' ? 0.06 : 0.04;
-                const breathingEffect = (1 - breathingIntensity) + breathingIntensity * Math.sin(breathingCycle * Math.PI * 2);
-                finalOpacity = breathingEffect;
+            // Check if content is ready and we can interrupt
+            if (transition.contentReady && !transition.animationInterrupted && elapsed >= minVisibleDuration) {
+                const progress = elapsed / animationDuration;
+                
+                // Interrupt much earlier and with wider range (30-85% progress)
+                if (progress >= 0.3 && progress < 0.85) {
+                    transition.animationInterrupted = true;
+                    startCrossFadeIn(transition);
+                    return;
+                }
             }
             
-            // Optimize repaints based on device class
-            const opacityPrecision = DeviceCapabilities.deviceClass === 'iot' ? 10 : 100;
-            overlay.style.opacity = Math.round(finalOpacity * opacityPrecision) / opacityPrecision;
-            
-            // Continue animation until page is ready
-            if (!transition.pageReady) {
-                requestAnimationFrame(animateFrame);
+            if (!fadeCompleted) {
+                const progress = Math.min(elapsed / animationDuration, 1);
+                // Scale easing to end at 0.4 opacity (20% visual white)
+                newOpacity = fastStartSlowEndEasing(progress) * 0.4;
+                
+                if (progress >= 1) {
+                    fadeCompleted = true;
+                    pulseStartTime = Date.now();
+                    newOpacity = 0.4; // Ensure we end at exactly 0.4 opacity (20% visual white)
+                    
+                    // If content is ready when fade completes, start cross-fade immediately
+                    if (transition.contentReady) {
+                        startCrossFadeIn(transition);
+                        return;
+                    }
+                }
             } else {
-                // Page is ready, we can proceed
-                transition.fadeToWhiteComplete = true;
-                checkTransitionReady(transition);
+                // Fade completed, show pulsing/breathing effect while waiting for content
+                const pulseElapsed = Date.now() - pulseStartTime;
+                const breathingCycle = pulseElapsed * 0.0006061; // 1650ms cycle (10% slower than default)
+                // Start sine wave at minimum (-π/2 offset) for smooth transition from fade
+                const pulseValue = Math.sin((breathingCycle * 6.283185307) - 1.570796327); // 2π and π/2 pre-calculated
+                
+                // Always pulse for loading feedback (ignores device breathing preferences)
+                // Oscillates between 20% and 50% visual white intensity
+                newOpacity = pulseAvgOpacity + (pulseRange * pulseValue);
+                
+                // Debug: Log pulsing values every 500ms for troubleshooting
+                if (Math.floor(pulseElapsed / 500) !== Math.floor((pulseElapsed - 16) / 500)) {
+                    console.log('Pulsing:', { pulseElapsed, breathingCycle, pulseValue: pulseValue.toFixed(3), newOpacity: newOpacity.toFixed(3) });
+                }
+                
+                // If content becomes ready during pulsing, start cross-fade
+                if (transition.contentReady) {
+                    startCrossFadeIn(transition);
+                    return;
+                }
             }
+            
+            // Only update DOM if opacity actually changed (reduces reflows)
+            if (Math.abs(newOpacity - lastOpacity) > 0.001) {
+                overlay.style.opacity = newOpacity.toFixed(3);
+                lastOpacity = newOpacity;
+            }
+            
+            requestAnimationFrame(animateFrame);
         };
         
         requestAnimationFrame(animateFrame);
     }
     
-    function loadPageContent(destination, transition) {
-        // Get cached page or fetch new one
-        const cachedPage = getCachedPage(destination);
+    /**
+     * Handles the cross-fade in effect when new content is ready
+     */
+    function startCrossFadeIn(transition) {
+        if (!transition.pageContent || !transition.overlay) {
+            return;
+        }
         
-        if (cachedPage) {
-            // Cached content is immediately ready
-            setTimeout(() => {
+        // Start fading out the white overlay immediately
+        const fadeOutDuration = 300; // Slightly longer for smoother cross-fade
+        transition.overlay.style.transition = `opacity ${fadeOutDuration}ms ease-out`;
+        transition.overlay.style.opacity = '0';
+        
+        // Load new page content simultaneously with overlay fade-out
+        // This creates the true cross-fade effect
+        loadNewPage(
+            transition.pageContent.html,
+            transition.pageContent.title,
+            transition.destination,
+            transition.pushState,
+            () => {
+                // New content is now loaded and overlay is fading out
+                // The cross-fade is happening naturally
+            }
+        );
+        
+        // Clean up after the overlay fade completes
+        setTimeout(() => {
+            cleanupTransition(transition);
+        }, fadeOutDuration);
+    }
+    
+    /**
+     * Waits for ALL images to load to prevent white flash on any page
+     */
+    function waitForCriticalImages(html, callback) {
+        // Create a temporary container to parse the HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        
+        // Find ALL images in the page content (not just hero images)
+        const allImages = tempDiv.querySelectorAll('img[src]');
+        
+        if (allImages.length === 0) {
+            // No images found, proceed immediately
+            callback();
+            return;
+        }
+        
+        let loadedCount = 0;
+        const totalImages = allImages.length;
+        let timeoutId;
+        
+        const checkComplete = () => {
+            loadedCount++;
+            if (loadedCount >= totalImages) {
+                clearTimeout(timeoutId);
+                callback();
+            }
+        };
+        
+        // Set a maximum wait time to prevent hanging (3 seconds for all images)
+        timeoutId = setTimeout(() => {
+            callback();
+        }, 3000);
+        
+        // Check each image
+        allImages.forEach((img, index) => {
+            const src = img.getAttribute('src');
+            if (!src) {
+                checkComplete();
+                return;
+            }
+            
+            // Convert relative paths to absolute paths for proper loading
+            let absoluteSrc = src;
+            if (!src.startsWith('http') && !src.startsWith('/')) {
+                // This is a relative path, make it absolute from root
+                absoluteSrc = '/' + src;
+            }
+            
+            // Create a new image to test loading
+            const testImg = new Image();
+            testImg.onload = checkComplete;
+            testImg.onerror = checkComplete; // Proceed even if image fails to load
+            testImg.src = absoluteSrc;
+        });
+    }
+
+    /**
+     * Fetches the new page content and signals when ready
+     */
+    function loadPageContent(destination, transition) {
+        const onPageReady = (html, title) => {
+            if (transition.cancelled) return;
+            
+            // Wait for critical images to load before marking as ready
+            waitForCriticalImages(html, () => {
                 if (transition.cancelled) return;
-                transition.pageContent = { html: cachedPage.html, title: cachedPage.title };
-                transition.pageReady = true;
-                checkTransitionReady(transition);
-            }, 0);
+                
+                transition.contentReady = true;
+                transition.pageContent = { html, title };
+                
+                // Don't immediately proceed - let the animation loop handle the timing
+            });
+        };
+        
+        const processPage = (pageData) => {
+            // Reduce minimum delay to make interruption more likely
+            const minDelay = 30;
+            const elapsed = Date.now() - transition.startTime;
+            const delay = Math.max(0, minDelay - elapsed);
+            
+            setTimeout(() => onPageReady(pageData.html, pageData.title), delay);
+        };
+        
+        const cachedPage = getCachedPage(destination);
+        if (cachedPage) {
+            processPage(cachedPage);
         } else {
-            // Fetch new page
             loadWithRetry(destination, 2, 500)
                 .then(html => {
-                    if (transition.cancelled) return;
-                    
-                    // Validate HTML content
-                    if (!html || html.trim().length === 0) {
-                        throw new Error('Empty response received');
-                    }
-                    
-                    // Cache the page
+                    if (!html || html.trim().length === 0) throw new Error('Empty response');
                     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
                     const title = titleMatch ? titleMatch[1] : 'NUM';
-                    pageCache.set(destination, { html, title, timestamp: Date.now() });
-                    
-                    // Mark page as ready
-                    transition.pageContent = { html, title };
-                    transition.pageReady = true;
-                    checkTransitionReady(transition);
+                    const pageData = { html, title };
+                    pageCache.set(destination, { ...pageData, timestamp: Date.now() });
+                    processPage(pageData);
                 })
                 .catch(error => {
                     if (transition.cancelled) return;
-                    console.error('Page transition failed:', error);
                     handleTransitionError(destination, error);
                     cleanupTransition(transition);
                 });
         }
     }
-    
-    function checkTransitionReady(transition) {
-        // If page is ready, we can proceed regardless of fade state
-        if (transition.pageReady && !transition.cancelled) {
-            // Calculate current progress for smooth transition
-            const elapsed = Date.now() - transition.startTime;
-            const currentProgress = Math.min(elapsed / 800, 1);
-            const currentOpacity = 1 - Math.pow(1 - currentProgress, 3);
-            
-            // If we're early in the animation (brief glow), complete it quickly
-            if (currentOpacity < 0.3) {
-                // Quick fade to show just a glow effect
-                if (transition.overlay) {
-                    transition.overlay.style.transition = 'opacity 0.15s ease-out';
-                    transition.overlay.style.opacity = '0.4';
-                }
-                setTimeout(() => {
-                    if (!transition.cancelled) {
-                        proceedWithPageLoad(transition);
-                    }
-                }, 150);
-            } else {
-                // We're deeper in the animation, proceed immediately
-                proceedWithPageLoad(transition);
-            }
-        }
-        // If fade is complete but page isn't ready, the animation continues smoothly
-    }
-    
-    function proceedWithPageLoad(transition) {
-        try {
-            loadNewPage(
-                transition.pageContent.html, 
-                transition.pageContent.title, 
-                transition.destination, 
-                transition.pushState,
-                transition
-            );
-        } catch (error) {
-            console.error('Error loading new page:', error);
-            handleTransitionError(transition.destination, error);
-            cleanupTransition(transition);
-        }
-    }
-    
+
     function cleanupTransition(transition) {
-        if (transition && transition.overlay) {
+        if (!transition) return;
+        
+        // Remove overlay immediately
+        if (transition.overlay) {
             // Reset will-change to free up GPU resources
             if (transition.overlay.style) {
                 transition.overlay.style.willChange = 'auto';
@@ -693,6 +828,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.warn('Error removing transition overlay:', error);
                 }
             }
+            transition.overlay = null;
         }
         
         // Clear transition reference
@@ -701,33 +837,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function loadNewPage(mainHTML, titleText, destination, pushState, transition = null) {
+    /**
+     * Swaps the page content - now simplified since cross-fade is handled separately
+     */
+    function loadNewPage(mainHTML, titleText, destination, pushState, onComplete = null) {
         try {
             const parser = new DOMParser();
             const newDoc = parser.parseFromString(mainHTML, 'text/html');
-            const newMain = newDoc.querySelector('main'); // Note: This is from parsed HTML, not current DOM
+            const newMain = newDoc.querySelector('main');
             const currentMain = getMainElement();
             
-            if (!newMain) {
-                throw new Error('No main element found in new page content');
+            if (!newMain || !currentMain) {
+                throw new Error('Could not find main element.');
             }
             
-            if (!currentMain) {
-                throw new Error('No main element found in current page');
-            }
-            
-            // Update page title
             document.title = titleText;
-            
-            // Update browser history
             if (pushState) {
                 history.pushState({ path: destination }, titleText, destination);
             }
             
-            // Replace main content
             currentMain.innerHTML = newMain.innerHTML;
             
-            // Load and execute page-specific styles
             const newStyles = newDoc.querySelectorAll('style');
             newStyles.forEach(style => {
                 if (!document.querySelector(`style[data-page-style="${btoa(style.textContent.substring(0, 50))}"]`)) {
@@ -737,99 +867,44 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.head.appendChild(newStyle);
                 }
             });
+            executePageScripts(newDoc);
             
-            // Execute page-specific inline scripts
-            try {
-                executePageScripts(newDoc);
-            } catch (error) {
-                console.error('Error executing page scripts:', error);
-            }
-            
-            // Initialize page content after DOM update
             setTimeout(initializePageContent, 0);
             
         } catch (error) {
             console.error('Error in loadNewPage:', error);
-            throw error; // Re-throw to be handled by caller
+            throw error;
         }
         
+        // This inner function handles post-load initialization
         function initializePageContent() {
             try {
-                // Update active navigation
                 updateActiveNav();
                 
-                // Initialize page-specific components if functions exist
-                if (typeof window.initializeProgramTabs === 'function') {
-                    try {
-                        window.initializeProgramTabs();
-                    } catch (error) {
-                        console.error('Error initializing program tabs during SPA navigation:', error);
-                    }
-                }
+                // Call page-specific functions if they exist
+                if (typeof window.initializeProgramTabs === 'function') window.initializeProgramTabs();
+                // Add other initializers here
                 
-                // Initialize homepage hero if present (using global functions from page)
-                if (typeof window.initializeHomepageHero === 'function') {
-                    try {
-                        window.initializeHomepageHero();
-                    } catch (error) {
-                        console.error('Error initializing homepage hero:', error);
-                    }
-                }
-                
-                // Initialize hero video if on homepage (using global functions from page)
-                if (typeof window.initializeHeroVideo === 'function') {
-                    try {
-                        window.initializeHeroVideo();
-                    } catch (error) {
-                        console.error('Error initializing hero video:', error);
-                    }
-                }
-                
-                // Trigger animations for new content
                 triggerPageAnimations(getMainElement());
                 
-                // Fade in from white overlay
-                if (transition && transition.overlay) {
-                    // Fade out the white overlay to reveal new content
-                    transition.overlay.style.transition = 'opacity 0.4s ease-in';
-                    transition.overlay.style.opacity = '0';
-                    
-                    // Remove overlay after fade completes
-                    setTimeout(() => {
-                        cleanupTransition(transition);
-                    }, 400);
-                } else {
-                    // Fallback for non-transition loads (direct navigation, etc.)
-                    const mainContent = getMainElement();
-                    if (mainContent) {
-                        mainContent.style.opacity = '1';
-                        mainContent.style.transition = 'opacity 0.3s ease-in';
-                    }
+                // Call the completion callback if provided
+                if (onComplete && typeof onComplete === 'function') {
+                    onComplete();
                 }
+                
             } catch (error) {
                 console.error('Error during page content initialization:', error);
-                // Still fade in even if initialization fails
-                if (transition && transition.overlay) {
-                    transition.overlay.style.transition = 'opacity 0.4s ease-in';
-                    transition.overlay.style.opacity = '0';
-                    setTimeout(() => {
-                        cleanupTransition(transition);
-                    }, 400);
-                } else {
-                    const mainContent = getMainElement();
-                    if (mainContent) {
-                        mainContent.style.opacity = '1';
-                        mainContent.style.transition = 'opacity 0.3s ease-in';
-                    }
-                }
                 showErrorMessage('Some page features may not work properly.');
+                
+                // Still call completion callback even if there's an error
+                if (onComplete && typeof onComplete === 'function') {
+                    onComplete();
+                }
             }
         }
         
-        // Smooth scroll to top
         window.scrollTo({ top: 0, behavior: 'instant' });
     }
-    
 
 
     // =========================================================================
