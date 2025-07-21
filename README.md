@@ -1,7 +1,7 @@
 # University Website Project
 
 Please python run cmd script: python -m http.server
-f
+
 Welcome to the university website project! This is a static website built with HTML, Tailwind CSS, and vanilla JavaScript, designed for simplicity and maintainability.
 
 ## Project Structure
