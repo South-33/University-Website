@@ -73,9 +73,6 @@
     transform: translateY(-50%);
 }
 
-/* Program Tab Content Animation */
-
-
 .dropdown-menu.is-open {
     opacity: 1;
     max-height: 500px; /* Adjust if submenus are taller */
@@ -165,6 +162,77 @@ main.spa-transition {
 
 
 /* --- Search Results Dropdown --- */
+.search-results-dropdown {
+    position: absolute;
+    top: 100%;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    z-index: 50;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 0.25rem;
+}
+
+/* Desktop: dropdown matches search container width */
+@media (min-width: 768px) {
+    .search-results-dropdown {
+        left: 0;
+        right: 0;
+    }
+}
+
+/* Mobile: dropdown is full-width for better UX */
+@media (max-width: 767px) {
+    .search-results-dropdown {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.search-results-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-results-dropdown li {
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.search-results-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.search-results-dropdown a {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #374151;
+    transition: background-color 0.15s ease;
+}
+
+.search-results-dropdown a:hover {
+    background-color: #f9fafb;
+}
+
+.search-results-dropdown .result-title {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.search-results-dropdown .result-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
 /* Elegant fade to background system */
 main {
     position: relative;
