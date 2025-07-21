@@ -14,9 +14,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Tailwind CSS Theme Configuration (global) -->
+    <!-- IMPORTANT: Update path if in subdirectory: js/theme.js → ../js/theme.js -->
     <script src="js/theme.js"></script>
 
     <!-- Global site-wide styles -->
+    <!-- IMPORTANT: Update path if in subdirectory: css/main.css → ../css/main.css -->
     <link rel="stylesheet" href="css/main.css">
 
     <!-- PAGE-SPECIFIC STYLES (Recommended for team collaboration) -->
@@ -100,8 +102,11 @@
         4. Add your HTML content inside this <main> tag
         5. Add your custom JavaScript in the <script> section below
         6. If you move this file into a subdirectory (e.g., "/programs/"),
-           update the script path: src="js/main.js" → src="../js/main.js"
-           and data-base-path="." → data-base-path=".."
+           update ALL paths:
+           - js/theme.js → ../js/theme.js
+           - css/main.css → ../css/main.css  
+           - js/main.js → ../js/main.js
+           - data-base-path="." → data-base-path=".."
         
         SELF-CONTAINED PAGE BENEFITS:
         ✅ No conflicts with teammates' code
@@ -232,6 +237,7 @@
     </script>
     
     <!-- Site-wide Scripts (global logic) - DO NOT MODIFY -->
+    <!-- IMPORTANT: Update paths if in subdirectory: js/main.js → ../js/main.js and data-base-path="." → data-base-path=".." -->
     <script src="js/main.js" data-base-path="."></script>
 </body>
 </html>

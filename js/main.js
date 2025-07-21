@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeSearch(basePath);
         initializeHidingHeader();
         updateActiveNav();
-        adjustLayoutForHeader(); // For homepage hero, harmless on other pages
         initializePageTransitions(); // The new, simple transition logic
         triggerPageAnimations(document);
 
@@ -454,22 +453,71 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeHidingHeader() {
+        // Only animate the <header> element, not the .header-bg-static background div
         const header = document.querySelector('header');
+        const headerBg = document.querySelector('.header-bg-static');
         if (!header) return;
+        
+        // Function to update background div height to match header
+        function updateBackgroundHeight() {
+            if (headerBg) {
+                headerBg.style.height = header.offsetHeight + 'px';
+            }
+        }
+        
+        // Set initial height and update on resize
+        updateBackgroundHeight();
+        window.addEventListener('resize', updateBackgroundHeight);
+        
         let lastScrollTop = 0;
+        let isHeaderHidden = false;
+        let ticking = false;
         const scrollThreshold = header.offsetHeight;
-        window.addEventListener('scroll', () => {
+        const minScrollDistance = 5; // Minimum pixels to scroll before triggering
+        
+        function updateHeader() {
+            // Skip on desktop
             if (window.innerWidth >= 768) {
-                header.style.transform = 'translateY(0)'; return;
+                if (isHeaderHidden) {
+                    header.style.transform = 'translateY(0)';
+                    isHeaderHidden = false;
+                }
+                return;
             }
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+            
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollDifference = Math.abs(scrollTop - lastScrollTop);
+            
+            // Only proceed if we've scrolled enough to avoid jitter
+            if (scrollDifference < minScrollDistance) {
+                return;
+            }
+            
+            // Hide header when scrolling down past threshold
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold && !isHeaderHidden) {
                 header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
+                isHeaderHidden = true;
             }
+            // Show header when scrolling up or at top
+            else if ((scrollTop < lastScrollTop || scrollTop <= scrollThreshold) && isHeaderHidden) {
+                header.style.transform = 'translateY(0)';
+                isHeaderHidden = false;
+            }
+            
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, { passive: true });
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateHeader();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', requestTick, { passive: true });
     }
 
     function initializeNavigation() {
@@ -498,19 +546,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function adjustLayoutForHeader() {
-        // Hero height calculation is now self-contained in individual pages
-        // This function is kept for compatibility but no longer handles hero sections
-    }
+
 
     function initializeSearch(basePath) {
         let searchInitialized = false;
-        document.body.addEventListener('focusin', (e) => {
-            if (e.target.matches('input[type="search"]') && !searchInitialized) {
-                setupSearch(e.target, basePath);
+        
+        // Function to initialize search when input is found
+        const tryInitializeSearch = () => {
+            const searchInput = document.querySelector('input[type="search"]');
+            if (searchInput && !searchInitialized) {
+                setupSearch(searchInput, basePath);
                 searchInitialized = true;
+                return true;
             }
-        }, { once: true });
+            return false;
+        };
+        
+        // Try to initialize immediately
+        if (!tryInitializeSearch()) {
+            // If search input not found, wait for it to be loaded (header loads async)
+            const observer = new MutationObserver(() => {
+                if (tryInitializeSearch()) {
+                    observer.disconnect();
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            
+            // Also try with a fallback event listener
+            document.body.addEventListener('focusin', (e) => {
+                if (e.target.matches('input[type="search"]') && !searchInitialized) {
+                    setupSearch(e.target, basePath);
+                    searchInitialized = true;
+                }
+            }, { once: true });
+        }
     }
     
     function setupSearch(searchInput, basePath) {
@@ -524,32 +593,102 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchResultsContainer = document.createElement('div');
         searchResultsContainer.className = 'search-results-dropdown hidden';
         searchContainer.appendChild(searchResultsContainer);
-        fetch(`${basePath}/js/search-index.json`).then(r => r.json()).then(data => {
-            fuse = new Fuse(data, { keys: ['title', 'description', 'tags'], includeScore: true, threshold: 0.4, minMatchCharLength: 2 });
-        }).catch(err => console.error('Error loading search index:', err));
-        const render = (results) => {
-            searchResultsContainer.innerHTML = '';
-            if (results.length === 0) return;
+        // Load search index with native JavaScript search
+        let searchData = [];
+        
+        // Restore search text from sessionStorage if available
+        const savedSearch = sessionStorage.getItem('searchQuery');
+        if (savedSearch) {
+            searchInput.value = savedSearch;
+        }
+        
+        fetch(`${basePath}/js/search-index.json`)
+            .then(r => r.json())
+            .then(data => {
+                searchData = data;
+            })
+            .catch(err => console.error('Error loading search index:', err));
+        
+        // Simple native search function
+        const performSearch = (query) => {
+            if (!query || query.length < 2) return [];
+            
+            const lowerQuery = query.toLowerCase();
+            const results = [];
+            
+            searchData.forEach(item => {
+                let score = 0;
+                const titleLower = item.title.toLowerCase();
+                const descLower = item.description.toLowerCase();
+                const tagsLower = item.tags ? item.tags.toLowerCase() : '';
+                
+                // Exact title match gets highest score
+                if (titleLower.includes(lowerQuery)) {
+                    score += titleLower.indexOf(lowerQuery) === 0 ? 100 : 50;
+                }
+                
+                // Description match gets medium score
+                if (descLower.includes(lowerQuery)) {
+                    score += 25;
+                }
+                
+                // Tags match gets lower score
+                if (tagsLower.includes(lowerQuery)) {
+                    score += 10;
+                }
+                
+                if (score > 0) {
+                    results.push({ item, score });
+                }
+            });
+            
+            // Sort by score (highest first) and return top 10
+            return results.sort((a, b) => b.score - a.score).slice(0, 10).map(r => r.item);
+        };
+        
+        const render = results => {
             const ul = document.createElement('ul');
-            results.slice(0, 10).forEach((result, index, arr) => {
-                const { item } = result;
+            results.forEach(result => {
                 const li = document.createElement('li');
-                if (index < arr.length - 1) li.classList.add('border-b', 'border-dark-blue/5');
-                li.innerHTML = `<a href="${new URL(item.url, window.location.origin).href}" class="block w-full px-5 py-3 hover:bg-light-lavender/60 transition-colors duration-150"><span class="font-body font-medium text-dark-blue">${item.title}</span><span class="block text-sm text-dark-blue/70 font-body mt-1">${item.description||''}</span></a>`;
+                const a = document.createElement('a');
+                // Use absolute URL from root to avoid basePath issues
+                a.href = result.url;
+                a.innerHTML = `
+                    <div class="result-title">${result.title}</div>
+                    <div class="result-description">${result.description}</div>
+                `;
+                li.appendChild(a);
                 ul.appendChild(li);
             });
+            searchResultsContainer.innerHTML = '';
             searchResultsContainer.appendChild(ul);
         };
         const search = () => {
-            if (!fuse || searchInput.value.length < 2) { hide(); return; }
-            const results = fuse.search(searchInput.value);
-            if (results.length === 0) { hide(); return; }
+            if (!searchData.length || searchInput.value.length < 2) { 
+                hide(); 
+                return; 
+            }
+            
+            const results = performSearch(searchInput.value);
+            
+            if (results.length === 0) { 
+                hide(); 
+                return; 
+            }
+            
             render(results);
-            searchResultsContainer.classList.remove('hidden');
+            
+            // Position dropdown correctly for mobile
             if (window.innerWidth < 768) {
+                const searchRect = searchInput.getBoundingClientRect();
+                searchResultsContainer.style.top = (searchRect.bottom + 18) + 'px';
                 overlay.classList.remove('hidden');
                 document.body.classList.add('overflow-hidden');
+            } else {
+                searchResultsContainer.style.top = '';
             }
+            
+            searchResultsContainer.classList.remove('hidden');
         };
         const hide = () => {
             setTimeout(() => {
@@ -562,14 +701,19 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         searchInput.addEventListener('input', search);
         searchInput.addEventListener('focus', search);
+        searchInput.addEventListener('click', search); // Show dropdown on click even if already focused
         searchInput.addEventListener('blur', hide);
-        searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
+        searchInput.addEventListener('keydown', e => { 
+            if (e.key === 'Enter') e.preventDefault(); 
+        });
         overlay.addEventListener('click', hide);
         searchResultsContainer.addEventListener('mousedown', e => e.preventDefault());
         searchResultsContainer.addEventListener('click', e => {
             if (e.target.closest('a')) {
-                searchInput.value = '';
-                hide();
+                sessionStorage.setItem('searchQuery', searchInput.value);
+                searchResultsContainer.classList.add('hidden');
+                overlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
             }
         });
     }
