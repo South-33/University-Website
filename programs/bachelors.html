@@ -51,18 +51,6 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transform: scale(1.05);
         }
-        
-        /* Timeline Styling */
-        .timeline-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            height: 2px;
-            width: 100%;
-            background-color: #e5e7eb;
-            z-index: -1;
-        }
     </style>
 </head>
 <body class="bg-light-lavender">
@@ -84,39 +72,21 @@
             </div>
         </section>
 
-        <!-- Introduction Section -->
-        <section class="bg-white py-24 font-body">
-            <div class="max-w-6xl mx-auto px-5">
-                <div class="fade-in-section">
-                    <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="wow-fade-in-left">
-                        <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Foundation for Your Future</h2>
-                        <p class="text-dark-blue/80 text-lg leading-relaxed">
-                            Our Bachelors programs provide a comprehensive education that combines rigorous academic theory with practical, real-world application. We are dedicated to nurturing the next generation of leaders, entrepreneurs, and innovators. With a focus on industry-relevant skills and a supportive learning environment, NUM is the perfect place to begin your academic and professional journey.
-                        </p>
-                    </div>
-                    <div class="wow-fade-in-right">
-                        <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students collaborating on a project" class="rounded-xl shadow-2xl w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Programs Grid Section -->
-        <section id="programs-grid" class="bg-light-lavender py-24 font-body">
+        <section id="programs-grid" class="program-tabs-section bg-light-lavender py-12 font-body fade-in-section">
             <div class="max-w-6xl mx-auto px-5">
-                <div class="fade-in-section">
-                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">Explore Our Faculties</h2>
-
+                <div>
                 <!-- Program Type Tabs -->
                 <div class="mb-12">
-                    <div class="flex flex-col md:flex-row flex-wrap justify-center gap-4">
-                        <button class="w-full md:w-auto program-tab active bg-dark-blue text-white px-6 py-3 rounded-full font-medium" data-tab="national">
-                            National
-                        </button>
-                        <button class="w-full md:w-auto program-tab bg-white text-dark-blue px-6 py-3 rounded-full font-medium" data-tab="international">
-                            International
-                        </button>
+                    <div class="bg-white/50 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-white/20">
+                        <div class="flex flex-col md:flex-row flex-wrap justify-center gap-4">
+                            <button class="w-full md:w-auto program-tab active px-6 py-3 rounded-full font-medium" data-tab="national">
+                                National
+                            </button>
+                            <button class="w-full md:w-auto program-tab px-6 py-3 rounded-full font-medium" data-tab="international">
+                                International
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -144,7 +114,7 @@
                                     <div class="flex-grow flex flex-col items-center">
                                         <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Finance and Accounting</h3>
                                         <div class="w-full h-40 overflow-hidden rounded-lg mt-3">
-                                            <img src="../Picture/FInance.jpg" alt="Faculty of Finance and Accounting" class="w-full h-full object-cover scale-125">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="../Picture/FInance.jpg" alt="Faculty of Finance and Accounting" class="lazy-load w-full h-full object-cover scale-125">
                                         </div>
                                     </div>
                                     <a href="bachelor/faculty-of-management.html" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
@@ -277,9 +247,9 @@
         </section>
 
         <!-- Student Life & Testimonial Section -->
-        <section class="bg-white py-24 font-body">
+        <section class="bg-white py-24 font-body fade-in-section">
             <div class="max-w-6xl mx-auto px-5">
-                <div class="fade-in-section grid lg:grid-cols-2 gap-16 items-center">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1">
                     <h3 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">A Vibrant Campus Community</h3>
                     <p class="mb-8 text-lg text-dark-blue/80 leading-relaxed">Life at NUM is more than just lectures and assignments. We foster a supportive and dynamic community where students can grow personally and professionally. Join student clubs, participate in events, and build lifelong friendships.</p>
@@ -287,7 +257,7 @@
                     <div class="bg-light-lavender/60 p-8 rounded-xl shadow-lg group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative will-change-transform">
                         <p class="text-lg text-dark-blue/80 italic mb-4">"Choosing NUM was the best decision I ever made. The professors are incredibly supportive, and the hands-on projects prepared me for my career long before I Masterd. I felt like part of a real community here."</p>
                         <div class="flex items-center">
-                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student Testimonial" class="w-14 h-14 rounded-full mr-4 object-cover ring-2 ring-dark-blue/20 z-10">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student Testimonial" class="lazy-load w-14 h-14 rounded-full mr-4 object-cover ring-2 ring-dark-blue/20 z-10">
                             <div>
                                 <p class="font-bold text-dark-blue">Sokun David</p>
                                 <p class="text-dark-blue/70">B.S. in Computer Science, Class of 2023</p>
@@ -296,7 +266,7 @@
                     </div>
                 </div>
                 <div class="order-1 lg:order-2 h-full flex">
-                    <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students celebrating graduation" class="w-full h-full rounded-xl block object-cover shadow-2xl">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students celebrating graduation" class="lazy-load w-full h-full rounded-xl block object-cover shadow-2xl">
                 </div>
             </div>
         </section>
@@ -330,9 +300,9 @@
         </section>
 
         <!-- Call to Action Section -->
-        <section class="bg-white py-24 font-body">
+        <section class="bg-white py-24 font-body fade-in-section">
             <div class="max-w-4xl mx-auto px-5 text-center">
-                <div class="fade-in-section">
+                <div>
                 <h3 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Ready to Begin Your Journey?</h3>
                 <p class="text-lg text-dark-blue/80 mb-8">Take the next step in your education. Our admissions team is here to guide you through the application process and answer any questions you may have.</p>
                 <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Contact Admissions</a>
@@ -346,117 +316,80 @@
     
     <!-- PAGE-SPECIFIC JAVASCRIPT (Program Tabs) -->
     <script>
-        // Program Tabs Management
-        // This runs on both initial page load and SPA navigation
-        
         function initializeProgramTabs() {
             const tabs = document.querySelectorAll('.program-tab');
             const contentWrapper = document.querySelector('.program-content-wrapper');
-            
+
             if (!tabs.length || !contentWrapper) {
-                return;
+                return; // No tabs or content wrapper found, exit
             }
 
-            const setActiveTabHeight = () => {
-                const activeContent = contentWrapper.querySelector('.program-content.active');
-                if (activeContent) {
-                    contentWrapper.style.height = activeContent.scrollHeight + 'px';
-                }
-            };
-            
-            // Initial setup - ensure proper active states
-            let initialActiveTab = document.querySelector('.program-tab.active');
-            
-            // If no active tab found, make the first tab active
-            if (!initialActiveTab) {
-                initialActiveTab = tabs[0];
-                if (initialActiveTab) {
-                    // Clear all tab states first
-                    tabs.forEach(tab => tab.classList.remove('active'));
-                    
-                    // Set first tab as active
-                    initialActiveTab.classList.add('active');
-                }
-            }
-            
-            if (initialActiveTab) {
-                const initialTabContentId = initialActiveTab.dataset.tab + '-content';
-                const initialContent = document.getElementById(initialTabContentId);
-                
-                if (initialContent) {
-                    // Clear all active states first
-                    contentWrapper.querySelectorAll('.program-content').forEach(c => c.classList.remove('active'));
-                    initialContent.classList.add('active');
-                }
-            }
-            
-            // Set height after a brief delay to ensure content is rendered
-            setTimeout(setActiveTabHeight, 100);
-
-            // Remove any existing program tab listeners to prevent duplicates
-            const existingHandler = window.programTabHandler;
-            if (existingHandler) {
-                document.body.removeEventListener('click', existingHandler);
-            }
-            
-            // Create new handler function and store reference
-            window.programTabHandler = function(e) {
-                const clickedTab = e.target.closest('.program-tab');
-                if (!clickedTab) return;
-                
-                e.preventDefault();
-                
-                const targetId = clickedTab.dataset.tab + '-content';
-                const targetContent = document.getElementById(targetId);
-                
-                if (!targetContent) {
-                    return;
-                }
-                
-                // Get fresh references
-                const currentContentWrapper = document.querySelector('.program-content-wrapper');
-                if (!currentContentWrapper) return;
-                
-                const allTabs = document.querySelectorAll('.program-tab');
-                
-                // Update tab states by only toggling the 'active' class
-                allTabs.forEach(t => t.classList.remove('active'));
-                clickedTab.classList.add('active');
-                
-                // Update content states
-                const allContent = currentContentWrapper.querySelectorAll('.program-content');
-                allContent.forEach(c => {
+            // Helper to reset all tabs and content to inactive state
+            const resetAllTabs = () => {
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                });
+                contentWrapper.querySelectorAll('.program-content').forEach(c => {
                     c.classList.remove('active');
                 });
-                targetContent.classList.add('active');
-                
-                // Force a reflow to ensure styles are applied
-                targetContent.offsetHeight;
-                
-                // Update height
-                setTimeout(() => {
-                    const activeContent = currentContentWrapper.querySelector('.program-content.active');
-                    if (activeContent) {
-                        const newHeight = activeContent.scrollHeight + 'px';
-                        currentContentWrapper.style.height = newHeight;
-                    }
-                }, 50);
             };
-            
-            // Add the event listener to document body for delegation
-            document.body.addEventListener('click', window.programTabHandler);
-            
-            // Add resize listener (remove existing first to prevent duplicates)
-            const resizeHandler = () => setActiveTabHeight();
-            window.removeEventListener('resize', resizeHandler);
-            window.addEventListener('resize', resizeHandler);
+
+            // Helper to set a specific tab as active
+            const setActiveTab = (tab) => {
+                if (!tab) return;
+
+                const contentId = tab.dataset.tab + '-content';
+                const content = document.getElementById(contentId);
+
+                if (content) {
+                    resetAllTabs(); // Reset all first
+
+                    // Set the new tab and content as active
+                    tab.classList.add('active');
+                    content.classList.add('active');
+
+                    // Adjust wrapper height smoothly
+                    // Use a timeout to ensure content is rendered before calculating height
+                    setTimeout(() => {
+                        contentWrapper.style.height = content.scrollHeight + 'px';
+                    }, 50);
+                }
+            };
+
+            // Add click event listeners to all tabs
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setActiveTab(tab);
+                    // Scroll the section into view
+                    if (window.handleProgramTabClick) {
+                        window.handleProgramTabClick(tab);
+                    }
+                });
+            });
+
+            // Set initial active tab on page load
+            let initialActiveTab = document.querySelector('.program-tab.active');
+            if (!initialActiveTab) {
+                initialActiveTab = tabs[0]; // Default to the first tab if none is active
+            }
+            setActiveTab(initialActiveTab);
+
+            // Adjust height on window resize to handle responsive changes
+            window.addEventListener('resize', () => {
+                const currentActiveTab = document.querySelector('.program-tab.active');
+                if (currentActiveTab) {
+                    const activeContent = document.querySelector('.program-content.active');
+                    if (activeContent) {
+                        contentWrapper.style.height = activeContent.scrollHeight + 'px';
+                    }
+                }
+            });
         }
-        
+
         // Initialize on DOM ready (initial page load)
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeProgramTabs();
-        });
-        
+        document.addEventListener('DOMContentLoaded', initializeProgramTabs);
+
         // Make function globally available for SPA navigation
         window.initializeProgramTabs = initializeProgramTabs;
     </script>
