@@ -272,19 +272,8 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure header and footer stay on top with proper hierarchy */
-header {
+/* Ensure header and footer stay on top */
+header, footer {
     position: relative;
-    z-index: 10000; /* Highest - always above everything */
-    isolation: isolate; /* Create new stacking context to isolate from page effects */
-    will-change: transform; /* Optimize for animations */
-    transform: translateZ(0); /* Force hardware acceleration and new layer */
-}
-
-footer {
-    position: relative;
-    z-index: 9000; /* High but below header */
-    isolation: isolate;
-    will-change: transform;
-    transform: translateZ(0);
+    z-index: 1000;
 }

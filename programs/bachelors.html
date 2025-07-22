@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,17 @@
             transform: scale(1.05);
         }
         
-
+        /* Timeline Styling */
+        .timeline-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            height: 2px;
+            width: 100%;
+            background-color: #e5e7eb;
+            z-index: -1;
+        }
     </style>
 </head>
 <body class="bg-light-lavender">
@@ -423,14 +433,14 @@
                 // Force a reflow to ensure styles are applied
                 targetContent.offsetHeight;
                 
-                // Update height with requestAnimationFrame to avoid interfering with scroll events
-                requestAnimationFrame(() => {
+                // Update height
+                setTimeout(() => {
                     const activeContent = currentContentWrapper.querySelector('.program-content.active');
                     if (activeContent) {
                         const newHeight = activeContent.scrollHeight + 'px';
                         currentContentWrapper.style.height = newHeight;
                     }
-                });
+                }, 50);
             };
             
             // Add the event listener to document body for delegation
@@ -442,10 +452,10 @@
             window.addEventListener('resize', resizeHandler);
         }
         
-        // Initialize on DOM ready (initial page load) - TEMPORARILY DISABLED FOR TESTING
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     initializeProgramTabs();
-        // });
+        // Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProgramTabs();
+        });
         
         // Make function globally available for SPA navigation
         window.initializeProgramTabs = initializeProgramTabs;

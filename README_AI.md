@@ -50,42 +50,13 @@ This is a comprehensive guide for AI assistants working on our university websit
 
 ## ⚡ **Recent Major Improvements (2024)**
 
-### 🧠 **Smart Device Detection & Adaptive Animations (LATEST)**
-- ✅ **Universal Device Support:** Works on everything from smart fridges to gaming phones
-- ✅ **Hardware Detection:** CPU cores, memory, network speed, performance benchmarking
-- ✅ **Device Classification:** IoT, low-end, mid-range, high-end with specific profiles
-- ✅ **Adaptive Animations:** Frame rates, durations, easing adapt to device capabilities
-- ✅ **Smart Header Behavior:** Mobile gets hide/show, desktop/tablet always visible
-- ✅ **Accessibility Integration:** Respects prefers-reduced-motion and user preferences
-- ✅ **Header Protection:** SPA transitions never affect header (clip-path solution)
-- ✅ **DRY Code:** Eliminated redundancy with utility functions, 30% code reduction
-
 ### 🚀 **SPA Navigation System**
-- ✅ **Seamless Transitions:** Smart fade transitions with device-adaptive performance
+- ✅ **Seamless Transitions:** Simple fade transitions for main content only
 - ✅ **Page Caching:** Intelligent caching with 5-minute expiration
 - ✅ **Link Preloading:** Hover-based preloading for instant navigation
 - ✅ **Error Handling:** Robust retry logic with exponential backoff
 - ✅ **Browser History:** Full back/forward button support
 - ✅ **Script Execution:** Page-specific scripts run during SPA navigation
-- ✅ **Header Isolation:** Transitions never visually affect header or navigation
-
-### 🎭 **Advanced Page Transition Animation System**
-- ✅ **Fluid Fade-to-White:** Custom S-curve easing (fast-start, slow-end) to 20% visual white
-- ✅ **Smart Interruption:** Midway animation interruption (30-85% progress) for fast-loading content
-- ✅ **Loading Feedback:** Dramatic pulsing effect (20% to 50% visual white) for slow content
-- ✅ **Performance Optimized:** Minimal DOM updates, requestAnimationFrame loops, hardware acceleration
-- ✅ **Visual Continuity:** No opacity drops or snapping, smooth transitions throughout
-- ✅ **Cross-Fade Completion:** True cross-fade revealing new content while overlay fades out
-- ✅ **Timing Control:** 1650ms pulsing cycle (10% slower), 150ms minimum visibility
-- ✅ **Mathematical Precision:** Pre-calculated constants, sine wave pulsing with phase offset
-
-### 🔧 **Animation System Fixes (Latest)**
-- ✅ **Container Rising Fixed:** Removed page-specific CSS that caused layout containers to animate
-- ✅ **Global CSS Integration:** All pages now use consistent fade-in animations from `main.css`
-- ✅ **Template Updated:** `template.html` now provides proper guidance and prevents animation conflicts
-- ✅ **Consistent Behavior:** Doctoral, Masters, and Bachelors pages now have identical animation behavior
-- ✅ **Clean Selectors:** Animations target only `.fade-in-section` elements, not their children
-- ✅ **Zero Layout Shifts:** Content animates smoothly while containers remain stable
 
 ### 🎬 **Homepage Hero System**
 - ✅ **Perfect Viewport:** Hero fills exactly `viewport height - header height`
@@ -93,13 +64,12 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **Mobile Responsive:** Handles address bar changes and orientation
 - ✅ **Self-Contained:** All logic moved to homepage inline script
 
-### 📑 **Modular Architecture & Code Cleanup**
+### 📑 **Modular Architecture & Code Cleanup (LATEST)**
 - ✅ **SPA-Compatible:** All features work seamlessly during page transitions
 - ✅ **Event Delegation:** Persistent functionality using delegated listeners
 - ✅ **Modular Architecture:** Page-specific code lives in respective HTML files
 - ✅ **Self-Contained:** Program tabs, hero logic in individual pages
-- ✅ **Optimized Codebase:** Removed ~200+ lines of redundant code
-- ✅ **Utility Functions:** Centralized DOM queries and environment detection
+- ✅ **Optimized Codebase:** Removed ~150 lines of unused CSS and JavaScript
 - ✅ **Vercel Ready:** Proper routing configuration for deployment
 
 ### 🛡️ **Error Handling & Reliability**
@@ -127,27 +97,19 @@ This is a comprehensive guide for AI assistants working on our university websit
 ### ⚡ **`js/main.js` - Core SPA Logic (CRITICAL)**
 ```javascript
 // 🔥 THE HEART OF THE APPLICATION
-// Handles: Smart device detection, adaptive animations, SPA navigation,
-//          header/footer loading, page transitions, caching, preloading,
-//          error handling, search, device-optimized UI behavior
+// Handles: SPA navigation, header/footer loading, page transitions,
+//          caching, preloading, error handling, search, animations
 ```
 
 **Key Features:**
-- **🧠 Smart Device Detection:** Hardware profiling (CPU, memory, network, performance)
-- **🎯 Device Classification:** IoT, low-end, mid-range, high-end with adaptive profiles
-- **⚡ Adaptive Animations:** Frame rates, durations, easing based on device capabilities
-- **📱 Smart UI Behavior:** Mobile header hide/show, desktop always visible
-- **🛡️ Header Protection:** SPA transitions never affect header (clip-path solution)
-- **🔄 Dynamic Includes:** Loads header/footer from `_includes/`
-- **🎬 SPA Navigation:** Device-optimized page transitions with fade effects
-- **💾 Page Caching:** 5-minute intelligent caching system
-- **⚡ Link Preloading:** Hover-based preloading for instant navigation
-- **🔧 Error Handling:** Retry logic with exponential backoff
-- **🔍 Search System:** Global search functionality with Fuse.js
-- **🎛️ Event Delegation:** Persistent functionality during navigation
-- **🔗 Page Integration:** Calls page-specific functions during navigation
-- **♿ Accessibility:** Respects prefers-reduced-motion and user preferences
-- **🧹 DRY Utilities:** Centralized DOM queries and environment detection
+- **Dynamic Includes:** Loads header/footer from `_includes/`
+- **SPA Navigation:** Smooth page transitions with fade effects
+- **Page Caching:** 5-minute intelligent caching system
+- **Link Preloading:** Hover-based preloading for instant navigation
+- **Error Handling:** Retry logic with exponential backoff
+- **Search System:** Global search functionality with Fuse.js
+- **Event Delegation:** Persistent functionality during navigation
+- **Page-Specific Integration:** Calls page-specific functions (window.initializeProgramTabs, etc.) during navigation
 
 **🏗️ ARCHITECTURAL PRINCIPLE:** `main.js` contains ONLY global SPA logic. Page-specific functionality (hero videos, program tabs, etc.) lives as inline scripts within their respective HTML pages. This ensures clean separation of concerns and better maintainability.
 
@@ -174,147 +136,30 @@ This is a comprehensive guide for AI assistants working on our university websit
 
 ---
 
-## 🧠 **SMART DEVICE DETECTION SYSTEM**
-
-### 🎯 **Device Classification**
-The system automatically detects and classifies devices into 4 categories:
-
-```javascript
-// Device Classes with Animation Profiles
-'iot':      { fps: 15,  duration: 1200ms, easing: 'linear',      effects: 'minimal'  }
-'low-end':  { fps: 30,  duration: 800ms,  easing: 'ease-out',   effects: 'reduced'  }
-'mid-range': { fps: 60,  duration: 600ms,  easing: 'cubic-bezier', effects: 'standard' }
-'high-end': { fps: 60,  duration: 400ms,  easing: 'cubic-bezier', effects: 'enhanced' }
-```
-
-### 🔍 **Detection Criteria**
-- **Hardware:** CPU cores (`navigator.hardwareConcurrency`)
-- **Memory:** Device RAM (`navigator.deviceMemory`)
-- **Network:** Connection speed (`navigator.connection`)
-- **Performance:** Real-time benchmark testing
-- **Screen:** Viewport size and pixel density
-- **Form Factor:** Phone, tablet, laptop, desktop classification
-
-### 🎬 **Adaptive Behaviors**
-
-**📱 Mobile Devices (< 768px):**
-- Header hides/shows on scroll to save space
-- Optimized touch interactions
-- Reduced animation complexity
-
-**💻 Desktop/Tablet (≥ 768px):**
-- Header always visible (plenty of space)
-- Enhanced animations and effects
-- Full feature set enabled
-
-**🌡️ IoT Devices (Smart Fridges, etc.):**
-- Minimal animations (15fps, linear easing)
-- Header always visible for accessibility
-- Simplified UI interactions
-
-### ♿ **Accessibility Integration**
-- Respects `prefers-reduced-motion` setting
-- Adapts to user's accessibility preferences
-- Ensures usability across all device types
-
-### 🛡️ **Header Protection System**
-- SPA transitions use CSS `clip-path` to exclude header area
-- Header has higher z-index than footer (10000 vs 9000)
-- Isolated stacking context prevents visual interference
-- Works regardless of scroll position or header visibility
-
-### 🎭 **Page Transition Animation Technical Details**
-
-**Animation Architecture:**
-```javascript
-// Overlay Configuration
-backgroundColor: 'rgba(255, 255, 255, 0.5)'  // 50% white background
-opacity: 0 → 0.4 (fade) → 0.4-1.0 (pulsing)  // Opacity control
-zIndex: 9999                                   // Above all content
-clipPath: excludes header area                 // Header protection
-```
-
-**Visual White Intensity Calculations:**
-```javascript
-// Visual White = Background Opacity × Overlay Opacity
-Fade End:    0.5 × 0.4 = 20% visual white
-Pulse Min:   0.5 × 0.4 = 20% visual white  
-Pulse Max:   0.5 × 1.0 = 50% visual white
-Pulse Range: 30% visual white difference (very noticeable)
-```
-
-**Animation Phases:**
-1. **Fade Phase:** Fast-start slow-end easing to 20% visual white (0.4 opacity)
-2. **Interruption Window:** 30-85% progress for fast-loading content
-3. **Pulsing Phase:** Sine wave breathing effect (20% ↔ 50% visual white)
-4. **Cross-Fade:** Overlay fades out while new content appears
-
-**Performance Optimizations:**
-- Pre-calculated mathematical constants (2π, π/2)
-- Minimal DOM updates (only when opacity changes significantly)
-- Hardware acceleration (`transform: translateZ(0)`, `will-change: opacity`)
-- RequestAnimationFrame loops for smooth 60fps animation
-- Isolated stacking context prevents layout thrashing
-
-**Timing Configuration:**
-```javascript
-Animation Duration: baseDuration × 2.5        // Encourages interruption
-Minimum Visibility: 150ms                     // Always visible
-Pulsing Cycle: 1650ms (10% slower than default)
-Interruption Range: 30-85% progress           // Wide window
-Cross-Fade Duration: 300ms                    // Quick reveal
-```
-
----
-
 ## 📄 **COMPLETE PAGE TEMPLATE**
 
-**Use this exact template for all new pages:**
+**Copy this template for ALL new pages:**
 
 ```html
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title - National University of Management</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-
+    <title>Page Title - NUM</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Theme Config -->
-    <script src="../js/theme.js"></script>
     
-    <!-- Global Styles -->
-    <link rel="stylesheet" href="../css/main.css">
+    <!-- Theme Configuration -->
+    <script src="../js/theme.js"></script>
     
     <!-- PAGE-SPECIFIC STYLES (if needed) -->
     <style>
-        /*
-        ✅ FADE-IN ANIMATIONS: Already included in global CSS (main.css)
-        Just add class="fade-in-section" to any element you want to animate!
-        
-        ✅ SPA NAVIGATION: Already configured in main.js
-        All links automatically work with smooth page transitions!
-        
-        ✅ HEADER & FOOTER: Automatically loaded via main.js
-        No need to manually include them!
-        
-        Benefits of this template:
-        - Uses global CSS for consistent animations
-        - No conflicting fade-in styles
-        - Perfect SPA navigation out of the box
-        - Clean, maintainable code structure
-        
-        Add your page-specific styles here if needed...
-        */
-        
-        /* Removed conflicting fade-in-section styles - using global CSS instead */
+        /* Add page-specific CSS here */
+        .page-specific-class {
+            /* Custom styles for this page only */
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans leading-relaxed">
@@ -371,14 +216,11 @@ Cross-Fade Duration: 300ms                    // Quick reveal
 ## 📝 **DEVELOPMENT RULES & PATTERNS**
 
 ### 🎯 **Creating New Pages**
-1. **Copy template.html** from the root directory (or use the template above)
-2. **Update paths:** Adjust `data-base-path` and relative paths based on file location
+1. **Copy the template above** into appropriate directory
+2. **Update paths:** Adjust `data-base-path` and relative paths to `js/main.js`
 3. **Add content:** Replace placeholder content with actual page content
-4. **Use fade-in animations:** Add `class="fade-in-section"` to elements you want to animate
-5. **Page-specific code:** Add inline `<style>` and `<script>` blocks only if needed
-6. **Test SPA navigation:** Ensure page works both directly and via SPA
-
-**✅ IMPORTANT:** The template now uses global CSS from `main.css` for animations. Do NOT add custom fade-in animation CSS - it will conflict with the global system and cause container rising issues.
+4. **Page-specific code:** Add inline `<style>` and `<script>` blocks as needed
+5. **Test SPA navigation:** Ensure page works both directly and via SPA
 
 ### 🖼️ **Image Pathing Rules**
 ```html

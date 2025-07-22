@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,28 @@
     <link rel="stylesheet" href="../css/main.css">
     <!-- Page-specific styles for advanced components (e.g., timeline) -->
     <style>
-        /* Removed conflicting fade-in-section styles - using global CSS instead */
+        .timeline-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            height: 2px;
+            width: 100%;
+            background-color: #e5e7eb;
+            z-index: -1;
+        }
+
+        .fade-in-section > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s,
+                        transform 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s;
+        }
+
+        .fade-in-section.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-light-lavender">
@@ -114,15 +135,6 @@
                                 <p class="text-dark-blue/70">Ph.D. in Management, Class of 2023</p>
                             </div>
                         </div>
-                        <script>
-                            requestAnimationFrame(() => {
-                                const activeContent = currentContentWrapper.querySelector('.program-content.active');
-                                if (activeContent) {
-                                    const newHeight = activeContent.scrollHeight + 'px';
-                                    currentContentWrapper.style.height = newHeight;
-                                }
-                            });
-                        </script>
                     </div>
                 </div>
                 <div class="order-1 lg:order-2 h-full flex">
