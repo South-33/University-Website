@@ -233,6 +233,20 @@ main.spa-transition {
     line-height: 1.4;
 }
 
+/* Add any additional global styles here */
+
+/* Lazy-loading image styles */
+img.lazy-load {
+    /* Start with low opacity to fade in */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+img.lazy-load.is-loaded {
+    /* Fade to full opacity once loaded */
+    opacity: 1;
+}
+
 /* Elegant fade to background system */
 main {
     position: relative;

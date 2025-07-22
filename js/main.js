@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // --- Initialize dynamic features ---
+        initializeLazyLoading(document);
+
         // --- Make the page visible ---
         // The body starts as transparent (from CSS) and fades in.
         document.body.classList.add('is-visible');
@@ -380,6 +383,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Trigger animations for new content
                 triggerPageAnimations(document.querySelector('main'));
                 
+                // Apply lazy loading to the new content
+                initializeLazyLoading(document.querySelector('main'));
+                
                 // Fade page back in - only affect main content, not header
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
@@ -402,6 +408,48 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'instant' });
     }
     
+
+
+    // =========================================================================
+    //  LAZY LOADING
+    // =========================================================================
+
+    let lazyLoadObserver;
+
+    /**
+     * Initializes lazy loading for images within a given container.
+     * Uses IntersectionObserver to load images only when they are close to the viewport.
+     * @param {HTMLElement} container - The element to search for lazy-load images within.
+     */
+    function initializeLazyLoading(container) {
+        const lazyImages = container.querySelectorAll('img.lazy-load');
+
+        if (!lazyImages.length) return;
+
+        if (!lazyLoadObserver) {
+            lazyLoadObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.dataset.src;
+
+                        // Load the image
+                        img.src = src;
+
+                        // Optional: Add a 'loaded' class for fade-in animations
+                        img.classList.add('is-loaded');
+
+                        // Stop observing the image once loaded
+                        observer.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '0px 0px 200px 0px' }); // Start loading 200px before it enters the viewport
+        }
+
+        lazyImages.forEach(image => {
+            lazyLoadObserver.observe(image);
+        });
+    }
 
 
     // =========================================================================
@@ -719,6 +767,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+    /**
+     * Handles the click event on a program tab to scroll the relevant section into view.
+     * This is made globally available to be called from inline scripts on program pages.
+     * @param {HTMLElement} tabEl - The tab element that was clicked.
+     */
+    window.handleProgramTabClick = function(tabEl) {
+        const programSection = tabEl.closest('.program-tabs-section');
+        if (!programSection) {
+            console.warn('Could not find the program container to scroll to.');
+            return;
+        }
+
+        const header = document.querySelector('header');
+        let headerOffset = 0;
+
+        // On desktop screens (>= 768px), the header is sticky and visible.
+        // We need to account for its height.
+        if (window.innerWidth >= 768 && header) {
+            headerOffset = header.offsetHeight;
+        }
+
+        // On mobile, the header hides on scroll, so no offset is needed.
+
+        const sectionTop = programSection.getBoundingClientRect().top + window.pageYOffset;
+        const scrollToPosition = sectionTop - headerOffset;
+
+        window.scrollTo({
+            top: scrollToPosition,
+            behavior: 'smooth'
+        });
+    };
     
     // Error handling utilities
     function showErrorMessage(message, duration = 5000) {
