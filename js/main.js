@@ -1340,5 +1340,242 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // =========================================================================
+    //  GLOBAL IMAGE OPTIMIZATION SYSTEM
+    //  Applied to all pages for smooth loading and better performance
+    // =========================================================================
+    
+    /**
+     * Initialize comprehensive image optimization for the current page
+     */
+    function initializeImageOptimization() {
+        preloadCriticalImages();
+        setupLazyLoading();
+        optimizeImageContainers();
+        setupImageErrorHandling();
+    }
+    
+    /**
+     * Preload critical images based on page content
+     */
+    function preloadCriticalImages() {
+        // Get all images that should be preloaded (hero images, logos, etc.)
+        const criticalImages = document.querySelectorAll('img[fetchpriority="high"], .hero-image-container img, header img, .critical-image');
+        
+        // Also find images in the first viewport
+        const firstViewportImages = document.querySelectorAll('img');
+        const viewportHeight = window.innerHeight;
+        
+        const imagesToPreload = new Set();
+        
+        // Add critical images
+        criticalImages.forEach(img => {
+            if (img.src) imagesToPreload.add(img.src);
+        });
+        
+        // Add images in first viewport
+        firstViewportImages.forEach(img => {
+            const rect = img.getBoundingClientRect();
+            if (rect.top < viewportHeight && img.src) {
+                imagesToPreload.add(img.src);
+            }
+        });
+        
+        // Preload the images
+        imagesToPreload.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                // Mark original images as preloaded
+                document.querySelectorAll(`img[src="${src}"]`).forEach(originalImg => {
+                    originalImg.classList.add('preloaded');
+                });
+            };
+        });
+    }
+    
+    /**
+     * Setup lazy loading with intersection observer
+     */
+    function setupLazyLoading() {
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window && lazyImages.length > 0) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        
+                        // Add loaded class for animation
+                        img.classList.add('loaded');
+                        
+                        // Mark container as loaded
+                        const container = img.closest('.image-container, .content-image-container, .hero-image-container');
+                        if (container) {
+                            container.classList.add('loaded');
+                        }
+                        
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            });
+            
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+                
+                // Also listen for load event
+                img.addEventListener('load', () => {
+                    img.classList.add('loaded');
+                    const container = img.closest('.image-container, .content-image-container, .hero-image-container');
+                    if (container) {
+                        container.classList.add('loaded');
+                    }
+                });
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            lazyImages.forEach(img => {
+                img.classList.add('loaded');
+            });
+        }
+    }
+    
+    /**
+     * Optimize image containers to prevent layout shift
+     */
+    function optimizeImageContainers() {
+        const images = document.querySelectorAll('img');
+        
+        images.forEach(img => {
+            // Skip if already optimized
+            if (img.closest('.image-container, .content-image-container, .hero-image-container, .avatar-container')) {
+                return;
+            }
+            
+            // Determine container type based on image context
+            let containerClass = 'image-container';
+            
+            if (img.closest('section[class*="hero"], .hero')) {
+                containerClass = 'hero-image-container';
+            } else if (img.classList.contains('rounded-full') || img.closest('.testimonial, .avatar')) {
+                containerClass = 'avatar-container';
+            } else if (img.closest('.gallery, .content, main')) {
+                containerClass = 'content-image-container';
+            }
+            
+            // Wrap image in container if it's not already wrapped
+            const parent = img.parentElement;
+            if (!parent.classList.contains(containerClass)) {
+                const container = document.createElement('div');
+                container.className = containerClass;
+                
+                // Copy relevant styles from parent
+                const computedStyle = window.getComputedStyle(parent);
+                if (computedStyle.position === 'relative' || computedStyle.position === 'absolute') {
+                    container.style.position = computedStyle.position;
+                }
+                
+                parent.insertBefore(container, img);
+                container.appendChild(img);
+            }
+        });
+    }
+    
+    /**
+     * Setup error handling for failed image loads
+     */
+    function setupImageErrorHandling() {
+        const images = document.querySelectorAll('img');
+        
+        images.forEach(img => {
+            img.addEventListener('error', function() {
+                // Add error class for styling
+                this.classList.add('image-error');
+                
+                // Try to provide a fallback
+                if (this.dataset.fallback) {
+                    this.src = this.dataset.fallback;
+                } else if (this.alt) {
+                    // Create a placeholder with alt text
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'image-placeholder';
+                    placeholder.textContent = this.alt;
+                    placeholder.style.cssText = `
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: #f3f4f6;
+                        color: #6b7280;
+                        font-size: 0.875rem;
+                        text-align: center;
+                        padding: 1rem;
+                        min-height: 100px;
+                        width: 100%;
+                        height: 100%;
+                    `;
+                    
+                    this.parentElement.replaceChild(placeholder, this);
+                }
+            });
+        });
+    }
+    
+    /**
+     * Preload images for a specific page (used in SPA navigation)
+     */
+    function preloadPageImages(pageContent) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = pageContent;
+        
+        const images = tempDiv.querySelectorAll('img');
+        const imageUrls = Array.from(images)
+            .map(img => img.src || img.getAttribute('src'))
+            .filter(src => src && !src.startsWith('data:'));
+        
+        // Preload first few images
+        imageUrls.slice(0, 5).forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
+    
+    /**
+     * Add image optimization to page initialization
+     */
+    const originalInitializeSite = initializeSite;
+    initializeSite = function() {
+        originalInitializeSite();
+        initializeImageOptimization();
+    };
+    
+    /**
+     * Re-initialize image optimization after SPA navigation
+     */
+    const originalTriggerPageAnimations = triggerPageAnimations;
+    triggerPageAnimations = function(container) {
+        originalTriggerPageAnimations(container);
+        
+        // Re-run image optimization for new content
+        if (container === document) {
+            initializeImageOptimization();
+        } else {
+            // Optimize images in the specific container
+            const images = container.querySelectorAll('img[loading="lazy"]');
+            if (images.length > 0) {
+                setupLazyLoading();
+            }
+        }
+    };
+    
+    // Export for use in page-specific scripts
+    window.imageOptimization = {
+        preloadCriticalImages,
+        setupLazyLoading,
+        optimizeImageContainers,
+        preloadPageImages
+    };
 
 });

@@ -189,9 +189,10 @@ main.spa-transition {
         position: fixed;
         left: 1rem;
         right: 1rem;
-        width: auto;
-        margin-left: 0;
-        margin-right: 0;
+        top: 4rem;
+        max-height: calc(100vh - 6rem);
+        overflow-y: auto;
+        z-index: 9999;
     }
 }
 
@@ -272,19 +273,134 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure header and footer stay on top with proper hierarchy */
-header {
+/* Ensure header and footer stay on top */
+header, footer {
     position: relative;
-    z-index: 10000; /* Highest - always above everything */
-    isolation: isolate; /* Create new stacking context to isolate from page effects */
-    will-change: transform; /* Optimize for animations */
-    transform: translateZ(0); /* Force hardware acceleration and new layer */
+    z-index: 1000;
 }
 
-footer {
-    position: relative;
-    z-index: 9000; /* High but below header */
-    isolation: isolate;
+/* =========================================================================
+   GLOBAL IMAGE OPTIMIZATION SYSTEM
+   Provides smooth loading, lazy loading animations, and layout shift prevention
+   ========================================================================= */
+
+/* Base image optimizations */
+img {
     will-change: transform;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
     transform: translateZ(0);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Lazy loading fade-in animation */
+img[loading="lazy"] {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+img[loading="lazy"].loaded,
+img.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Preloaded images show immediately */
+img.preloaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Image containers to prevent layout shift */
+.hero-image-container,
+.content-image-container,
+.image-container {
+    background-color: #f3f4f6;
+    background-image: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-image-container {
+    background-color: #1f2937;
+    background-image: linear-gradient(90deg, #1f2937 0%, #374151 50%, #1f2937 100%);
+}
+
+.avatar-container {
+    background-color: #f9fafb;
+    background-image: linear-gradient(90deg, #f9fafb 0%, #f3f4f6 50%, #f9fafb 100%);
+    border-radius: 50%;
+}
+
+/* Stop shimmer when image loads */
+.hero-image-container.loaded,
+.content-image-container.loaded,
+.image-container.loaded,
+.avatar-container.loaded {
+    animation: none;
+    background: transparent;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Error handling */
+img.image-error {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+.image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f4f6;
+    color: #6b7280;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 1rem;
+    min-height: 100px;
+    border-radius: 0.375rem;
+}
+
+/* Responsive optimizations */
+@media (max-width: 768px) {
+    img {
+        image-rendering: auto;
+    }
+    
+    .hero-image-container,
+    .content-image-container,
+    .image-container {
+        animation-duration: 2s;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    img {
+        transition: opacity 0.1s ease-in-out;
+        transform: none !important;
+    }
+    
+    img[loading="lazy"] {
+        transform: none;
+    }
+    
+    .hero-image-container,
+    .content-image-container,
+    .image-container,
+    .avatar-container {
+        animation: none;
+    }
 }
