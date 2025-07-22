@@ -120,41 +120,139 @@
             </div>
         </section>
 
-        <!-- 4. Events & Activities -->
-        <section class="py-16 md:py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Events & Activities</h2>
-                    <p class="mt-4 text-lg text-gray-600">There's always something happening on campus. Here are some of our signature events.</p>
-                </div>
-                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Event Card -->
-                    <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?q=80&w=2070&auto=format&fit=crop" alt="Cultural Festival" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold">Cultural Festival</h3>
-                            <p class="mt-2 text-gray-600">An annual celebration of the diverse cultures within our university community, featuring food, music, and dance.</p>
-                        </div>
-                    </div>
-                    <!-- Event Card -->
-                    <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop" alt="Welcome Week" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold">Welcome Week</h3>
-                            <p class="mt-2 text-gray-600">A week full of events, fairs, and mixers to help new students connect and find their way around campus.</p>
-                        </div>
-                    </div>
-                    <!-- Event Card -->
-                    <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2132&auto=format&fit=crop" alt="Hackathon" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold">Annual Hackathon</h3>
-                            <p class="mt-2 text-gray-600">A 48-hour challenge where students collaborate to build innovative solutions to real-world problems.</p>
-                        </div>
-                    </div>
+        <!--
+    PAGE: STUDENT ACTIVITIES & COMPETITIONS
+    =======================================
+    This code should be placed within the <main class="pt-20"> tag in your page file.
+    - It assumes the page is located in a subdirectory (e.g., /student-activities/index.html).
+    - All image paths are set to `../Picture/` accordingly.
+    - All videos are placeholders and should be replaced with actual university footage.
+    - Fade-in animations are applied using the global `fade-in-section` class.
+-->
+
+<!-- Section 2: Introduction with Left-Aligned Video -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
+            <div class="w-full rounded-lg shadow-xl overflow-hidden">
+                <video class="w-full h-full object-cover" src="NUM/Video/aa.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="prose max-w-none prose-lg">
+                <h2 class="text-3xl font-bold text-slate-900">Learning Beyond the Classroom</h2>
+                <p>Through exciting student competitions, we empower learning outside the traditional classroom. These moments challenge our students to code, design, build, and present—and grow in the process. We believe that practical application and spirited competition are key to unlocking potential.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Activities Grouped by Theme -->
+<div class="py-16 md:py-24 bg-sky-50/50">
+    <div class="container mx-auto px-6 space-y-20">
+
+        <!-- Theme 1: Coding & Problem-Solving -->
+        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
+            <figure class="w-full">
+                <img src="../Picture/activity-coding.jpg" alt="Students at a coding competition" class="rounded-lg shadow-2xl object-cover w-full h-auto">
+            </figure>
+            <div class="prose max-w-none prose-lg">
+                <h3 class="text-2xl font-bold text-sky-800">🧠 Coding & Problem-Solving</h3>
+                <p>Our annual hackathons and coding challenges bring together the brightest minds to tackle real-world problems. Participants develop innovative software solutions, pushing the boundaries of technology and teamwork.</p>
+                <ul class="mt-4">
+                    <li>48-hour intensive hackathons</li>
+                    <li>Industry-sponsored coding competitions</li>
+                    <li>Workshops on emerging technologies</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Theme 2: Robotics & Engineering -->
+        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
+            <div class="prose max-w-none prose-lg md:order-last">
+                <h3 class="text-2xl font-bold text-sky-800">🤖 Robotics & Engineering</h3>
+                <p>From autonomous vehicles to sophisticated robotic arms, our students design, build, and compete. These events foster mechanical and electrical engineering skills, providing a platform for hands-on innovation.</p>
+                 <ul class="mt-4">
+                    <li>National robotics tournament participation</li>
+                    <li>In-house "Battle Bots" league</li>
+                    <li>Projects focused on sustainable engineering</li>
+                </ul>
+            </div>
+            <figure class="w-full">
+                <img src="../Picture/activity-robotics.jpg" alt="Students working on a robotics project" class="rounded-lg shadow-2xl object-cover w-full h-auto">
+            </figure>
+        </div>
+
+        <!-- Theme 3: Innovation & Popularity Contests -->
+        <div class="text-center fade-in-section">
+            <figure class="w-full max-w-4xl mx-auto">
+                <img src="../Picture/activity-innovation-wide.jpg" alt="Students presenting an innovative project to an audience" class="rounded-lg shadow-2xl object-cover w-full h-auto">
+            </figure>
+            <div class="prose max-w-3xl prose-lg mx-auto mt-8">
+                <h3 class="text-2xl font-bold text-sky-800">🎨 Innovation & Popularity Contests</h3>
+                <p>Our annual Innovation Fair celebrates creative ideas that can change the world. Students pitch their ventures to a panel of experts and the university community, competing for funding and recognition in categories like social impact and commercial viability.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Section 4: Highlight Reel with Right-Aligned Video -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
+            <div class="prose max-w-none prose-lg md:order-last">
+                 <div class="w-full rounded-lg shadow-xl overflow-hidden">
+                    <video class="w-full h-full object-cover" src="../Picture/video-placeholder-highlight-reel.mp4" autoplay muted loop playsinline></video>
                 </div>
             </div>
-        </section>
+            <div class="text-center md:text-left">
+                <blockquote class="text-3xl font-semibold italic text-slate-900">
+                    <p>“Students learn best when they’re having fun and facing challenges head-on. That’s where real growth happens.”</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Summary & Student Voice -->
+<section class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-6 fade-in-section">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+            
+            <!-- Student Testimonial -->
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <img class="w-24 h-24 rounded-full mx-auto -mt-16 border-4 border-white shadow-md" src="../Picture/testimonial-student.jpg" alt="Photo of a smiling student">
+                <p class="mt-4 text-slate-600 italic">"The hackathon was the most intense and rewarding experience of my university life. My team and I built something we were proud of in just two days."</p>
+                <cite class="mt-4 block font-bold text-slate-800">- Alex Johnson, Computer Science</cite>
+            </div>
+
+            <!-- Organizer Quote -->
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <img class="w-24 h-24 rounded-full mx-auto -mt-16 border-4 border-white shadow-md" src="../Picture/testimonial-organizer.jpg" alt="Photo of a faculty member">
+                <p class="mt-4 text-slate-600 italic">"Seeing the ingenuity on display every year is inspiring. We provide the platform, but the students bring the magic and fierce competition."</p>
+                <cite class="mt-4 block font-bold text-slate-800">- Dr. Emily Carter, Faculty Organizer</cite>
+            </div>
+
+            <!-- Impact Stat -->
+            <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col justify-center items-center">
+                <img class="w-20 h-20" src="../Picture/icon-badge.svg" alt="Impact Badge Icon">
+                <p class="mt-4 text-5xl font-bold text-sky-600">300+</p>
+                <p class="mt-2 text-slate-600 font-semibold">Participants in Last Year's Events</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Footer with Call-to-Action -->
+<section class="bg-slate-800 text-white">
+    <div class="container mx-auto px-6 py-12 text-center fade-in-section">
+        <h2 class="text-3xl font-bold">Ready to Get Involved?</h2>
+        <p class="mt-2 text-slate-300">Explore our full gallery of past events and see the highlights for yourself.</p>
+        <div class="mt-8">
+            <a href="#" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition-colors">View Full Gallery</a>
+        </div>
+    </div>
+</section>
 
         <!-- 5. Leadership & Volunteering -->
         <section class="py-16 md:py-20 bg-gray-50">
