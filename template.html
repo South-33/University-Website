@@ -28,24 +28,25 @@
         ADD YOUR PAGE-SPECIFIC CSS HERE
         ===============================
         
-        ✅ FADE-IN ANIMATIONS: Already included in global CSS (main.css)
-        Just add class="fade-in-section" to any element you want to animate!
+        Benefits of inline styles:
+        - Self-contained pages for team collaboration
+        - No conflicts with other developers' CSS files
+        - Works perfectly with SPA navigation
+        - Easy to debug and maintain
         
-        ✅ SPA NAVIGATION: Already configured in main.js
-        All links automatically work with smooth page transitions!
+        Common patterns you can copy:
         
-        ✅ HEADER & FOOTER: Automatically loaded via main.js
-        No need to manually include them!
+        1. FADE-IN ANIMATIONS:
+        Use .fade-in-section class - animations are handled globally by main.css
+        No need to add CSS - just use class="fade-in-section" on elements
         
-        Benefits of this template:
-        - Uses global CSS for consistent animations
-        - No conflicting fade-in styles
-        - Perfect SPA navigation out of the box
-        - Clean, maintainable code structure
+        2. IMAGE OPTIMIZATION:
+        Images are automatically optimized by the global system in main.js
+        Use: loading="lazy" decoding="async" for better performance
+        Critical images are preloaded automatically
         
-        Common patterns you can add:
-        
-        1. TAB FUNCTIONALITY:
+        3. TAB FUNCTIONALITY:
+        */
         .program-tab {
             padding: 0.75rem 1.5rem;
             border-radius: 9999px;
@@ -79,12 +80,6 @@
             visibility: visible;
             position: static;
         }
-        
-        2. CUSTOM COMPONENTS:
-        Add your page-specific styles here...
-        */
-        
-        /* Removed conflicting fade-in-section styles - using global CSS instead */
     </style>
 </head>
 <body class="bg-light-lavender">
@@ -163,22 +158,13 @@
         ADD YOUR PAGE-SPECIFIC JS HERE
         ===============================
         
-        ✅ FADE-IN ANIMATIONS: Already handled by main.js!
-        No need to write animation code - just add class="fade-in-section"
+        Benefits of inline JavaScript:
+        - Self-contained functionality
+        - No conflicts with teammates' JS files
+        - Works perfectly with SPA navigation
+        - Easy to debug and maintain
         
-        ✅ SPA NAVIGATION: Already configured in main.js!
-        All internal links work automatically with smooth transitions
-        
-        ✅ HEADER & FOOTER: Automatically loaded and functional!
-        Mobile menu, search, and all navigation works out of the box
-        
-        Benefits of this template:
-        - Clean separation of concerns
-        - No duplicate animation code
-        - SPA-compatible by default
-        - Easy to maintain and debug
-        
-        COMMON PATTERNS YOU CAN ADD:
+        COMMON PATTERNS:
         
         1. TAB FUNCTIONALITY (copy this if you have tabs):
         
@@ -227,7 +213,13 @@
             });
         }
         
-        2. FORM HANDLING:
+        2. CUSTOM ANIMATIONS:
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Your custom animation code here
+        });
+        
+        3. FORM HANDLING:
         
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('#your-form');
@@ -235,16 +227,8 @@
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
                     // Handle form submission
-                    console.log('Form submitted!');
                 });
             }
-        });
-        
-        3. CUSTOM INTERACTIONS:
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add your custom JavaScript here
-            // Examples: modals, carousels, custom animations, etc.
         });
         */
     </script>
