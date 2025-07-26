@@ -33,7 +33,6 @@
         '/academic-ecosystem/research': '/academic-ecosystem/research.html',
         '/academic-ecosystem/partners': '/academic-ecosystem/partners.html',
         '/academic-ecosystem/innovation': '/academic-ecosystem/innovation.html',
-        '/contact': '/contact.html',
         
         // Faculty pages
         '/programs/bachelors/management': '/programs/bachelors/faculty-of-management.html',
