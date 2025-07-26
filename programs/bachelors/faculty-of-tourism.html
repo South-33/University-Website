@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Tourism - National University of Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../js/theme.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <style>
+        .font-heading {
+            font-family: 'Lora', serif;
+        }
+        .font-body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .bg-dark-blue {
+            background-color: #0A0B3D;
+        }
+        .bg-light-lavender {
+            background-color: #f3f4f9;
+        }
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        
+    </style>
+</head>
+<body class="bg-light-lavender">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center text-center text-white font-body">
+            <div class="absolute inset-0">
+                <img src="https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tourism and hospitality background" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-dark-blue/75"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
+                <h1 class="font-heading text-4xl md:text-6xl mb-4">Faculty of Tourism</h1>
+                <p class="text-lg md:text-xl text-white/90">Discover the world of hospitality and tourism through comprehensive training, cultural understanding, and service excellence.</p>
+            </div>
+        </section>
+
+        <!-- Career Pathways Section -->
+        <section class="bg-light-lavender py-24 font-body border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5 text-center fade-in-section" id="stats-section">
+                <div class="">
+                    <h2 class="font-heading text-4xl md:text-5xl mb-6">Your Tourism Career Awaits</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-4xl mx-auto mb-12">Our graduates are employed by leading hotels, resorts, travel agencies, and tourism boards worldwide. A degree from our faculty opens doors to exciting careers in hospitality management, tour operations, and sustainable tourism development.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto">
+                        <div class="bg-dark-blue/10 rounded-xl p-6 text-center hover:bg-dark-blue/20 transition-colors duration-300">
+                            <div class="text-4xl font-bold mb-2 text-dark-blue counter" data-target="91" data-suffix="%+">0%+</div>
+                            <div class="text-sm text-dark-blue/70 font-medium">Employment Rate</div>
+                        </div>
+                        <div class="bg-dark-blue/10 rounded-xl p-6 text-center hover:bg-dark-blue/20 transition-colors duration-300">
+                            <div class="text-4xl font-bold mb-2 text-dark-blue counter" data-target="120" data-suffix="+">0+</div>
+                            <div class="text-sm text-dark-blue/70 font-medium">Tourism Partners</div>
+                        </div>
+                        <div class="bg-dark-blue/10 rounded-xl p-6 text-center hover:bg-dark-blue/20 transition-colors duration-300">
+                            <div class="text-4xl font-bold mb-2 text-dark-blue counter" data-target="22" data-suffix="+">0+</div>
+                            <div class="text-sm text-dark-blue/70 font-medium">Years Excellence</div>
+                        </div>
+                        <div class="bg-dark-blue/10 rounded-xl p-6 text-center hover:bg-dark-blue/20 transition-colors duration-300">
+                            <div class="text-4xl font-bold mb-2 text-dark-blue counter" data-target="85" data-suffix="%">0%</div>
+                            <div class="text-sm text-dark-blue/70 font-medium">Industry Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Details Section -->
+        <section class="bg-white py-24 font-body border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5 fade-in-section">
+                <div class="space-y-12">
+                    <!-- Program Detail: Tourism Management -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3">
+                            <img src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Tourism management professionals">
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Tourism Management</h3>
+                                <p class="text-dark-blue/80 mb-6">Master the art of creating memorable travel experiences. This comprehensive program covers destination management, tourism planning, and sustainable tourism practices to prepare you for leadership roles in the global tourism industry.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Tourism Planning & Development</li>
+                                    <li>Destination Marketing</li>
+                                    <li>Sustainable Tourism Practices</li>
+                                    <li>Tourism Economics & Policy</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="tourism-management.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Program Detail: Hospitality Management -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3">
+                            <img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Luxury hotel lobby">
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Hospitality Management</h3>
+                                <p class="text-dark-blue/80 mb-6">Excel in the dynamic hospitality industry. Learn hotel operations, guest services, food & beverage management, and event planning to create exceptional experiences for travelers and guests worldwide.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Hotel Operations Management</li>
+                                    <li>Food & Beverage Service</li>
+                                    <li>Event Planning & Management</li>
+                                    <li>Guest Relations & Service Excellence</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="hospitality-management.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet Our Expert Faculty -->
+        <section class="bg-light-lavender py-24 font-body border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5 text-center fade-in-section">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Meet Our Expert Faculty</h2>
+                <p class="text-lg text-dark-blue/80 mb-12 max-w-3xl mx-auto">Our faculty are more than just teachers; they are
+                    mentors, researchers, and industry leaders dedicated to your success.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 pt-12">
+                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Dr. Chanthy Lim"
+                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
+                        <div class="pt-12">
+                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Dr. Chanthy Lim</h4>
+                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Dean, Faculty of Tourism</p>
+                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Leading sustainable tourism development with 20+ years of
+                                industry experience.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Prof. Sokha Phan"
+                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
+                        <div class="pt-12">
+                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Prof. Sokha Phan</h4>
+                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Hospitality Management Director</p>
+                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Former hotel executive specializing in luxury hospitality
+                                and guest experience excellence.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Dr. Veasna Ros"
+                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
+                        <div class="pt-12">
+                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Dr. Veasna Ros</h4>
+                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Cultural Tourism Specialist</p>
+                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Expert in heritage preservation and cultural tourism
+                                development across Southeast Asia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script src="../../js/main.js" data-base-path="../.."></script>
+    
+    <script>
+        // Counter Animation Function
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const suffix = element.getAttribute('data-suffix') || '';
+            const startTime = performance.now();
+            
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(start + (target - start) * easeOutQuart);
+                
+                element.textContent = current + suffix;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+        
+        // Initialize stats animation - exposed to window for SPA navigation
+        function initializeStatsAnimation() {
+            const statsSection = document.getElementById('stats-section');
+            if (!statsSection) return;
+            
+            // Reset counters to initial state
+            const counters = statsSection.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const suffix = counter.getAttribute('data-suffix') || '';
+                counter.textContent = '0' + suffix;
+            });
+            
+            // Start animations with a small delay and stagger them
+            setTimeout(() => {
+                counters.forEach((counter, index) => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    // Stagger the animations for a more dynamic effect
+                    setTimeout(() => {
+                        animateCounter(counter, target, 2500);
+                    }, index * 200);
+                });
+            }, 250); // Small delay to ensure smooth animation start
+        }
+        
+        // Expose function to window for SPA navigation
+        window.initializeStatsAnimation = initializeStatsAnimation;
+        
+        // Initialize on DOM load (for direct page access)
+        document.addEventListener('DOMContentLoaded', initializeStatsAnimation);
+        
+        // Also initialize immediately if DOM is already loaded (for SPA navigation)
+        if (document.readyState === 'loading') {
+            // DOM is still loading, wait for DOMContentLoaded
+        } else {
+            // DOM is already loaded, initialize immediately
+            initializeStatsAnimation();
+        }
+    </script>
+</body>
+</html>

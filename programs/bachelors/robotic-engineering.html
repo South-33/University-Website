@@ -76,6 +76,41 @@
             color: #4299e1;
             font-weight: bold;
         }
+
+        .faculty-card, .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .faculty-card:hover, .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #4f46e5; /* Indigo 600 */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca; /* Indigo 700 */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn-secondary:hover {
+            background-color: white;
+            color: #1e293b; /* Slate 800 */
+        }
     </style>
 </head>
 <body class="bg-light-lavender">
@@ -85,18 +120,21 @@
     <main>
         <!-- Hero Section -->
         <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center text-center text-white font-body">
-            <div class="absolute inset-0">
-                <img src="https://images.pexels.com/photos/7759931/pexels-photo-7759931.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Advanced robotic arm in a lab" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-dark-blue/75"></div>
+            <div class="absolute inset-0 overflow-hidden">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="https://videos.pexels.com/video-files/8327799/8327799-hd_1920_1080_25fps.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute inset-0 bg-dark-blue/60"></div>
             </div>
             <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
                 <h1 class="font-heading text-4xl md:text-6xl mb-4">Bachelor of Science in Robotic Engineering</h1>
-                <p class="text-lg md:text-xl text-white/90">Build the future of automation and artificial intelligence with our hands-on engineering program.</p>
+                <p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">Build the future of automation and artificial intelligence with our hands-on, industry-focused engineering program.</p>
             </div>
         </section>
 
         <!-- Program Overview Section -->
-        <section class="bg-white py-24 font-body fade-in-section">
+        <section class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60">
             <div class="max-w-6xl mx-auto px-5">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div>
@@ -127,8 +165,44 @@
             </div>
         </section>
 
+        <!-- Why Choose NUM Section -->
+        <section class="bg-white py-24 font-body fade-in-section border-t border-gray-300/60">
+            <div class="max-w-7xl mx-auto px-5">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Why Robotic Engineering at NUM?</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">We provide a world-class education with a focus on hands-on experience and industry relevance.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature 1: Expert Faculty -->
+                    <div class="text-center p-8">
+                        <div class="w-20 h-20 bg-light-lavender rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <svg class="w-10 h-10 text-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
+                        <h3 class="font-heading text-xl text-dark-blue mb-3">Expert Faculty</h3>
+                        <p class="text-dark-blue/80">Learn from leading researchers and practitioners who are pushing the boundaries of robotics and AI.</p>
+                    </div>
+                    <!-- Feature 2: Advanced Labs -->
+                    <div class="text-center p-8">
+                        <div class="w-20 h-20 bg-light-lavender rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <svg class="w-10 h-10 text-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="font-heading text-xl text-dark-blue mb-3">State-of-the-Art Labs</h3>
+                        <p class="text-dark-blue/80">Gain hands-on experience with industrial robots, autonomous systems, and advanced simulation software.</p>
+                    </div>
+                    <!-- Feature 3: Industry Connections -->
+                    <div class="text-center p-8">
+                        <div class="w-20 h-20 bg-light-lavender rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <svg class="w-10 h-10 text-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h3 class="font-heading text-xl text-dark-blue mb-3">Career-Focused Curriculum</h3>
+                        <p class="text-dark-blue/80">Our program is designed with industry input to ensure you graduate with the most in-demand skills.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Curriculum Section -->
-        <section class="bg-light-lavender py-24 font-body fade-in-section">
+        <section class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60">
             <div class="max-w-7xl mx-auto px-5">
                 <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">Program Curriculum</h2>
 
@@ -251,8 +325,44 @@
             </div>
         </section>
 
+        <!-- Student Projects Showcase -->
+        <section class="bg-white py-24 font-body fade-in-section border-t border-gray-300/60">
+            <div class="max-w-7xl mx-auto px-5">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Student Project Showcase</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">See what our students are creating. From autonomous drones to intelligent prosthetics, the possibilities are endless.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="bg-light-lavender rounded-xl overflow-hidden project-card">
+                        <img src="https://images.pexels.com/photos/7698767/pexels-photo-7698767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Autonomous delivery drone" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-dark-blue mb-2">Autonomous Delivery Drone</h3>
+                            <p class="text-dark-blue/80">A GPS-guided quadcopter for automated package delivery in urban environments, featuring obstacle avoidance AI.</p>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="bg-light-lavender rounded-xl overflow-hidden project-card">
+                        <img src="https://images.pexels.com/photos/220357/pexels-photo-220357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Robotic arm sorting objects" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-dark-blue mb-2">AI-Powered Sorting Robot</h3>
+                            <p class="text-dark-blue/80">A robotic arm that uses computer vision to identify and sort objects on a conveyor belt with 99% accuracy.</p>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="bg-light-lavender rounded-xl overflow-hidden project-card">
+                        <img src="https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Person using a smart prosthetic hand" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-dark-blue mb-2">Smart Prosthetic Hand</h3>
+                            <p class="text-dark-blue/80">A myoelectric prosthetic hand that interprets muscle signals to provide users with intuitive control and dexterity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Career Opportunities Section -->
-        <section class="bg-light-lavender py-24 font-body fade-in-section">
+        <section class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60">
             <div class="max-w-6xl mx-auto px-5">
                 <div class="text-center mb-16">
                     <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Career Opportunities</h2>
@@ -262,7 +372,7 @@
                 <!-- Career Cards Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Robotics Engineer -->
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-light-lavender rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="w-16 h-16 bg-dark-blue rounded-full flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
@@ -274,7 +384,7 @@
                     </div>
 
                     <!-- AI/ML Engineer -->
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-light-lavender rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="w-16 h-16 bg-dark-blue rounded-full flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -286,7 +396,7 @@
                     </div>
 
                     <!-- Automation Specialist -->
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-light-lavender rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="w-16 h-16 bg-dark-blue rounded-full flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
@@ -298,7 +408,7 @@
                     </div>
 
                     <!-- Control Systems Engineer -->
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-light-lavender rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="w-16 h-16 bg-dark-blue rounded-full flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
@@ -311,7 +421,7 @@
                     </div>
 
                     <!-- Embedded Systems Developer -->
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-light-lavender rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="w-16 h-16 bg-dark-blue rounded-full flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
@@ -323,7 +433,7 @@
                     </div>
 
                     <!-- Research Scientist -->
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-light-lavender rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="w-16 h-16 bg-dark-blue rounded-full flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.5 4a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2a.5.5 0 01.5-.5h2zM13.5 10a.5.5 0 00-.5.5v2a.5.5 0 00.5.5h2a.5.5 0 00.5-.5v-2a.5.5 0 00-.5-.5h-2z" clip-rule="evenodd"/>
@@ -344,6 +454,36 @@
                 </div>
             </div>
         </section>
+
+        <!-- Testimonials Section -->
+        <section class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">What Our Students Say</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">Our program empowers students to innovate and succeed. Hear directly from them.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8">
+                        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student photo" class="w-24 h-24 rounded-full object-cover flex-shrink-0">
+                        <div>
+                            <p class="text-dark-blue/80 text-lg italic mb-4">"The hands-on lab experience at NUM is unparalleled. I was building and programming robots from my first year, which gave me a huge advantage in my internships."</p>
+                            <p class="font-bold text-dark-blue">- Alex Johnson, Year 4</p>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8">
+                        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student photo" class="w-24 h-24 rounded-full object-cover flex-shrink-0">
+                        <div>
+                            <p class="text-dark-blue/80 text-lg italic mb-4">"The faculty are not just teachers; they are mentors. Their industry connections helped me land my dream job before I even graduated."</p>
+                            <p class="font-bold text-dark-blue">- Samantha Lee, Alumna</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
 
     </main>
 

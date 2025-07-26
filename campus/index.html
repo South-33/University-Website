@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="i18n-title" content="navigation.campus">
     <title>Campus - National University of Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,34 +11,36 @@
     <script src="https://cdn.tailwindcss.com  "></script>
     <script src="../js/theme.js"></script>
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/i18n.css">
 </head>
 <body class="bg-white">
     <div id="header-placeholder"></div>
     <main>
         <div class="bg-white pt-28 pb-16">
             <div class="max-w-6xl mx-auto px-5 text-center">
-                <h1 class="text-4xl md:text-5xl font-heading text-dark-blue">Our Campus</h1>
-                <p class="text-lg text-gray-700 font-body mt-4 max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-heading text-dark-blue" data-i18n="campus.title">Our Campus</h1>
+                <p class="text-lg text-gray-700 font-body mt-4 max-w-3xl mx-auto" data-i18n="campus.subtitle">
                     Explore our modern facilities and vibrant campus life.
                 </p>
             </div>
         </div>
         <div class="bg-light-lavender py-20">
             <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-10">
-                <a href="map.html" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
-                    <h2 class="text-2xl font-heading text-dark-blue">Map</h2>
-                    <p class="mt-2 font-body text-gray-600">Navigate our campus with our interactive map.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                <a href="/campus/map" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <h2 class="text-2xl font-heading text-dark-blue" data-i18n="navigation.map">Map</h2>
+                    <p class="mt-2 font-body text-gray-600" data-i18n="campus.map_description">Navigate our campus with our interactive map.</p>
+                    <span class="mt-4 inline-block text-dark-blue font-bold" data-i18n="common.learn_more">Learn More &rarr;</span>
                 </a>
-                <a href="facilities.html" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
-                    <h2 class="text-2xl font-heading text-dark-blue">Facilities</h2>
-                    <p class="mt-2 font-body text-gray-600">Discover our state-of-the-art labs, libraries, and student spaces.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More &rarr;</span>
+                <a href="/campus/facilities" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <h2 class="text-2xl font-heading text-dark-blue" data-i18n="navigation.facilities">Facilities</h2>
+                    <p class="mt-2 font-body text-gray-600" data-i18n="campus.facilities_description">Discover our state-of-the-art labs, libraries, and student spaces.</p>
+                    <span class="mt-4 inline-block text-dark-blue font-bold" data-i18n="common.learn_more">Learn More &rarr;</span>
                 </a>
             </div>
         </div>
     </main>
     <div id="footer-placeholder"></div>
+    <script src="../js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

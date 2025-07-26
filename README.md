@@ -17,11 +17,13 @@ Welcome to the university website project! This is a static website built with H
 
 1.  **Dynamic Header & Footer:** Instead of repeating HTML, each page uses placeholders (`<div id="header-placeholder"></div>`). The `js/main.js` script fetches the content from `_includes/header.html` and `_includes/footer.html` and injects it into the page on load.
 
-2.  **Centralized Styling:** The site's look and feel is controlled by a combination of Tailwind CSS and a central stylesheet.
+2.  **SPA Navigation with Clean URLs:** The site uses a hybrid Single Page Application (SPA) system that provides smooth page transitions while maintaining clean URLs without `.html` extensions. Users see URLs like `/programs/bachelors` instead of `/programs/bachelors.html`.
+
+3.  **Centralized Styling:** The site's look and feel is controlled by a combination of Tailwind CSS and a central stylesheet.
     -   **Theme Configuration:** Site-wide colors and fonts are defined in `js/theme.js` for Tailwind CSS.
     -   **Global Component Styles:** Custom styles for shared components, like the navigation menu and dropdown animations, are centralized in `css/main.css`. This ensures a consistent appearance and behavior across all pages.
 
-3.  **Centralized Scripts:** All interactive features, like the navigation menu, are managed in `js/main.js`. This avoids code duplication and makes updates easy.
+4.  **Centralized Scripts:** All interactive features, like the navigation menu and SPA navigation, are managed in `js/main.js`. This avoids code duplication and makes updates easy.
 
 ## Getting Started: Creating a New Page
 
@@ -31,6 +33,7 @@ Welcome to the university website project! This is a static website built with H
 
 ## Key Guidelines
 
+-   **Clean URLs:** Always use clean URLs without `.html` extensions for internal links (e.g., `/programs/bachelors` not `/programs/bachelors.html`). The SPA system handles the URL rewriting automatically.
 -   **Images:** Store all images in the `/Picture` folder.
     -   From `index.html`, link to them using `Picture/your-image.png`.
     -   From a page in a subdirectory (e.g., `/programs/bachelors.html`), link to them using `../Picture/your-image.png`.

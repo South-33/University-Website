@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="i18n-title" content="student_activities.title">
     <title>Student activity | Your University Name</title>
     
     <!-- Google Fonts -->
@@ -33,6 +34,7 @@
     
     <!-- RULE ADHERENCE: Loading centralized global styles. -->
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/i18n.css">
 
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -51,11 +53,11 @@
             
             <!-- Content -->
             <div class="relative z-10 w-full px-6">
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">Experience More Than Just Academics!</h1>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight" data-i18n="student_activities.hero_title">Experience More Than Just Academics!</h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-200" data-i18n="student_activities.hero_description">
                     Campus life at our university is a vibrant journey of personal growth, skill development, and lifelong friendships.
                 </p>
-                <a href="#clubs" class="mt-8 inline-block bg-teal-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-600 transition-all duration-300 transform hover:scale-105">
+                <a href="#clubs" class="mt-8 inline-block bg-teal-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-600 transition-all duration-300 transform hover:scale-105" data-i18n="student_activities.explore_clubs">
                     Explore Clubs
                 </a>
             </div>
@@ -64,8 +66,8 @@
         <!-- 2. Student Life Overview -->
         <section class="py-16 md:py-20 bg-white">
             <div class="max-w-4xl mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Life at Our University</h2>
-                <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900" data-i18n="student_activities.life_title">Life at Our University</h2>
+                <p class="mt-4 text-lg text-gray-600 leading-relaxed" data-i18n="student_activities.life_description">
                     We believe that true education extends far beyond the classroom. Student life here is about discovering new passions, connecting with diverse communities, and creating unforgettable memories. It's about finding your place and making your mark.
                 </p>
             </div>
@@ -340,6 +342,7 @@
     <div id="footer-placeholder"></div>
 
     <!-- RULE ADHERENCE: Primary application script with correct data-base-path -->
+    <script src="../js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
 
 </body>

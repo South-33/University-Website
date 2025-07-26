@@ -1,5 +1,61 @@
 // js/main.js
 
+    // =========================================================================
+    //  URL MAPPING SYSTEM FOR CLEAN URLS
+    // =========================================================================
+    
+    // Map clean URLs to actual file paths
+    const urlMapping = {
+        // Main pages
+        '/programs': '/programs/index.html',
+        '/programs/bachelors': '/programs/bachelors.html',
+        '/programs/doctoral': '/programs/doctoral.html',
+        '/programs/doctoral/phd': '/programs/phd.html',
+        '/programs/doctoral/dba': '/programs/dba.html',
+        '/programs/doctoral/public-policy': '/programs/public-policy.html',
+        '/study-with-us/admissions': '/study-with-us/admissions.html',
+        '/study-with-us/student-support': '/study-with-us/student-support.html',
+        '/study-with-us/student-mobility': '/study-with-us/student-mobility.html',
+        '/study-with-us/fees': '/study-with-us/fees.html',
+        '/campus': '/campus/index.html',
+        '/campus/map': '/campus/map.html',
+        '/campus/facilities': '/campus/facilities.html',
+        '/campus/main-campus-details': '/campus/main-campus-details.html',
+        '/campus/second-campus-details': '/campus/second-campus-details.html',
+        '/academic-ecosystem': '/academic-ecosystem/index.html',
+        '/academic-ecosystem/research': '/academic-ecosystem/research.html',
+        '/academic-ecosystem/partners': '/academic-ecosystem/partners.html',
+        '/academic-ecosystem/innovation': '/academic-ecosystem/innovation.html',
+        '/contact': '/contact.html',
+        
+        // Faculty pages
+        '/programs/bachelors/management': '/programs/bachelors/faculty-of-management.html',
+        '/programs/bachelors/finance': '/programs/bachelors/faculty-of-finance-and-accounting.html',
+        '/programs/bachelors/economics': '/programs/bachelors/faculty-of-economics.html',
+        '/programs/bachelors/tourism': '/programs/bachelors/faculty-of-tourism.html',
+        '/programs/bachelors/law': '/programs/bachelors/faculty-of-law.html',
+        '/programs/bachelors/digital-economy': '/programs/bachelors/faculty-of-digital-economy.html',
+        '/programs/bachelors/public-policy': '/programs/bachelors/faculty-of-public-policy.html',
+        '/programs/bachelors/foreign-languages': '/programs/bachelors/faculty-of-foreign-languages.html',
+        '/programs/bachelors/it': '/programs/bachelors/faculty-of-it.html'
+    };
+    
+    // Reverse mapping for converting file paths back to clean URLs
+    const reverseUrlMapping = {};
+    Object.entries(urlMapping).forEach(([cleanUrl, filePath]) => {
+        reverseUrlMapping[filePath] = cleanUrl;
+    });
+    
+    // Function to convert clean URL to file path
+    function getFilePathFromCleanUrl(cleanUrl) {
+        return urlMapping[cleanUrl] || cleanUrl;
+    }
+    
+    // Function to convert file path to clean URL
+    function getCleanUrlFromFilePath(filePath) {
+        return reverseUrlMapping[filePath] || filePath;
+    }
+
 document.addEventListener('DOMContentLoaded', function() {
 
     // =========================================================================
@@ -17,7 +73,18 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeHidingHeader();
         updateActiveNav();
         initializePageTransitions(); // The new, simple transition logic
+        handleCleanUrlAccess(); // Handle direct access to clean URLs
         triggerPageAnimations(document);
+        
+        // --- Initialize simple bilingual system ---
+        if (window.SimpleBilingualManager) {
+            try {
+                new SimpleBilingualManager();
+                console.log('✅ Bilingual system initialized');
+            } catch (error) {
+                console.error('Failed to initialize bilingual system:', error);
+            }
+        }
 
         // --- Run Page-Specific Logic ---
         // Call page-specific functions if they exist (exposed by page inline scripts)
@@ -135,23 +202,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 !link.hasAttribute('data-no-transition')) {
                 
                 e.preventDefault();
-                const destination = link.href;
+                let destination = link.href;
+                
+                // Convert file path to clean URL for display
+                const pathname = new URL(destination).pathname;
+                const cleanUrl = getCleanUrlFromFilePath(pathname);
+                const cleanDestination = new URL(destination);
+                cleanDestination.pathname = cleanUrl;
                 
                 // Don't transition if we're already on the same page
-                if (destination === window.location.href) {
+                if (cleanDestination.href === window.location.href) {
                     return;
                 }
                 
-                // Start simple fade transition
-                startPageTransition(destination);
+                // Start simple fade transition with clean URL
+                startPageTransition(cleanDestination.href, destination);
             }
         });
 
         // Handle browser back/forward navigation
         window.addEventListener('popstate', (e) => {
-            startPageTransition(window.location.href, false);
+            startPageTransition(window.location.href, null, false);
         });
-    }    
+    }
+    
+    // Handle direct access to clean URLs (when user types URL or refreshes)
+    function handleCleanUrlAccess() {
+        const currentPath = window.location.pathname;
+        const actualFilePath = getFilePathFromCleanUrl(currentPath);
+        
+        // If we have a mapping for this URL and we're not already on the actual file
+        if (actualFilePath !== currentPath && urlMapping[currentPath]) {
+            // This means user accessed a clean URL directly
+            // We need to update the browser URL to show the clean version
+            // but the page content is already loaded from the actual file
+            
+            // Update browser history to show clean URL without causing a reload
+            const title = document.title;
+            history.replaceState({ path: window.location.href }, title, window.location.href);
+        }
+    }
         
     // Simple page cache for better performance
     const pageCache = new Map();
@@ -175,18 +265,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function preloadPage(url) {
+        // Convert to actual file path for preloading
+        const pathname = new URL(url).pathname;
+        const actualFilePath = getFilePathFromCleanUrl(pathname);
+        let actualUrl = url;
+        
+        if (actualFilePath !== pathname) {
+            actualUrl = new URL(actualFilePath, window.location.origin).href;
+        }
+        
         // Don't preload if already cached or currently loading
-        if (pageCache.has(url) || preloadingUrls.has(url)) {
+        if (pageCache.has(actualUrl) || preloadingUrls.has(actualUrl)) {
             return;
         }
         
-        preloadingUrls.add(url);
+        preloadingUrls.add(actualUrl);
         
         // Use a shorter timeout for preloading to avoid blocking
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
         
-        fetch(url, { signal: controller.signal })
+        fetch(actualUrl, { signal: controller.signal })
             .then(response => {
                 clearTimeout(timeoutId);
                 if (!response.ok) {
@@ -200,16 +299,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
                 const title = titleMatch ? titleMatch[1] : 'NUM';
-                pageCache.set(url, { html, title, timestamp: Date.now() });
+                pageCache.set(actualUrl, { html, title, timestamp: Date.now() });
             })
             .catch(error => {
                 clearTimeout(timeoutId);
-                if (error.name !== 'AbortError') {
-                    console.warn('Failed to preload page:', url, error.message);
+                if (error.name !== 'AbortError' && !error.message.includes('404')) {
+                    console.warn('Failed to preload page:', actualUrl, error.message);
                 }
             })
             .finally(() => {
-                preloadingUrls.delete(url);
+                preloadingUrls.delete(actualUrl);
             });
     }
     
@@ -243,8 +342,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Simple transition timing
     let transitionStartTime = 0;
     
-    function startPageTransition(destination, pushState = true) {
+    function startPageTransition(cleanUrl, actualFilePath = null, pushState = true) {
         transitionStartTime = Date.now();
+        
+        // If no actual file path provided, try to get it from clean URL
+        if (!actualFilePath) {
+            const pathname = new URL(cleanUrl).pathname;
+            actualFilePath = getFilePathFromCleanUrl(pathname);
+            // If it's the same, it means no mapping exists, use as-is
+            if (actualFilePath === pathname) {
+                actualFilePath = cleanUrl;
+            } else {
+                // Convert relative path to full URL
+                actualFilePath = new URL(actualFilePath, window.location.origin).href;
+            }
+        }
         
         // Start fade out - only affect main content, not header
         const mainContent = document.querySelector('main');
@@ -253,39 +365,39 @@ document.addEventListener('DOMContentLoaded', function() {
             mainContent.style.transition = 'opacity 0.2s ease-out';
         }
         
-        // Get cached page or fetch new one
-        const cachedPage = getCachedPage(destination);
+        // Get cached page or fetch new one (use actual file path for caching)
+        const cachedPage = getCachedPage(actualFilePath);
         
         if (cachedPage) {
             // Use cached version
             setTimeout(() => {
                 try {
-                    loadNewPage(cachedPage.html, cachedPage.title, destination, pushState);
+                    loadNewPage(cachedPage.html, cachedPage.title, cleanUrl, pushState);
                 } catch (error) {
                     console.error('Error loading cached page:', error);
-                    handleTransitionError(destination, error);
+                    handleTransitionError(cleanUrl, error);
                 }
             }, 150);
         } else {
-            // Fetch new page with enhanced error handling
-            loadWithRetry(destination, 2, 500)
+            // Fetch new page with enhanced error handling (use actual file path)
+            loadWithRetry(actualFilePath, 2, 500)
                 .then(html => {
                     // Validate HTML content
                     if (!html || html.trim().length === 0) {
                         throw new Error('Empty response received');
                     }
                     
-                    // Cache the page
+                    // Cache the page (use actual file path as key)
                     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
                     const title = titleMatch ? titleMatch[1] : 'NUM';
-                    pageCache.set(destination, { html, title, timestamp: Date.now() });
+                    pageCache.set(actualFilePath, { html, title, timestamp: Date.now() });
                     
                     setTimeout(() => {
                         try {
-                            loadNewPage(html, title, destination, pushState);
+                            loadNewPage(html, title, cleanUrl, pushState);
                         } catch (error) {
                             console.error('Error loading new page:', error);
-                            handleTransitionError(destination, error);
+                            handleTransitionError(cleanUrl, error);
                         }
                     }, 150);
                 })
@@ -298,6 +410,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function loadNewPage(mainHTML, titleText, destination, pushState) {
         try {
+            // Smooth scroll to top FIRST, before any content changes
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            
             const parser = new DOMParser();
             const newDoc = parser.parseFromString(mainHTML, 'text/html');
             const newMain = newDoc.querySelector('main');
@@ -314,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update page title
             document.title = titleText;
             
-            // Update browser history
+            // Update browser history (use clean URL)
             if (pushState) {
                 history.pushState({ path: destination }, titleText, destination);
             }
@@ -403,9 +518,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 showErrorMessage('Some page features may not work properly.');
             }
         }
-        
-        // Smooth scroll to top
-        window.scrollTo({ top: 0, behavior: 'instant' });
     }
     
 
