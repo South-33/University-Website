@@ -8,21 +8,28 @@
     const urlMapping = {
         // Main pages
         '/programs': '/programs/index.html',
+        '/programs/': '/programs/index.html',
         '/programs/bachelors': '/programs/bachelors.html',
+        '/programs/masters': '/programs/masters.html',
         '/programs/doctoral': '/programs/doctoral.html',
-        '/programs/doctoral/phd': '/programs/phd.html',
-        '/programs/doctoral/dba': '/programs/dba.html',
-        '/programs/doctoral/public-policy': '/programs/public-policy.html',
+        '/study-with-us/': '/study-with-us/index.html',
         '/study-with-us/admissions': '/study-with-us/admissions.html',
         '/study-with-us/student-support': '/study-with-us/student-support.html',
         '/study-with-us/student-mobility': '/study-with-us/student-mobility.html',
         '/study-with-us/fees': '/study-with-us/fees.html',
+        '/student-activities/': '/student-activities/index.html',
+        '/student-activities/clubs': '/student-activities/clubs.html',
+        '/student-activities/events': '/student-activities/events.html',
+        '/student-activities/gallery': '/student-activities/gallery.html',
+        '/student-activities/student-voice': '/student-activities/student-voice.html',
         '/campus': '/campus/index.html',
+        '/campus/': '/campus/index.html',
         '/campus/map': '/campus/map.html',
         '/campus/facilities': '/campus/facilities.html',
         '/campus/main-campus-details': '/campus/main-campus-details.html',
         '/campus/second-campus-details': '/campus/second-campus-details.html',
         '/academic-ecosystem': '/academic-ecosystem/index.html',
+        '/academic-ecosystem/': '/academic-ecosystem/index.html',
         '/academic-ecosystem/research': '/academic-ecosystem/research.html',
         '/academic-ecosystem/partners': '/academic-ecosystem/partners.html',
         '/academic-ecosystem/innovation': '/academic-ecosystem/innovation.html',
@@ -37,7 +44,8 @@
         '/programs/bachelors/digital-economy': '/programs/bachelors/faculty-of-digital-economy.html',
         '/programs/bachelors/public-policy': '/programs/bachelors/faculty-of-public-policy.html',
         '/programs/bachelors/foreign-languages': '/programs/bachelors/faculty-of-foreign-languages.html',
-        '/programs/bachelors/it': '/programs/bachelors/faculty-of-it.html'
+        '/programs/bachelors/it': '/programs/bachelors/faculty-of-it.html',
+        '/programs/bachelors/robotic-engineering': '/programs/bachelors/robotic-engineering.html'
     };
     
     // Reverse mapping for converting file paths back to clean URLs
@@ -204,19 +212,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 let destination = link.href;
                 
-                // Convert file path to clean URL for display
+                // Get the pathname from the clicked link
                 const pathname = new URL(destination).pathname;
-                const cleanUrl = getCleanUrlFromFilePath(pathname);
-                const cleanDestination = new URL(destination);
-                cleanDestination.pathname = cleanUrl;
                 
                 // Don't transition if we're already on the same page
-                if (cleanDestination.href === window.location.href) {
+                if (destination === window.location.href) {
                     return;
                 }
                 
                 // Start simple fade transition with clean URL
-                startPageTransition(cleanDestination.href, destination);
+                // The destination is already a clean URL, so we pass it as the clean URL
+                // and let startPageTransition figure out the actual file path
+                startPageTransition(destination);
             }
         });
 
@@ -403,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(error => {
                     console.error('Page transition failed:', error);
-                    handleTransitionError(destination, error);
+                    handleTransitionError(cleanUrl, error);
                 });
         }
     }
