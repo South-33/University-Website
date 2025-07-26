@@ -9,7 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/theme.js"></script>
+    <script src="js/simple-i18n.js"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/i18n.css">
     
     <!-- Homepage-specific styles -->
     <style>
@@ -25,11 +27,49 @@
             height: calc(100vh - 80px);
             /* No transition - we want instant height changes to prevent layout shift */
         }
+        
+        /* Force perfect squares for bento grid 1x1 items */
+        .bento-square {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            height: 600px;
+        }
+        
+        @media (max-width: 1023px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                height: auto;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
     </style>
 </head>
 <body class="bg-light-lavender">
 
     <div id="header-placeholder"></div>
+    
+    <!-- Temporary Language Toggle for Homepage -->
+    <div class="fixed top-4 right-4 z-50">
+        <button class="language-toggle bg-dark-blue text-white px-4 py-2 rounded-full shadow-lg hover:bg-dark-blue/90 transition-colors">
+            <span class="lang-en">ខ្មែរ</span>
+            <span class="lang-km">EN</span>
+        </button>
+    </div>
 
     <main>
         <section id="hero" class="relative flex items-center justify-center overflow-hidden text-center text-white">
@@ -39,77 +79,118 @@
             <!-- Hero Content -->
             <div class="relative z-20 flex flex-col items-center justify-center h-full w-full">
                 <!-- Centered Title -->
-                <h1 class="font-heading text-4xl md:text-6xl text-center mb-8 drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">National University of Management</h1>
-                
+                <h1 class="font-heading text-4xl md:text-6xl text-center mb-8 drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+                    <span class="lang-en">National University of Management</span>
+                    <span class="lang-km">សាកលវិទ្យាល័យជាតិគ្រប់គ្រង</span>
+                </h1>
+                <p class="font-body text-lg md:text-xl max-w-3xl mx-auto drop-shadow-md" style="text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);">
+                    <span class="lang-en">A Hub of Research, Entrepreneurship, and Innovation for a Brighter Future.</span>
+                    <span class="lang-km">មជ្ឈមណ្ឌលនៃការស្រាវជ្រាវ ការបង្កើតអាជីវកម្ម និងការបង្កើតថ្មីសម្រាប់អនាគតដ៏ភ្លឺស្វាង។</span>
+                </p>
                 <!-- Lower Third Explore Link -->
                 <div class="absolute bottom-16">
                     <a href="#intro" class="explore-link flex flex-col items-center gap-4 text-3xl uppercase tracking-[2px] text-white drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
-                        <span>Explore</span>
+                        <span class="lang-en">Explore</span>
+                        <span class="lang-km">ស្វែងយល់</span>
                         <span class="animate-bounce text-[2.7rem]">↓</span>
                     </a>
                 </div>
             </div>
         </section>
 
-                        <section id="intro" class="bg-light-lavender py-20">
+        <section id="intro" class="bg-light-lavender py-20">
             <div class="max-w-6xl mx-auto px-5 text-center">
-                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue leading-tight">National University of Management: <br>Research, Entrepreneurship, and Innovation</h2>
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue leading-tight">
+                    <span class="lang-en">A Legacy of Excellence, A Vision for the Future</span>
+                    <span class="lang-km">បេតិកភណ្ឌនៃឧត្តមភាព និងចក្ខុវិស័យសម្រាប់អនាគត</span>
+                </h2>
+                <p class="font-body text-lg text-dark-blue/80 max-w-4xl mx-auto mt-6">
+                    <span class="lang-en">Since our inception, the National University of Management has been dedicated to developing competent, ethical, and socially responsible leaders. We champion a dynamic learning environment where quality education, impactful research, and groundbreaking innovation converge to shape the next generation of professionals.</span>
+                    <span class="lang-km">ចាប់តាំងពីការបង្កើតរបស់យើង សាកលវិទ្យាល័យជាតិគ្រប់គ្រងបានលះបង់ខ្លួនក្នុងការអភិវឌ្ឍមេដឹកនាំដែលមានសមត្ថភាព គុណធម៌ និងទំនួលខុសត្រូវចំពោះសង្គម។ យើងគាំទ្របរិយាកាសអប់រំដ៏សកម្មដែលការអប់រំមានគុណភាព ការស្រាវជ្រាវដែលមានឥទ្ធិពល និងការបង្កើតថ្មីដ៏ទំនើបបានបញ្ចូលគ្នាដើម្បីបង្កើតជំនាន់ថ្មីនៃអ្នកជំនាញ។</span>
+                </p>
             </div>
         </section>
 
+        <!-- Bento Grid Container - 2x3 Layout -->
         <section class="bg-white py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-8">
-                <!-- Welcome Card -->
-                <div class="relative flex items-end p-10 text-white rounded-[20px] bg-cover bg-center min-h-[500px]" style="background-image: url('https://images.pexels.com/photos/764529/pexels-photo-764529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-[20px]"></div>
-                    <div class="relative z-10 flex flex-col justify-end h-full">
-                        <div class="mt-auto">
-                            <h4 class="font-heading text-2xl mb-4">Our Mission & Vision</h4>
-                            <p class="mb-6">We are committed to developing competent and socially responsible human resources with high intellectual knowledge, skills, and ethics. Our key mission is to improve and apply the best quality standards in education, research, and innovation, transforming NUM into a leading research university in entrepreneurship and innovation.</p>
-                            <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
+            <div class="max-w-6xl mx-auto px-5">
+                <!-- 2x3 Bento Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style="grid-template-rows: repeat(2, 1fr); min-height: 500px;">
+                    
+                    <!-- Mission & Vision Card - Takes 1x2 space -->
+                    <div class="lg:col-span-1 lg:row-span-2">
+                        <div class="relative flex items-end p-10 text-white rounded-[20px] bg-cover bg-center h-full min-h-[300px]" style="background-image: url('https://images.pexels.com/photos/3816807/pexels-photo-3816807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-[20px]"></div>
+                            <div class="relative z-10">
+                                <h4 class="font-heading text-3xl md:text-4xl mb-6">Our Mission & Vision</h4>
+                                <p class="mb-8 text-lg leading-relaxed">We are committed to developing competent and socially responsible human resources with high intellectual knowledge, skills, and ethics. Our key mission is to improve and apply the best quality standards in education, research, and innovation.</p>
+                                <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity text-lg">Read More</a>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Personal Visit Card - Takes 2x1 space -->
+                    <div class="lg:col-span-2 lg:row-span-1">
+                        <div class="bg-dark-blue text-white p-8 rounded-[20px] h-full flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-heading text-2xl md:text-3xl mb-4">Explore</h4>
+                                <p class="mb-6 text-lg leading-relaxed">Discover our diverse range of programs, designed to foster critical thinking, creativity, and collaboration.</p>
+                            </div>
+                            <a href="#" class="bg-transparent border border-white text-white rounded-full px-6 py-3 inline-block font-medium hover:bg-white hover:text-dark-blue transition-colors text-lg self-start">Arrange Visit</a>
+                        </div>
+                    </div>
+
+                    <!-- Academic Programs Card - Takes 1x1 space -->
+                    <div class="lg:col-span-1 lg:row-span-1">
+                        <div class="bg-cover bg-center rounded-[20px] h-full w-full relative" style="background-image: url('https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); aspect-ratio: 1/1;">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-[20px]"></div>
+                            <div class="absolute bottom-6 left-6 text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admissions Text Card - Takes 1x1 space -->
+                    <div class="lg:col-span-1 lg:row-span-1">
+                        <div class="bg-light-lavender text-dark-blue p-8 rounded-[20px] h-full w-full flex flex-col justify-between" style="aspect-ratio: 1/1;">
+                            <div>
+                                <h4 class="font-heading text-2xl mb-4">Explore</h4>
+                                <p class="mb-6 text-lg leading-relaxed">Discover our diverse range of programs, designed to foster critical thinking, creativity, and collaboration.</p>
+                            </div>
+                            <a href="#" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity text-lg self-start">Explore Programs</a>
+                        </div>
+                    </div>
+
                 </div>
-                
-                <div class="flex flex-col gap-8">
-                    <!-- Visit Card -->
-                    <div class="bg-dark-blue text-white p-10 rounded-[20px]">
-                        <h4 class="font-heading text-3xl mb-4">Arrange a Personal Visit</h4>
-                        <p class="mb-6">Experience NUM Academy firsthand. Tailored to your child's interests and admission stage, we offer visits year-round, from Nursery to Prep School.</p>
-                        <a href="#" class="bg-transparent border border-white text-white rounded-full px-8 py-3 inline-block font-medium hover:bg-white hover:text-dark-blue transition-colors">Arrange a Visit</a>
+            </div>
+        </section>
+
+        <!-- Ethos Section - Separate for easy modification -->
+        <section class="bg-light-lavender py-20 font-body">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="grid lg:grid-cols-2 gap-12 items-stretch">
+                    
+                    <!-- Ethos Text Card -->
+                    <div class="text-dark-blue">
+                        <h3 class="font-heading text-4xl lg:text-5xl mb-6">The Ethos and the Environment</h3>
+                        <p class="mb-6 text-lg">At NUM Academy, our ethos goes beyond academia. We believe in nurturing the whole child, promoting resilience, creativity, and global awareness. Set against the backdrop of Kent's natural beauty, our campus offers an environment where students are inspired daily, both by the lessons in the classroom and the serenity outside.</p>
+                        <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
                     </div>
                     
-                    <!-- Admissions Group -->
-                    <div class="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8">
-                        <div class="bg-dark-blue rounded-[20px] flex w-full h-full">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg?auto=compress&w=1000&q=80" alt="Campus Life" class="lazy-load w-full h-full object-cover rounded-[20px]">
-                        </div>
-                        <div class="bg-light-lavender text-dark-blue p-10 rounded-[20px]">
-                            <h4 class="font-heading text-3xl mb-4">Admissions</h4>
-                            <p class="mb-6">Selecting the ideal educational environment for your child is a significant and profound choice.</p>
-                            <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
-                        </div>
+                    <!-- Ethos Image Card -->
+                    <div class="h-full flex">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Picture/School/num_front.jpg" alt="Happy students waving" class="lazy-load w-full h-full rounded-[20px] block object-cover">
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-light-lavender py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-stretch">
-                <div class="text-dark-blue">
-                    <h3 class="font-heading text-5xl mb-6">The Ethos and the Environment</h3>
-                    <p class="mb-6">At NUM Academy, our ethos goes beyond academia. We believe in nurturing the whole child, promoting resilience, creativity, and global awareness. Set against the backdrop of Kent's natural beauty, our campus offers an environment where students are inspired daily, both by the lessons in the classroom and the serenity outside.</p>
-                    <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
-                </div>
-                <div class="h-full flex">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Picture/School/num_front.jpg" alt="Happy students waving" class="lazy-load w-full h-full rounded-[20px] block object-cover">
+                    
                 </div>
             </div>
         </section>
 
         <section class="py-24 text-white bg-cover bg-center font-body" style="background-image: linear-gradient(rgba(10, 10, 62, 0.85), rgba(10, 10, 62, 0.85)), url('https://images.pexels.com/photos/1206101/pexels-photo-1206101.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
             <div class="max-w-6xl mx-auto px-5">
-                <h3 class="font-heading text-5xl mb-16 text-center">Why Choose NUM?</h3>
+                <h3 class="font-heading text-5xl mb-16 text-center">
+                    <span class="lang-en">Why Choose NUM?</span>
+                    <span class="lang-km">ហេតុអ្វីជ្រើសរីស NUM?</span>
+                </h3>
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
 
@@ -118,8 +199,14 @@
                         <div class="bg-white/10 p-4 rounded-full mb-4">
                             <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-2.308M15 19.128v-3.864m0-11.012A9.337 9.337 0 0012.243 2.5a9.337 9.337 0 00-4.121 2.308m6.878 11.012a9.37 9.37 0 01-2.625-.372m0 0a9.37 9.37 0 01-2.625.372m0 0v-3.864m0 11.012a9.337 9.337 0 01-4.121-2.308M1.343 12.343a9.337 9.337 0 012.308-4.121m11.012 6.878a9.37 9.37 0 01.372-2.625m-.372 2.625a9.37 9.37 0 01.372 2.625m0 0a9.337 9.337 0 012.308 4.121m-11.012-6.878a9.37 9.37 0 01-.372-2.625m.372 2.625a9.37 9.37 0 01-.372 2.625m0 0A9.337 9.337 0 011.343 12.343m6.878-6.878a9.337 9.337 0 014.121-2.308m-4.121 2.308L12 12m0 0l-2.343 2.343m0-4.686L12 12m0 0l2.343-2.343m0 4.686L12 12" /></svg>
                         </div>
-                        <h4 class="font-heading text-xl mb-2">Expert Faculty</h4>
-                        <p class="text-white/80">Learn from industry leaders and renowned academics dedicated to fostering your intellectual growth and success.</p>
+                        <h4 class="font-heading text-xl mb-2">
+                            <span class="lang-en">Expert Faculty</span>
+                            <span class="lang-km">អ្នកបញ្ញាជំនាញ</span>
+                        </h4>
+                        <p class="text-white/80">
+                            <span class="lang-en">Learn from industry leaders and renowned academics who drive your success.</span>
+                            <span class="lang-km">សិក្សាពីមេដឹកនាំអាជីវកម្ម និងអ្នកសិក្សាដែលមានឈ្មាតិជំរ៉ាវដែលនាំទៅការជោជះរបស់អ្នក។</span>
+                        </p>
                     </div>
 
                     <!-- Feature 2: Career-Focused Curriculum -->
@@ -127,8 +214,14 @@
                         <div class="bg-white/10 p-4 rounded-full mb-4">
                             <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.073a2.25 2.25 0 01-2.25 2.25h-13.5a2.25 2.25 0 01-2.25-2.25V6.328a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 6.328v4.073m-2.25-4.073V6.328m2.25 4.073l-3.75-1.5m-1.5 1.5l-3.75-1.5M3 14.15l3.75-1.5m-1.5 1.5l3.75-1.5m0 0l3.75 1.5m-12.75-3l3.75-1.5m1.5 1.5l3.75-1.5m-1.5-1.5l3.75-1.5m3.75 1.5l3.75-1.5M4.5 6.328v12.045A2.25 2.25 0 006.75 20.623h10.5a2.25 2.25 0 002.25-2.25V6.328m-15 0h15v12.045a2.25 2.25 0 01-2.25 2.25H6.75a2.25 2.25 0 01-2.25-2.25V6.328z" /></svg>
                         </div>
-                        <h4 class="font-heading text-xl mb-2">Career-Focused Curriculum</h4>
-                        <p class="text-white/80">Our programs are designed with the future in mind, equipping you with the practical skills and theoretical knowledge demanded by the global workforce.</p>
+                        <h4 class="font-heading text-xl mb-2">
+                            <span class="lang-en">Future-Ready Programs</span>
+                            <span class="lang-km">កម្មវិធីរបស់អនាគត</span>
+                        </h4>
+                        <p class="text-white/80">
+                            <span class="lang-en">Practical skills and cutting-edge knowledge that employers actually want.</span>
+                            <span class="lang-km">ជំនាញប្រិយាបត្រិម និងចំណេះដឹងដែលមានទំនាក់ទំនឹបដែលនាយការពិតជះចង់។</span>
+                        </p>
                     </div>
 
                     <!-- Feature 3: State-of-the-Art Facilities -->
@@ -136,8 +229,14 @@
                         <div class="bg-white/10 p-4 rounded-full mb-4">
                             <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-1.5-.545M3 12l3-1m0 0l.5-1.5m-.5 1.5L3 12m3-1l3-1m0 0l1.5.545m-1.5-.545L12 9m3 3l-3-1m0 0l-1.5.545M12 15l1.5 1.5m-1.5-1.5l-1.5 1.5" /></svg>
                         </div>
-                        <h4 class="font-heading text-xl mb-2">State-of-the-Art Facilities</h4>
-                        <p class="text-white/80">From modern labs to expansive libraries, our campus provides a world-class environment for learning, research, and innovation.</p>
+                        <h4 class="font-heading text-xl mb-2">
+                            <span class="lang-en">Modern Campus</span>
+                            <span class="lang-km">សាកលវិទ្យាល័យទំនាក់ទំនឹប</span>
+                        </h4>
+                        <p class="text-white/80">
+                            <span class="lang-en">World-class labs, libraries, and facilities designed for innovation.</span>
+                            <span class="lang-km">បញ្ញាល័យផ្ទះការ បញ្ញាល័យសៀវភៅ និងមូលដ្ហានទំនាក់ទំនឹបដែលត្រូវបានរចនាសម្រាប់ការបង្កើតថ្មី។</span>
+                        </p>
                     </div>
 
                     <!-- Feature 4: A Legacy of Success -->
@@ -145,8 +244,14 @@
                         <div class="bg-white/10 p-4 rounded-full mb-4">
                             <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-.07.002-.018.002-.003.001-.001.001L12 6.493l4.242 3.654-.001-.001-.003-.001-.018-.002-.07-.002a50.57 50.57 0 00-2.658-.813m-15.482 0A50.57 50.57 0 0112 6.493v1.017a48.627 48.627 0 01-8.232 4.41z" /></svg>
                         </div>
-                        <h4 class="font-heading text-xl mb-2">A Legacy of Success</h4>
-                        <p class="text-white/80">Join a community of over 15,000 alumni who are making their mark across the globe in business, technology, and public service.</p>
+                        <h4 class="font-heading text-xl mb-2">
+                            <span class="lang-en">Proven Success</span>
+                            <span class="lang-km">ការជោជះដែលបានបង្ហាញ</span>
+                        </h4>
+                        <p class="text-white/80">
+                            <span class="lang-en">Join 15,000+ alumni making their mark globally in business and tech.</span>
+                            <span class="lang-km">ចូលរួមជាមួយបុត្រសិស្សចាស់ 15,000+ នាកដែលកំពុងបង្កើតសញ្ញាណរបស់ពួកគេនៅទូទៅពិភពលោកក្នុងវិស័យអាជីវកម្ម និងបច្ចេកវិទ្យា។</span>
+                        </p>
                     </div>
 
                 </div>
@@ -363,6 +468,7 @@
         window.initializeHeroVideo = initializeHeroVideo;
     </script>
     
+    <script src="js/i18n.js"></script>
     <script src="js/main.js" data-base-path="."></script>
     
 </body>

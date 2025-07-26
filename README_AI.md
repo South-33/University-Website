@@ -78,6 +78,13 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **User Feedback:** Transient error messages with auto-dismiss
 - ✅ **Global Listeners:** Catch uncaught errors and promise rejections
 
+### 🔗 **Clean URL System (LATEST)**
+- ✅ **Client-Side URL Rewriting:** All internal links use clean URLs (no .html extensions)
+- ✅ **Comprehensive URL Mapping:** Complete mapping system in main.js for all site pages
+- ✅ **SPA Integration:** Clean URLs work seamlessly with SPA navigation
+- ✅ **Browser History:** Clean URLs appear in address bar while fetching actual files
+- ✅ **Direct Access:** Users can navigate directly to clean URLs
+
 ### 🚀 **Deployment & Performance**
 - ✅ **Vercel Integration:** Clean URLs and proper routing with vercel.json
 - ✅ **Code Optimization:** Removed unused styles and functions
@@ -245,6 +252,13 @@ This is a comprehensive guide for AI assistants working on our university websit
 - **Global Styles:** Add to `css/main.css` for shared components
 - **Page-Specific Styles:** Add inline `<style>` blocks in individual pages
 - **Tailwind First:** Use Tailwind classes before custom CSS
+
+### 🔗 **Clean URL Rules**
+- **Internal Links:** Always use clean URLs without `.html` extensions (e.g., `/programs/bachelors` not `/programs/bachelors.html`)
+- **URL Mapping:** Add new pages to the URL mapping object in `main.js`
+- **SPA Navigation:** Clean URLs are rewritten client-side to fetch actual `.html` files
+- **Direct Access:** Users can navigate directly to clean URLs via browser address bar
+- **Consistency:** Ensure all internal links across the site use the same clean URL format
 
 ### 🔄 **SPA Compatibility Rules**
 1. **Self-Contained Pages:** Each page must work independently

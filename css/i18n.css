@@ -1,0 +1,117 @@
+/* i18n.css - Self-contained bilingual system for NUM website */
+
+/* Khmer font support */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;700&display=swap');
+
+/* Default: Show English, hide Khmer */
+.lang-en { display: inline; }
+.lang-km { display: none; }
+
+/* When Khmer is selected: Hide English, show Khmer */
+html[lang="km"] .lang-en { display: none; }
+html[lang="km"] .lang-km { display: inline; }
+
+/* For block elements */
+.lang-en.block { display: block; }
+.lang-km.block { display: none; }
+
+html[lang="km"] .lang-en.block { display: none; }
+html[lang="km"] .lang-km.block { display: block; }
+
+/* Apply Khmer font when Khmer language is active */
+html[lang="km"] {
+    font-family: 'Noto Sans Khmer', 'Montserrat', sans-serif;
+}
+
+html[lang="km"] .font-heading {
+    font-family: 'Noto Sans Khmer', 'Lora', serif;
+}
+
+html[lang="km"] .font-body {
+    font-family: 'Noto Sans Khmer', 'Montserrat', sans-serif;
+}
+
+/* Language toggle button styles */
+.language-toggle {
+    position: relative;
+    overflow: hidden;
+}
+
+.language-toggle:hover {
+    transform: translateY(-1px);
+}
+
+.language-toggle:active {
+    transform: translateY(0);
+}
+
+/* Smooth transitions for language changes */
+[data-i18n] {
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Loading state for language switching */
+.i18n-loading [data-i18n] {
+    opacity: 0.7;
+}
+
+/* RTL support (future-proofing) */
+html[dir="rtl"] {
+    direction: rtl;
+}
+
+html[dir="rtl"] .language-toggle {
+    flex-direction: row-reverse;
+}
+
+/* Responsive font sizes for Khmer */
+@media (max-width: 768px) {
+    html[lang="km"] {
+        font-size: 14px;
+    }
+    
+    html[lang="km"] h1 {
+        font-size: 1.8rem;
+    }
+    
+    html[lang="km"] h2 {
+        font-size: 1.5rem;
+    }
+    
+    html[lang="km"] h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Ensure proper spacing for Khmer characters */
+html[lang="km"] p,
+html[lang="km"] li,
+html[lang="km"] span {
+    word-spacing: 0.1em;
+}
+
+/* Navigation menu adjustments for Khmer */
+html[lang="km"] .main-nav a {
+    padding: 0.5rem 1rem;
+}
+
+html[lang="km"] .main-nav .group ul {
+    min-width: 200px;
+}
+
+/* Search placeholder styling for Khmer */
+html[lang="km"] input[type="search"]::placeholder {
+    font-family: 'Noto Sans Khmer', sans-serif;
+}
+
+/* Button text adjustments */
+html[lang="km"] button,
+html[lang="km"] .btn {
+    font-family: 'Noto Sans Khmer', sans-serif;
+    font-weight: 500;
+}
+
+/* Ensure proper rendering of Khmer numerals */
+html[lang="km"] .khmer-numerals {
+    font-feature-settings: "kern" 1, "liga" 1;
+}
