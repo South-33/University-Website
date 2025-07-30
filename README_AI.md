@@ -50,13 +50,16 @@ This is a comprehensive guide for AI assistants working on our university websit
 
 ## ⚡ **Recent Major Improvements (2024)**
 
-### 🚀 **SPA Navigation System**
+### 🚀 **SPA Navigation System (FINALIZED)**
 - ✅ **Seamless Transitions:** Simple fade transitions for main content only
-- ✅ **Page Caching:** Intelligent caching with 5-minute expiration
+- ✅ **Page Caching:** Intelligent caching with timestamp-based expiration
 - ✅ **Link Preloading:** Hover-based preloading for instant navigation
 - ✅ **Error Handling:** Robust retry logic with exponential backoff
 - ✅ **Browser History:** Full back/forward button support
 - ✅ **Script Execution:** Page-specific scripts run during SPA navigation
+- ✅ **Dynamic Function Detection:** Automatic initialization of page functions
+- ✅ **Memory Management:** Cleanup system prevents memory leaks
+- ✅ **Duplicate Prevention:** Dual-path tracking prevents navigation conflicts
 
 ### 🎬 **Homepage Hero System**
 - ✅ **Perfect Viewport:** Hero fills exactly `viewport height - header height`
@@ -89,6 +92,13 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **Vercel Integration:** Clean URLs and proper routing with vercel.json
 - ✅ **Code Optimization:** Removed unused styles and functions
 - ✅ **Fast Loading:** Minimal CSS/JS footprint for better performance
+
+### 🎨 **Self-Contained Architecture (FINALIZED)**
+- ✅ **Dynamic Function Detection:** Automatic discovery of `initialize*` and `init*` functions
+- ✅ **Memory Leak Prevention:** Built-in cleanup system via optional `pageCleanup()` function
+- ✅ **Error Resilience:** Comprehensive error handling for all edge cases
+- ✅ **Team-Friendly:** Each page is completely independent and self-contained
+- ✅ **Zero Configuration:** New pages work automatically without main.js modifications
 
 ---
 
@@ -194,13 +204,24 @@ This is a comprehensive guide for AI assistants working on our university websit
     
     <!-- PAGE-SPECIFIC JAVASCRIPT (if needed) -->
     <script>
-        // Add page-specific JavaScript here
-        document.addEventListener('DOMContentLoaded', function() {
-            // Page initialization code
-        });
+        // Page-specific initialization function (auto-detected by SPA)
+        function initializeYourPageFeature() {
+            // Your page initialization code here
+            console.log('Page feature initialized');
+        }
+        
+        // Optional cleanup function (called before SPA navigation)
+        function pageCleanup() {
+            // Clear any intervals, timeouts, or event listeners
+            // Example: clearInterval(myInterval);
+        }
+        
+        // Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializeYourPageFeature);
         
         // Make functions globally available for SPA navigation
-        // window.yourPageFunction = yourPageFunction;
+        window.initializeYourPageFeature = initializeYourPageFeature;
+        window.pageCleanup = pageCleanup;
     </script>
     
     <!-- REQUIRED: Fuse.js for search -->
