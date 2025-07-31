@@ -1,5 +1,7 @@
 // js/main.js
 
+document.addEventListener('DOMContentLoaded', function() {
+
     // =========================================================================
     //  URL MAPPING SYSTEM FOR CLEAN URLS
     // =========================================================================
@@ -63,61 +65,36 @@
         return reverseUrlMapping[filePath] || filePath;
     }
 
-document.addEventListener('DOMContentLoaded', function() {
-
     // =========================================================================
     //  CORE INITIALIZATION
     // =========================================================================
 
-    /**
-     * This function runs ONCE when the page is fully loaded.
-     * It sets up all necessary global and page-specific functionality.
-     */
     function initializeSite() {
-        // --- Setup for ALL pages ---
         initializeNavigation();
         initializeSearch(basePath);
         initializeHidingHeader();
         updateActiveNav();
-        initializePageTransitions(); // The new, simple transition logic
-        handleCleanUrlAccess(); // Handle direct access to clean URLs
+        initializePageTransitions();
+        handleCleanUrlAccess();
         triggerPageAnimations(document);
         
-        // --- Initialize simple bilingual system ---
         if (window.SimpleBilingualManager) {
             try {
                 new SimpleBilingualManager();
-                console.log('✅ Bilingual system initialized');
             } catch (error) {
                 console.error('Failed to initialize bilingual system:', error);
             }
         }
 
-        // --- Run Page-Specific Logic ---
-        // Call page-specific functions if they exist (exposed by page inline scripts)
-        if (typeof window.initializeProgramTabs === 'function') {
-            try {
-                window.initializeProgramTabs();
-            } catch (error) {
-                console.error('Error initializing program tabs:', error);
-            }
-        }
-
-        // --- Initialize dynamic features ---
         initializeLazyLoading(document);
-
-        // --- Make the page visible ---
-        // The body starts as transparent (from CSS) and fades in.
         document.body.classList.add('is-visible');
     }
 
-    // --- Start everything after the header is loaded ---
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
     const scriptTag = document.querySelector('script[src*="js/main.js"]');
     const basePath = scriptTag ? (scriptTag.dataset.basePath || '.') : '.';
 
-    // Enhanced error handling with retries and fallbacks
     const loadWithRetry = async (url, retries = 3, delay = 1000) => {
         for (let i = 0; i < retries; i++) {
             try {
@@ -137,26 +114,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadHeader = headerPlaceholder ? loadWithRetry(`${basePath}/_includes/header.html`)
         .then(data => {
             headerPlaceholder.outerHTML = data;
-            // Use a timeout to ensure the header is in the DOM before we run scripts
             setTimeout(() => {
                 try {
                     initializeSite();
                 } catch (error) {
                     console.error('Error during site initialization:', error);
-                    // Fallback: make page visible even if initialization fails
                     document.body.classList.add('is-visible');
-                    showErrorMessage('Some features may not work properly. Please refresh the page.');
                 }
             }, 0);
         })
         .catch(error => {
             console.error('Failed to load header after retries:', error);
-            // Fallback: create a basic header
             headerPlaceholder.innerHTML = `
                 <header class="bg-dark-blue text-white p-4">
                     <div class="max-w-6xl mx-auto">
                         <h1 class="text-xl font-bold">National University of Management</h1>
-                        <p class="text-sm opacity-75">Header failed to load - basic navigation active</p>
                     </div>
                 </header>
             `;
@@ -183,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Failed to load footer after retries:', error);
-            // Fallback: create a basic footer
             footerPlaceholder.innerHTML = `
                 <footer class="bg-dark-blue text-white p-4 text-center">
                     <p>&copy; ${new Date().getFullYear()} National University of Management</p>
@@ -191,9 +162,8 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         }) : Promise.resolve();
 
-
     // =========================================================================
-    //  SIMPLE PAGE TRANSITION SYSTEM
+    //  SIMPLE PAGE TRANSITION SYSTEM (ORIGINAL WORKING VERSION)
     // =========================================================================
     
     function initializePageTransitions() {
@@ -201,7 +171,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             
-            // Check if it's an internal link that should be transitioned
             if (link && 
                 link.hostname === window.location.hostname && 
                 !link.getAttribute('href').startsWith('#') && 
@@ -211,17 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 let destination = link.href;
                 
-                // Get the pathname from the clicked link
-                const pathname = new URL(destination).pathname;
-                
                 // Don't transition if we're already on the same page
                 if (destination === window.location.href) {
                     return;
                 }
                 
-                // Start simple fade transition with clean URL
-                // The destination is already a clean URL, so we pass it as the clean URL
-                // and let startPageTransition figure out the actual file path
                 startPageTransition(destination);
             }
         });
@@ -232,18 +195,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Handle direct access to clean URLs (when user types URL or refreshes)
     function handleCleanUrlAccess() {
         const currentPath = window.location.pathname;
         const actualFilePath = getFilePathFromCleanUrl(currentPath);
         
-        // If we have a mapping for this URL and we're not already on the actual file
         if (actualFilePath !== currentPath && urlMapping[currentPath]) {
-            // This means user accessed a clean URL directly
-            // We need to update the browser URL to show the clean version
-            // but the page content is already loaded from the actual file
-            
-            // Update browser history to show clean URL without causing a reload
             const title = document.title;
             history.replaceState({ path: window.location.href }, title, window.location.href);
         }
@@ -256,7 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const preloadingUrls = new Set();
     
     function initializeLinkPreloading() {
-        // Preload pages on hover for instant transitions
         document.body.addEventListener('mouseenter', (e) => {
             const link = e.target.closest('a');
             if (link && 
@@ -271,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function preloadPage(url) {
-        // Convert to actual file path for preloading
         const pathname = new URL(url).pathname;
         const actualFilePath = getFilePathFromCleanUrl(pathname);
         let actualUrl = url;
@@ -280,14 +234,12 @@ document.addEventListener('DOMContentLoaded', function() {
             actualUrl = new URL(actualFilePath, window.location.origin).href;
         }
         
-        // Don't preload if already cached or currently loading
         if (pageCache.has(actualUrl) || preloadingUrls.has(actualUrl)) {
             return;
         }
         
         preloadingUrls.add(actualUrl);
         
-        // Use a shorter timeout for preloading to avoid blocking
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
         
@@ -321,12 +273,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeLinkPreloading();
     
     function executePageScripts(doc) {
-        // Execute inline scripts from the new page
         const scripts = doc.querySelectorAll('script:not([src])');
         scripts.forEach(script => {
             if (script.textContent.trim()) {
                 try {
-                    // Create a new script element and execute it
                     const newScript = document.createElement('script');
                     newScript.textContent = script.textContent;
                     document.head.appendChild(newScript);
@@ -337,8 +287,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-
     
     function getCachedPage(url) {
         const cached = pageCache.get(url);
@@ -351,31 +299,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function startPageTransition(cleanUrl, actualFilePath = null, pushState = true) {
         transitionStartTime = Date.now();
         
-        // If no actual file path provided, try to get it from clean URL
         if (!actualFilePath) {
             const pathname = new URL(cleanUrl).pathname;
             actualFilePath = getFilePathFromCleanUrl(pathname);
-            // If it's the same, it means no mapping exists, use as-is
             if (actualFilePath === pathname) {
                 actualFilePath = cleanUrl;
             } else {
-                // Convert relative path to full URL
                 actualFilePath = new URL(actualFilePath, window.location.origin).href;
             }
         }
         
-        // Start fade out - only affect main content, not header
         const mainContent = document.querySelector('main');
         if (mainContent) {
             mainContent.style.opacity = '0.85';
             mainContent.style.transition = 'opacity 0.2s ease-out';
         }
         
-        // Get cached page or fetch new one (use actual file path for caching)
         const cachedPage = getCachedPage(actualFilePath);
         
         if (cachedPage) {
-            // Use cached version
             setTimeout(() => {
                 try {
                     loadNewPage(cachedPage.html, cachedPage.title, cleanUrl, pushState);
@@ -385,15 +327,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }, 150);
         } else {
-            // Fetch new page with enhanced error handling (use actual file path)
             loadWithRetry(actualFilePath, 2, 500)
                 .then(html => {
-                    // Validate HTML content
                     if (!html || html.trim().length === 0) {
                         throw new Error('Empty response received');
                     }
                     
-                    // Cache the page (use actual file path as key)
                     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
                     const title = titleMatch ? titleMatch[1] : 'NUM';
                     pageCache.set(actualFilePath, { html, title, timestamp: Date.now() });
@@ -416,7 +355,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function loadNewPage(mainHTML, titleText, destination, pushState) {
         try {
-            // Smooth scroll to top FIRST, before any content changes
             window.scrollTo({ top: 0, behavior: 'instant' });
             
             const parser = new DOMParser();
@@ -432,25 +370,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('No main element found in current page');
             }
             
-            // Update page title
             document.title = titleText;
             
-            // Update browser history (use clean URL)
             if (pushState) {
                 history.pushState({ path: destination }, titleText, destination);
             }
             
-            // Replace main content
             currentMain.innerHTML = newMain.innerHTML;
             
             // Load and execute page-specific styles
             const newStyles = newDoc.querySelectorAll('style');
             newStyles.forEach(style => {
-                if (!document.querySelector(`style[data-page-style="${btoa(style.textContent.substring(0, 50))}"]`)) {
-                    const newStyle = document.createElement('style');
-                    newStyle.textContent = style.textContent;
-                    newStyle.setAttribute('data-page-style', btoa(style.textContent.substring(0, 50)));
-                    document.head.appendChild(newStyle);
+                if (style.textContent && style.textContent.trim()) {
+                    try {
+                        const styleHash = btoa(style.textContent.substring(0, 50).replace(/[\r\n\t]/g, ''));
+                        if (!document.querySelector(`style[data-page-style="${styleHash}"]`)) {
+                            const newStyle = document.createElement('style');
+                            newStyle.textContent = style.textContent;
+                            newStyle.setAttribute('data-page-style', styleHash);
+                            document.head.appendChild(newStyle);
+                        }
+                    } catch (error) {
+                        console.warn('Error processing page styles:', error);
+                    }
                 }
             });
             
@@ -461,53 +403,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error executing page scripts:', error);
             }
             
-            // Initialize page content after DOM update
             setTimeout(initializePageContent, 0);
             
         } catch (error) {
             console.error('Error in loadNewPage:', error);
-            throw error; // Re-throw to be handled by caller
+            throw error;
         }
         
         function initializePageContent() {
             try {
-                // Update active navigation
                 updateActiveNav();
                 
-                // Initialize page-specific components if functions exist
-                if (typeof window.initializeProgramTabs === 'function') {
+                // Clean up any existing page-specific intervals/timers to prevent memory leaks
+                if (window.pageCleanup && typeof window.pageCleanup === 'function') {
                     try {
-                        window.initializeProgramTabs();
+                        window.pageCleanup();
                     } catch (error) {
-                        console.error('Error initializing program tabs during SPA navigation:', error);
+                        console.warn('Error during page cleanup:', error);
                     }
                 }
                 
-                // Initialize homepage hero if present (using global functions from page)
-                if (typeof window.initializeHomepageHero === 'function') {
-                    try {
-                        window.initializeHomepageHero();
-                    } catch (error) {
-                        console.error('Error initializing homepage hero:', error);
-                    }
-                }
+                // Automatically detect and call any initialization functions
+                // Look for functions that start with 'initialize' or 'init'
+                const initFunctionPatterns = /^(initialize|init)[A-Z]/;
                 
-                // Initialize hero video if on homepage (using global functions from page)
-                if (typeof window.initializeHeroVideo === 'function') {
-                    try {
-                        window.initializeHeroVideo();
-                    } catch (error) {
-                        console.error('Error initializing hero video:', error);
+                Object.getOwnPropertyNames(window).forEach(prop => {
+                    if (initFunctionPatterns.test(prop) && typeof window[prop] === 'function') {
+                        try {
+                            window[prop]();
+                        } catch (error) {
+                            console.error(`Error calling ${prop}:`, error);
+                        }
                     }
-                }
+                });
                 
-                // Trigger animations for new content
                 triggerPageAnimations(document.querySelector('main'));
-                
-                // Apply lazy loading to the new content
                 initializeLazyLoading(document.querySelector('main'));
                 
-                // Fade page back in - only affect main content, not header
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
                     mainContent.style.opacity = '1';
@@ -515,30 +447,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 console.error('Error during page content initialization:', error);
-                // Still fade in even if initialization fails - only affect main content
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
                     mainContent.style.opacity = '1';
                     mainContent.style.transition = 'opacity 0.3s ease-in';
                 }
-                showErrorMessage('Some page features may not work properly.');
             }
         }
     }
-    
-
 
     // =========================================================================
-    //  LAZY LOADING
+    //  UTILITY FUNCTIONS
     // =========================================================================
 
     let lazyLoadObserver;
-
-    /**
-     * Initializes lazy loading for images within a given container.
-     * Uses IntersectionObserver to load images only when they are close to the viewport.
-     * @param {HTMLElement} container - The element to search for lazy-load images within.
-     */
     function initializeLazyLoading(container) {
         const lazyImages = container.querySelectorAll('img.lazy-load');
 
@@ -550,30 +472,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         const src = img.dataset.src;
-
-                        // Load the image
                         img.src = src;
-
-                        // Optional: Add a 'loaded' class for fade-in animations
                         img.classList.add('is-loaded');
-
-                        // Stop observing the image once loaded
                         observer.unobserve(img);
                     }
                 });
-            }, { rootMargin: '0px 0px 200px 0px' }); // Start loading 200px before it enters the viewport
+            }, { rootMargin: '0px 0px 200px 0px' });
         }
 
         lazyImages.forEach(image => {
             lazyLoadObserver.observe(image);
         });
     }
-
-
-    // =========================================================================
-    //  ALL OTHER FUNCTIONS (Global and Page-Specific)
-    //  These are now just a library of functions called by initializeSite()
-    // =========================================================================
 
     function triggerPageAnimations(container) {
         const sections = container.querySelectorAll('.fade-in-section');
@@ -588,8 +498,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, observerOptions);
         sections.forEach(section => observer.observe(section));
     }
-
-
     
     function updateActiveNav() {
         const currentPath = window.location.pathname.replace(/\/$/, '').replace(/\.html$/, '');
@@ -619,19 +527,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeHidingHeader() {
-        // Only animate the <header> element, not the .header-bg-static background div
         const header = document.querySelector('header');
         const headerBg = document.querySelector('.header-bg-static');
         if (!header) return;
         
-        // Function to update background div height to match header
         function updateBackgroundHeight() {
             if (headerBg) {
                 headerBg.style.height = header.offsetHeight + 'px';
             }
         }
         
-        // Set initial height and update on resize
         updateBackgroundHeight();
         window.addEventListener('resize', updateBackgroundHeight);
         
@@ -639,10 +544,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let isHeaderHidden = false;
         let ticking = false;
         const scrollThreshold = header.offsetHeight;
-        const minScrollDistance = 5; // Minimum pixels to scroll before triggering
+        const minScrollDistance = 5;
         
         function updateHeader() {
-            // Skip on desktop
             if (window.innerWidth >= 768) {
                 if (isHeaderHidden) {
                     header.style.transform = 'translateY(0)';
@@ -654,17 +558,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollDifference = Math.abs(scrollTop - lastScrollTop);
             
-            // Only proceed if we've scrolled enough to avoid jitter
             if (scrollDifference < minScrollDistance) {
                 return;
             }
             
-            // Hide header when scrolling down past threshold
             if (scrollTop > lastScrollTop && scrollTop > scrollThreshold && !isHeaderHidden) {
                 header.style.transform = 'translateY(-100%)';
                 isHeaderHidden = true;
             }
-            // Show header when scrolling up or at top
             else if ((scrollTop < lastScrollTop || scrollTop <= scrollThreshold) && isHeaderHidden) {
                 header.style.transform = 'translateY(0)';
                 isHeaderHidden = false;
@@ -712,12 +613,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
-
     function initializeSearch(basePath) {
         let searchInitialized = false;
         
-        // Function to initialize search when input is found
         const tryInitializeSearch = () => {
             const searchInput = document.querySelector('input[type="search"]');
             if (searchInput && !searchInitialized) {
@@ -728,9 +626,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         };
         
-        // Try to initialize immediately
         if (!tryInitializeSearch()) {
-            // If search input not found, wait for it to be loaded (header loads async)
             const observer = new MutationObserver(() => {
                 if (tryInitializeSearch()) {
                     observer.disconnect();
@@ -738,7 +634,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             observer.observe(document.body, { childList: true, subtree: true });
             
-            // Also try with a fallback event listener
             document.body.addEventListener('focusin', (e) => {
                 if (e.target.matches('input[type="search"]') && !searchInitialized) {
                     setupSearch(e.target, basePath);
@@ -749,7 +644,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function setupSearch(searchInput, basePath) {
-        // This function remains the same as before.
         let fuse = null;
         const searchContainer = searchInput.closest('div');
         if (!searchContainer) return;
@@ -759,10 +653,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchResultsContainer = document.createElement('div');
         searchResultsContainer.className = 'search-results-dropdown hidden';
         searchContainer.appendChild(searchResultsContainer);
-        // Load search index with native JavaScript search
         let searchData = [];
         
-        // Restore search text from sessionStorage if available
         const savedSearch = sessionStorage.getItem('searchQuery');
         if (savedSearch) {
             searchInput.value = savedSearch;
@@ -775,7 +667,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(err => console.error('Error loading search index:', err));
         
-        // Simple native search function
         const performSearch = (query) => {
             if (!query || query.length < 2) return [];
             
@@ -788,17 +679,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const descLower = item.description.toLowerCase();
                 const tagsLower = item.tags ? item.tags.toLowerCase() : '';
                 
-                // Exact title match gets highest score
                 if (titleLower.includes(lowerQuery)) {
                     score += titleLower.indexOf(lowerQuery) === 0 ? 100 : 50;
                 }
                 
-                // Description match gets medium score
                 if (descLower.includes(lowerQuery)) {
                     score += 25;
                 }
                 
-                // Tags match gets lower score
                 if (tagsLower.includes(lowerQuery)) {
                     score += 10;
                 }
@@ -808,7 +696,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // Sort by score (highest first) and return top 10
             return results.sort((a, b) => b.score - a.score).slice(0, 10).map(r => r.item);
         };
         
@@ -817,7 +704,6 @@ document.addEventListener('DOMContentLoaded', function() {
             results.forEach(result => {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
-                // Use absolute URL from root to avoid basePath issues
                 a.href = result.url;
                 a.innerHTML = `
                     <div class="result-title">${result.title}</div>
@@ -844,7 +730,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             render(results);
             
-            // Position dropdown correctly for mobile
             if (window.innerWidth < 768) {
                 const searchRect = searchInput.getBoundingClientRect();
                 searchResultsContainer.style.top = (searchRect.bottom + 18) + 'px';
@@ -867,7 +752,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         searchInput.addEventListener('input', search);
         searchInput.addEventListener('focus', search);
-        searchInput.addEventListener('click', search); // Show dropdown on click even if already focused
+        searchInput.addEventListener('click', search);
         searchInput.addEventListener('blur', hide);
         searchInput.addEventListener('keydown', e => { 
             if (e.key === 'Enter') e.preventDefault(); 
@@ -884,12 +769,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
-    /**
-     * Handles the click event on a program tab to scroll the relevant section into view.
-     * This is made globally available to be called from inline scripts on program pages.
-     * @param {HTMLElement} tabEl - The tab element that was clicked.
-     */
+    // Global utility function for program tab scrolling (used by multiple pages)
     window.handleProgramTabClick = function(tabEl) {
         const programSection = tabEl.closest('.program-tabs-section');
         if (!programSection) {
@@ -900,13 +780,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('header');
         let headerOffset = 0;
 
-        // On desktop screens (>= 768px), the header is sticky and visible.
-        // We need to account for its height.
         if (window.innerWidth >= 768 && header) {
             headerOffset = header.offsetHeight;
         }
-
-        // On mobile, the header hides on scroll, so no offset is needed.
 
         const sectionTop = programSection.getBoundingClientRect().top + window.pageYOffset;
         const scrollToPosition = sectionTop - headerOffset;
@@ -917,69 +793,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Error handling utilities
-    function showErrorMessage(message, duration = 5000) {
-        // Remove any existing error messages
-        const existingError = document.querySelector('.spa-error-message');
-        if (existingError) {
-            existingError.remove();
-        }
-        
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'spa-error-message fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 max-w-sm';
-        errorDiv.innerHTML = `
-            <div class="flex items-center gap-2">
-                <span>⚠️</span>
-                <span class="text-sm">${message}</span>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-white hover:text-gray-200">&times;</button>
-            </div>
-        `;
-        
-        document.body.appendChild(errorDiv);
-        
-        if (duration > 0) {
-            setTimeout(() => {
-                if (errorDiv.parentNode) {
-                    errorDiv.remove();
-                }
-            }, duration);
-        }
-    }
-    
     function handleTransitionError(destination, error) {
         console.error('Transition error for', destination, ':', error);
         
-        // Reset page opacity - only affect main content, not header
         const mainContent = document.querySelector('main');
         if (mainContent) {
             mainContent.style.opacity = '1';
             mainContent.style.transition = 'opacity 0.3s ease-in';
         }
         
-        // Show user-friendly error message
-        showErrorMessage('Failed to load page. Redirecting...', 3000);
-        
-        // Fallback to regular navigation after a short delay
         setTimeout(() => {
             window.location.href = destination;
         }, 1000);
     }
     
-    // Global error handler for unhandled errors
     window.addEventListener('error', (event) => {
         console.error('Global error:', event.error);
-        if (event.error && event.error.message && event.error.message.includes('fetch')) {
-            showErrorMessage('Network error detected. Some features may not work properly.');
-        }
     });
     
-    // Handle unhandled promise rejections
     window.addEventListener('unhandledrejection', (event) => {
         console.error('Unhandled promise rejection:', event.reason);
-        if (event.reason && event.reason.message && event.reason.message.includes('fetch')) {
-            showErrorMessage('Network error detected. Please check your connection.');
-        }
     });
-    
 
 });

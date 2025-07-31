@@ -155,30 +155,52 @@
 
     <div id="footer-placeholder"></div>
     
-    <!-- PAGE-SPECIFIC JAVASCRIPT (Recommended for team collaboration) -->
+    <!-- PAGE-SPECIFIC JAVASCRIPT (SPA-Compatible) -->
     <script>
         /*
         ===============================
-        ADD YOUR PAGE-SPECIFIC JS HERE
+        SPA-COMPATIBLE PAGE JAVASCRIPT
         ===============================
         
-        Benefits of inline JavaScript:
-        - Self-contained functionality
-        - No conflicts with teammates' JS files
-        - Works perfectly with SPA navigation
-        - Easy to debug and maintain
+        🚀 FOR YOUR FRIENDS' PAGES:
+        When your friends send you pages, they just need to:
         
-        COMMON PATTERNS:
+        1. Follow naming convention: initializeFeatureName() for any page-specific functions
+        2. Add cleanup if needed: Optional pageCleanup() function for intervals/timers  
+        3. Make functions global: window.initializeFeatureName = initializeFeatureName
         
-        1. TAB FUNCTIONALITY (copy this if you have tabs):
+        That's it! The SPA will automatically detect and call their functions.
+        */
         
-        document.addEventListener('DOMContentLoaded', function() {
-            // Only run if tabs exist on this page
+        // 🎯 PAGE-SPECIFIC INITIALIZATION (auto-detected by SPA)
+        function initializeYourPageFeature() {
+            // Your page initialization code here
+            console.log('Page feature initialized');
+            
+            // Example: Initialize tabs if they exist
             if (document.querySelector('.program-tab')) {
                 initializePageTabs();
             }
-        });
+            
+            // Example: Initialize forms if they exist
+            const form = document.querySelector('#your-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Handle form submission
+                });
+            }
+        }
         
+        // 🧹 OPTIONAL CLEANUP (called before SPA navigation)
+        function pageCleanup() {
+            // Clear any intervals, timeouts, or event listeners to prevent memory leaks
+            // Example: clearInterval(myInterval);
+            // Example: clearTimeout(myTimeout);
+            console.log('Page cleanup completed');
+        }
+        
+        // 📋 EXAMPLE: Tab functionality (copy this pattern if you have tabs)
         function initializePageTabs() {
             const tabs = document.querySelectorAll('.program-tab');
             const contentWrapper = document.querySelector('.program-content-wrapper');
@@ -217,29 +239,17 @@
             });
         }
         
-        2. CUSTOM ANIMATIONS:
+        // 🔄 Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializeYourPageFeature);
         
-        document.addEventListener('DOMContentLoaded', function() {
-            // Your custom animation code here
-        });
-        
-        3. FORM HANDLING:
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('#your-form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Handle form submission
-                });
-            }
-        });
-        */
+        // 🌐 Make functions globally available for SPA navigation (REQUIRED)
+        window.initializeYourPageFeature = initializeYourPageFeature;
+        window.pageCleanup = pageCleanup;
     </script>
     
     <!-- Site-wide Scripts (global logic) - DO NOT MODIFY -->
-    <!-- IMPORTANT: Update paths if in subdirectory: js/i18n.js → ../js/i18n.js and js/main.js → ../js/main.js and data-base-path="." → data-base-path=".." -->
-    <script src="js/i18n.js"></script>
+    <!-- IMPORTANT: For new pages in subdirectories, update the main.js path (e.g., js/main.js → ../js/main.js) and the data-base-path attribute (e.g., data-base-path="." → data-base-path="..") -->
+    <script src="/js/i18n.js"></script>
     <script src="js/main.js" data-base-path="."></script>
 </body>
 </html>
