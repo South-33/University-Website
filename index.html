@@ -59,9 +59,22 @@
         }
     </style>
 </head>
-<body class="bg-light-lavender">
+<body class="body-loading">
 
-    <div id="header-placeholder"></div>
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page Content Container - initially hidden until header loads -->
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
     
     <!-- Temporary Language Toggle for Homepage -->
     <div class="fixed top-4 right-4 z-50">
@@ -72,7 +85,7 @@
     </div>
 
     <main>
-        <section id="hero" class="relative flex items-center justify-center overflow-hidden text-center text-white">
+        <section id="hero" class="relative flex items-center justify-center overflow-hidden text-center text-white" style="height: calc(100vh - var(--header-height, 0px))">
             <!-- Static image shown first for instant loading -->
             <img id="hero-image" src="/Picture/School/numdronecompressedframe1.jpg" alt="NUM Campus" class="absolute top-0 left-0 w-full h-full object-cover object-top z-0 transition-opacity duration-1000">
             
@@ -467,9 +480,115 @@
         window.initializeHomepageHero = initializeHomepageHero;
         window.initializeHeroVideo = initializeHeroVideo;
     </script>
-    
     <script src="/js/i18n.js"></script>
     <script src="js/main.js" data-base-path="."></script>
+    
+    <script>
+        (function() {
+            'use strict';
+
+            const placeholder = document.getElementById('header-loading-placeholder');
+            const contentContainer = document.getElementById('main-content-container');
+            const heroSection = document.getElementById('hero');
+
+            if (!placeholder || !contentContainer || !heroSection) {
+                console.warn('Essential elements for layout management are missing.');
+                return;
+            }
+
+            let freezeState = {
+                isFrozen: true,
+                originalY: 0,
+            };
+
+            function absoluteScrollFreeze() {
+                if (freezeState.isFrozen) {
+                    document.documentElement.style.scrollBehavior = 'auto';
+                    document.body.style.scrollBehavior = 'auto';
+                    window.scrollTo(0, freezeState.originalY);
+                }
+            }
+
+            function setHeroHeight() {
+                const header = document.querySelector('header');
+                if (!header || header.offsetHeight === 0) {
+                    return; // Header not ready
+                }
+
+                // 1. Clean up previous styles to ensure a single source of truth
+                heroSection.style.removeProperty('height');
+                heroSection.style.removeProperty('min-height');
+                document.documentElement.style.removeProperty('--header-height');
+
+                // 2. Perform precise measurements
+                const viewportHeight = window.innerHeight;
+                const headerRect = header.getBoundingClientRect();
+                const exactHeaderHeight = Math.round(headerRect.height);
+                const exactHeroHeight = viewportHeight - exactHeaderHeight;
+
+                // 3. Set the definitive height in pixels
+                heroSection.style.height = `${exactHeroHeight}px`;
+                heroSection.style.minHeight = `${exactHeroHeight}px`;
+
+                // 4. Force an immediate browser reflow to apply the style
+                heroSection.offsetHeight;
+
+                console.log(`🎯 Unified Layout Set: Vh(${viewportHeight}) - Hh(${exactHeaderHeight}) = Hero(${exactHeroHeight}px)`);
+            }
+
+            function completeHeaderLoad() {
+                freezeState.isFrozen = false;
+                window.removeEventListener('scroll', absoluteScrollFreeze);
+
+                placeholder.style.transition = 'opacity 0.1s ease-out';
+                placeholder.style.opacity = '0';
+                contentContainer.style.opacity = '1';
+
+                setTimeout(() => {
+                    placeholder.style.display = 'none';
+                    document.documentElement.style.scrollBehavior = '';
+                    document.body.style.scrollBehavior = '';
+                    document.body.classList.remove('body-loading');
+                    console.log('✅ Layout Unlocked & Stable');
+                }, 100);
+            }
+
+            function initializeLayoutSequence() {
+                console.log('🚀 Initializing Unified Layout Sequence...');
+                freezeState.originalY = window.pageYOffset || document.documentElement.scrollTop;
+                window.addEventListener('scroll', absoluteScrollFreeze, { passive: false });
+
+                let attempts = 0;
+                const maxAttempts = 50; // ~1 second
+
+                const interval = setInterval(() => {
+                    const header = document.querySelector('header');
+                    attempts++;
+
+                    if (header && header.offsetHeight > 0) {
+                        clearInterval(interval);
+                        setHeroHeight();
+                        completeHeaderLoad();
+                    } else if (attempts > maxAttempts) {
+                        clearInterval(interval);
+                        console.warn('Header failed to load in time. Forcing layout unlock.');
+                        completeHeaderLoad();
+                    }
+                }, 20);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initializeLayoutSequence);
+            } else {
+                initializeLayoutSequence();
+            }
+
+            // Re-calculate on resize for responsive correctness
+            window.addEventListener('resize', setHeroHeight);
+
+            console.log('🧊 Absolute scroll freeze initialized');
+        })();
+    </script>
     
 </body>
 </html>

@@ -15,12 +15,12 @@
 
     <!-- Tailwind CSS Theme Configuration (global) -->
     <!-- IMPORTANT: Update path if in subdirectory: js/theme.js → ../js/theme.js -->
-    <script src="js/theme.js"></script>
+    <script src="../js/theme.js"></script>
 
     <!-- Global site-wide styles -->
     <!-- IMPORTANT: Update path if in subdirectory: css/main.css → ../css/main.css -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/i18n.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/i18n.css">
 
     <!-- PAGE-SPECIFIC STYLES (Recommended for team collaboration) -->
     <style>
@@ -86,10 +86,23 @@
         */
     </style>
 </head>
-<body class="bg-light-lavender">
+<body class="body-loading bg-light-lavender">
 
-    <div id="header-placeholder"></div>
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Page Content Container - initially hidden until header loads -->
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+    
     <main>
         <!-- 
         ===================================================================
@@ -239,17 +252,31 @@
             });
         }
         
-        // 🔄 Initialize on DOM ready (initial page load)
-        document.addEventListener('DOMContentLoaded', initializeYourPageFeature);
+        // SPA initialization function - called by main.js during navigation
+        function initializePage() {
+            initializeYourPageFeature();
+            // Add any other page-specific initialization here
+        }
         
-        // 🌐 Make functions globally available for SPA navigation (REQUIRED)
+        // Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializePage);
+        
+        // Make functions globally available for SPA navigation (REQUIRED)
+        window.initializePage = initializePage;
         window.initializeYourPageFeature = initializeYourPageFeature;
-        window.pageCleanup = pageCleanup;
+        window.pageCleanup = pageCleanup; // Optional cleanup
+        window.initializePageTabs = initializePageTabs; // If you have tabs
+        
+        // Also initialize immediately if DOM is already loaded (for SPA navigation)
+        if (document.readyState !== 'loading') {
+            // DOM is already loaded, initialize immediately
+            initializePage();
+        }
     </script>
     
     <!-- Site-wide Scripts (global logic) - DO NOT MODIFY -->
     <!-- IMPORTANT: For new pages in subdirectories, update the main.js path (e.g., js/main.js → ../js/main.js) and the data-base-path attribute (e.g., data-base-path="." → data-base-path="..") -->
-    <script src="/js/i18n.js"></script>
-    <script src="js/main.js" data-base-path="."></script>
+    <script src="../js/i18n.js"></script>
+    <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

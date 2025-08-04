@@ -11,24 +11,27 @@
     <script src="../../js/theme.js"></script>
     <link rel="stylesheet" href="../../css/main.css">
     <style>
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
         
         
     </style>
 </head>
-<body class="bg-light-lavender">
+<body class="body-loading bg-light-lavender">
 
-    <div id="header-placeholder"></div>
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <main>
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+        <main>
         <!-- Hero Section -->
         <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center text-center text-white font-body">
             <div class="absolute inset-0">
@@ -235,5 +238,8 @@
             initializeStatsAnimation();
         }
     </script>
+    
+    <!-- Unified Layout Sequence for SPA Navigation -->
+    <script src="/js/layout-sequence.js"></script>
 </body>
 </html>

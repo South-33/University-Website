@@ -1,46 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="i18n-title" content="navigation.campus">
-    <title>Campus - National University of Management</title>
+    <title>Our Campuses - National University of Management</title>
+    
+    <!-- External Dependencies (Fonts & Scripts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com  "></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Theme Configuration (global) -->
     <script src="../js/theme.js"></script>
+
+    <!-- Global site-wide styles -->
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/i18n.css">
+
+    <!-- PAGE-SPECIFIC STYLES -->
+    <style>
+        .campus-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .campus-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .campus-card-image-wrapper {
+            overflow: hidden;
+        }
+        .campus-card-image {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .campus-card:hover .campus-card-image {
+            transform: scale(1.05);
+        }
+        .campus-card .explore-btn {
+            transition: all 0.3s ease;
+            transform: translateX(0);
+        }
+        .campus-card:hover .explore-btn {
+            background-color: #FBBF24; /* accent-color */
+            color: #0A0A3E; /* primary-color */
+        }
+        .campus-card:hover .explore-btn-arrow {
+            transform: translateX(4px);
+        }
+        .explore-btn-arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
-<body class="bg-white">
+<body class="bg-light-lavender">
+
     <div id="header-placeholder"></div>
+
     <main>
-        <div class="bg-white pt-28 pb-16">
-            <div class="max-w-6xl mx-auto px-5 text-center">
-                <h1 class="text-4xl md:text-5xl font-heading text-dark-blue" data-i18n="campus.title">Our Campus</h1>
-                <p class="text-lg text-gray-700 font-body mt-4 max-w-3xl mx-auto" data-i18n="campus.subtitle">
-                    Explore our modern facilities and vibrant campus life.
+        <!-- HERO SECTION -->
+        <section class="relative bg-white pt-32 pb-20 md:pt-40 md:pb-24">
+            <div class="absolute inset-0 bg-cover bg-center opacity-5" style="background-image: url('../image/mainimage/s12.jpg');"></div>
+            <div class="relative max-w-6xl mx-auto px-5 text-center fade-in-section">
+                <h1 class="text-4xl md:text-6xl font-heading font-bold text-dark-blue">Two Campuses, One Vision</h1>
+                <p class="text-lg md:text-xl text-dark-blue/80 font-body mt-4 max-w-3xl mx-auto">
+                    From the historic heart of academic excellence to a modern gateway for global education, discover the unique environment that will shape your future.
                 </p>
             </div>
-        </div>
-        <div class="bg-light-lavender py-20">
-            <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-10">
-                <a href="/campus/map" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
-                    <h2 class="text-2xl font-heading text-dark-blue" data-i18n="navigation.map">Map</h2>
-                    <p class="mt-2 font-body text-gray-600" data-i18n="campus.map_description">Navigate our campus with our interactive map.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold" data-i18n="common.learn_more">Learn More &rarr;</span>
+        </section>
+        
+        <!-- CAMPUS SELECTION SECTION -->
+        <div class="py-20 lg:py-24">
+            <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-10 lg:gap-12 scroll-animate">
+
+                <!-- Main Campus Card -->
+                <a href="/campus/main" class="campus-card block bg-white rounded-2xl shadow-lg overflow-hidden group">
+                    <div class="campus-card-image-wrapper h-64">
+                        <img src="../image/mainimage/numbuilding.jpg" alt="National University of Management Main Campus Building" class="campus-card-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <h2 class="text-3xl font-heading text-dark-blue">Main Campus</h2>
+                        <p class="mt-2 mb-6 font-body text-dark-blue/70 leading-relaxed">The vibrant, historic heart of NUM, offering comprehensive programs and a rich legacy of academic excellence in Cambodia.</p>
+                        <div class="explore-btn inline-flex items-center gap-2 font-bold text-dark-blue py-2 px-4 rounded-full bg-light-lavender/70">
+                            Explore Main Campus
+                            <span class="explore-btn-arrow">→</span>
+                        </div>
+                    </div>
                 </a>
-                <a href="/campus/facilities" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
-                    <h2 class="text-2xl font-heading text-dark-blue" data-i18n="navigation.facilities">Facilities</h2>
-                    <p class="mt-2 font-body text-gray-600" data-i18n="campus.facilities_description">Discover our state-of-the-art labs, libraries, and student spaces.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold" data-i18n="common.learn_more">Learn More &rarr;</span>
+
+                <!-- Veal Sbov (Second) Campus Card -->
+                <a href="/campus/second" class="campus-card block bg-white rounded-2xl shadow-lg overflow-hidden group">
+                    <div class="campus-card-image-wrapper h-64">
+                        <img src="../image/vealsbov/veal_sbov_view.jpg" alt="NUM Veal Sbov International Campus" class="campus-card-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <h2 class="text-3xl font-heading text-dark-blue">Veal Sbov Campus</h2>
+                        <p class="mt-2 mb-6 font-body text-dark-blue/70 leading-relaxed">Our modern, international campus dedicated to global programs, cross-cultural collaboration, and preparing leaders for the world stage.</p>
+                        <div class="explore-btn inline-flex items-center gap-2 font-bold text-dark-blue py-2 px-4 rounded-full bg-light-lavender/70">
+                            Explore Veal Sbov Campus
+                            <span class="explore-btn-arrow">→</span>
+                        </div>
+                    </div>
                 </a>
+
             </div>
         </div>
     </main>
+    
     <div id="footer-placeholder"></div>
-    <script src="/js/i18n.js"></script>
+    
+    <!-- PAGE-SPECIFIC JAVASCRIPT (SPA-Compatible) -->
+    <script>
+        // 🎯 PAGE-SPECIFIC INITIALIZATION (auto-detected by SPA)
+        function initializeCampusIndexPage() {
+            // This page is mostly static, but we follow the pattern.
+            // Scroll animations are handled globally by main.js.
+            console.log('Campus Index Page Initialized.');
+        }
+
+        // 🧹 OPTIONAL CLEANUP (called before SPA navigation)
+        function pageCleanup() {
+            // No timers or listeners to clear on this page.
+            console.log('Campus Index Page Cleaned Up.');
+        }
+
+        // 🔄 Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializeCampusIndexPage);
+
+        // 🌐 Make functions globally available for SPA navigation (REQUIRED)
+        window.initializeCampusIndexPage = initializeCampusIndexPage;
+        window.pageCleanup = pageCleanup;
+    </script>
+    
+    <!-- Site-wide Scripts (global logic) -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+    <script src="../js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>
