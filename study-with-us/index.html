@@ -3,281 +3,902 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study With Us - National University of Management</title>
+    <title>Campus - Kingster University</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tailwind CSS Theme Configuration -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'dark-blue': '#0A0A3E',
-              'light-lavender': '#E9E8F5',
-            },
-            fontFamily: {
-              heading: ['Lora', 'serif'],
-              body: ['Montserrat', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
+    <script src="../js/theme.js"></script>
     <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- PAGE-SPECIFIC STYLES (UPDATED) -->
+    <style>
+        /* Animation initial states */
+        #hero-subtitle,
+        #hero-button {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        #animated-heading .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Visible states for animations */
+        #hero-subtitle.visible,
+        #hero-button.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Background image slider styles (Unchanged) */
+        .hero-bg-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            animation: ken-burns 20s infinite;
+        }
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+        .hero-bg-slide.zoom-out {
+             animation-direction: alternate-reverse;
+        }
+        /* Make the overlap more dramatic by increasing the negative margin */
+.features-section {
+    position: relative;
+    z-index: 20;
+    background-color: transparent;
+    /* CHANGE THIS VALUE to pull the section up even more */
+    margin-top: -10px; 
+}
+
+/* No changes needed for the rest */
+.features-curve {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+}
+.features-curve svg {
+    width: 100%;
+    height: 100%;
+}
+.feature-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+#parallax-bg {
+    /* Set the background image URL */
+    background-image: url('../Picture/School/13.jpg');
+    
+    /* Position the background */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    /* This is important: will-change hints to the browser that we'll be animating this property */
+    will-change: transform;
+}
+.stylish-background-section {
+            position: relative; /* Establishes a positioning context for the pseudo-elements */
+            overflow: hidden;   /* Hides the parts of the shapes that extend beyond the section's bounds */
+            background-color: #f8f9fa; /* A very light, soft gray for a clean and modern look */
+        }
+
+        /* "Sticker" element 1: A soft blue shape positioned at the top-left */
+        .stylish-background-section::before {
+            content: '';
+            position: absolute;
+            z-index: 0; /* Places the shape behind the content */
+            top: -80px;
+            left: -120px;
+            width: 350px;
+            height: 350px;
+            background-color: rgba(224, 231, 255, 0.7); /* A semi-transparent, soft indigo */
+            border-radius: 45% 55% 60% 40% / 40% 50% 50% 60%; /* Creates a unique, organic "blob" shape */
+            transform: rotate(-30deg); /* Tilts the shape for a more dynamic feel */
+        }
+
+        /* "Sticker" element 2: A soft green shape positioned at the bottom-right */
+        .stylish-background-section::after {
+            content: '';
+            position: absolute;
+            z-index: 0; /* Places the shape behind the content */
+            bottom: -100px;
+            right: -100px;
+            width: 320px;
+            height: 320px;
+            background-color: rgba(209, 250, 229, 0.7); /* A semi-transparent, soft green */
+            border-radius: 55% 45% 45% 55% / 50% 60% 40% 50%; /* Another unique, organic "blob" shape */
+            transform: rotate(15deg); /* Tilts the shape differently from the first one */
+        }
+
+        /* We need to make sure the actual content of the section (the container with text and cards)
+           sits on top of our new background shapes. */
+        .content-on-top {
+            position: relative;
+            z-index: 1;
+        }
+        /* Card hover animations */
+        .professor-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .professor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        /* Social icon hover animations */
+        .social-link { transition: color 0.3s ease; }
+        .social-link:hover { color: #2563eb; }
+
+        /* Button hover animations */
+        .view-all-button { transition: background-color 0.3s ease, transform 0.2s ease; }
+        .view-all-button:hover {
+            transform: translateY(-2px);
+            background-color: #1d4ed8;
+        }
+
+        /*
+        =====================================================================
+        >>> THE CRUCIAL CSS RULE THAT WAS MISSING <<<
+        This rule tells the browser to hide any element with the 'hidden-card' class.
+        Without this, the cards will always be visible.
+        =====================================================================
+        */
+        .hidden-card {
+            display: none;
+        }
+        @keyframes ken-burns {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body class="bg-white">
-
     <div id="header-placeholder"></div>
+    
+    <!-- MAIN CONTENT -->
+    <main class="pt-20">
 
-    <main>
-        <!-- Section 1: Hero Section (Inspiration) -->
-        <!-- CRITICAL: Added id="hero" for the layout script in main.js -->
-        <section id="hero" class="relative text-white">
-            <!-- Background Image: Ensure 'academic-collaboration.jpg' is in your /Picture/ folder. -->
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../Picture/study-with-us-picture/image.png');"></div>
-            <!-- Overlay for text readability -->
-            <div class="absolute inset-0 bg-dark-blue/60"></div>
+        <!-- HERO SLIDER SECTION (UPDATED HTML) -->
+        <section class="relative h-[calc(100vh-80px)] min-h-[500px] max-h-[720px] w-full flex items-center bg-gray-800 fade-in-section">
             
+            <!-- Background Image Container -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+                <div id="hero-bg-1" class="hero-bg-slide"></div>
+                <div id="hero-bg-2" class="hero-bg-slide"></div>
+            </div>
+
+            <!-- Left Dark Overlay (Matches #003366 theme) -->
+            <div class="absolute inset-y-0 left-0 w-full md:w-1/2 lg:w-2/5 bg-blue-900/80 z-10"></div>
+
             <!-- Content -->
-            <div class="relative z-10 max-w-6xl mx-auto px-5 flex flex-col items-center justify-center h-full text-center ">
-                <h1 class="text-4xl md:text-6xl font-heading font-bold">A World-Class Education Awaits.</h1>
-                <p class="text-lg md:text-xl font-body mt-4 max-w-3xl mx-auto">
-                    Discover a community of innovators, a faculty of mentors, and a campus alive with opportunity. Find your path to success with us.
-                </p>
-                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5">
-                <a href="../programs/" class="bg-white hover:scale-110 text-dark-blue font-bold py-3 px-8 rounded-md transition-all duration-150 active:scale-95 w-full sm:w-auto">Explore Programs</a>
-                </div>
+            <div class="relative z-20 w-full md:w-1/2 lg:w-2/5 px-8 sm:px-12 lg:px-16 text-white">
+                <!-- MODIFIED: Added id for animation targeting -->
+                <p id="hero-subtitle" class="font-montserrat text-base md:text-lg font-light text-white/90 uppercase tracking-widest mb-4">The Best University Of The State</p>
+                
+                <h1 id="animated-heading" class="font-lora text-[clamp(2.5rem,6vw,3.75rem)] font-bold text-white mb-8 leading-tight">
+                    <!-- Text will be generated by JS -->
+                </h1>
+                
+                <!-- UPDATED BUTTON TEXT COLOR -->
+                <a href="#" id="hero-button" class="inline-block mt-8 bg-white text-[#333333] font-montserrat font-bold py-3 px-8 border border-white hover:bg-transparent hover:text-white transition-all duration-300">
+                    Explore Here
+                </a>
             </div>
         </section>
 
-        <!-- Section 2: Academic Excellence -->
-        <section id="programs" class="bg-light-lavender py-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">A Commitment to Academic Excellence</h2>
-                    <p class="mt-3 font-body text-lg text-gray-600">Discover programs designed for impact, taught by leaders in their fields.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Card 1: Programs -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
-                        <h3 class="text-2xl font-heading text-dark-blue">Diverse Programs & Degrees</h3>
-                        <p class="mt-2 font-body text-gray-600">Choose from a wide range of fields including Business, Information Technology, English, Engineering, and Fine Arts, all designed to meet global standards.</p>
-                    </div>
-                    <!-- Card 2: Teaching Quality -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
-                        <h3 class="text-2xl font-heading text-dark-blue">Expert Faculty & Practical Learning</h3>
-                        <p class="mt-2 font-body text-gray-600">Learn from experienced professors and industry experts. Our curriculum emphasizes hands-on projects, ensuring you gain practical, real-world skills.</p>
-                    </div>
-                    <!-- Card 3: Accreditations -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
-                        <h3 class="text-2xl font-heading text-dark-blue">Accreditation & Partnerships</h3>
-                        <p class="mt-2 font-body text-gray-600">We are fully accredited and maintain strong partnerships with leading universities and corporations, providing you with a network of opportunities.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Modern Learning Environment -->
-        <section class="bg-white py-20">
-            <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-                <div class="pr-8">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Modern Learning Environment</h2>
-                    <p class="mt-4 font-body text-lg text-gray-700">Our campus is designed to inspire collaboration and innovation. We provide the tools and spaces you need to excel.</p>
-                    <ul class="mt-6 space-y-4 font-body text-gray-600">
-                        <li class="flex items-start"><span class="text-primary-blue font-bold mr-3">✓</span>State-of-the-art libraries, computer labs, and collaborative classrooms.</li>
-                        <li class="flex items-start"><span class="text-primary-blue font-bold mr-3">✓</span>Full technology integration with smart boards and robust online learning platforms.</li>
-                        <li class="flex items-start"><span class="text-primary-blue font-bold mr-3">✓</span>A safe, inclusive, and welcoming atmosphere for all students from all backgrounds.</li>
-                    </ul>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop" alt="Modern university campus with students" class="rounded-xl shadow-2xl">
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Student Life -->
-        <section class="bg-light-lavender py-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Vibrant Student Life</h2>
-                    <p class="mt-3 font-body text-lg text-gray-600">Your university experience is more than just lectures and labs.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8 text-center">
-                    <!-- Card 1: Clubs -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-heading text-primary-blue">Clubs & Sports</h3>
-                        <p class="mt-2 font-body text-gray-600">Join over 100 student-led clubs, from coding to debate, or compete in our competitive sports programs.</p>
-                    </div>
-                    <!-- Card 2: Events -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-heading text-primary-blue">Community Events</h3>
-                        <p class="mt-2 font-body text-gray-600">Participate in annual festivals, workshops, and volunteer opportunities that connect you with the local community.</p>
-                    </div>
-                    <!-- Card 3: Community -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-heading text-primary-blue">Supportive Community</h3>
-                        <p class="mt-2 font-body text-gray-600">Become part of a diverse and supportive network of peers, mentors, and friends from around the world.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+   
+<!-- ========= SECTION 2 ========= -->
+<section class="features-section pb-16">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Section 5: Career Opportunities -->
-        <section class="bg-white py-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Launch Your Career</h2>
-                    <p class="mt-3 font-body text-lg text-gray-600">We provide the resources to turn your degree into a successful career.</p>
-                </div>
-                <div class="grid md:grid-cols-5 gap-12 items-center">
-                    <div class="md:col-span-3 bg-light-lavender p-8 rounded-xl">
-                        <h3 class="font-bold text-2xl text-black-700">Graduate Success Story</h3>
-                        <blockquote class="mt-4 border-l-4 border-red-500 pl-4 italic text-black-700 font-body">
-                            "The internship program and career services were invaluable. I had a job offer from a top tech firm before I even graduated. The hands-on projects in my IT courses gave me the confidence and skills to excel from day one."
-                            <cite class="block mt-4 not-italic font-bold text-red-500">- Jane Doe, B.Sc. in IT, Class of 2023</cite>
-                        </blockquote>
-                    </div>
-                    <div class="md:col-span-2">
-                        <h3 class="font-bold text-2xl text-black-800">Our Commitment to You:</h3>
-                        <ul class="mt-4 space-y-3 font-body-bold text-black-500">
-                           <li>✓ Dedicated Career Services Team</li>
-                           <li>✓ Guaranteed Internship Placements</li>
-                           <li>✓ Strong Network of Partner Companies</li>
-                           <li>✓ Resume Workshops & Mock Interviews</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 6: Scholarships & Financial Aid -->
-        <section class="bg-dark-blue text-white py-20">
-            <div class="max-w-5xl mx-auto px-6 text-center">
-                 <h2 class="text-3xl md:text-4xl font-heading">Scholarships & Financial Aid</h2>
-                 <p class="mt-3 font-body text-lg text-gray-300 max-w-3xl mx-auto">We believe a world-class education should be within reach. We are committed to making your studies affordable.</p>
-                <div class="grid md:grid-cols-2 gap-10 mt-12 text-left">
-                    <div class="bg-white/10 p-8 rounded-xl">
-                        <h3 class="text-2xl font-heading">Available Scholarships</h3>
-                        <p class="mt-2 font-body text-gray-300">We offer a variety of merit-based and need-based scholarships to recognize your achievements and support your educational journey.</p>
-                    </div>
-                    <div class="bg-white/10 p-8 rounded-xl">
-                        <h3 class="text-2xl font-heading">Flexible Tuition Plans</h3>
-                        <p class="mt-2 font-body text-gray-300">Our financial aid office can help you explore flexible payment plans, student loans, and other support programs to fit your budget.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 7: How to Join Us (Corrected for Mobile) -->
-<section class="bg-light-lavender py-20" id="apply">
-    <div class="max-w-4xl mx-auto px-6">
-        <div class="text-center mb-20">
-            <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">How to Join Us</h2>
-            <p class="text-lg text-gray-700 font-body mt-3 max-w-2xl mx-auto">Follow these simple steps to begin your journey with us.</p>
+        <!-- Upward Curve SVG (No changes here) -->
+        <div class="features-curve" aria-hidden="true">
+            <svg preserveAspectRatio="none" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 100C360 100 360 0 720 0C1080 0 1080 100 1440 100V101H0V100Z" fill="white"/>
+            </svg>
         </div>
+
+        <div class="relative pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-lg shadow-md overflow-hidden divide-y divide-gray-200 sm:divide-x sm:divide-y-0">
+            
+            <!-- Box 1: University Life -->
+            <div class="feature-box bg-white p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <!-- ICON COLOR (Deep Blue Accent) -->
+                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
+                </div>
+                <!-- UPDATED TEXT COLOR -->
+                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">University Life</h3>
+                <p class="font-montserrat text-sm text-gray-500">Overall in here</p>
+            </div>
+
+            <!-- Box 2: Graduation -->
+            <div class="feature-box bg-white p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <!-- ICON COLOR (Deep Blue Accent) -->
+                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/></svg>
+                </div>
+                <!-- UPDATED TEXT COLOR -->
+                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">Graduation</h3>
+                <p class="font-montserrat text-sm text-gray-500">Getting Diploma</p>
+            </div>
+
+            <!-- Box 3: Athletics -->
+            <div class="feature-box bg-white p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <!-- ICON COLOR (Deep Blue Accent) -->
+                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
+                </div>
+                <!-- UPDATED TEXT COLOR -->
+                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">Athletics</h3>
+                <p class="font-montserrat text-sm text-gray-500">Sport Clubs</p>
+            </div>
+            
+            <!-- Box 4: Social -->
+            <div class="feature-box bg-white p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <!-- ICON COLOR (Deep Blue Accent) -->
+                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.928a4.5 4.5 0 017.5 0M12 12.75a4.5 4.5 0 017.5 0m-7.5 2.928a4.5 4.5 0 00-7.5 0m7.5 2.928a4.5 4.5 0 00-7.5 0m1.5-12.812A4.5 4.5 0 0112 6.75a4.5 4.5 0 017.5 0m-7.5 2.928a4.5 4.5 0 017.5 0" /></svg>
+                </div>
+                <!-- UPDATED TEXT COLOR -->
+                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">Social</h3>
+                <p class="font-montserrat text-sm text-gray-500">Overall in here</p>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<!-- ========= SECTION 3 ========= -->
+<section class="bg-white py-20 sm:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+        <div class="w-px h-16 bg-gray-300 mx-auto mb-8"></div>
+
+        <p class="font-montserrat text-sm font-medium text-gray-500 uppercase tracking-[0.2em] mb-6">
+            Why study with NUM?
+        </p>
+
+        <!-- UPDATED TEXT COLOR -->
+        <h2 class="font-lora text-4xl sm:text-5xl text-[#333333] tracking-[0.15em] uppercase leading-tight mb-8">
+            Experience In School<br> Leadership And Teaching
+        </h2>
+
+        <p class="font-montserrat text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            At the National University of Management, we are building an exceptional and innovative educational institution. As a modern university, our mission is not only to enhance our students' lives but also to advance the cause of education across our region.
+        </p>
+
+    </div>
+</section>
+
+<section class="bg-gray-100 font-sans">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+<!-- Grid container for the two main columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16 items-center">
+
+        <!-- Left Column: Text Content -->
+        <div>
+            <h1 class="mt-4 text-4xl sm:text-5xl font-bold text-gray-900 leading-tight">
+                🎉 Congratulations to the National University of Management! 🎉
+            </h1>
+            <p class="mt-6 text-gray-700 leading-relaxed max-w-xl">
+                NUM has proudly earned global recognition in the 2025 WURI Rankings, including:
+                <ul class="list-disc list-inside mt-4">
+                    <li>Global Top 400 – Ranked 69th worldwide</li>
+                    <li>Empowerment-Based Management (Top 100) – Ranked 7th globally</li>
+                    <li>Infrastructure & Technology (Top 100) – Ranked 34th</li>
+                    <li>University Brand & Reputation (Top 100) – Ranked 34th</li>
+                </ul>
+            </p>
+
+        </div>
+
+        <!-- Right Column: Image Collage -->
+        <div class="grid grid-cols-2 grid-rows-2 gap-4 h-full">
+            <div class="col-span-1 row-span-1">
+                 <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/41.jpg" alt="Two workers welding on a metal frame inside a building.">
+            </div>
+            <div class="col-span-1 row-span-1">
+                <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/42.jpg" alt="Welder with helmet working on a metal pipe, creating bright sparks.">
+            </div>
+             <div class="col-span-1 row-span-1">
+                <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/43.jpg" alt="Construction worker using surveying equipment on a building site at sunset.">
+            </div>
+            <div class="col-span-1 row-span-1">
+                <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/44.jpg" alt="Construction worker using surveying equipment on a building site at sunset.">
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+
+<!-- ========= ABOUT & SERVICES SECTION 4 START (CORRECTED) ========= -->
+
+<section class="bg-[#151a25]">
+
+    <div class="relative overflow-hidden py-16 sm:py-20">
         
-        <div class="relative">
-            <!-- The vertical timeline line -->
-             <div class="absolute -top-2 left-2 w-full h-0.5 bg-gray-300 md:-top-2 md:-translate-y-1/2" aria-hidden="true"></div>
-            <div class="absolute left-4 -top-2 h-full w-0.5 bg-gray-300 md:left-1/2 md:-translate-x-1/2" aria-hidden="true"></div>
+        <div id="parallax-bg" class="parallax-bg absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('../Picture/School/13.jpg');">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#151a25] via-[#151a25]/60 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
-            <!-- Timeline Item 1 - Left Side -->
-            <div class="relative mb-12">
-                <!-- ✅ CHANGE: Added margin for mobile (ml-12) and reset it for desktop (md:ml-0) -->
-                <div class="ml-12 md:ml-0 md:flex md:justify-end md:text-right"> 
-                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">1. Explore & Choose</h3>
-                        <p class="font-body text-gray-600">Browse our programs and find the one that aligns with your passion and career goals.</p>
-                    </div>
+            <!-- Left Column: Title -->
+            <div class="text-white">
+                <div class="flex items-center mb-4">
+                    <svg class="w-10 h-10 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                    </svg>
+                    <span class="text-2xl font-semibold">National University of Management</span>
                 </div>
-                <!-- ✅ CHANGE: Correctly positioned the marker on the line (left-4 -translate-x-1/2) -->
-                <div class="absolute left-4 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-dark-blue text-white font-bold md:left-1/2">1</div>
+                <!-- UPDATED ACCENT COLOR (was green) -->
+                <h2 class="text-4xl sm:text-5xl font-bold text-blue-400">
+                    About Our University
+                </h2>
             </div>
 
-            <!-- Timeline Item 2 - Right Side -->
-            <div class="relative mb-12">
-                 <!-- ✅ CHANGE: Added margin for mobile (ml-12) and reset it for desktop (md:ml-auto) -->
-                <div class="ml-12 md:ml-auto md:flex">
-                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">2. Prepare Your Application</h3>
-                        <p class="font-body text-gray-600">Check the admission requirements and gather necessary documents like transcripts and recommendation letters.</p>
-                    </div>
+            <!-- Right Column: Description -->
+            <div class="text-gray-300 space-y-4">
+                <p>
+                    The National University of Management, located in Cambodia, is a modern educational institution with a history of 39 years, having progressed in capacity, diversity, and quality education, emphasizing research, entrepreneurship, and innovation. It is ranked 69th in the World University Rankings for Innovation (WURI) 2025, reflecting its commitment to developing competent, socially responsible individuals who contribute to the country's socio-economic growth.
+                </p>
+                <p>
+                    The National University of Management was established for the public benefit and it is recognized nationally. Throughout our great history, the National University of Management has offered access to a wide range of academic opportunities.
+                </p>
+                <!-- UPDATED ACCENT COLOR (was green) -->
+                <a href="#" class="inline-flex items-center text-white font-semibold mt-4 hover:text-blue-300 transition-colors">
+                    Read More
+                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom "Services" part with 4 boxes -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            <!-- Feature 1: Education Services (UPDATED ACCENT) -->
+            <div class="text-center">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
+                    <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
                 </div>
-                <!-- ✅ CHANGE: Correctly positioned the marker on the line (left-4 -translate-x-1/2) -->
-                <div class="absolute left-4 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-dark-blue text-white font-bold md:left-1/2">2</div>
+                <h3 class="text-lg font-bold text-white mb-2">Education Services</h3>
+                <p class="text-gray-400 text-sm mb-4">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized.</p>
+                <a href="#" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
             </div>
 
-            <!-- Timeline Item 3 - Apply (You will need to apply the same changes here) -->
-            <div class="relative mb-12">
-                <div class="ml-12 md:ml-0 md:flex md:justify-end md:text-right">
-                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">3. Apply Online</h3>
-                        <p class="font-body text-gray-600">Complete our easy-to-use online application form. Our admissions team is here to help if you have questions.</p>
-                    </div>
+            <!-- Feature 2: International Hubs (UPDATED ACCENT) -->
+            <div class="text-center">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
+                    <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
                 </div>
-                <div class="absolute left-4 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-dark-blue text-white font-bold md:left-1/2">3</div>
+                <h3 class="text-lg font-bold text-white mb-2">International Hubs</h3>
+                <p class="text-gray-400 text-sm mb-4">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized.</p>
+                <a href="#" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
             </div>
 
-            
+            <!-- Feature 3: Bachelor's and Master's (UPDATED ACCENT) -->
+            <div class="text-center">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
+                    <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Bachelor's and Master's</h3>
+                <p class="text-gray-400 text-sm mb-4">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized.</p>
+                <a href="#" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
+            </div>
+
+            <!-- Feature 4: University Life (UPDATED ACCENT) -->
+            <div class="text-center">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
+                     <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">University Life</h3>
+                <p class="text-gray-400 text-sm mb-4">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized.</p>
+                <a href="#" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
+            </div>
+
         </div>
     </div>
 </section>
 
-    <section class="bg-light-lavender py-20 overflow-hidden border-4 border-lavender-dark m-4 rounded-lg">
-        <!-- The 'cta-section' class is a target for our animation script -->
-        <div class="cta-section max-w-4xl mx-auto px-6 text-center opacity-0 translate-y-8 transition-all duration-1000">
-                     
-            <!-- 1. Headline Enhancement -->
-            <h2 class="text-3xl md:text-4xl font-bold text-lavender-dark">Start Your Journey With Us Today</h2>
-            <p class="mt-4 max-w-2xl mx-auto text-lavender-medium">
-                The best way to experience our community is to see it for yourself. Schedule a tour, explore our programs, or start your application today.
-            </p>
-     
-            <!-- 2. Descriptive Buttons with Icons & Responsive Spacing -->
-            <!-- The 'space-y-4' class improves spacing on mobile (when flex-col is active) -->
-            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 space-y-4 sm:space-y-0">
-                             
-                <!-- Apply Now Button -->
-                <a href="#apply" class="flex items-center justify-center btn-primary hover:bg-gray-800 font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full sm:w-auto transform hover:-translate-y-1 hover:shadow-xl">
-                    <!-- Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
-                    </svg>
-                    Apply Now
-                </a>
-                             
-                <!-- Campus Tour Button -->
-                <a href="#" class="flex items-center justify-center bg-transparent border-2 btn-secondary font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full sm:w-auto transform hover:-translate-y-1 hover:shadow-xl">
-                    <!-- Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                    </svg>
-                    Schedule Your Campus Tour
-                </a>
-     
-                
-                
+      <!-- ========= SECTION 4.5: PROGRAM INFO CARDS ========= -->
+    <!-- Add the 'stylish-background-section' class here and remove bg-white -->
+    <section class="stylish-background-section py-16 sm:py-24">
+        <!-- Add the 'content-on-top' class to this container -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-on-top">
+
+            <!-- Section Title & Description -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 sm:text-5xl">
+                    Our Programs
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    This is a brief description of the programs offered by National University of Management, highlighting their commitment to quality education and global recognition.
+                </p>
             </div>
-     
-            <!-- 3. Add Testimonial for Trust -->
-            <div class="mt-16 max-w-3xl mx-auto">
-                <blockquote class="italic text-lavender-medium">
-                    "Choosing this university was the best decision I ever made. The support from the faculty and the career opportunities they opened up for me were beyond my expectations."
-                </blockquote>
-                <cite class="block mt-3 not-italic font-bold text-lavender-dark">
-                    - Alex Johnson, Alumnus
-                </cite>
+            
+            <!-- Main grid container with rounded corners and shadow to lift it off the page -->
+            <div class="grid grid-cols-1 md:grid-cols-3 text-white overflow-hidden rounded-lg shadow-2xl relative">
+
+                <!-- Card 1: Undergraduate -->
+                <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                    <!-- Dark blue overlay with a hover effect -->
+                    <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+                    
+                    <!-- Content Container with hover animation -->
+                    <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                        <h3 class="font-lora text-2xl lg:text-3xl font-bold mb-3">Undergraduate</h3>
+                        <p class="font-montserrat text-white/90 max-w-xs mx-auto">
+                            .
+                    </div>
+                </div>
+
+                <!-- Card 2: Graduated & Professional -->
+                <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                    <!-- Dark blue overlay with a hover effect -->
+                    <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+                    
+                    <!-- Content Container with hover animation -->
+                    <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                        <h3 class="font-lora text-2xl lg:text-3xl font-bold mb-3">Master</h3>
+                        <p class="font-montserrat text-white/90 max-w-xs mx-auto">
+                            .
+                        </p>
+                    </div>
+                </div>
+                <!-- Card 3: Scholarships & Financial AID -->
+                <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                    <!-- Dark blue overlay with a hover effect -->
+                    <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+                    
+                    <!-- Content Container with hover animation -->
+                    <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                        <h3 class="font-lora text-2xl lg:text-3xl font-bold mb-3">Doctorate</h3>
+                        <p class="font-montserrat text-white/90 max-w-xs mx-auto">
+                            .
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    </main>
 
+<!-- ========= EMBARK ON A JOURNEY SECTION (DARK BLUE THEME) ========= -->
+<!-- UPDATED: Main background color set to a dark slate blue -->
+<section class="relative bg-blue-800 text-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10">
+        
+        <!-- Grid container for the two main columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 items-center">
+            
+            <!-- Left Column: Main Title & Link -->
+            <div class="relative z-10">
+                <!-- Decorative Icon (color adjusted for blue theme) -->
+                <div class="mb-6">
+                    <svg class="w-12 h-12 text-blue-300/40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/>
+                    </svg>
+                </div>
+                
+                <h2 class="font-lora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
+                    Modern Learning Environment     
+                </h2>
+                
+                <!-- UPDATED: Link border color adjusted for blue theme -->
+                <a href="#" class="inline-flex items-center gap-x-2 font-semibold mt-10 border-b-2 border-blue-300/50 hover:border-blue-300 transition-all duration-300 pb-1">
+                    Learn More
+                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+            </div>
+
+            <!-- ========= HERE IS THE MODIFIED CODE SNIPPET ========= -->
+    <div class="relative z-0">
+        <p class="text-white-200/80 leading-relaxed max-w-lg mb-8">
+            Embark on a journey of knowledge, discovery, and growth at Unipix University. Our admissions process is designed to identify bright, motivated individuals who are eager to contribute to our dynamic academic community.
+        </p>
+        
+        <!-- Container for the video and the circular decoration -->
+        <div class="relative">
+            <!-- 
+                MODIFIED PART: 
+                - The <img> tag has been replaced with a video container.
+                - `aspect-w-16 aspect-h-9` creates a responsive 16:9 box.
+                - The <video> tag is set to autoplay, loop, and muted.
+            -->
+            <div class="relative z-10 w-full rounded-lg shadow-2xl overflow-hidden aspect-w-16 aspect-h-9">
+                <video fade-on-scroll controls playsinline
+                    src="../Video/National University of Management (1).mp4" 
+                    class="w-full h-full object-cover"
+                >
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <!-- White circle element - remains unchanged -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-white rounded-full z-0 hidden lg:block"></div>
+            </div>
+        </div>
+            
+    
+    <!-- Background decorative elements (colors adjusted for blue theme) -->
+    <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 border border-blue-400/10 rounded-full z-0"></div>
+    <div class="absolute bottom-10 right-16 w-24 h-24 text-blue-400/10 z-0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471M11.42 15.17L5.877 21A2.652 2.652 0 013 17.25l5.877-5.877m0 0l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471m6.053 0l-3.46-3.46a.563.563 0 01.796-.796l3.46 3.46m-3.46-3.46a.563.563 0 01.796 0l2.471 2.471" /></svg>
+    </div>
+
+</section>
+
+<section class="w-full py-16 sm:py-24 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Grid container for the entire section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 shadow-xl">
+
+            <!-- Left Panel: Title and Subtitle -->
+            <div class="lg:col-span-1 bg-blue-800 p-8 flex flex-col justify-center">
+                <div class="max-w-md">
+                     <!-- Vertical Line -->
+                    <div class="w-px h-12 bg-white opacity-50 mb-5"></div>
+                    <h2 class="text-5xl font-lora font-medium text-white sm:text-6xl">
+                        Our Campus
+                    </h2>
+                    <p class="mt-5 text-lg text-white opacity-90">
+                        A closer look to our university views.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Panel: Image Gallery Grid -->
+            <!-- Added lg:h-[40rem] to control the height on larger screens -->
+            <div class="lg:col-span-2 lg:h-[30rem]">
+                <div class="grid grid-cols-2 grid-rows-6 h-full">
+
+                    <!-- Image 1: Lecture Hall (Large) -->
+                    <div class="col-span-2 row-span-2">
+                        <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop" alt="A university lecture hall filled with students during a class.">
+                    </div>
+
+                    <!-- Image 2: Library -->
+                    <div class="col-span-1 row-span-2">
+                         <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop" alt="Quiet university library with rows of bookshelves.">
+                    </div>
+
+                    <!-- Image 3: Students Collaborating -->
+                    <div class="col-span-1 row-span-2">
+                        <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop" alt="Two students studying together with a laptop in a modern cafe.">
+                    </div>
+
+                    <!-- Image 4: Campus Architecture -->
+                    <div class="col-span-2 row-span-2">
+                        <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1607513746982-53c5a7f4c93a?q=80&w=1974&auto=format&fit=crop" alt="Brick walkway lined with stately white columns on a university campus.">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- ========= SECTION: MEET OUR PROFESSORS (Updated) ========= -->
+<section class="py-16 sm:py-24 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-lora font-bold text-gray-900 sm:text-5xl">
+                Meet Our Esteemed Faculty
+            </h2>
+            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                Our professors are distinguished scholars and dedicated mentors who are leaders in their respective fields.
+            </p>
+        </div>
+        
+        <!-- Grid container for professor cards -->
+        <div id="professors-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Professor Card 1 (Visible) -->
+            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center">
+                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop" alt="Photo of Dr. Eleanor Vance">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">Dr. Eleanor Vance</h3>
+                    <p class="text-blue-700 font-semibold mt-1">Quantum Physics</p>
+                    <p class="text-gray-500 mt-3 text-sm">A leading researcher in quantum computing and string theory with over 20 years of experience.</p>
+                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
+                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professor Card 2 (Visible) -->
+            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center">
+                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=2071&auto=format&fit=crop" alt="Photo of Dr. Marcus Cole">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">Dr. Marcus Cole</h3>
+                    <p class="text-blue-700 font-semibold mt-1">Business & Strategy</p>
+                    <p class="text-gray-500 mt-3 text-sm">An expert in corporate strategy and international business, with a focus on emerging markets.</p>
+                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
+                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professor Card 3 (Visible) -->
+            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center">
+                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?q=80&w=1887&auto=format&fit=crop" alt="Photo of Dr. Isabella Rossi">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">Dr. Isabella Rossi</h3>
+                    <p class="text-blue-700 font-semibold mt-1">Fine Arts & History</p>
+                    <p class="text-gray-500 mt-3 text-sm">An acclaimed art historian and curator specializing in the Renaissance period.</p>
+                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
+                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Professor Card 4 (Initially Hidden) -->
+            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center hidden-card">
+                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop" alt="Photo of Dr. Jian Li">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">Dr. Jian Li</h3>
+                    <p class="text-blue-700 font-semibold mt-1">Computer Engineering</p>
+                    <p class="text-gray-500 mt-3 text-sm">A pioneer in artificial intelligence and human-computer interaction research.</p>
+                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
+                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professor Card 5 (Initially Hidden) -->
+            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center hidden-card">
+                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1581093418546-56c483a48e9f?q=80&w=1887&auto=format&fit=crop" alt="Photo of Dr. Anya Sharma">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">Dr. Anya Sharma</h3>
+                    <p class="text-blue-700 font-semibold mt-1">Biomedical Science</p>
+                    <p class="text-gray-500 mt-3 text-sm">Specializes in genetic engineering and molecular biology, focusing on therapeutic applications.</p>
+                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
+                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professor Card 6 (Initially Hidden) -->
+            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center hidden-card">
+                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop" alt="Photo of Dr. Ben Carter">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">Dr. Ben Carter</h3>
+                    <p class="text-blue-700 font-semibold mt-1">Economics</p>
+                    <p class="text-gray-500 mt-3 text-sm">Author of "The Global Market" and an expert consultant on international trade policies.</p>
+                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
+                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- "See More" Button with the required ID -->
+        <div class="text-center mt-16">
+            <a href="#" id="view-all-btn" class="view-all-button inline-block bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg uppercase tracking-wider text-sm">
+                View All Professors
+            </a>
+        </div>
+
+    </div>
+</section>
+
+    </main>
     <div id="footer-placeholder"></div>
 
-    <script src="../js/main.js" data-base-path=".."></script>
+    <script>
+    let heroSliderInterval;
 
+    function cleanupHeroAnimations() {
+        if (heroSliderInterval) {
+            clearInterval(heroSliderInterval);
+        }
+        window.removeEventListener("scroll", handleParallax);
+    }
+
+    // ========================================================
+    // ========= PARALLAX FUNCTION
+    // ========================================================
+    function handleParallax() {
+        const parallaxBg = document.querySelector(".parallax-bg");
+        if (!parallaxBg) return;
+
+        const parallaxContainer = parallaxBg.parentElement;
+        if (!parallaxContainer) return;
+
+        const sectionTop = parallaxContainer.offsetTop;
+        const scrollY = window.scrollY;
+        const relativeScrollY = scrollY - sectionTop;
+        
+        if (scrollY + window.innerHeight > sectionTop) {
+             parallaxBg.style.transform = `translateY(${relativeScrollY * 0.4}px)`;
+        }
+    }
+
+    // ========================================================
+    // ========= HERO SLIDER & TEXT ANIMATION
+    // ========================================================
+    function initHeroAnimations() {
+        cleanupHeroAnimations(); 
+
+        window.addEventListener("scroll", handleParallax);
+        handleParallax();
+
+        const subtitle = document.getElementById('hero-subtitle');
+        const heading = document.getElementById('animated-heading');
+        const button = document.getElementById('hero-button');
+        const textToAnimate = "National University of Management";
+
+        if (subtitle) subtitle.classList.remove('visible');
+        if (button) button.classList.remove('visible');
+        if (heading) heading.innerHTML = '';
+        
+        const subtitleDelay = 0;
+        const headingDelayAfterSubtitle = 0;
+        const letterStagger = 30;
+        const buttonDelayAfterHeading = 0;
+
+        setTimeout(() => {
+            if (subtitle) subtitle.classList.add('visible');
+        }, subtitleDelay);
+
+        if (heading && !heading.dataset.animated) {
+            heading.dataset.animated = 'true';
+            textToAnimate.split('').forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.innerHTML = (char === ' ') ? ' ' : char;
+                heading.appendChild(span);
+            });
+
+            const headingAnimationStartTime = subtitleDelay + 800 + headingDelayAfterSubtitle;
+
+            heading.querySelectorAll('.char').forEach((char, index) => {
+                setTimeout(() => {
+                    char.style.opacity = '1';
+                    char.style.transform = 'translateY(0)';
+                }, headingAnimationStartTime + (index * letterStagger));
+            });
+
+            const headingAnimationDuration = (textToAnimate.length * letterStagger) + 600;
+            const headingAnimationEndTime = headingAnimationStartTime + headingAnimationDuration;
+
+            setTimeout(() => {
+                if (button) button.classList.add('visible');
+            }, headingAnimationEndTime + buttonDelayAfterHeading);
+
+            setTimeout(() => {
+                if (heading) heading.dataset.animated = 'false';
+            }, headingAnimationEndTime + 1000);
+        }
+
+        const slideElements = [document.getElementById('hero-bg-1'), document.getElementById('hero-bg-2')];
+        const images = ['../Picture/school/10.jpg', '../Picture/school/20.jpg'];
+
+        if (images.length > 0 && slideElements[0]) {
+            let currentImageIndex = 0;
+            slideElements.forEach((el, index) => {
+                if (images[index]) el.style.backgroundImage = `url('${images[index]}')`;
+            });
+            slideElements[0].classList.add('active', 'zoom-out');
+            if (slideElements[1]) slideElements[1].classList.remove('zoom-out');
+
+            heroSliderInterval = setInterval(() => {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                const activeSlide = document.querySelector('.hero-bg-slide.active');
+                const nextSlide = Array.from(slideElements).find(el => !el.classList.contains('active'));
+
+                if (activeSlide && nextSlide) {
+                    activeSlide.classList.remove('active', 'zoom-out');
+                    nextSlide.classList.add('active', 'zoom-out');
+                    const nextImageIndex = (currentImageIndex + 1) % images.length;
+                    setTimeout(() => {
+                        activeSlide.style.backgroundImage = `url('${images[nextImageIndex]}')`;
+                    }, 1500);
+                }
+            }, 7000);
+        }
+    }
+    
+    // ========================================================
+    // ========= INITIALIZE ALL PAGE SCRIPTS
+    // ========================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize hero animations
+        initHeroAnimations();
+
+        // --- START: NEW "SEE MORE / SEE LESS" PROFESSOR SCRIPT ---
+        
+        const viewAllBtn = document.getElementById('view-all-btn');
+        const professorsGrid = document.getElementById('professors-grid');
+        
+        // Only run this logic if the professor section exists on the page
+        if (viewAllBtn && professorsGrid) {
+            const limit = 3; // The number of cards to show initially
+            const allCards = professorsGrid.querySelectorAll('.professor-card');
+            let isExpanded = false; // State to track if cards are shown or hidden
+
+            // 1. Initially hide the cards that are beyond the limit
+            allCards.forEach((card, index) => {
+                if (index >= limit) {
+                    card.classList.add('hidden-card');
+                }
+            });
+
+            // Make the button visible only if there are cards to hide
+            if (allCards.length <= limit) {
+                viewAllBtn.style.display = 'none';
+            }
+
+            // 2. Add the click event listener to the button
+            viewAllBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // Flip the state
+                isExpanded = !isExpanded;
+
+                // 3. Show or hide cards based on the new state
+                allCards.forEach((card, index) => {
+                    if (index >= limit) {
+                        if (isExpanded) {
+                            // If expanded, remove the hidden class to show the card
+                            card.classList.remove('hidden-card');
+                        } else {
+                            // If collapsed, add the hidden class to hide the card
+                            card.classList.add('hidden-card');
+                        }
+                    }
+                });
+
+                // 4. Update the button text based on the new state
+                this.textContent = isExpanded ? 'See Less' : 'View All Professors';
+            });
+        }
+        // --- END: "SEE MORE / SEE LESS" SCRIPT ---
+    });
+
+    // This allows you to re-initialize animations if needed
+    window.pageSpecificInit = initHeroAnimations;
+</script>
+
+<script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

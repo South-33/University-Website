@@ -1,288 +1,347 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Mobility - National University of Management</title>
-    
-    <!-- Fonts -->
+    <meta name="description" content="Explore global opportunities with NUM's Student Mobility programs. Study, intern, and research abroad to build a global career.">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Theme Config -->
+    <script src="../js/theme.js"></script>
     
-    <!-- Tailwind CSS Theme Configuration -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'dark-blue': '#0A0A3E',
-              'light-lavender': '#E9E8F5',
-            },
-            fontFamily: {
-              heading: ['Lora', 'serif'],
-              body: ['Montserrat', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
+    <!-- Global Styles -->
     <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- PAGE-SPECIFIC STYLES -->
+    <style>
+        .program-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .faq-item summary {
+            cursor: pointer;
+            outline: none;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary .icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-item[open] summary .icon {
+            transform: rotate(45deg);
+        }
+        /* Style for the media box in success stories */
+        .story-media-box {
+            background-color: #f3f4f6; /* gray-100 */
+        }
+    </style>
 </head>
-<body class="bg-white">
-
-    <!-- Header Placeholder -->
+<body class="bg-white text-gray-900 font-sans">
+    
+    <!-- DYNAMIC HEADER -->
     <div id="header-placeholder"></div>
-
     <main>
-        <!-- Section 1: Hero Section -->
-        <section class="py-20 lg:py-28 bg-gradient-to-br from-white to-light-lavender">
-    <div class="container mx-auto px-6">
+
+<!-- ========= SECTION: UNIVERSITY LIFE HERO ========= -->
+<!-- This section uses a background image. Replace the URL in the style attribute. -->
+<section class="relative bg-cover bg-center text-white py-24 sm:py-32" style="background-image: url('../Picture/school/39.jpg');">
+    
+    <!-- Gradient Overlay: Ensures text readability -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+
+    <!-- Content Container -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Stylized Heading -->
-        <div class="text-center mb-16">
-            <h2 class="text-4xl lg:text-5xl font-heading text-dark-blue font-bold">What is Student Mobility?</h2>
-            <div class="mt-3 h-1 w-24 bg-dark-blue mx-auto rounded-full"></div>
-        </div>
+        <!-- Grid for the text content -->
+        <!-- items-end aligns the content to the bottom of the container -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+            
+            <!-- Left Column: Title -->
+            <div>
+                <h2 class="text-4xl sm:text-5xl font-bold">
+                    University Life
+                </h2>
+                <!-- Green Accent Line -->
+                <div class="mt-4 h-1 w-24 bg-emerald-500"></div>
+            </div>
 
-        <!-- Two-Column Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-16 items-center">
-
-            <!-- Left Column: Main Text & Quote -->
-            <div class="lg:col-span-3">
-                <p class="text-md lg:text-lg text-gray-700 font-body mb-8">
-                    Student mobility is your opportunity to gain international experience during your studies. It allows you to study, intern, or conduct research abroad for a semester, a year, or even a few weeks. These experiences are designed to enrich your academic journey and enhance your future employability.
+            <!-- Right Column: Description -->
+            <div class="lg:pb-2"> <!-- Adds a little padding to align with the title baseline -->
+                <p class="text-lg text-gray-200">
+                    Campus on a tour designed for prospective graduate and professional students. You will see how our university like, facilities, student and life in this university. Meet our graduate admissions representative to learn more about our graduate programs and decide what it the best for you.
                 </p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ========= SECTION: EVENTS & CAMPUS LIFE (with Video) ========= -->
+<section class="bg-white py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Main Grid Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12">
+
+            <!-- == Left Column == -->
+            <div class="space-y-8">
+                <!-- Top content block -->
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Event and Traditions</h2>
+                    <p class="text-lg text-gray-500 mb-4">
+                        <span class="text-red-500 font-semibold">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</span>
+                    </p>
+                    <p class="text-black-500">
+                        Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.
+                    </p>
+                </div>
                 
-                <!-- Testimonial/Quote Block -->
-                <div class="bg-dark-blue text-white rounded-lg p-6 italic shadow-lg">
-                    <p class="mb-3">"My semester abroad was the single most important experience of my university life. It opened my eyes to new cultures and gave me the confidence to pursue a global career."</p>
-                    <p class="font-bold not-italic text-light-lavender">- A Former Exchange Student</p>
+                <!-- Red Divider Line -->
+                <div class="pt-4 pb-4">
+                    <div class="h-0.5 w-full bg-red-500"></div>
+                </div>
+
+                <!-- Student Activities Card -->
+                <div class="bg-emerald-500 text-white p-8 rounded-lg">
+                    <!-- "Sparkles" Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.572L16.5 21.75l-.398-1.178a3.375 3.375 0 00-2.455-2.456L12.5 17.25l1.178-.398a3.375 3.375 0 002.455-2.456L16.5 13.5l.398 1.178a3.375 3.375 0 002.456 2.456l1.178.398-1.178.398a3.375 3.375 0 00-2.456 2.456z" />
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-3">Student Activities</h3>
+                    <p class="opacity-90">
+                        Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.
+                    </p>
                 </div>
             </div>
 
-            <!-- Right Column: Key Benefits with Icons -->
-            <div class="lg:col-span-2 bg-white p-8 rounded-lg shadow-xl">
-                <h3 class="font-heading text-2xl font-bold text-dark-blue mb-6">Key Advantages</h3>
-                <ul class="space-y-5 font-body text-gray-700">
-                    <li class="flex items-start">
-                        <!-- Globe Icon -->
-                        <svg class="w-7 h-7 text-dark-blue mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.881 4.002l.027.027A2 2 0 0110 4h4a2 2 0 011.092.329l.027-.027M12 20.998V22m-7.119-2.002a2 2 0 01-1.092-.329l-.027.027m15.212-15.212a2 2 0 01.329 1.092l-.027-.027m-15.212 0a2 2 0 00-.329 1.092l.027-.027" /></svg>
-                        <div>
-                            <strong class="text-dark-blue">Develop Cross-Cultural Skills:</strong> Immerse yourself in a new environment and learn to navigate different social and professional landscapes.
+            <!-- == Right Column == -->
+            <div class="space-y-12">
+                <!-- Video Replacement -->
+                <video fade-on-scroll auto loop controls playsinline class="rounded-lg shadow-lg w-full object-cover">
+                    <!-- 
+                        IMPORTANT: Replace this src with the path to your video file.
+                        I've used a placeholder video from Pexels.
+                    -->
+                    <source src="../Video/video1.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- Transportation Section -->
+                <div class="flex items-start space-x-5">
+                    <div class="flex-shrink-0 text-gray-500">
+                        <!-- Bus Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 10.5V6a2.25 2.25 0 00-2.25-2.25H9A2.25 2.25 0 006.75 6v4.5m10.5 0a2.25 2.25 0 01-2.25-2.25H9a2.25 2.25 0 01-2.25-2.25m10.5 0H6.75" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12.75H4.5a2.25 2.25 0 00-2.25 2.25v2.25a2.25 2.25 0 002.25 2.25h1.5M17.25 12.75h2.25a2.25 2.25 0 012.25 2.25v2.25a2.25 2.25 0 01-2.25 2.25h-1.5M12 19.5h.01" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-red-600">Transportations</h3>
+                        <p class="text-black mt-2">There are many options to travel in the campus.</p>
+                        <p class="text-black mt-2">
+                            There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Parking Section -->
+                <div class="flex items-start space-x-5">
+                    <div class="flex-shrink-0 text-gray-500">
+                        <!-- Parking Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m-3-6h3a3 3 0 110 6H9" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-red-600">Parking</h3>
+                        <p class="text-black mt-2">More than 1000 parking lots available in the west side of the campus.</p>
+                        <p class="text-black mt-2">
+                           <span class="text-gray-800 font-semibold">The parking is available 24 hours</span> with 24hours security. We make sure that everything is under control.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ========= SECTION: ALUMNI TESTIMONIAL ========= -->
+    <!-- Changed background to a light gray -->
+    <section class="bg-gray-100 py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Main Grid Container: 2 columns on large screens, 1 on small -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+                <!-- == Left Column: Layered Image == -->
+                <div class="relative flex justify-center lg:justify-start">
+                    <!-- The container for the image and its decorative background -->
+                    <div class="relative w-full max-w-sm">
+                        <!-- The decorative lime green block (positioned absolutely) -->
+                        <div class="absolute -bottom-4 -left-4 w-48 h-48 bg-lime-400 rounded-lg z-0"></div>
+                        
+                        <!-- The main image -->
+                        <!-- Replace this with your image URL -->
+                        <img src="../Picture/school/38.jpg" 
+                             alt="Portrait of Angelina Francis, an alumna."
+                             class="relative rounded-lg shadow-xl w-full z-10">
+                    </div>
+                </div>
+
+                <!-- == Right Column: Testimonial Content == -->
+                <div class="text-left">
+                    
+                    <!-- The Quote -->
+                    <blockquote class="text-2xl lg:text-3xl font-bold text-gray-800 leading-tight">
+                        <p>
+                            “I am thrilled to share that I’ve been accepted into this program at Syracuse University.”
+                        </p>
+                    </blockquote>
+                    <br/>
+                        <p>
+                            Leap Romam! Who has been selected for the YSEALI Academic Fellowship Program 2025 and will participate in a five-week exchange program at Syracuse University in New York City, focusing on Society and Governance.
+                        </p>
+                    <!-- Attribution -->
+                    <figcaption class="mt-8">
+                        <!-- Decorative red line -->
+                        <div class="w-16 h-1 bg-red-500"></div>
+
+                        <div class="mt-4">
+                            <p class="font-bold text-gray-900">— Leap Romam</p>
+                            <p class="text-red-500 text-sm font-semibold uppercase tracking-wider mt-1">
+                                Alumni 2025
+                            </p>
                         </div>
-                    </li>
-                    <li class="flex items-start">
-                        <!-- Suitcase Icon -->
-                        <svg class="w-7 h-7 text-dark-blue mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2zm6 12V6" /></svg>
-                        <div>
-                            <strong class="text-dark-blue">Build a Global Career:</strong> Gain a competitive edge with international work or study experience that stands out to employers.
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <!-- Graduation Cap Icon -->
-                        <svg class="w-7 h-7 text-dark-blue mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
-                        <div>
-                            <strong class="text-dark-blue">Enrich Your Academic Journey:</strong> Take specialized courses not available at NUM and bring a new perspective back to your studies.
-                        </div>
-                    </li>
-                </ul>
+                    </figcaption>
+                    
+                </div>
                 
-                <!-- Call-to-Action Button -->
-                <div class="mt-8 text-center">
-                    <a href="#" class="bg-dark-blue text-white font-body font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-colors duration-300 w-full block sm:w-auto">
-                        Explore Programs
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= SECTION: WHERE KNOWLEDGE MEETS INNOVATION ========= -->
+<section class="bg-[#F8F9FA] py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Main Grid Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <!-- == Left Column: Text Content == -->
+            <div class="text-left">
+                <!-- Section Title -->
+                <h2 class="text-4xl sm:text-5xl font-bold text-dark-blue leading-tight mb-5">
+                    About Our Alumni
+                </h2>
+                <hr class="w-24 h-1 bg-red-700 mt-4 mb-6">
+
+                <!-- Introductory Paragraph -->
+                <p class="text-black text-lg mb-10">
+                    Ms. Thoun Sithiprathna, Year 3 students from NUM  Faculty of Digital Economy, about her life-changing semester abroad! 🌍
+                </p>
+
+                <p class="text-black text-lg mb-10">
+                    My semester at ESSCA was truly life-changing. As my first experience living and studying in Europe, it gave me profound insights into international business, economics, management, and cultural diversity. Coming from a Digital Economy background, studying global business management in an international classroom helped me bridge theory with real-world practices through multiple cultural perspectives.
+                </p>
+
+                <p class="text-black text-lg mb-10">
+                    Beyond coursework, I grew tremendously - adapting to new environments, communicating across cultures, and forming friendships worldwide. Every experience, from group projects to daily life in France, taught me valuable lessons about myself and our global community.
+                </p>    
+
+                <p class="text-black text-lg mb-10">
+                    This exchange expanded both my academic and personal horizons. It made me more independent, confident, and eager to pursue future international opportunities.
+                </p>    
+
+            </div>
+
+            <!-- == Right Column: Masonry Image Grid == -->
+            <!-- On mobile, this will appear below the text content -->
+            <div class="grid grid-cols-2 gap-4">
+                <!-- First column of images -->
+                <div class="space-y-4">
+                    <img src="../Picture/School/32.jpg" alt="Student walking up stairs" class="rounded-lg shadow-md w-full h-auto object-cover">
+                    <img src="../picture/school/33.jpg" alt="Two students walking on campus path" class="rounded-lg shadow-md w-full h-auto object-cover">
+                    <img src="../picture/school/34.jpg" alt="Students studying on grass" class="rounded-lg shadow-md w-full h-auto object-cover">
+                </div>
+                <!-- Second column of images, pushed down slightly to create the staggered effect -->
+                <div class="space-y-4 pt-10">
+                    <img src="../Picture/School/35.jpg" alt="Happy graduate in cap and gown" class="rounded-lg shadow-md w-full h-auto object-cover">
+                    <img src="../picture/school/36.jpg" alt="Student sitting and reading a book outdoors" class="rounded-lg shadow-md w-full h-auto object-cover">
+                    <img src="../picture/school/37.jpg" alt="Student listening to headphones" class="rounded-lg shadow-md w-full h-auto object-cover">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========= SECTION: WHO WE ARE ========= -->
+<section class="bg-gray-100 py-16 sm:py-24 overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Main Grid Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <!-- == Left Column: Text Content == -->
+            <div class="text-left">
+                <!-- Description -->
+                <p class="mt-6 text-gray-800 text-lg sm:text-xl font-medium leading-relaxed"></p>
+                    <span class="font-bold text-lime-700">Mao Sophanha</span> from the <span class="font-semibold text-emerald-700">Faculty of Digital Economy</span>, along with three talented students from the International College — <span class="font-semibold text-blue-700">Mr. Kong Sopichkongkea</span>, <span class="font-semibold text-blue-700">Ms. But Kimheng</span>, and <span class="font-semibold text-blue-700">Ms. Taing Vouchleng</span> — had the incredible opportunity to participate in the <span class="font-bold text-red-600">Young ASEAN Leader Policy Initiative 2025!</span>
+                    <br class="hidden sm:block" />
+                    <span class="block mt-2">Held from <span class="font-semibold text-gray-900">February 4 to February 7, 2025</span> at the prestigious <span class="font-semibold text-pink-700">Chulalongkorn University</span>, this event was a platform for young leaders to shape the future of <span class="font-bold text-emerald-600">ASEAN</span>.</span>
+                </p>
+                <!-- Button -->
+                <div class="mt-8">
+                    <a href="#" class="inline-block bg-lime-500 text-gray-900 font-bold py-3 px-8 uppercase tracking-wider shadow-lg hover:bg-lime-600 transition-colors">
+                        Discover More
                     </a>
                 </div>
             </div>
+
+            <!-- == Right Column: Layered Image & Floating Card == -->
+            <div class="relative mt-12 lg:mt-0 flex justify-center">
+                <!-- This container holds the image, the green accent, and the white card -->
+                <div class="relative w-full max-w-lg">
+                    
+                    <!-- Decorative Green Background Shape -->
+                    <!-- Positioned absolutely behind the image, offset to create the "L" shape -->
+                    <div class="absolute top-0 left-0 w-full h-full transform -translate-x-8 translate-y-8 bg-lime-500 rounded-md z-0"></div>
+                    
+                    <!-- Main Image -->
+                    <img 
+                        src="../Picture/school/40.jpg" 
+                        alt="University campus with brick buildings on a sunny day" 
+                        class="relative rounded-md shadow-2xl w-full z-10"
+                    />
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-        </section>
-
-        <!-- DYNAMIC PROGRAM SEARCH TOOL -->
-    <section class="py-16 lg:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl lg:text-4xl font-heading text-dark-blue text-center mb-12">Find Your Perfect Program</h2>
-            <!-- Filter Controls -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12 bg-light-lavender p-8 rounded-lg shadow-md">
-                <div>
-                    <label for="country-filter" class="block text-sm font-bold text-dark-blue mb-2">Country</label>
-                    <select id="country-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
-                        <option>All Countries</option>
-                        <option>Germany</option>
-                        <option>Japan</option>
-                        <option>Singapore</option>
-                        <option>Australia</option>
-                        <option>France</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="duration-filter" class="block text-sm font-bold text-dark-blue mb-2">Duration</label>
-                    <select id="duration-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
-                        <option>Any Duration</option>
-                        <option>Summer School</option>
-                        <option>One Semester</option>
-                        <option>Full Year</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="type-filter" class="block text-sm font-bold text-dark-blue mb-2">Program Type</label>
-                    <select id="type-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
-                        <option>All Types</option>
-                        <option>Exchange Program</option>
-                        <option>Internship</option>
-                        <option>Study Tour</option>
-                        <option>Double Degree</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="field-filter" class="block text-sm font-bold text-dark-blue mb-2">Field of Study</label>
-                    <select id="field-filter" class="w-full p-3 rounded-md border-gray-300 shadow-sm focus:border-dark-blue focus:ring focus:ring-dark-blue focus:ring-opacity-50">
-                        <option>All Fields</option>
-                        <option>Business</option>
-                        <option>Computer Science</option>
-                        <option>Engineering</option>
-                        <option>Arts & Humanities</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Search Results Area -->
-            <div class="bg-gray-100 rounded-lg p-8 min-h-[300px]">
-                <p class="text-center text-gray-500 font-body">Your search results will appear here. Please select filters to begin.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- INTERACTIVE APPLICATION TIMELINE -->
-    <section class="py-16 lg:py-24">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl lg:text-4xl font-heading text-dark-blue text-center mb-16">Your Journey, Step-by-Step</h2>
-            <div class="relative max-w-2xl mx-auto">
-                <div class="absolute left-4 top-0 h-full w-0.5 bg-dark-blue opacity-30"></div>
-                <div class="relative pl-12 pb-16 fade-in-section timeline-item">
-                    <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 1: Exploration</span></div>
-                    <p class="text-gray-500 text-sm font-bold mb-2">September - October</p>
-                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Research & Information Sessions</h3>
-                    <p class="font-body text-gray-700">Explore partner universities using our search tool and attend mandatory info sessions to understand the opportunities and requirements.</p>
-                </div>
-                <div class="relative pl-12 pb-16 fade-in-section timeline-item">
-                    <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 2: Application</span></div>
-                    <p class="text-gray-500 text-sm font-bold mb-2">November 15th - Deadline</p>
-                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Prepare & Submit Application</h3>
-                    <p class="font-body text-gray-700">Gather your documents (transcripts, motivation letter, recommendations) and submit your complete application through the online portal before the deadline.</p>
-                </div>
-                <div class="relative pl-12 pb-16 fade-in-section timeline-item">
-                     <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 3: Selection</span></div>
-                    <p class="text-gray-500 text-sm font-bold mb-2">December - January</p>
-                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Nomination & Acceptance</h3>
-                    <p class="font-body text-gray-700">Successful candidates are nominated to partner universities. You will receive an official acceptance letter from your host institution.</p>
-                </div>
-                <div class="relative pl-12 fade-in-section timeline-item">
-                     <div class="mb-4"><span class="bg-dark-blue text-white font-bold text-sm py-1 px-3 rounded-full">Phase 4: Preparation</span></div>
-                    <p class="text-gray-500 text-sm font-bold mb-2">February - April</p>
-                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Pre-Departure Orientation</h3>
-                    <p class="font-body text-gray-700">Attend pre-departure workshops covering visas, accommodation, insurance, and cultural adaptation. Finalize your learning agreement and travel plans.</p>
-                </div>
-            </div>
-             <div class="text-center mt-16">
-                 <a href="#contact" class="bg-dark-blue text-white font-body py-3 px-8 rounded-full hover:bg-opacity-90 transition-colors duration-300">Contact an Advisor</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SUCCESS STORY VIDEO INTEGRATION -->
-    <section class="py-16 lg:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl lg:text-4xl font-heading text-dark-blue text-center mb-12">Success Stories</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="bg-light-lavender rounded-lg shadow-lg overflow-hidden group">
-                    <div class="relative cursor-pointer video-thumbnail" data-video-id="VIDEO_ID_1">
-                        <img src="https://i.imgur.com/uGEn8A7.jpeg" alt="Student in Germany" class="w-full h-56 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-20">
-                            <svg class="w-16 h-16 text-white transform group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="font-body text-gray-600 mb-4 italic">"My semester in Germany was life-changing. It was the best decision of my university career."</p>
-                        <p class="font-body font-bold text-dark-blue">Sokha Chan</p>
-                        <p class="font-body text-sm text-gray-500">B.A. in Business, Exchange at Technical University of Munich</p>
-                    </div>
-                </div>
-                 <div class="bg-light-lavender rounded-lg shadow-lg overflow-hidden group">
-                    <div class="relative cursor-pointer video-thumbnail" data-video-id="VIDEO_ID_2">
-                        <img src="https://i.imgur.com/L7sF1vU.jpeg" alt="Student intern in Singapore" class="w-full h-56 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-20">
-                           <svg class="w-16 h-16 text-white transform group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="font-body text-gray-600 mb-4 italic">"The internship in Singapore gave me invaluable industry experience and I secured a job offer before graduation."</p>
-                        <p class="font-body font-bold text-dark-blue">Lyna Vong</p>
-                        <p class="font-body text-sm text-gray-500">B.S. in Computer Science, Internship at a Tech Startup</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Modal Structure -->
-    <div id="video-modal" class="video-modal">
-        <div class="video-modal-content">
-            <span class="close-button" id="close-modal-button">×</span>
-            <div class="aspect-w-16 aspect-h-9" id="video-container"></div>
-        </div>
-    </div>
-    
-    <!-- FAQ & Contact Section (Original) -->
-    <section id="contact" class="py-16 lg:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                <!-- FAQs -->
-                <div>
-                    <h2 class="text-3xl font-heading text-dark-blue mb-8">Frequently Asked Questions</h2>
-                    <div class="space-y-6 font-body">
-                        <div>
-                            <h4 class="font-bold text-dark-blue mb-2">Who is eligible to apply?</h4>
-                            <p class="text-gray-600">Most programs are open to full-time undergraduate and graduate students who have completed at least one year of study and meet the minimum GPA requirement.</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-dark-blue mb-2">Are there scholarships available?</h4>
-                            <p class="text-gray-600">Yes, the university offers several mobility scholarships. Additionally, many host institutions and external organizations provide funding opportunities. Visit our Financial Support page for details.</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-dark-blue mb-2">How do course credits get transferred?</h4>
-                            <p class="text-gray-600">Before you go, you will complete a learning agreement to get your courses pre-approved by your academic advisor. This ensures a smooth credit transfer process upon your return.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Contact Info -->
-                <div class="bg-dark-blue text-white rounded-lg p-8">
-                    <h3 class="text-2xl font-heading mb-6">Contact Us</h3>
-                    <p class="font-body mb-4">Have questions? Our Student Mobility team is here to help you every step of the way.</p>
-                    <ul class="font-body space-y-3">
-                        <li><strong>Coordinator:</strong> Ms. Leakhena Tep</li>
-                        <li><strong>Email:</strong> <a href="mailto:mobility@num.edu.kh" class="underline hover:text-light-lavender">mobility@num.edu.kh</a></li>
-                        <li><strong>Phone:</strong> +855 23 426 836</li>
-                        <li><strong>Office:</strong> Building A, Room 101</li>
-                        <li><strong>Hours:</strong> Mon - Fri, 9:00 AM - 4:00 PM</li>
-                    </ul>
-                     <a href="#" class="mt-6 inline-block bg-white text-dark-blue font-body font-bold py-3 px-6 rounded-full hover:bg-light-lavender transition-colors duration-300">Book an Appointment</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
+</section>
     </main>
-
-    <!-- Footer Placeholder -->
+    <!-- DYNAMIC FOOTER -->
     <div id="footer-placeholder"></div>
 
-    <!-- Main JS file (for header/footer loading and other interactions) -->
-    <script src="../js/main.js" data-base-path=".."></script>
+    
 
+    <!-- REQUIRED: Main SPA Logic -->
+    <script src="../js/main.js" data-base-path=".."></script>
+    
 </body>
 </html>

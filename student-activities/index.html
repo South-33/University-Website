@@ -45,7 +45,7 @@
         <!-- 1. Hero Section -->
         <section class="relative h-[60vh] min-h-[400px] flex items-center text-center text-white">
             <!-- Background Image -->
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../Picture/School/photo_2025-07-11_11-25-18.jpg');"></div>
             <!-- Dark Overlay for Readability -->
             <div class="absolute inset-0 bg-slate-800/60"></div>
             
@@ -61,342 +61,404 @@
             </div>
         </section>
 
-        <!-- 2. Student Life Overview -->
-        <section class="py-16 md:py-20 bg-white">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Life at Our University</h2>
-                <p class="mt-4 text-lg text-gray-600 leading-relaxed">
-                    We believe that true education extends far beyond the classroom. Student life here is about discovering new passions, connecting with diverse communities, and creating unforgettable memories. It's about finding your place and making your mark.
-                </p>
-            </div>
-        </section>
+        <!-- Student Life Overview Section -->
+<section class="py-16 md:py-24 bg-gray-100">
+    <div class="container mx-auto px-4">
+        
+        <!-- 
+            Main container with rounded corners and a shadow.
+            The overflow-hidden is critical for clipping the child elements to the rounded shape.
+            It becomes a grid on large screens.
+        -->
+        <div class="relative rounded-xl overflow-hidden shadow-2xl lg:grid lg:grid-cols-12 items-stretch">
 
+            <!-- 
+                Left Side: Image container.
+                It takes up a larger portion of the grid on desktop.
+                On mobile, it will be a standard block element.
+            -->
+            <div class="lg:col-span-8 fade-in-section">
+                 <img src="../Picture/school/1.jpg" alt="A vibrant scene of university life with students celebrating" class="w-full h-full min-h-[300px] lg:min-h-[600px] object-cover">
+            </div>
+
+            <!-- 
+                Right Side: Content container.
+                This is the key to the layout. It has a dark blue background and is pulled
+                to the left with a negative margin on large screens to overlap the image.
+            -->
+            <div class="relative lg:col-span-4 bg-dark-blue lg:-ml-24 xl:-ml-32 p-8 md:p-12 lg:p-16 flex flex-col justify-center fade-in-section">
+                
+                <!-- White inset box for the title -->
+                <div class="bg-white p-8 rounded-t-lg shadow-lg">
+                    <div class="w-20 h-1.5 bg-dark-blue mb-6"></div>
+                    <h2 class="font-lora text-dark-blue leading-none">
+                        <span class="block text-3xl font-medium">Life at Our</span>
+                        <span class="block text-3xl font-bold uppercase tracking-wider mt-2">University</span>
+                    </h2>
+                </div>
+
+                <!-- Paragraph text sits below the white box, on the blue background -->
+                <div class="pt-8">
+                     <p class="font-montserrat text-white opacity-80 leading-relaxed">
+                        We believe that true education extends far beyond the classroom. Student life here is about discovering new passions, connecting with diverse communities, and creating unforgettable memories. It's about finding your place and making your mark.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
         <!-- 3. Clubs & Organizations -->
-        <section id="clubs" class="py-16 md:py-20 bg-gray-50">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Find Your Community</h2>
-                    <p class="mt-4 text-lg text-gray-600">With over 100 student-led organizations, there's a place for everyone.</p>
-                </div>
-                <!-- Club Categories -->
-                <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
-                    <!-- Academic Club -->
-                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-teal-100 text-teal-600 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                        </div>
-                        <h3 class="mt-4 text-lg font-bold">Academic</h3>
-                    </div>
-                    <!-- Cultural Club -->
-                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-sky-100 text-sky-600 rounded-full">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.881 4.002l.027.027A2 2 0 0110 4h4a2 2 0 011.092.329l.027-.027M12 20.998V22m-7.119-2.002a2 2 0 01-1.092-.329l-.027.027m15.212-15.212a2 2 0 01.329 1.092l-.027-.027m-15.212 0a2 2 0 00-.329 1.092l.027-.027" /></svg>
-                        </div>
-                        <h3 class="mt-4 text-lg font-bold">Cultural</h3>
-                    </div>
-                    <!-- Sports Club -->
-                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-rose-100 text-rose-600 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        </div>
-                        <h3 class="mt-4 text-lg font-bold">Sports</h3>
-                    </div>
-                    <!-- Volunteer Club -->
-                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-amber-100 text-amber-600 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                        </div>
-                        <h3 class="mt-4 text-lg font-bold">Volunteer</h3>
-                    </div>
-                    <!-- Creative Arts Club -->
-                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-indigo-100 text-indigo-600 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>
-                        </div>
-                        <h3 class="mt-4 text-lg font-bold">Creative Arts</h3>
-                    </div>
-                </div>
-                <p class="mt-12 text-center text-gray-600">Can't find what you're looking for? We make it easy to <a href="#" class="font-bold text-teal-600 hover:underline">start your own club</a>!</p>
-            </div>
-        </section>
-
-        <!--
-    PAGE: STUDENT ACTIVITIES & COMPETITIONS
-    =======================================
-    This code should be placed within the <main class="pt-20"> tag in your page file.
-    - It assumes the page is located in a subdirectory (e.g., /student-activities/index.html).
-    - All image paths are set to `../Picture/` accordingly.
-    - All videos are placeholders and should be replaced with actual university footage.
-    - Fade-in animations are applied using the global `fade-in-section` class.
--->
-
-<!-- Section 2: Introduction with Left-Aligned Video -->
-<section class="py-16 md:py-24 bg-white">
-    <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
-            <div class="w-full rounded-lg shadow-xl overflow-hidden">
-                <video class="w-full h-full object-cover" src="NUM/Video/aa.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <div class="prose max-w-none prose-lg">
-                <h2 class="text-3xl font-bold text-slate-900">Learning Beyond the Classroom</h2>
-                <p>Through exciting student competitions, we empower learning outside the traditional classroom. These moments challenge our students to code, design, build, and present—and grow in the process. We believe that practical application and spirited competition are key to unlocking potential.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section 3: Activities Grouped by Theme -->
-<div class="py-16 md:py-24 bg-sky-50/50">
-    <div class="container mx-auto px-6 space-y-20">
-
-        <!-- Theme 1: Coding & Problem-Solving -->
-        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
-            <figure class="w-full">
-                <img src="../Picture/activity-coding.jpg" alt="Students at a coding competition" class="rounded-lg shadow-2xl object-cover w-full h-auto">
-            </figure>
-            <div class="prose max-w-none prose-lg">
-                <h3 class="text-2xl font-bold text-sky-800">🧠 Coding & Problem-Solving</h3>
-                <p>Our annual hackathons and coding challenges bring together the brightest minds to tackle real-world problems. Participants develop innovative software solutions, pushing the boundaries of technology and teamwork.</p>
-                <ul class="mt-4">
-                    <li>48-hour intensive hackathons</li>
-                    <li>Industry-sponsored coding competitions</li>
-                    <li>Workshops on emerging technologies</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Theme 2: Robotics & Engineering -->
-        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
-            <div class="prose max-w-none prose-lg md:order-last">
-                <h3 class="text-2xl font-bold text-sky-800">🤖 Robotics & Engineering</h3>
-                <p>From autonomous vehicles to sophisticated robotic arms, our students design, build, and compete. These events foster mechanical and electrical engineering skills, providing a platform for hands-on innovation.</p>
-                 <ul class="mt-4">
-                    <li>National robotics tournament participation</li>
-                    <li>In-house "Battle Bots" league</li>
-                    <li>Projects focused on sustainable engineering</li>
-                </ul>
-            </div>
-            <figure class="w-full">
-                <img src="../Picture/activity-robotics.jpg" alt="Students working on a robotics project" class="rounded-lg shadow-2xl object-cover w-full h-auto">
-            </figure>
-        </div>
-
-        <!-- Theme 3: Innovation & Popularity Contests -->
-        <div class="text-center fade-in-section">
-            <figure class="w-full max-w-4xl mx-auto">
-                <img src="../Picture/activity-innovation-wide.jpg" alt="Students presenting an innovative project to an audience" class="rounded-lg shadow-2xl object-cover w-full h-auto">
-            </figure>
-            <div class="prose max-w-3xl prose-lg mx-auto mt-8">
-                <h3 class="text-2xl font-bold text-sky-800">🎨 Innovation & Popularity Contests</h3>
-                <p>Our annual Innovation Fair celebrates creative ideas that can change the world. Students pitch their ventures to a panel of experts and the university community, competing for funding and recognition in categories like social impact and commercial viability.</p>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Section 4: Highlight Reel with Right-Aligned Video -->
-<section class="py-16 md:py-24 bg-white">
-    <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-12 items-center fade-in-section">
-            <div class="prose max-w-none prose-lg md:order-last">
-                 <div class="w-full rounded-lg shadow-xl overflow-hidden">
-                    <video class="w-full h-full object-cover" src="../Picture/video-placeholder-highlight-reel.mp4" autoplay muted loop playsinline></video>
-                </div>
-            </div>
-            <div class="text-center md:text-left">
-                <blockquote class="text-3xl font-semibold italic text-slate-900">
-                    <p>“Students learn best when they’re having fun and facing challenges head-on. That’s where real growth happens.”</p>
-                </blockquote>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section 5: Summary & Student Voice -->
-<section class="py-16 md:py-24 bg-slate-50">
-    <div class="container mx-auto px-6 fade-in-section">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            
-            <!-- Student Testimonial -->
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <img class="w-24 h-24 rounded-full mx-auto -mt-16 border-4 border-white shadow-md" src="../Picture/testimonial-student.jpg" alt="Photo of a smiling student">
-                <p class="mt-4 text-slate-600 italic">"The hackathon was the most intense and rewarding experience of my university life. My team and I built something we were proud of in just two days."</p>
-                <cite class="mt-4 block font-bold text-slate-800">- Alex Johnson, Computer Science</cite>
-            </div>
-
-            <!-- Organizer Quote -->
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <img class="w-24 h-24 rounded-full mx-auto -mt-16 border-4 border-white shadow-md" src="../Picture/testimonial-organizer.jpg" alt="Photo of a faculty member">
-                <p class="mt-4 text-slate-600 italic">"Seeing the ingenuity on display every year is inspiring. We provide the platform, but the students bring the magic and fierce competition."</p>
-                <cite class="mt-4 block font-bold text-slate-800">- Dr. Emily Carter, Faculty Organizer</cite>
-            </div>
-
-            <!-- Impact Stat -->
-            <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col justify-center items-center">
-                <img class="w-20 h-20" src="../Picture/icon-badge.svg" alt="Impact Badge Icon">
-                <p class="mt-4 text-5xl font-bold text-sky-600">300+</p>
-                <p class="mt-2 text-slate-600 font-semibold">Participants in Last Year's Events</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- Section 6: Footer with Call-to-Action -->
-<section class="bg-slate-800 text-white">
-    <div class="container mx-auto px-6 py-12 text-center fade-in-section">
-        <h2 class="text-3xl font-bold">Ready to Get Involved?</h2>
-        <p class="mt-2 text-slate-300">Explore our full gallery of past events and see the highlights for yourself.</p>
-        <div class="mt-8">
-            <a href="#" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition-colors">View Full Gallery</a>
-        </div>
-    </div>
-</section>
-
-        <!-- 5. Leadership & Volunteering -->
-        <section class="py-16 md:py-20 bg-gray-50">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Lead and Give Back</h2>
-                    <p class="mt-4 text-lg text-gray-600">Develop your leadership skills and make a positive impact on our community and beyond.</p>
-                </div>
-                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Leadership Card -->
-                    <div class="bg-white text-center p-8 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold">Student Council</h3>
-                        <p class="mt-2 text-gray-600">Represent your peers, advocate for change, and help shape the future of the university.</p>
-                    </div>
-                    <!-- Leadership Card -->
-                    <div class="bg-white text-center p-8 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold">Peer Mentors</h3>
-                        <p class="mt-2 text-gray-600">Guide new students, share your experience, and develop valuable coaching skills.</p>
-                    </div>
-                    <!-- Leadership Card -->
-                    <div class="bg-white text-center p-8 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold">Community Volunteering</h3>
-                        <p class="mt-2 text-gray-600">Join university-led initiatives to support local charities and community projects.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section id="clubs" class="py-20 md:py-28 bg-dark-blue text-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.25),rgba(255,255,255,0))]">
+    <div class="max-w-7xl mx-auto px-6">
         
-        <!-- 6. Facilities -->
-        <section class="py-16 md:py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Spaces to Connect and Create</h2>
-                    <p class="mt-4 text-lg text-gray-600">Our campus provides modern facilities designed for student life.</p>
-                </div>
-                <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    <figure class="relative overflow-hidden rounded-xl shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1579758629938-03607ccDBaba?q=80&w=2070&auto=format&fit=crop" alt="University Gym" class="w-full h-64 object-cover">
-                        <figcaption class="absolute bottom-0 left-0 w-full p-4 bg-black/50 text-white font-bold">Gym & Sports Complex</figcaption>
-                    </figure>
-                    <figure class="relative overflow-hidden rounded-xl shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1563291074-2bf8677a5e9b?q=80&w=2160&auto=format&fit=crop" alt="Student Lounge" class="w-full h-64 object-cover">
-                        <figcaption class="absolute bottom-0 left-0 w-full p-4 bg-black/50 text-white font-bold">Student Lounge</figcaption>
-                    </figure>
-                    <figure class="relative overflow-hidden rounded-xl shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="Multipurpose Hall" class="w-full h-64 object-cover">
-                        <figcaption class="absolute bottom-0 left-0 w-full p-4 bg-black/50 text-white font-bold">Multipurpose Hall</figcaption>
-                    </figure>
-                    <figure class="relative overflow-hidden rounded-xl shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop" alt="Club Rooms" class="w-full h-64 object-cover">
-                        <figcaption class="absolute bottom-0 left-0 w-full p-4 bg-black/50 text-white font-bold">Club Rooms</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. Student Highlights -->
-<section class="py-16 md:py-20 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Student Highlights</h2>
-            <p class="mt-4 text-lg text-gray-600">Meet the students who make our campus vibrant.</p>
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto fade-in-section">
+            <h2 class="font-lora text-4xl md:text-5xl font-bold">Find Your Community</h2>
+            <p class="mt-4 text-lg text-gray-300 leading-relaxed">
+                With over 100 student-led organizations spanning every interest and passion, there is a place for everyone to connect, grow, and lead.
+            </p>
         </div>
 
-        <!-- Grid container for all highlight cards -->
-        <div id="highlights-grid" class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Club Categories Grid -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 text-center">
             
-            <!-- Card 1 (Always Visible) -->
-            <div class="bg-white p-8 rounded-xl shadow-lg text-center transition-all ease-in-out duration-500">
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1887&auto=format&fit=crop" alt="Student photo" class="w-24 h-24 mx-auto rounded-full -mt-16 border-4 border-white shadow-md">
-                <h3 class="mt-4 text-xl font-bold">Maria Garcia</h3>
-                <p class="text-teal-600 font-semibold">President, Coding Club</p>
-                <blockquote class="mt-2 text-gray-600 italic">"Organizing the hackathon was a huge challenge, but seeing a hundred students collaborating was the most rewarding experience."</blockquote>
-            </div>
-
-            <!-- Card 2 (Always Visible) -->
-            <div class="bg-white p-8 rounded-xl shadow-lg text-center transition-all ease-in-out duration-500">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" alt="Student photo" class="w-24 h-24 mx-auto rounded-full -mt-16 border-4 border-white shadow-md">
-                <h3 class="mt-4 text-xl font-bold">David Chen</h3>
-                <p class="text-teal-600 font-semibold">Captain, Soccer Team</p>
-                <blockquote class="mt-2 text-gray-600 italic">"Winning the inter-university championship was a dream come true. The teamwork and dedication we built are lessons I'll carry forever."</blockquote>
-            </div>
-
-            <!-- Card 3 (Always Visible) -->
-            <div class="bg-white p-8 rounded-xl shadow-lg text-center transition-all ease-in-out duration-500">
-                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop" alt="Student photo" class="w-24 h-24 mx-auto rounded-full -mt-16 border-4 border-white shadow-md">
-                <h3 class="mt-4 text-xl font-bold">Alex Johnson</h3>
-                <p class="text-teal-600 font-semibold">Volunteer Lead, Green Campus Initiative</p>
-                <blockquote class="mt-2 text-gray-600 italic">"Our campus cleanup drive proves that small, collective actions can lead to a big, positive impact on our environment."</blockquote>
+            <!-- Card Template with Staggered Animation -->
+            <!-- Academic Club -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-white/20 transform hover:scale-105 fade-in-section" style="animation-delay: 100ms;">
+                <div class="flex items-center justify-center h-16 w-16 mx-auto bg-teal-500/10 text-teal-400 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                </div>
+                <h3 class="mt-5 text-lg font-bold text-gray-100">Academic</h3>
             </div>
             
-            <!-- ====== TOGGLEABLE CARDS START HERE ====== -->
-            <!-- These cards have the 'extra-card' class and are hidden by default -->
-
-            <!-- Card 4 (Initially hidden) -->
-            <div class="extra-card bg-white p-8 rounded-xl shadow-lg text-center transition-all ease-in-out duration-500 max-h-0 opacity-0 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop" alt="Student photo" class="w-24 h-24 mx-auto rounded-full -mt-16 border-4 border-white shadow-md">
-                <h3 class="mt-4 text-xl font-bold">Priya Sharma</h3>
-                <p class="text-teal-600 font-semibold">Editor, University Journal</p>
-                <blockquote class="mt-2 text-gray-600 italic">"Interviewing professors and showcasing student research has been an incredible privilege and has sharpened my writing skills."</blockquote>
-            </div>
-
-            <!-- Card 5 (Initially hidden) -->
-            <div class="extra-card bg-white p-8 rounded-xl shadow-lg text-center transition-all ease-in-out duration-500 max-h-0 opacity-0 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=2071&auto=format&fit=crop" alt="Student photo" class="w-24 h-24 mx-auto rounded-full -mt-16 border-4 border-white shadow-md">
-                <h3 class="mt-4 text-xl font-bold">Kenji Tanaka</h3>
-                <p class="text-teal-600 font-semibold">Founder, Photography Club</p>
-                <blockquote class="mt-2 text-gray-600 italic">"Starting a club from scratch taught me about leadership and community building. Seeing our members' art in the gallery was a proud moment."</blockquote>
-            </div>
-
-            <!-- Card 6 (Initially hidden) -->
-            <div class="extra-card bg-white p-8 rounded-xl shadow-lg text-center transition-all ease-in-out duration-500 max-h-0 opacity-0 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop" alt="Student photo" class="w-24 h-24 mx-auto rounded-full -mt-16 border-4 border-white shadow-md">
-                <h3 class="mt-4 text-xl font-bold">Chloe Miller</h3>
-                <p class="text-teal-600 font-semibold">Peer Mentor</p>
-                <blockquote class="mt-2 text-gray-600 italic">"Helping new students find their way is so fulfilling. The peer mentor program built my confidence and connected me with so many amazing people."</blockquote>
+            <!-- Cultural Club -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-white/20 transform hover:scale-105 fade-in-section" style="animation-delay: 200ms;">
+                <div class="flex items-center justify-center h-16 w-16 mx-auto bg-sky-500/10 text-sky-400 rounded-full">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.881 4.002l.027.027A2 2 0 0110 4h4a2 2 0 011.092.329l.027-.027M12 20.998V22m-7.119-2.002a2 2 0 01-1.092-.329l-.027.027m15.212-15.212a2 2 0 01.329 1.092l-.027-.027m-15.212 0a2 2 0 00-.329 1.092l.027-.027" /></svg>
+                </div>
+                <h3 class="mt-5 text-lg font-bold text-gray-100">Cultural</h3>
             </div>
             
-        </div>
-        
-        <!-- "See More / See Less" Button Container -->
-        <div class="mt-12 text-center">
-            <button id="toggle-highlights-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300">
-                See More
-            </button>
+            <!-- Sports Club -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-white/20 transform hover:scale-105 fade-in-section" style="animation-delay: 300ms;">
+                <div class="flex items-center justify-center h-16 w-16 mx-auto bg-rose-500/10 text-rose-400 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <h3 class="mt-5 text-lg font-bold text-gray-100">Sports</h3>
+            </div>
+            
+            <!-- Volunteer Club -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-white/20 transform hover:scale-105 fade-in-section" style="animation-delay: 400ms;">
+                <div class="flex items-center justify-center h-16 w-16 mx-auto bg-amber-500/10 text-amber-400 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                </div>
+                <h3 class="mt-5 text-lg font-bold text-gray-100">Volunteer</h3>
+            </div>
+            
+            <!-- Creative Arts Club -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-white/20 transform hover:scale-105 fade-in-section" style="animation-delay: 500ms;">
+                <div class="flex items-center justify-center h-16 w-16 mx-auto bg-indigo-500/10 text-indigo-400 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>
+                </div>
+                <h3 class="mt-5 text-lg font-bold text-gray-100">Creative Arts</h3>
+            </div>
+
         </div>
     </div>
-</section>      
+</section>
 
-        <!-- 8. Get Involved (CTA) -->
-        <section class="py-16 md:py-24 bg-slate-800 text-white">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold">Ready to Get Involved?</h2>
-                <p class="mt-4 text-lg text-gray-300">
-                    Your university experience is what you make it. Explore, join, and lead. Take the first step today.
-                </p>
-                <a href="#" class="mt-8 inline-block bg-teal-500 text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-teal-600 transition-all duration-300 transform hover:scale-105">
-                    Join Now
+<!-- Celebrating the Brightest Mind Section -->
+<section class="py-16 md:py-24 bg-gray-50 overflow-hidden">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <!-- Left Column: Text Content -->
+            <div class="text-left fade-in-section">
+                <div class="h-12 w-px bg-gray-300"></div>
+                <h2 class="font-heading text-4xl text-dark-blue uppercase tracking-widest my-6">
+                    class participation<br>of our students
+                </h2>
+                <hr class="w-20 h-0.5 bg-gray-300 mb-8">
+                <p class="font-body text-gray-600 leading-relaxed mb-10">
+                    Hands-on learning in Computer Architecture! Students are actively assembling and troubleshooting computer hardware, applying their theoretical knowledge to real-world scenarios. From identifying components to ensuring system functionality, this activity enhances their understanding of how computers operate. A great way to bridge theory and practice! </p>
+                <a href="#" class="font-body font-semibold text-dark-blue tracking-widest text-sm group">
+                    VIEW PROGRAMS
+                    <span class="inline-block transition-transform group-hover:translate-x-2 ml-2">→</span>
                 </a>
-                <p class="mt-6 text-gray-400">
-                    Have questions? Contact the <a href="mailto:student.affairs@university.edu" class="underline hover:text-white">Office of Student Affairs</a>.
-                </p>
             </div>
-        </section>
+
+            <!-- Right Column: Image Collage -->
+            <div class="grid grid-cols-2 gap-4 items-start fade-in-section">
+                <!-- Large Top Image -->
+                <div class="col-span-2 shadow-lg">
+                    <img src="../Picture/School/11.jpg" alt="A grand, classic library interior">
+                </div>
+                
+                <!-- Bottom Left Image -->
+                <div class="shadow-lg">
+                    <img src="../Picture/School/12.jpg" alt="A professional man reading a newspaper in a cafe">
+                </div>
+                
+                <!-- Bottom Right Image (Overlapping) -->
+                <div class="shadow-xl transform lg:-translate-y-24">
+                    <img src="../Picture/School/13.jpg" alt="A portrait of a man in a suit">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Latest Video Section (Inline Player Version) -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <!-- Left Column: Text Content -->
+            <div class="text-left fade-in-section">
+                <div class="flex items-center space-x-3 mb-4">
+                    <svg class="h-8 w-8 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" /></svg>
+                    <p class="font-body text-dark-blue-600 font-semibold tracking-widest">LATEST VIDEO</p>
+                </div>
+                <h2 class="font-heading text-4xl lg:text-5xl text-dark-blue-900 font-bold leading-tight">
+                    Robotic <br><span class="text-red-600">Testing</span> Video
+                </h2>
+                <p class="font-body text-gray-600 leading-relaxed mt-6 mb-8">
+                    There are many variations of passages available but the majority have suffered alteration in some form by injected humour look even slightly believable.
+                </p>
+                <a href="#" class="inline-flex items-center bg-yellow-500 text-blue-900 font-bold text-sm py-4 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all duration-300 group">
+                    LEARN MORE
+                    <span class="inline-block transition-transform group-hover:translate-x-1 ml-2">→</span>
+                </a>
+            </div>
+
+            <!-- Right Column: Stylish Video Player Box -->
+            <div class="fade-in-section">
+                <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+                    <!-- This div maintains a 16:9 aspect ratio -->
+                    <div class="aspect-video">
+                        <video class="w-full h-full object-cover" 
+                               src="../Video/build-t_BKQr0OAYwwRPVbUDvt9Q.mp4" 
+                               controls 
+                               muted 
+                               playsinline>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Alumni Reconnect Section -->
+<section class="py-16 md:py-24 bg-white overflow-hidden">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-center">
+
+            <!-- Left Column: Image Collage with "Flash Zoom" Effect -->
+            <div class="grid grid-cols-3 grid-rows-2 gap-4 fade-in-section">
+                
+                <!-- This structure is repeated for each of the 6 images -->
+                <div class="group relative overflow-hidden shadow-lg rounded-md">
+                    <img src="../Picture/School/14.jpg" alt="Students studying from an overhead view" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
+
+                <div class="group relative overflow-hidden shadow-lg rounded-md">
+                    <img src="../Picture/School/15.jpg" alt="Students collaborating at an outdoor table" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
+
+                <div class="group relative overflow-hidden shadow-lg rounded-md">
+                    <img src="../Picture/School/16.jpg" alt="Graduates celebrating in front of a university building" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
+
+                <div class="group relative overflow-hidden shadow-lg rounded-md">
+                    <img src="../Picture/School/17.jpg" alt="Group of students looking at a laptop on campus steps" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
+
+                <div class="group relative overflow-hidden shadow-lg rounded-md">
+                    <img src="../Picture/School/18.jpg" alt="Two students reading books in a classroom" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
+
+                <div class="group relative overflow-hidden shadow-lg rounded-md">
+                    <img src="../Picture/School/19.jpg" alt="Students in a casual discussion circle" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Text Content -->
+            <div class="text-left fade-in-section">
+                <div class="flex items-center space-x-4 mb-4">
+                    <hr class="w-12 h-px bg-red-700">
+                    <p class="font-body text-maroon-red font-semibold tracking-widest">Students</p>
+                </div>
+                
+                <h2 class="font-heading text-4xl lg:text-5xl text-dark-blue font-bold leading-tight mb-6">
+                    Students Reconnect and learn together
+                </h2>
+                
+                <p class="font-body text-gray-600 leading-relaxed mb-10">
+                    A hands-on educational or competitive event focused on robotics or engineering, likely involving students or young participants. The individuals are engaged in various activities such as assembling electronic components, soldering, programming, and building mechanical structures, indicating a focus on technical skills. The presence of uniforms with "NUM" and collaborative settings with tools and equipment imply it could be part of a school or university program, possibly related to a robotics competition like RoboCon. The display of projects and teamwork highlights innovation and learning in a structured environment.
+                </p>
+
+    
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Page-specific JavaScript (Unchanged) -->
+<script>
+    function initVideoControls() {
+        const video = document.getElementById('challenge-video');
+        const unmuteButton = document.getElementById('unmute-button');
+
+        if (video && unmuteButton) {
+            unmuteButton.addEventListener('click', () => {
+                if (video.muted) {
+                    video.muted = false;
+                    unmuteButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                           <path d="M5.5 3.5A1.5 1.5 0 017 5v10a1.5 1.5 0 01-3 0V5a1.5 1.5 0 011.5-1.5zM12.5 3.5A1.5 1.5 0 0114 5v10a1.5 1.5 0 01-3 0V5a1.5 1.5 0 011.5-1.5z" />
+                        </svg>
+                        Mute Sound`;
+                } else {
+                    video.muted = true;
+                    unmuteButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                           <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.383-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Play Sound`;
+                }
+            });
+        }
+    }
+    
+    window.initVideoControls = initVideoControls;
+    document.addEventListener('DOMContentLoaded', initVideoControls);
+</script>
+
+<!-- Fully Responsive & Professional Image Gallery Section -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6">
+
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-16 text-center mx-auto fade-in-section">
+            <div class="w-24 h-1.5 bg-dark-blue mx-auto mb-6"></div>
+            <h2 class="font-lora text-dark-blue text-4xl md:text-5xl font-bold uppercase tracking-wider">
+                Social Engagement
+            </h2>
+            <p class="font-montserrat text-gray-600 leading-relaxed mt-6">
+                Our university offers a wide range of student activities designed to foster social engagement, personal growth, and community involvement. From academic clubs to cultural events, there's something for everyone.
+            </p>
+        </div>
+
+        <!-- 
+            Responsive Masonry-Style Grid
+            - Stacks on extra-small screens (1 column)
+            - Becomes a 2-column grid on small screens
+            - A more complex, asymmetrical layout on large screens
+            - All images are always visible.
+        -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[250px] gap-4 lg:gap-6 fade-in-section">
+
+            <!-- Image 1 -->
+            <div class="lg:row-span-2 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <img src="../Picture/School/22.jpg" alt="A presenter speaks to an audience in a classroom" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Image 2 -->
+            <div class="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <img src="../Picture/School/20.jpg" alt="Students walking on campus with books" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Image 3 -->
+            <div class="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <img src="../Picture/School/21.jpg" alt="Two students smiling on university steps" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Image 4 -->
+            <div class="lg:col-span-2 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <img src="../Picture/School/25.jpg" alt="A modern wooden architectural study nook in a library" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Image 5 -->
+            <div class="sm:col-span-2 lg:col-span-1 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <img src="../Picture/School/24.jpg" alt="A female student with glasses holding a red book" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ASEAN-China Youth Exchange Gallery Section -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6">
+        
+        <div class="max-w-4xl mb-12 fade-in-section">
+    <!-- Decorative line -->
+    <div class="w-20 h-1.5 bg-dark-blue mb-6"></div>
+
+    <!-- Main heading with two distinct styles -->
+    <h2 class="font-lora text-dark-blue leading-none">
+        <span class="block text-3xl font-bold uppercase tracking-widest mt-2">Asean-china youth <br>  exchange Program</span>
+    </h2>
+
+    <!-- Paragraph content -->
+    <p class="font-montserrat text-gray-600 leading-relaxed mt-8 max-w-3xl">
+       The ASEAN-China Youth Exchange program in Siem Reap aims to strengthen ties between youth from ASEAN countries and China, fostering mutual understanding and collaboration. 
+    </p>
+</div>
+        <!-- Responsive Grid for the Gallery -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+
+            <!-- Gallery Item 1 -->
+            <div class="text-left fade-in-section">
+                <img src="../Picture/School/26.jpg" alt="ASEAN and China leaders standing with flags" class="w-full h-72 object-cover rounded-lg shadow-xl mb-4">
+                <h3 class="font-semibold text-dark-blue tracking-wider uppercase">Unity and Representation</h3>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="text-left fade-in-section">
+                <img src="../Picture/School/27.jpg" alt="A large group photo of the ASEAN-China Youth Exchange delegates" class="w-full h-72 object-cover rounded-lg shadow-xl mb-4">
+                <h3 class="font-semibold text-dark-blue tracking-wider uppercase">ASEAN-China Youth Exchange Visit</h3>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="text-left fade-in-section">
+                <img src="../Picture/School/28.jpg" alt="A wide shot of a conference hall filled with youth participants" class="w-full h-72 object-cover rounded-lg shadow-xl mb-4">
+                <h3 class="font-semibold text-dark-blue tracking-wider uppercase">Youth are shown actively participating in meaningful regional discussions.</h3>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="text-left fade-in-section">
+                <img src="../Picture/School/29.jpg" alt="Youth delegates seated at a long table during a discussion" class="w-full h-72 object-cover rounded-lg shadow-xl mb-4">
+                 <h3 class="font-semibold text-dark-blue tracking-wider uppercase">Focused discussion among delegates.</h3>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="text-left fade-in-section">
+                <img src="../Picture/School/30.jpg" alt="Participants listening to a presentation in a meeting room" class="w-full h-72 object-cover rounded-lg shadow-xl mb-4">
+                <h3 class="font-semibold text-dark-blue tracking-wider uppercase">Engaging in the presentation.</h3>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div class="text-left fade-in-section">
+                <img src="../Picture/School/31.jpg" alt="A fun group photo of smiling youth delegates" class="w-full h-72 object-cover rounded-lg shadow-xl mb-4">
+                <h3 class="font-semibold text-dark-blue tracking-wider uppercase">Building cross-cultural friendships.</h3>
+            </div>
+
+        </div>
+    </div>
+</section>
 
         <!-- JAVASCRIPT: Place this right before your closing </body> tag or in a <script> tag in the <head> -->
 <script>
