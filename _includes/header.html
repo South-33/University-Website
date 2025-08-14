@@ -68,8 +68,12 @@
     /* Touch Device Hover Fix (for manual toggle) */
     @media (hover: none) {
         .main-nav .group:hover > ul { opacity: 0 !important; visibility: hidden !important; transform: translateY(-0.5rem) translateX(-50%) !important; }
-        .main-nav .group.is-open > ul { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; transform: translateY(0) translateX(-50%) !important; }
+        /* Disable dropdowns on touch devices (mobile/tablet) */
+        .main-nav .group.is-open > ul { display: none !important; max-height: 0 !important; opacity: 0 !important; visibility: hidden !important; transform: translateY(-0.5rem) translateX(-50%) !important; }
     }
+
+    /* Additionally, hide submenus on small screens regardless of input type */
+    @media (max-width: 767px) { .main-nav .group > ul { display: none !important; } }
 
     /* Search Results Dropdown */
     .search-results-dropdown { position: absolute; top: 100%; background: white; border: 1px solid #e5e7eb; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); z-index: 50; max-height: 400px; overflow-y: auto; margin-top: 0.25rem; }
@@ -129,7 +133,7 @@
                 <ul class="flex items-center justify-center flex-wrap gap-x-6 gap-y-2 md:gap-x-8">
                     <!-- Nav items -->
                     <li><a href="/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5"><path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" /></svg><span data-i18n="common.home">Home</span></a></li>
-                    <li class="relative group"><a href="#" onclick="event.preventDefault()" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5"><path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" /></svg><span data-i18n="common.programs">Programs</span></a>
+                    <li class="relative group"><a href="/programs/" class="text-sm md:text-base hover:text-gray-300 transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1.5"><path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" /></svg><span data-i18n="common.programs">Programs</span></a>
                         <!-- FIX: Updated the classes here to use Tailwind's group-hover for a smooth, correctly centered animation. -->
                         <ul class="absolute top-full left-1/2 mt-2 bg-indigo-100 rounded-md shadow-lg p-2 min-w-[180px] z-[10000] opacity-0 invisible -translate-x-1/2 -translate-y-2 transition-all duration-300 ease-out md:group-hover:opacity-100 md:group-hover:visible md:group-hover:translate-y-0">
                             <li><a href="/programs/bachelors" class="text-dark-blue block w-full px-5 py-2 text-sm md:text-base text-center" data-i18n="navigation.bachelors">Bachelors</a></li>
@@ -306,6 +310,11 @@
                 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
                 
                 if (isTouchDevice && clickedDropdownToggle) {
+                    // On non-desktop view (mobile widths), do NOT open submenu; allow navigation
+                    if (window.innerWidth < 768) {
+                        document.querySelectorAll('.main-nav .group.is-open').forEach(openGroup => openGroup.classList.remove('is-open'));
+                        return; // Let the anchor navigate normally
+                    }
                     const parentLi = clickedDropdownToggle.parentElement;
                     const isOpen = parentLi.classList.contains('is-open');
 

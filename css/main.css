@@ -40,6 +40,14 @@ main {
     transform: translateY(0);
 }
 
+/* Variant: fade-in without upward movement (for fixed-looking hero sections) */
+.fade-in-section.no-translate { 
+    transform: none; /* no vertical shift at start */
+}
+.fade-in-section.no-translate.is-visible {
+    transform: none; /* remain still after visible */
+}
+
 /* Prevent layout shifts during transitions */
 * {
     box-sizing: border-box;
@@ -48,7 +56,7 @@ main {
 /* Optimize rendering performance */
 body {
     /* This is the REAL background color that shows during SPA transitions */
-    background-color: #c4c4c4;
+    background-color: #ffffff;
     transition: none;
     font-family: 'Inter', sans-serif; /* Added a default font */
     color: #333; /* Default text color */

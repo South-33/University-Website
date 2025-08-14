@@ -46,7 +46,27 @@ document.addEventListener('DOMContentLoaded', function() {
         '/programs/bachelors/faculty-of-public-policy': '/programs/bachelors/faculty-of-public-policy.html',
         '/programs/bachelors/faculty-of-foreign-languages': '/programs/bachelors/faculty-of-foreign-languages.html',
         '/programs/bachelors/faculty-of-it': '/programs/bachelors/faculty-of-it.html',
-        '/programs/bachelors/faculty-of-robotic-engineering': '/programs/bachelors/robotic-engineering.html'
+        '/programs/bachelors/faculty-of-robotic-engineering': '/programs/bachelors/robotic-engineering.html',
+
+        // Masters program detail pages (clean URLs → actual files)
+        '/programs/masters/mba-management': '/programs/masters/mba-management.html',
+        '/programs/masters/mba-marketing': '/programs/masters/mba-marketing.html',
+        '/programs/masters/mba-international-business': '/programs/masters/mba-international-business.html',
+        '/programs/masters/mba-business-law': '/programs/masters/mba-business-law.html',
+        '/programs/masters/mba-family-business': '/programs/masters/mba-family-business.html',
+        '/programs/masters/msc-logistics-and-supply-chain-management': '/programs/masters/msc-logistics-and-supply-chain-management.html',
+        '/programs/masters/msc-management-of-technology': '/programs/masters/msc-management-of-technology.html',
+        '/programs/masters/msc-bank-management': '/programs/masters/msc-bank-management.html',
+        '/programs/masters/msc-accounting': '/programs/masters/msc-accounting.html',
+        '/programs/masters/msc-tourism-and-hospitality': '/programs/masters/msc-tourism-and-hospitality.html',
+        '/programs/masters/msc-information-technology': '/programs/masters/msc-information-technology.html',
+        '/programs/masters/msc-economics': '/programs/masters/msc-economics.html',
+        '/programs/masters/msc-finance': '/programs/masters/msc-finance.html',
+        '/programs/masters/msc-environmental-management': '/programs/masters/msc-environmental-management.html',
+        '/programs/masters/msc-digital-economy': '/programs/masters/msc-digital-economy.html',
+        '/programs/masters/comparative-law': '/programs/masters/comparative-law.html',
+        '/programs/masters/mpa-public-administration': '/programs/masters/mpa-public-administration.html',
+        '/programs/masters/mpp-public-policy': '/programs/masters/mpp-public-policy.html'
     };
     
     // Reverse mapping for converting file paths back to clean URLs
@@ -407,6 +427,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             currentMain.innerHTML = newMain.innerHTML;
+
+            // Hint the browser to decode images asynchronously to reduce main-thread jank
+            try {
+                const imgs = currentMain.querySelectorAll('img');
+                imgs.forEach(img => {
+                    // Respect existing lazy strategy but prefer async decode
+                    if (!img.hasAttribute('decoding')) {
+                        img.setAttribute('decoding', 'async');
+                    }
+                });
+            } catch (_) {}
             
             const newStyles = newDoc.querySelectorAll('style');
             newStyles.forEach(style => {
@@ -431,6 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error executing page scripts:', error);
             }
             
+            // Allow a microtask break before running initializers
             setTimeout(initializePageContent, 0);
             
         } catch (error) {
@@ -454,6 +486,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
+                // Prioritize lightweight visual setup first for smoother perception
+                const mainEl = document.querySelector('main');
+                triggerPageAnimations(mainEl);
+                initializeLazyLoading(mainEl);
+
                 // Explicitly call initializePage if it exists (for SPA navigation)
                 if (window.initializePage && typeof window.initializePage === 'function') {
                     try {
@@ -462,32 +499,54 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.error('Error calling initializePage:', error);
                     }
                 }
-                
-                const initFunctionPatterns = /^(initialize|init)[A-Z]/;
-                Object.getOwnPropertyNames(window).forEach(prop => {
-                    if (initFunctionPatterns.test(prop) && typeof window[prop] === 'function') {
-                        try {
-                            window[prop]();
-                        } catch (error) {
-                            console.error(`Error calling ${prop}:`, error);
-                        }
+
+                // Run known page-level initializers quickly (small, necessary)
+                const quickInits = [
+                    'initializeImageToTextSlideshow',
+                    'initializeProgramTabs'
+                ];
+                quickInits.forEach(name => {
+                    if (typeof window[name] === 'function') {
+                        try { window[name](); } catch (e) { console.error(`Error calling ${name}:`, e); }
                     }
                 });
-                
-                triggerPageAnimations(document.querySelector('main'));
-                initializeLazyLoading(document.querySelector('main'));
+
+                // Defer any other wide "initialize* / init*" functions to idle time to avoid jank
+                const deferOtherInits = () => {
+                    try {
+                        const initFunctionPatterns = /^(initialize|init)[A-Z]/;
+                        Object.getOwnPropertyNames(window).forEach(prop => {
+                            if (quickInits.includes(prop)) return; // already handled
+                            if (initFunctionPatterns.test(prop) && typeof window[prop] === 'function') {
+                                try {
+                                    window[prop]();
+                                } catch (error) {
+                                    console.error(`Error calling ${prop}:`, error);
+                                }
+                            }
+                        });
+                    } catch (err) {
+                        console.warn('Deferred initializers encountered an error:', err);
+                    }
+                };
+
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(deferOtherInits, { timeout: 400 });
+                } else {
+                    setTimeout(deferOtherInits, 120);
+                }
                 
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
                     mainContent.style.opacity = '1';
-                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                    mainContent.style.transition = 'opacity 0.25s ease-in';
                 }
             } catch (error) {
                 console.error('Error during page content initialization:', error);
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
                     mainContent.style.opacity = '1';
-                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                    mainContent.style.transition = 'opacity 0.25s ease-in';
                 }
             }
         }
