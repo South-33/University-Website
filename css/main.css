@@ -1,238 +1,9 @@
-/* Hamburger Menu Animation */
-.hamburger {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background-color: white;
-    position: relative;
-    transition: background-color 0.3s ease-out;
-}
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: white;
-    left: 0;
-    transition: transform 0.3s ease-out;
-}
-.hamburger::before {
-    top: -8px;
-}
-.hamburger::after {
-    bottom: -8px;
-}
-.nav-toggle.is-active .hamburger {
-    background-color: transparent;
-}
-.nav-toggle.is-active .hamburger::before {
-    transform: rotate(45deg) translate(5px, 6px);
-}
-.nav-toggle.is-active .hamburger::after {
-    transform: rotate(-45deg) translate(5px, -6px);
-}
-
-/* Desktop Dropdown Menu */
-.dropdown-menu {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    text-align: center; /* Center-align submenu items */
-    /* A very fast, responsive closing animation */
-    transition: max-height 0.2s ease-out, opacity 0.1s ease-out;
-}
-
-/* Style submenu items for clarity */
-.dropdown-menu a {
-    font-size: 1rem;
-    opacity: 0.9;
-    padding: 0.5rem 0;
-    position: relative; /* Establish positioning context for the hyphen */
-    display: inline-block; /* Allow centering of the link itself */
-}
-
-.main-nav ul.absolute a {
-    font-size: 1rem;
-    opacity: 0.9;
-    padding: 0.5rem 0;
-    position: relative; /* Establish positioning context for the hyphen */
-    display: inline-block; /* Allow centering of the link itself */
-    transition: color 200ms cubic-bezier(0.4,0,0.2,1), text-shadow 200ms cubic-bezier(0.4,0,0.2,1);
-}
-
-/* Add a hyphen before each submenu item for clarity */
-.dropdown-menu a::before {
-    content: "-";
-    position: absolute;
-    right: 100%; /* Position to the immediate left of the text */
-    margin-right: 0.5em; /* Add a small gap */
-
-    /* Vertically center the hyphen relative to the text */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.dropdown-menu.is-open {
-    opacity: 1;
-    max-height: 500px; /* Adjust if submenus are taller */
-    /* Smooth opening animation */
-    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
-}
-
-/* Mobile/Tablet Dropdown Specifics */
-.mobile-dropdown-link {
-    position: relative; /* Establish positioning context for the arrow */
-    display: inline-block; /* Ensure it doesn't take full width */
-}
-.mobile-dropdown-link .arrow {
-    position: absolute;
-    right: 100%; /* Position to the left of the text */
-    top: 50%;
-    transform: translateY(-50%) rotate(0deg); /* Point right by default */
-    margin-right: 0.5em; /* Add a small gap */
-    font-size: 0.8em;
-    transition: transform 0.3s ease-out;
-}
-.mobile-dropdown-link .arrow.is-open {
-    transform: translateY(-50%) rotate(90deg); /* Point down when open */
-}
-
-/* Dim inactive items when a mobile submenu is open */
-#mobile-menu ul.has-active-submenu > li {
-    opacity: 0.5;
-    transition: opacity 0.3s ease-out;
-}
-#mobile-menu ul.has-active-submenu > li.submenu-active {
-    opacity: 1;
-}
-
-/* Header Navigation Styles */
-.main-nav a {
-    position: relative;
-}
-
-/* Navigation Link Underline Animation */
-
-.main-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: white;
-    transform: scaleX(0);
-    transform-origin: center; /* Animate from the center */
-    transition: transform 0.3s ease-out;
-}
-.main-nav a.active::after {
-    transform: scaleX(1);
-}
-/* Prevent underline on submenu links */
-.main-nav ul.absolute a.active::after {
-    transform: scaleX(0) !important;
-}
-
-.main-nav ul.absolute a:focus,
-.main-nav ul.absolute a:active,
-.main-nav ul.absolute a:hover {
-    text-decoration: none !important;
-    border-bottom: none !important;
-    background-color: transparent !important;
-    color: #264ada !important;
-    text-shadow: 0 1px 6px rgba(59,91,219,0.08);
-}
-
 /* SPA Page Transition */
 main.spa-transition {
     transition: opacity 0.25s ease-in-out;
 }
 
-/* Touch Device Hover Fix */
-@media (hover: none) {
-    .main-nav .group:hover > ul {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transform: translateY(0.25rem) !important; /* Corresponds to translate-y-1 */
-    }
-}
-
 /* --- Page-specific styles moved to global --- */
-
-
-/* --- Search Results Dropdown --- */
-.search-results-dropdown {
-    position: absolute;
-    top: 100%;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    z-index: 50;
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 0.25rem;
-}
-
-/* Desktop: dropdown matches search container width */
-@media (min-width: 768px) {
-    .search-results-dropdown {
-        left: 0;
-        right: 0;
-    }
-}
-
-/* Mobile: dropdown is full-width for better UX */
-@media (max-width: 767px) {
-    .search-results-dropdown {
-        position: fixed;
-        left: 1rem;
-        right: 1rem;
-        width: auto;
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
-.search-results-dropdown ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.search-results-dropdown li {
-    border-bottom: 1px solid #f3f4f6;
-}
-
-.search-results-dropdown li:last-child {
-    border-bottom: none;
-}
-
-.search-results-dropdown a {
-    display: block;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    color: #374151;
-    transition: background-color 0.15s ease;
-}
-
-.search-results-dropdown a:hover {
-    background-color: #f9fafb;
-}
-
-.search-results-dropdown .result-title {
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 0.25rem;
-}
-
-.search-results-dropdown .result-description {
-    font-size: 0.875rem;
-    color: #6b7280;
-    line-height: 1.4;
-}
-
 /* Add any additional global styles here */
 
 /* Lazy-loading image styles */
@@ -269,6 +40,14 @@ main {
     transform: translateY(0);
 }
 
+/* Variant: fade-in without upward movement (for fixed-looking hero sections) */
+.fade-in-section.no-translate { 
+    transform: none; /* no vertical shift at start */
+}
+.fade-in-section.no-translate.is-visible {
+    transform: none; /* remain still after visible */
+}
+
 /* Prevent layout shifts during transitions */
 * {
     box-sizing: border-box;
@@ -278,6 +57,7 @@ main {
 body {
     /* This is the REAL background color that shows during SPA transitions */
     background-color: #ffffff;
+    transition: none;
     font-family: 'Inter', sans-serif; /* Added a default font */
     color: #333; /* Default text color */
     line-height: 1.6;
@@ -291,4 +71,3 @@ header, footer {
     position: relative;
     z-index: 1000;
 }
-

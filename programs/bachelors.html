@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="../css/i18n.css">
     <!-- Page-specific styles for advanced components (e.g., timeline) -->
     <style>
-        /* Removed conflicting fade-in-section styles - using global CSS instead */
         
-        /* Program Tab Content Animation */
+        /* Program Tab Content Animation - Now using global fade-in-section */
         .program-content-wrapper {
             position: relative;
             transition: height 0.35s ease-in-out;
@@ -53,12 +52,93 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transform: scale(1.05);
         }
+
+        /* Overlay text utilities for small cards */
+        .overlay-text { font-size: 0.9rem; line-height: 1.25rem; }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-clamp: 3; /* standard property for compatibility */
+        }
+
+        /* Standardize media container and overlay behavior */
+        .image-to-text-card {
+            position: relative;
+            height: 10rem; /* 160px, matches h-40 */
+            width: 100%; /* ensure full width like Finance card */
+            border-radius: 0.5rem; /* match rounded-lg */
+            overflow: hidden;
+        }
+        .image-to-text-card > img,
+        .image-to-text-card > .overlay-content,
+        .image-to-text-card > div {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .image-to-text-card > img { object-fit: cover; }
+        .overlay-content, .image-to-text-card > div { display: flex; align-items: center; justify-content: center; }
+        
+        /* Program label readability (e.g., "Faculty of", "School of") */
+        .program-content .mb-3.text-center > span {
+            font-size: 0.7rem; /* ~13.6px, slightly larger for readability */
+        }
+        
+        /* Admissions timeline connectors */
+        .timeline-step { position: relative; }
+        .timeline-step::after {
+            content: "";
+            position: absolute;
+            background: rgba(30, 27, 75, 0.25); /* dark-blue at ~25% */
+            z-index: 0; /* under the numbered circles (which have z-10) */
+        }
+
+        /* Enhanced number badge */
+        .timeline-number {
+            box-shadow: 0 10px 20px rgba(30,27,75,0.25);
+        }
+
+        /* Mobile: hide connectors entirely for a cleaner look */
+        @media (max-width: 767.98px) {
+            .timeline-step::after { display: none !important; }
+        }
+
+        /* Desktop (md+): horizontal connectors between columns */
+        @media (min-width: 768px) {
+            .timeline-step::after {
+                top: 2.5rem; /* roughly the vertical center of the number circle */
+                left: 50%;
+                height: 2px;
+                /* Stretch from center of this item to the next column's center.
+                   Assumes gap-8 (2rem) and px-4 padding on items; adjust if layout changes. */
+                width: calc(100% + 2rem); /* own width plus grid gap */
+                transform: translateX(0);
+                display: block;
+            }
+            .timeline-step:last-child::after { display: none; }
+        }
     </style>
 </head>
-<body class="bg-light-lavender">
+<body class="body-loading bg-white">
 
-    <div id="header-placeholder"></div>
-
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page Content Container - initially hidden until header loads -->
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+    
     <main>
         <!-- Hero Section -->
         <section class="relative h-[35vh] min-h-[250px] flex items-center justify-center text-center text-white font-body">
@@ -98,16 +178,17 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             <!-- Program Card: Faculty of Management -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="flex-grow flex flex-col items-center">
-                                        <h3 class="font-heading text-2xl text-dark-blue mb-3 min-h-[3.5rem] flex items-center justify-center text-center">Faculty of Management</h3>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Management</h3>
+                                        </div>
                                         <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
-                                            <video autoplay loop muted playsinline class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100">
-                                                <source src="https://videos.pexels.com/video-files/3249940/3249940-uhd_2560_1440_25fps.mp4" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
+                                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&auto=format&fit=crop" alt="Management Professional" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&auto=format&fit=crop';">
                                             <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
-                                                <p class="text-base text-dark-blue/80 font-body">Bachelor’s degrees in Management, Marketing, and Entrepreneurship.</p>
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Prepare to lead teams, market products, and launch ventures with real-world projects.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -117,13 +198,17 @@
 
                             <!-- Program Card: Faculty of Finance and Accounting -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="flex-grow flex flex-col items-center">
-                                        <h3 class="font-heading text-2xl text-dark-blue mb-3 min-h-[3.5rem] flex items-center justify-center text-center">Faculty of Finance and Accounting</h3>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Finance and Accounting</h3>
+                                        </div>
                                         <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
-                                            <img src="../Picture/FInance.jpg" alt="Faculty of Finance and Accounting" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100">
+                                            <img src="../Picture/FInance.jpg" alt="Faculty of Finance and Accounting" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&auto=format&fit=crop';">
                                             <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
-                                                <p class="text-base text-dark-blue/80 font-body">In-depth study of financial markets, corporate finance, and accounting principles to prepare for a dynamic career.</p>
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Master accounting, finance, and risk to make solid, ethical decisions.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -133,162 +218,141 @@
 
                             <!-- Program Card: Faculty of Information Technology -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="flex-grow flex flex-col items-center">
-                                        <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="1.5 1.5 21 21" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-dark-blue"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 15h-6a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h6" /><path d="M13 4m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" /><path d="M7 19l3 0" /><path d="M17 8l0 .01" /><path d="M17 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M9 15l0 4" /></svg></div>
-                                        <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Information Technology</h3>
-                                        <p class="text-base text-dark-blue/80 font-body mb-6">Bachelor's degrees in IT, Business IT, Robotic Engineering, and Computer Science.</p>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Information Technology</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop" alt="IT Professional" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Build software, work with data, and manage networks to solve real problems.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <a href="/programs/bachelors/faculty-of-it" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Program Card: Faculty of Economics -->
-                            <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-[388px]">
-                                <img src="https://images.unsplash.com/photo-1692598504819-3c910911767f?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Faculty of Economics" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-                                <div class="relative h-full flex flex-col justify-end p-6 text-white">
-                                    <div class="transition-transform duration-500 ease-in-out transform translate-y-20 group-hover:translate-y-0">
-                                        <h3 class="font-heading text-2xl font-bold mb-2">Faculty of Economics</h3>
-                                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                                            <p class="font-body text-base mb-4">Bachelor’s degrees in Economics, Business Economics, and International Economics.</p>
-                                            <a href="/programs/bachelors/faculty-of-economics" class="bg-white text-dark-blue rounded-full px-5 py-2 inline-block font-medium hover:opacity-85 transition-opacity text-sm">Learn More</a>
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Economics</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop" alt="Economics Professor" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Study markets and policy to make clear, data‑driven decisions.</p>
+                                            </div>
                                         </div>
                                     </div>
+                                    <a href="/programs/bachelors/faculty-of-economics" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Program Card: Faculty of Tourism -->
-                            <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-[388px]">
-                                <img src="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Faculty of Tourism" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                                
-                                <!-- Content Container -->
-                                <div class="relative h-full p-8 flex flex-col justify-center items-center text-center text-white">
-                                    
-                                    <!-- Icon & Title Container (slides up) -->
-                                    <div class="transition-transform duration-500 ease-in-out group-hover:-translate-y-12">
-                                        <div class="bg-white/20 p-4 rounded-full mb-4 inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Tourism</h3>
                                         </div>
-                                        <h3 class="font-heading text-2xl font-bold">Faculty of Tourism</h3>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=1200&auto=format&fit=crop" alt="Tourism Professional" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Manage hospitality and travel operations to create great experiences.</p>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <!-- Details (fade in) -->
-                                    <div class="absolute bottom-10 left-0 right-0 px-8 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
-                                        <p class="text-base font-body mb-6">Bachelor's degrees in Tourism Management, Hospitality, and Event Management.</p>
-                                        <a href="/programs/bachelors/tourism" class="bg-white text-dark-blue rounded-full px-6 py-2 inline-block font-medium hover:bg-white/80 transition-colors">Learn More</a>
-                                    </div>
+                                    <a href="/programs/bachelors/faculty-of-tourism" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Program Card: Faculty of Law -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-dark-blue" overflow="visible">
-                                            <style>
-                                                .scale-arm-group {
-                                                    transform-origin: 12px 7px;
-                                                    animation: tipScale 4s ease-in-out infinite;
-                                                }
-                                                .scale-pan {
-                                                    animation: keepVertical 4s ease-in-out infinite;
-                                                }
-                                                .scale-pan-left { transform-origin: 5px 8px; }
-                                                .scale-pan-right { transform-origin: 19px 8px; }
-
-                                                @keyframes tipScale {
-                                                    0%, 100% { transform: rotate(0deg); }
-                                                    25% { transform: rotate(-10deg); }
-                                                    75% { transform: rotate(10deg); }
-                                                }
-                                                @keyframes keepVertical {
-                                                    0%, 100% { transform: rotate(0deg); }
-                                                    25% { transform: rotate(10deg); } /* Counter-rotation */
-                                                    75% { transform: rotate(-10deg); } /* Counter-rotation */
-                                                }
-                                            </style>
-                                            <!-- Static Base -->
-                                            <path d="M7 21h10"/>
-                                            <path d="M12 3v18"/>
-                                            
-                                            <!-- Animated Group -->
-                                            <g class="scale-arm-group">
-                                                <!-- The Tipping Arm -->
-                                                <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
-                                                <!-- The Pans (with counter-rotation) -->
-                                                <path class="scale-pan scale-pan-left" d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
-                                                <path class="scale-pan scale-pan-right" d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
-                                            </g>
-                                        </svg>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Law</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&auto=format&fit=crop" alt="Law Professor" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Learn legal reasoning, ethics, and advocacy across key fields.</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Law</h3>
-                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor’s degrees in Law, specializing in areas like Constitutional Law, International Law, and Business Law.</p>
-                                    <a href="/programs/bachelors/law" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                    <a href="/programs/bachelors/faculty-of-law" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Program Card: Faculty of Foreign Languages -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                            <style>
-                                                .language-path {
-                                                    stroke-dasharray: 100;
-                                                    stroke-dashoffset: 100;
-                                                    animation: drawLanguagePath 10s ease-in-out infinite;
-                                                }
-                                                .language-path:nth-child(1) { animation-delay: 0s; }
-                                                .language-path:nth-child(2) { animation-delay: 0.4s; }
-                                                .language-path:nth-child(3) { animation-delay: 0.8s; }
-                                                .language-path:nth-child(4) { animation-delay: 1.2s; }
-                                                .language-path:nth-child(5) { animation-delay: 1.6s; }
-                                                .language-path:nth-child(6) { animation-delay: 2.0s; }
-                                                @keyframes drawLanguagePath {
-                                                    0% { stroke-dashoffset: 100; } /* Start hidden */
-                                                    10% { stroke-dashoffset: 0; }  /* Finish drawing */
-                                                    70% { stroke-dashoffset: 0; }  /* Hold drawn */
-                                                    80% { stroke-dashoffset: 100; }/* Finish erasing */
-                                                    100% { stroke-dashoffset: 100; }/* Stay hidden */
-                                                }
-                                            </style>
-                                            <path class="language-path" stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21"/>
-                                            <path class="language-path" stroke-linecap="round" stroke-linejoin="round" d="M11.5 18h7.5"/>
-                                            <path class="language-path" stroke-linecap="round" stroke-linejoin="round" d="M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114"/>
-                                            <path class="language-path" stroke-linecap="round" stroke-linejoin="round" d="M9 5.25V3"/>
-                                            <path class="language-path" stroke-linecap="round" stroke-linejoin="round" d="M12.334 5.364C11.176 10.658 7.69 15.08 3 17.502"/>
-                                            <path class="language-path" stroke-linecap="round" stroke-linejoin="round" d="M12.334 5.364c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802"/>
-                                        </svg>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Foreign Languages</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&auto=format&fit=crop" alt="Law Professor" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Develop language skills and cultural fluency for global communication.</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Foreign Languages</h3>
-                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor’s degrees in various Foreign Languages, focusing on linguistic proficiency and cultural understanding.</p>
                                     <a href="/programs/bachelors/faculty-of-foreign-languages" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Card: School of Public Policy -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
-                                    </svg></div>
-                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Public Policy</h3>
-                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor's degrees in Public Administration, International Relations, and Public Policy.</p>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">School of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Public Policy</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&auto=format&fit=crop" alt="Public Policy Expert" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Design and evaluate policies to serve communities and drive impact.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <a href="/programs/bachelors/faculty-of-public-policy" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Program Card: Faculty of Digital Economy -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-                                    </svg></div>
-                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Digital Economy</h3>
-                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Innovative programs focusing on E-commerce, Digital Marketing, and Fintech.</p>
-                                    <a href="/programs/bachelors/digital-economy" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Digital Economy</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop" alt="Digital Economy Expert" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Learn e‑commerce, analytics, and digital strategy to grow online.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="/programs/bachelors/faculty-of-digital-economy" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
                         </div>
@@ -299,34 +363,60 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             <!-- Program Card: Faculty of Information Technology -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="1.5 1.5 21 21" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-dark-blue"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 15h-6a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h6" /><path d="M13 4m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" /><path d="M7 19l3 0" /><path d="M17 8l0 .01" /><path d="M17 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M9 15l0 4" /></svg></div>
-                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Information Technology</h3>
-                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Cutting-edge programs in Computer Science, Data Analytics, and Cybersecurity.</p>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Information Technology</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop" alt="IT International" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Global IT: build apps, work with data, and collaborate across borders.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Program Card: School of Public Policy -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
-                                    </svg></div>
-                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">School of Public Policy</h3>
-                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Bachelor's degrees in Public Administration, International Relations, and Public Policy.</p>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">School of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Public Policy</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&auto=format&fit=crop" alt="Public Policy International" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Compare, design, and implement policy across global contexts.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
 
                             <!-- Program Card: Faculty of Digital Economy -->
                             <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
-                                <div class="p-8 flex flex-col text-center items-center h-full">
-                                    <div class="bg-dark-blue/10 p-4 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="1.5 1.5 21 21" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-                                    </svg></div>
-                                    <h3 class="font-heading text-2xl text-dark-blue mb-3">Faculty of Digital Economy</h3>
-                                    <p class="text-base text-dark-blue/80 font-body flex-grow mb-6">Innovative programs focusing on E-commerce, Digital Marketing, and Fintech.</p>
+                                <div class="p-8 flex flex-col text-center items-stretch h-full">
+                                    <div class="flex-grow flex flex-col items-stretch">
+                                        <div class="mb-3 text-center">
+                                            <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Faculty of</span>
+                                            <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                            <h3 class="font-heading text-2xl text-dark-blue leading-tight">Digital Economy</h3>
+                                        </div>
+                                        <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop" alt="Digital Economy International" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop';">
+                                            <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                                <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">Focus on e‑commerce, analytics, and platforms to scale across markets.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <a href="#" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                                 </div>
                             </div>
@@ -372,19 +462,19 @@
                 <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <!-- Step 1 -->
                     <div class="timeline-step relative flex flex-col items-center px-4">
-                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">1</div>
+                        <div class="timeline-number bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 z-10">1</div>
                         <h4 class="font-heading text-2xl text-dark-blue mb-2">Explore Programs</h4>
                         <p class="text-lg text-dark-blue/80">Review our faculties and choose the program that aligns with your career goals.</p>
                     </div>
                     <!-- Step 2 -->
                     <div class="timeline-step relative flex flex-col items-center px-4">
-                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">2</div>
+                        <div class="timeline-number bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 z-10">2</div>
                         <h4 class="font-heading text-2xl text-dark-blue mb-2">Prepare Documents</h4>
                         <p class="text-lg text-dark-blue/80">Gather your academic transcripts, national ID, and other required documents.</p>
                     </div>
                     <!-- Step 3 -->
-                    <div class="relative flex flex-col items-center px-4">
-                        <div class="bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 ring-8 ring-light-lavender z-10">3</div>
+                    <div class="timeline-step relative flex flex-col items-center px-4">
+                        <div class="timeline-number bg-dark-blue text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-2xl mb-4 z-10">3</div>
                         <h4 class="font-heading text-2xl text-dark-blue mb-2">Submit Application</h4>
                         <p class="text-lg text-dark-blue/80">Complete the online application form and upload your documents before the deadline.</p>
                     </div>
@@ -393,18 +483,8 @@
             </div>
         </section>
 
-        <!-- Call to Action Section -->
-        <section class="bg-white py-24 font-body fade-in-section">
-            <div class="max-w-4xl mx-auto px-5 text-center">
-                <div>
-                <h3 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">Ready to Begin Your Journey?</h3>
-                <p class="text-lg text-dark-blue/80 mb-8">Take the next step in your education. Our admissions team is here to guide you through the application process and answer any questions you may have.</p>
-                <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Contact Admissions</a>
-                </div>
-            </div>
-        </section>
-
     </main>
+    </div>
 
     <div id="footer-placeholder"></div>
 
@@ -436,7 +516,13 @@
                     return;
                 }
 
-                // Start with the image visible
+                // Always reset to the first slide (image visible) on init/tab switch
+                image.classList.add('opacity-100');
+                image.classList.remove('opacity-0');
+                textOverlay.classList.add('opacity-0');
+                textOverlay.classList.remove('opacity-100');
+
+                // Track state for this interval
                 let isImageVisible = true;
 
                 // Store interval reference on the card element for cleanup
@@ -548,6 +634,120 @@
     
     <script src="/js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
+    
+    <!-- Unified Layout Sequence for SPA Navigation -->
+    <script>
+        (function() {
+            'use strict';
+            
+            const placeholder = document.getElementById('header-loading-placeholder');
+            const contentContainer = document.getElementById('main-content-container');
+            const heroSection = document.querySelector('#hero'); // Optional hero section
+            
+            // Early exit if critical elements are missing
+            if (!placeholder || !contentContainer) {
+                console.warn('⚠️  Layout sequence elements missing. Skipping initialization.');
+                if (contentContainer) contentContainer.style.opacity = '1';
+                return;
+            }
+
+            let freezeState = {
+                isFrozen: true,
+                originalY: 0,
+            };
+
+            function absoluteScrollFreeze() {
+                if (freezeState.isFrozen) {
+                    document.documentElement.style.scrollBehavior = 'auto';
+                    document.body.style.scrollBehavior = 'auto';
+                    window.scrollTo(0, freezeState.originalY);
+                }
+            }
+
+            function setHeroHeight() {
+                const header = document.querySelector('header');
+                if (!header || header.offsetHeight === 0) {
+                    return; // Header not ready
+                }
+
+                // 1. Clean up previous styles to ensure a single source of truth
+                if (heroSection) {
+                    heroSection.style.removeProperty('height');
+                    heroSection.style.removeProperty('min-height');
+                }
+                document.documentElement.style.removeProperty('--header-height');
+
+                // 2. Perform precise measurements
+                const viewportHeight = window.innerHeight;
+                const headerRect = header.getBoundingClientRect();
+                const exactHeaderHeight = Math.round(headerRect.height);
+                
+                // 3. Set the definitive height in pixels (only for hero section if it exists)
+                if (heroSection) {
+                    const exactHeroHeight = viewportHeight - exactHeaderHeight;
+                    heroSection.style.height = `${exactHeroHeight}px`;
+                    heroSection.style.minHeight = `${exactHeroHeight}px`;
+
+                    // 4. Force an immediate browser reflow to apply the style
+                    heroSection.offsetHeight;
+
+                    console.log(`🎯 Unified Layout Set: Vh(${viewportHeight}) - Hh(${exactHeaderHeight}) = Hero(${exactHeroHeight}px)`);
+                }
+            }
+
+            function completeHeaderLoad() {
+                freezeState.isFrozen = false;
+                window.removeEventListener('scroll', absoluteScrollFreeze);
+
+                placeholder.style.transition = 'opacity 0.1s ease-out';
+                placeholder.style.opacity = '0';
+                contentContainer.style.opacity = '1';
+
+                setTimeout(() => {
+                    placeholder.style.display = 'none';
+                    document.documentElement.style.scrollBehavior = '';
+                    document.body.style.scrollBehavior = '';
+                    document.body.classList.remove('body-loading');
+                    console.log('✅ Layout Unlocked & Stable');
+                }, 100);
+            }
+
+            function initializeLayoutSequence() {
+                console.log('🚀 Initializing Unified Layout Sequence...');
+                freezeState.originalY = window.pageYOffset || document.documentElement.scrollTop;
+                window.addEventListener('scroll', absoluteScrollFreeze, { passive: false });
+
+                let attempts = 0;
+                const maxAttempts = 50; // ~1 second
+
+                const interval = setInterval(() => {
+                    const header = document.querySelector('header');
+                    attempts++;
+
+                    if (header && header.offsetHeight > 0) {
+                        clearInterval(interval);
+                        setHeroHeight();
+                        completeHeaderLoad();
+                    } else if (attempts > maxAttempts) {
+                        clearInterval(interval);
+                        console.warn('Header failed to load in time. Forcing layout unlock.');
+                        completeHeaderLoad();
+                    }
+                }, 20);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initializeLayoutSequence);
+            } else {
+                initializeLayoutSequence();
+            }
+
+            // Re-calculate on resize for responsive correctness
+            window.addEventListener('resize', setHeroHeight);
+
+            console.log('🧊 Absolute scroll freeze initialized');
+        })();
+    </script>
 
 </body>
 </html>

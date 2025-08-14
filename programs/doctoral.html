@@ -14,12 +14,30 @@
     <!-- Page-specific styles for advanced components (e.g., timeline) -->
     <style>
         /* Page-specific fade-in styles removed to use global main.css version */
+        
+        /* Program label readability (e.g., "Doctor of", "Doctoral Program in") */
+        .program-content .mb-3.text-center > span {
+            font-size: 0.7rem; /* keep consistent with bachelors */
+        }
     </style>
 </head>
-<body class="bg-light-lavender">
+<body class="body-loading bg-light-lavender">
 
-    <div id="header-placeholder"></div>
-
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page Content Container - initially hidden until header loads -->
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+    
     <main>
         <!-- Hero Section -->
         <section class="relative h-[35vh] min-h-[250px] flex items-center justify-center text-center text-white font-body">
@@ -57,44 +75,62 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Doctor of Philosophy (Ph.D) -->
-                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full">
-                        <div class="p-8 flex flex-col text-center items-center h-full">
-                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.97z" />
-                                </svg>
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                        <div class="p-8 flex flex-col text-center items-stretch h-full">
+                            <div class="flex-grow flex flex-col items-stretch">
+                                <div class="mb-3 text-center">
+                                    <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Doctor of</span>
+                                    <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue leading-tight">Philosophy (Ph.D)</h3>
+                                </div>
+                                <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1200&auto=format&fit=crop" alt="Doctoral Research" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1200&auto=format&fit=crop';">
+                                    <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                        <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">A research-focused doctoral program for advancing academic and professional knowledge in your chosen field. Includes independent research and faculty mentorship.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Doctor of Philosophy (Ph.D)</h3>
-<p class="text-base text-dark-blue/80 font-body flex-grow mb-6">A research-focused doctoral program for advancing academic and professional knowledge in your chosen field. Includes independent research and faculty mentorship.</p>
-<a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-</div>
-</div>
+                            <a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
                     <!-- Doctor of Business Administration (DBA) -->
-                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full">
-                        <div class="p-8 flex flex-col text-center items-center h-full">
-                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.97z" />
-                                </svg>
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                        <div class="p-8 flex flex-col text-center items-stretch h-full">
+                            <div class="flex-grow flex flex-col items-stretch">
+                                <div class="mb-3 text-center">
+                                    <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Doctor of</span>
+                                    <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue leading-tight">Business Administration (DBA)</h3>
+                                </div>
+                                <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&auto=format&fit=crop" alt="Business Administration" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&auto=format&fit=crop';">
+                                    <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                        <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">A professional doctorate for experienced managers and academics, focusing on advanced business research, leadership, and teaching skills.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Doctor of Business Administration (DBA)</h3>
-<p class="text-base text-dark-blue/80 font-body flex-grow mb-6">A professional doctorate for experienced managers and academics, focusing on advanced business research, leadership, and teaching skills.</p>
-<a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-</div>
-</div>
+                            <a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
                     <!-- Doctoral Program in Public Policy -->
-                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full">
-                        <div class="p-8 flex flex-col text-center items-center h-full">
-                            <div class="bg-dark-blue/10 p-4 rounded-full mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-dark-blue">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.97z" />
-                                </svg>
+                    <div class="bg-white rounded-xl overflow-hidden flex flex-col group shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-[388px]">
+                        <div class="p-8 flex flex-col text-center items-stretch h-full">
+                            <div class="flex-grow flex flex-col items-stretch">
+                                <div class="mb-3 text-center">
+                                    <span class="block text-[11px] tracking-[0.2em] text-dark-blue/50 leading-tight">Doctoral Program in</span>
+                                    <div class="mx-auto mt-2 mb-1 h-px w-10 bg-dark-blue/20"></div>
+                                    <h3 class="font-heading text-2xl text-dark-blue leading-tight">Public Policy</h3>
+                                </div>
+                                <div class="relative w-full h-40 overflow-hidden rounded-lg mt-3 image-to-text-card">
+                                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d3?w=1200&auto=format&fit=crop" alt="Public Policy" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute inset-0 opacity-100" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1587202372775-e229f172b9d3?w=1200&auto=format&fit=crop';">
+                                    <div class="absolute inset-0 bg-white p-4 flex items-center justify-center transition-opacity duration-1000 ease-in-out opacity-0">
+                                        <p class="text-dark-blue/80 font-body overlay-text line-clamp-3">An advanced program for policy professionals and researchers interested in impactful, independent research and public sector leadership.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="font-heading text-2xl text-dark-blue mb-3">Doctoral Program in Public Policy</h3>
-<p class="text-base text-dark-blue/80 font-body flex-grow mb-6">An advanced program for policy professionals and researchers interested in impactful, independent research and public sector leadership.</p>
-<a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-</div>
-</div>
+                            <a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -152,9 +188,79 @@
 
     </main>
 
+    </div> <!-- End main-content-container -->
+
     <div id="footer-placeholder"></div>
     
     <script src="/js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
+    
+    <!-- Unified Layout Sequence for SPA Navigation -->
+    <script src="/js/layout-sequence.js"></script>
+
+    <script>
+        /**
+         * Finds all cards with the 'image-to-text-card' class and sets up
+         * a cross-fade slideshow between the image and a text description.
+         * Named with 'initialize' prefix for SPA auto-detection.
+         */
+        function initializeImageToTextSlideshow() {
+            const cards = document.querySelectorAll('.image-to-text-card');
+            if (cards.length === 0) {
+                return; // No cards found, do nothing
+            }
+
+            // Clear any existing intervals to prevent duplicates during SPA navigation
+            cards.forEach(card => {
+                if (card.slideshowInterval) {
+                    clearInterval(card.slideshowInterval);
+                }
+            });
+
+            cards.forEach(card => {
+                const image = card.querySelector('img');
+                const textOverlay = card.querySelector('div'); // The description div
+
+                if (!image || !textOverlay) {
+                    console.warn('Card is missing image or text overlay for slideshow.', card);
+                    return;
+                }
+
+                // Always reset to the first slide (image visible) on init/tab switch
+                image.classList.add('opacity-100');
+                image.classList.remove('opacity-0');
+                textOverlay.classList.add('opacity-0');
+                textOverlay.classList.remove('opacity-100');
+
+                // Track state for this interval
+                let isImageVisible = true;
+
+                // Store interval reference on the card element for cleanup
+                card.slideshowInterval = setInterval(() => {
+                    if (isImageVisible) {
+                        // Fade out image, fade in text
+                        image.classList.remove('opacity-100');
+                        image.classList.add('opacity-0');
+                        textOverlay.classList.remove('opacity-0');
+                        textOverlay.classList.add('opacity-100');
+                    } else {
+                        // Fade out text, fade in image
+                        textOverlay.classList.remove('opacity-100');
+                        textOverlay.classList.add('opacity-0');
+                        image.classList.remove('opacity-0');
+                        image.classList.add('opacity-100');
+                    }
+                    isImageVisible = !isImageVisible;
+                }, 5000); // Switch every 5 seconds
+            });
+        }
+
+        // Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializeImageToTextSlideshow);
+
+        // Make function globally available for SPA navigation
+        window.initializeImageToTextSlideshow = initializeImageToTextSlideshow;
+    </script>
+
 </body>
 </html>

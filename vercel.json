@@ -9,6 +9,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/programs/bachelors/faculty-of-:facultySlug",
+      "destination": "/programs/bachelors/faculty-of-:facultySlug.html"
+    },
+    {
       "source": "/programs/(.*)",
       "destination": "/programs/$1.html"
     },

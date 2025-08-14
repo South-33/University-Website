@@ -38,7 +38,8 @@ This is a comprehensive guide for AI assistants working on our university websit
 │   └── main.css               # 🎨 Global styles (minimal)
 ├── js/
 │   ├── theme.js               # 🎨 Tailwind theme config
-│   └── main.js                # ⚡ CORE SPA LOGIC (CRITICAL)
+│   ├── main.js                # ⚡ CORE SPA LOGIC (CRITICAL)
+│   └── layout-sequence.js     # 🎯 SPA Header Consistency Module
 ├── Picture/                    # 🖼️ All image assets
 ├── template.html               # 📄 Page template (see below)
 ├── index.html                  # 🏠 Homepage with hero video
@@ -62,6 +63,7 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **Duplicate Prevention:** Dual-path tracking prevents navigation conflicts
 
 ### 🎬 **Homepage Hero System**
+- ✅ **Layout Stability:** Implemented a unified script to manage scroll-locking and hero height calculation, eliminating all race conditions and layout shifts on load.
 - ✅ **Perfect Viewport:** Hero fills exactly `viewport height - header height`
 - ✅ **Video Loading:** Smooth image-to-video transition with fallbacks
 - ✅ **Mobile Responsive:** Handles address bar changes and orientation
@@ -99,6 +101,16 @@ This is a comprehensive guide for AI assistants working on our university websit
 - ✅ **Error Resilience:** Comprehensive error handling for all edge cases
 - ✅ **Team-Friendly:** Each page is completely independent and self-contained
 - ✅ **Zero Configuration:** New pages work automatically without main.js modifications
+
+### 🚀 **SPA Header Consistency System (LATEST)**
+- ✅ **Seamless Header Loading:** Zero-flinch header transitions with loading placeholders
+- ✅ **Layout Sequence Module:** Centralized `layout-sequence.js` for consistent header behavior
+- ✅ **Dynamic Height Matching:** Header placeholder automatically matches actual header height
+- ✅ **Scroll Freeze:** Prevents layout jumps during header loading
+- ✅ **Fade Transitions:** Smooth opacity transitions for main content containers
+- ✅ **Universal Compatibility:** Works across all faculty pages and program sections
+- ✅ **SPA Navigation Support:** Proper initialization hooks for page-specific functionality
+- ✅ **Error Graceful Degradation:** Fallback behavior when header loading fails
 
 ---
 
@@ -146,9 +158,38 @@ This is a comprehensive guide for AI assistants working on our university websit
 4. 🎨 **Page Animations** - Trigger fade-in effects
 5. 🔍 **Page-Specific Logic** - Initialize tabs, hero, etc.
 
+### 🎯 **`js/layout-sequence.js` - SPA Header Consistency Module**
+```javascript
+// 🔥 SEAMLESS HEADER LOADING SYSTEM
+// Handles: Header loading placeholders, scroll freeze, fade transitions,
+//          dynamic height matching, SPA initialization hooks
+```
+
+**Key Features:**
+- **Loading Placeholder:** Animated placeholder with pulsing effect during header load
+- **Scroll Freeze:** Prevents page jumping during header initialization
+- **Dynamic Height:** Automatically matches placeholder height to actual header
+- **Fade Transitions:** Smooth opacity transitions for main content containers
+- **SPA Integration:** Calls page-specific `initializePage()` functions during navigation
+- **Error Handling:** Graceful fallback when header loading fails
+- **Universal Compatibility:** Works with any page structure that includes required elements
+
+**Required HTML Elements:**
+- `#header-placeholder` - Container for header loading placeholder
+- `#header-loading-placeholder` - Visual loading indicator
+- `#main-content-container` - Main content wrapper for fade transitions
+- `body.body-loading` - Initial loading state class
+
+**Usage Pattern:**
+```html
+<!-- Include after main.js -->
+<script src="/js/layout-sequence.js"></script>
+```
+
 ### 📄 **Page-Specific Inline Scripts**
 - **Homepage:** Hero height calculation + video loading logic
-- **Programs:** Tab system functionality
+- **Programs:** Tab system functionality + stats animations
+- **Faculty Pages:** Counter animations + page-specific initialization
 - **Other Pages:** Custom interactive elements as needed
 
 ---
@@ -179,7 +220,7 @@ This is a comprehensive guide for AI assistants working on our university websit
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans leading-relaxed">
+<body>
     
     <!-- DYNAMIC HEADER (DO NOT MODIFY) -->
     <div id="header-placeholder"></div>

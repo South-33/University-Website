@@ -11,24 +11,27 @@
     <script src="../../js/theme.js"></script>
     <link rel="stylesheet" href="../../css/main.css">
 
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
         
         
     </style>
 </head>
-<body class="bg-light-lavender">
+<body class="body-loading bg-light-lavender">
 
-    <div id="header-placeholder"></div>
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <main>
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+        <main>
         <!-- Hero Section -->
         <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center text-center text-white font-body">
             <div class="absolute inset-0">
@@ -38,6 +41,107 @@
             <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
                 <h1 class="font-heading text-4xl md:text-6xl mb-4">Faculty of Digital Economy</h1>
                 <p class="text-lg md:text-xl text-white/90">Drive Cambodia's digital transformation with cutting-edge education in digital economy and innovation.</p>
+            </div>
+        </section>
+
+        <!-- Dean's Welcome Section -->
+        <section class="bg-light-lavender py-24 font-body">
+            <div class="max-w-5xl mx-auto px-5 flex flex-col md:flex-row items-center gap-12 fade-in-section">
+                <div class="md:w-1/3 text-center">
+                    <img src="https://plus.unsplash.com/premium_photo-1683140661222-59e4fc995a41?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dr. Sophea Chea, Dean of IT" class="w-48 h-48 rounded-full mx-auto object-cover ring-4 ring-dark-blue/20 shadow-xl">
+                    <h3 class="font-heading text-2xl mt-6 text-dark-blue">Dr. Sophea Chea</h3>
+                    <p class="text-dark-blue/70 font-medium">Dean, Faculty of Information Technology</p>
+                </div>
+                <div class="md:w-2/3 text-center md:text-left">
+                    <blockquote class="relative text-center md:text-left max-w-prose mx-auto md:mx-0">
+
+                        <p class="font-heading text-2xl md:text-3xl text-dark-blue leading-snug">"We are not just teaching technology; we are cultivating the next generation of innovators and leaders who will drive Cambodia's digital future."</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Programs Details Section -->
+        <section class="bg-white py-24 font-body border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5 fade-in-section">
+                <div class="space-y-12">
+                    <!-- Program Detail: Digital Economy -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3">
+                            <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Digital economy and innovation">
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Digital Economy</h3>
+                                <p class="text-dark-blue/80 mb-6">Master the fundamentals of digital transformation and e-commerce ecosystems. This program prepares you to lead digital initiatives and drive economic growth in the digital age.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Digital Business Models</li>
+                                    <li>E-Commerce & Digital Marketing</li>
+                                    <li>Data Analytics & Digital Strategy</li>
+                                    <li>Digital Innovation Management</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Program Detail: Financial Technology -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3">
+                            <img src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Financial technology and mobile banking">
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Financial Technology</h3>
+                                <p class="text-dark-blue/80 mb-6">Combine finance and technology to revolutionize financial services. Learn blockchain, digital payments, and fintech innovation to shape the future of financial systems.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Blockchain & Cryptocurrency</li>
+                                    <li>Digital Payment Systems</li>
+                                    <li>Financial Data Analytics</li>
+                                    <li>Regulatory Technology (RegTech)</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Program Detail: Smart City Planning Management -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3">
+                            <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Smart city technology and urban planning">
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Smart City Planning Management</h3>
+                                <p class="text-dark-blue/80 mb-6">Design and manage intelligent urban environments using IoT, data analytics, and sustainable technology. Build the smart cities of tomorrow with integrated digital solutions.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>IoT & Smart Infrastructure</li>
+                                    <li>Urban Data Analytics</li>
+                                    <li>Sustainable City Planning</li>
+                                    <li>Smart Governance Systems</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -69,117 +173,21 @@
             </div>
         </section>
 
-        <!-- Programs Details Section -->
-        <section class="bg-white py-24 font-body border-t border-gray-300/60">
-            <div class="max-w-6xl mx-auto px-5 fade-in-section">
-                <div class="space-y-12">
-                    <!-- Program Detail: Digital Economy -->
-                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Digital economy and innovation">
-                        </div>
-                        <div class="p-8 md:w-2/3 flex flex-col">
-                            <div class="flex-grow">
-                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Digital Economy</h3>
-                                <p class="text-dark-blue/80 mb-6">Master the fundamentals of digital transformation and e-commerce ecosystems. This program prepares you to lead digital initiatives and drive economic growth in the digital age.</p>
-                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
-                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Digital Business Models</li>
-                                    <li>E-Commerce & Digital Marketing</li>
-                                    <li>Data Analytics & Digital Strategy</li>
-                                    <li>Digital Innovation Management</li>
-                                </ul>
-                            </div>
-                            <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Program Detail: Financial Technology -->
-                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Financial technology and mobile banking">
-                        </div>
-                        <div class="p-8 md:w-2/3 flex flex-col">
-                            <div class="flex-grow">
-                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Financial Technology</h3>
-                                <p class="text-dark-blue/80 mb-6">Combine finance and technology to revolutionize financial services. Learn blockchain, digital payments, and fintech innovation to shape the future of financial systems.</p>
-                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
-                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Blockchain & Cryptocurrency</li>
-                                    <li>Digital Payment Systems</li>
-                                    <li>Financial Data Analytics</li>
-                                    <li>Regulatory Technology (RegTech)</li>
-                                </ul>
-                            </div>
-                            <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Program Detail: Smart City Planning Management -->
-                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Smart city technology and urban planning">
-                        </div>
-                        <div class="p-8 md:w-2/3 flex flex-col">
-                            <div class="flex-grow">
-                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Smart City Planning Management</h3>
-                                <p class="text-dark-blue/80 mb-6">Design and manage intelligent urban environments using IoT, data analytics, and sustainable technology. Build the smart cities of tomorrow with integrated digital solutions.</p>
-                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
-                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>IoT & Smart Infrastructure</li>
-                                    <li>Urban Data Analytics</li>
-                                    <li>Sustainable City Planning</li>
-                                    <li>Smart Governance Systems</li>
-                                </ul>
-                            </div>
-                            <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Meet Our Expert Faculty -->
-        <section class="bg-light-lavender py-24 font-body border-t border-gray-300/60">
+        <section class="bg-white py-24 font-body border-t border-gray-300/60">
             <div class="max-w-6xl mx-auto px-5 text-center fade-in-section">
                 <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Meet Our Expert Faculty</h2>
                 <p class="text-lg text-dark-blue/80 mb-12 max-w-3xl mx-auto">Our faculty are more than just teachers; they are
                     mentors, researchers, and industry leaders dedicated to your success.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 pt-12">
-                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Dr. Ratana Pich"
-                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
-                        <div class="pt-12">
-                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Dr. Ratana Pich</h4>
-                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Dean, Faculty of Digital Economy</p>
-                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Leading Cambodia's digital transformation through innovative education and research in digital economy.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Prof. Dara Chhorn"
-                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
-                        <div class="pt-12">
-                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Prof. Dara Chhorn</h4>
-                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">FinTech Program Director</p>
-                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Expert in blockchain technology and digital financial systems, shaping the future of fintech in Cambodia.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Dr. Sreypov Lim"
-                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
-                        <div class="pt-12">
-                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Dr. Sreypov Lim</h4>
-                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Smart City Innovation Director</p>
-                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Pioneering smart city solutions and sustainable urban development through digital innovation.</p>
+                <div class="pt-12 flex justify-center">
+                    <div class="relative max-w-4xl w-full rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                            alt="Our Faculty Team" 
+                            class="w-full h-auto object-cover transition-all duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-blue/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-white text-center">
+                            <h3 class="font-heading text-2xl mb-2">Our Faculty Leadership Team</h3>
+                            <p class="text-white/90 max-w-2xl mx-auto">Meet the dedicated professionals who lead our Faculty of Information Technology with vision and expertise.</p>
                         </div>
                     </div>
                 </div>
@@ -228,17 +236,26 @@
                 const suffix = counter.getAttribute('data-suffix') || '';
                 counter.textContent = '0' + suffix;
             });
-            
-            // Start animations with a small delay and stagger them
-            setTimeout(() => {
-                counters.forEach((counter, index) => {
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    // Stagger the animations for a more dynamic effect
-                    setTimeout(() => {
-                        animateCounter(counter, target, 2500);
-                    }, index * 200);
+
+            // Animate on scroll into view (once)
+            let started = false;
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !started) {
+                        started = true;
+                        obs.unobserve(entry.target);
+                        // Stagger the animations for a more dynamic effect
+                        counters.forEach((counter, index) => {
+                            const target = parseInt(counter.getAttribute('data-target'), 10);
+                            setTimeout(() => {
+                                animateCounter(counter, target, 2500);
+                            }, index * 200);
+                        });
+                    }
                 });
-            }, 250);
+            }, { root: null, threshold: 0.25 });
+
+            observer.observe(statsSection);
         }
         
         // Expose function to window for SPA navigation
@@ -255,5 +272,8 @@
             initializeStatsAnimation();
         }
     </script>
+    
+    <!-- Unified Layout Sequence for SPA Navigation -->
+    <script src="/js/layout-sequence.js"></script>
 </body>
 </html>

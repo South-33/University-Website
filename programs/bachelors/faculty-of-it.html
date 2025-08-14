@@ -11,24 +11,52 @@
     <script src="../../js/theme.js"></script>
     <link rel="stylesheet" href="../../css/main.css">
     <style>
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+
+        
+        /* Program Card Slideshow Styles */
+        .program-slideshow {
+            position: relative;
+            overflow: hidden;
         }
         
+        .program-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .program-slide.active {
+            opacity: 1;
+        }
+        
+        .program-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         
     </style>
 </head>
-<body class="bg-light-lavender">
+<body class="body-loading bg-light-lavender">
 
-    <div id="header-placeholder"></div>
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <main>
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+        <main>
         <!-- Hero Section -->
         <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center text-center text-white font-body">
             <div class="absolute inset-0">
@@ -38,6 +66,278 @@
             <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
                 <h1 class="font-heading text-4xl md:text-6xl mb-4">Faculty of Information Technology</h1>
                 <p class="text-lg md:text-xl text-white/90">Shape the future with a world-class education in technology, innovation, and creativity.</p>
+            </div>
+        </section>
+
+        <!-- Dean's Welcome Section -->
+        <section class="bg-light-lavender py-24 font-body">
+            <div class="max-w-5xl mx-auto px-5 flex flex-col md:flex-row items-center gap-12 fade-in-section">
+                <div class="md:w-1/3 text-center">
+                    <img src="https://plus.unsplash.com/premium_photo-1683140661222-59e4fc995a41?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dr. Sophea Chea, Dean of IT" class="w-48 h-48 rounded-full mx-auto object-cover ring-4 ring-dark-blue/20 shadow-xl">
+                    <h3 class="font-heading text-2xl mt-6 text-dark-blue">Dr. Sophea Chea</h3>
+                    <p class="text-dark-blue/70 font-medium">Dean, Faculty of Information Technology</p>
+                </div>
+                <div class="md:w-2/3 text-center md:text-left">
+                    <blockquote class="relative text-center md:text-left max-w-prose mx-auto md:mx-0">
+
+                        <p class="font-heading text-2xl md:text-3xl text-dark-blue leading-snug">"We are not just teaching technology; we are cultivating the next generation of innovators and leaders who will drive Cambodia's digital future."</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPARK Section -->
+        <section class="bg-white py-24 font-body border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5 fade-in-section">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-4xl md:text-5xl mb-4 text-dark-blue">
+                        <span class="text-indigo-600">SPARK</span> Your Potential
+                    </h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">
+                        The <span class="font-semibold">S</span>upporting <span class="font-semibold">P</span>ractical <span class="font-semibold">A</span>pplication, <span class="font-semibold">R</span>esearch, and <span class="font-semibold">K</span>nowledge community is where theory meets practice. It's a vibrant hub for innovation, collaboration, and growth beyond the classroom.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-light-lavender/30 to-white/20 p-8 md:p-12 rounded-2xl shadow-lg border border-gray-200/80">
+                    <div class="grid md:grid-cols-2 gap-x-12 gap-y-16 items-stretch">
+                    <!-- Left Column: Purposes -->
+                    <div class="space-y-8">
+                        <h3 class="font-heading text-3xl text-dark-blue text-center md:text-left mb-3">Core Purposes</h3>
+                        <div class="relative">
+                            <div class="absolute left-5 top-8 bottom-8 w-px bg-indigo-300/80 hidden sm:block"></div>
+                            <ul class="space-y-5">
+                                <li class="relative sm:pl-14 pl-0">
+                                    <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0">
+                                        <!-- Icon: Bulb (provided) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                                        </svg>
+                                    </span>
+                                    <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 shadow-sm hover:shadow-none ring-1 ring-indigo-100/60 hover:ring-[1.5px] hover:ring-indigo-300/60 transition duration-300">
+                                        <h4 class="font-semibold text-dark-blue">Enhance Learning Beyond the Classroom</h4>
+                                        <p class="text-dark-blue/80 text-sm">Workshops, projects, and mentorship to turn theory into practice.</p>
+                                    </div>
+                                </li>
+                                <li class="relative sm:pl-14 pl-0">
+                                    <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0">
+                                        <!-- Icon: Book (provided) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                                        </svg>
+                                    </span>
+                                    <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 shadow-sm hover:shadow-none ring-1 ring-indigo-100/60 hover:ring-[1.5px] hover:ring-indigo-300/60 transition duration-300">
+                                        <h4 class="font-semibold text-dark-blue">Knowledge Sharing & Inspiration</h4>
+                                        <p class="text-dark-blue/80 text-sm">Talks by experts, alumni, and guests to spark ideas and direction.</p>
+                                    </div>
+                                </li>
+                                <li class="relative sm:pl-14 pl-0">
+                                    <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0">
+                                        <!-- Icon: Calendar (provided) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+                                        </svg>
+                                    </span>
+                                    <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 shadow-sm hover:shadow-none ring-1 ring-indigo-100/60 hover:ring-[1.5px] hover:ring-indigo-300/60 transition duration-300">
+                                        <h4 class="font-semibold text-dark-blue">Student Consultation & Support</h4>
+                                        <p class="text-dark-blue/80 text-sm">A clear pathway for guidance when facing academic or technical challenges.</p>
+                                    </div>
+                                </li>
+                                <li class="relative sm:pl-14 pl-0">
+                                    <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0">
+                                        <!-- Icon: Rocket (provided) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                        </svg>
+                                    </span>
+                                    <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 shadow-sm hover:shadow-none ring-1 ring-indigo-100/60 hover:ring-[1.5px] hover:ring-indigo-300/60 transition duration-300">
+                                        <h4 class="font-semibold text-dark-blue">Project & Product Development</h4>
+                                        <p class="text-dark-blue/80 text-sm">Build, refine, and showcase products for competitions and real users.</p>
+                                    </div>
+                                </li>
+                                <li class="relative sm:pl-14 pl-0">
+                                    <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0">
+                                        <!-- Icon: Peers / Users (provided) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                                        </svg>
+                                    </span>
+                                    <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 shadow-sm hover:shadow-none ring-1 ring-indigo-100/60 hover:ring-[1.5px] hover:ring-indigo-300/60 transition duration-300">
+                                        <h4 class="font-semibold text-dark-blue">Peer-to-Peer Learning</h4>
+                                        <p class="text-dark-blue/80 text-sm">Collaborate in squads; seniors mentor juniors through real projects.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Focus Areas -->
+                    <div class="self-start">
+                        <h3 class="font-heading text-3xl text-dark-blue mb-3 text-center md:text-left">Focus Areas</h3>
+                        <div class="bg-white/60 backdrop-blur-sm border border-indigo-100 rounded-xl p-6 shadow-sm hover:shadow-none ring-1 ring-indigo-100/60 hover:ring-[1.5px] hover:ring-indigo-300/60 transition duration-300 flex flex-col">
+                            <p class="text-dark-blue/70 text-sm mb-5 text-center md:text-left">Hands-on tracks where you can build, iterate, and showcase real projects with peers and mentors.</p>
+                            <div class="flex flex-wrap gap-2 sm:gap-3 justify-center md:justify-start">
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Website Development</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Networking</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Mobile & Device Applications</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Robotics</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Drone Technology</span>
+                            </div>
+                            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="flex items-start gap-2 text-dark-blue/80 text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    <span>Collaborative workshops</span>
+                                </div>
+                                <div class="flex items-start gap-2 text-dark-blue/80 text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    <span>Project showcases</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-6 text-center border-t border-indigo-100">
+                                <img src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students collaborating on a tech project" class="rounded-lg shadow-xl w-full h-56 md:h-64 object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Details Section -->
+        <section class="bg-white py-24 font-body border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5 fade-in-section">
+                <div class="space-y-12">
+                    <!-- Program Detail: Computer Science -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="computer-science">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Developer coding">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Algorithm visualization">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Software development">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Computer Science</h3>
+                                <p class="text-dark-blue/80  mb-6">Dive deep into programming, algorithms, and software architecture to build the technologies of tomorrow. This program provides a rigorous foundation in computational theory and practical software development.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Data Structures & Algorithms</li>
+                                    <li>Object-Oriented Programming</li>
+                                    <li>Software Engineering</li>
+                                    <li>Artificial Intelligence</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Program Detail: Information Technology -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="information-technology">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Server room management">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Network security">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Cloud computing">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-indigo-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    NATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Information Technology</h3>
+                                <p class="text-dark-blue/80 mb-6">Gain a comprehensive understanding of IT infrastructure, network security, and systems administration. This program prepares you to manage and secure the technology that powers modern organizations.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Network Administration & Security</li>
+                                    <li>Database Management Systems</li>
+                                    <li>Cloud Computing</li>
+                                    <li>IT Project Management</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Program Detail: Business IT -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="business-it">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business analytics">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="ERP systems">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="E-commerce platform">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-indigo-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    NATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Business Information Technology</h3>
+                                <p class="text-dark-blue/80 mb-6">Bridge the gap between business and technology. Learn to analyze business needs and implement IT solutions that drive growth, efficiency, and innovation.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Enterprise Resource Planning (ERP)</li>
+                                    <li>Business Intelligence & Analytics</li>
+                                    <li>E-Commerce Systems</li>
+                                    <li>Systems Analysis & Design</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Program Detail: Robotic Engineering -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="robotic-engineering">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Robotic arm assembly">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Autonomous robot">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mechatronics lab">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-indigo-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    NATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Robotic Engineering</h3>
+                                <p class="text-dark-blue/80 mb-6">Explore the exciting world of automation and intelligent systems. This program covers the design, construction, operation, and use of robots, combining mechanical, electrical, and computer engineering.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Control Systems</li>
+                                    <li>Embedded Systems Programming</li>
+                                    <li>Machine Vision</li>
+                                    <li>Mechatronics</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors/robotic-engineering" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -69,142 +369,23 @@
             </div>
         </section>
 
-        <!-- Programs Details Section -->
-        <section class="bg-white py-24 font-body border-t border-gray-300/60">
-            <div class="max-w-6xl mx-auto px-5 fade-in-section">
-                <div class="space-y-12">
-                    <!-- Program Detail: Computer Science -->
-                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Developer at a computer">
-                        </div>
-                        <div class="p-8 md:w-2/3 flex flex-col">
-                            <div class="flex-grow">
-                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Computer Science</h3>
-                                <p class="text-dark-blue/80 mb-6">Dive deep into programming, algorithms, and software architecture to build the technologies of tomorrow. This program provides a rigorous foundation in computational theory and practical software development.</p>
-                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
-                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Data Structures & Algorithms</li>
-                                    <li>Object-Oriented Programming</li>
-                                    <li>Software Engineering</li>
-                                    <li>Artificial Intelligence</li>
-                                </ul>
-                            </div>
-                            <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Program Detail: Information Technology -->
-                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="IT professional managing servers">
-                        </div>
-                        <div class="p-8 md:w-2/3 flex flex-col">
-                            <div class="flex-grow">
-                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor’s Degree in Information Technology</h3>
-                                <p class="text-dark-blue/80 mb-6">Gain a comprehensive understanding of IT infrastructure, network security, and systems administration. This program prepares you to manage and secure the technology that powers modern organizations.</p>
-                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
-                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Network Administration & Security</li>
-                                    <li>Database Management Systems</li>
-                                    <li>Cloud Computing</li>
-                                    <li>IT Project Management</li>
-                                </ul>
-                            </div>
-                            <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Program Detail: Business IT -->
-                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Business team analyzing data">
-                        </div>
-                        <div class="p-8 md:w-2/3 flex flex-col">
-                            <div class="flex-grow">
-                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor’s Degree in Business Information Technology</h3>
-                                <p class="text-dark-blue/80 mb-6">Bridge the gap between business and technology. Learn to analyze business needs and implement IT solutions that drive growth, efficiency, and innovation.</p>
-                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
-                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Enterprise Resource Planning (ERP)</li>
-                                    <li>Business Intelligence & Analytics</li>
-                                    <li>E-Commerce Systems</li>
-                                    <li>Systems Analysis & Design</li>
-                                </ul>
-                            </div>
-                            <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Program Detail: Robotic Engineering -->
-                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Robotic arm in a workshop">
-                        </div>
-                        <div class="p-8 md:w-2/3 flex flex-col">
-                            <div class="flex-grow">
-                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor’s Degree in Robotic Engineering</h3>
-                                <p class="text-dark-blue/80 mb-6">Explore the exciting world of automation and intelligent systems. This program covers the design, construction, operation, and use of robots, combining mechanical, electrical, and computer engineering.</p>
-                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
-                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Control Systems</li>
-                                    <li>Embedded Systems Programming</li>
-                                    <li>Machine Vision</li>
-                                    <li>Mechatronics</li>
-                                </ul>
-                            </div>
-                            <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors/robotic-engineering" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- Meet Our Expert Faculty -->
-        <section class="bg-light-lavender py-24 font-body border-t border-gray-300/60">
+        <section class="bg-white py-24 font-body border-t border-gray-300/60">
             <div class="max-w-6xl mx-auto px-5 text-center fade-in-section">
                 <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Meet Our Expert Faculty</h2>
                 <p class="text-lg text-dark-blue/80 mb-12 max-w-3xl mx-auto">Our faculty are more than just teachers; they are
                     mentors, researchers, and industry leaders dedicated to your success.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 pt-12">
-                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Dr. Sophea Chea"
-                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
-                        <div class="pt-12">
-                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Dr. Sophea Chea</h4>
-                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Dean, Faculty of IT</p>
-                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Leads our faculty with a vision for innovation and excellence in
-                                tech education.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Prof. Vuthy Sok"
-                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
-                        <div class="pt-12">
-                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Prof. Vuthy Sok</h4>
-                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Head of AI & Robotics</p>
-                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">An expert in machine learning with a passion for building
-                                intelligent systems.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-dark-blue text-white rounded-xl p-8 shadow-2xl text-center relative group hover:shadow-3xl hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Dr. Nary Kim"
-                            class="w-24 h-24 rounded-full mx-auto object-cover ring-4 ring-white absolute -top-12 left-1/2 -translate-x-1/2 group-hover:ring-6 transition-all duration-300">
-                        <div class="pt-12">
-                            <h4 class="font-heading text-xl group-hover:text-white transition-colors duration-300">Dr. Nary Kim</h4>
-                            <p class="text-white/70 font-medium mb-3 group-hover:text-white/90 transition-colors duration-300">Cybersecurity Program Director</p>
-                            <p class="text-white/80 text-sm group-hover:text-white/95 transition-colors duration-300">Dedicated to training the next generation of cybersecurity
-                                professionals in Cambodia.</p>
+                <div class="pt-12 flex justify-center">
+                    <div class="relative max-w-4xl w-full rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                            alt="Our Faculty Team" 
+                            class="w-full h-auto object-cover transition-all duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-blue/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-white text-center">
+                            <h3 class="font-heading text-2xl mb-2">Our Faculty Leadership Team</h3>
+                            <p class="text-white/90 max-w-2xl mx-auto">Meet the dedicated professionals who lead our Faculty of Information Technology with vision and expertise.</p>
                         </div>
                     </div>
                 </div>
@@ -241,6 +422,7 @@
             
             requestAnimationFrame(updateCounter);
         }
+
         
         // Initialize stats animation - exposed to window for SPA navigation
         function initializeStatsAnimation() {
@@ -253,17 +435,26 @@
                 const suffix = counter.getAttribute('data-suffix') || '';
                 counter.textContent = '0' + suffix;
             });
-            
-            // Start animations with a small delay and staggered starts
-            setTimeout(() => {
-                counters.forEach((counter, index) => {
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    // Stagger the animations slightly for a more dynamic effect
-                    setTimeout(() => {
-                        animateCounter(counter, target, 2500);
-                    }, index * 200);
+
+            // Animate on scroll into view (once)
+            let started = false;
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !started) {
+                        started = true;
+                        obs.unobserve(entry.target);
+                        // Stagger the animations slightly for a more dynamic effect
+                        counters.forEach((counter, index) => {
+                            const target = parseInt(counter.getAttribute('data-target'), 10);
+                            setTimeout(() => {
+                                animateCounter(counter, target, 2500);
+                            }, index * 200);
+                        });
+                    }
                 });
-            }, 250); // 250ms delay for SPA compatibility
+            }, { root: null, threshold: 0.25 });
+
+            observer.observe(statsSection);
         }
         
         // Expose function to window for SPA navigation
@@ -279,6 +470,49 @@
             // DOM is already loaded, initialize immediately
             initializeStatsAnimation();
         }
+        
+        // Program Slideshow Functionality
+        function initializeProgramSlideshows() {
+            const slideshows = document.querySelectorAll('.program-slideshow');
+            
+            slideshows.forEach((slideshow, index) => {
+                const slides = slideshow.querySelectorAll('.program-slide');
+                if (slides.length <= 1) return;
+                
+                let currentSlide = 0;
+                
+                function showNextSlide() {
+                    // Hide current slide
+                    slides[currentSlide].classList.remove('active');
+                    
+                    // Move to next slide
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    
+                    // Show next slide
+                    slides[currentSlide].classList.add('active');
+                }
+                
+                // Start slideshow with 4-second intervals and staggered delays
+                // Each slideshow starts 100ms after the previous one for a subtle flowing effect
+                setTimeout(() => {
+                    setInterval(showNextSlide, 4000);
+                }, index * 100);
+            });
+        }
+        
+        // Initialize program slideshows
+        document.addEventListener('DOMContentLoaded', initializeProgramSlideshows);
+        
+        // Also initialize immediately if DOM is already loaded (for SPA navigation)
+        if (document.readyState !== 'loading') {
+            initializeProgramSlideshows();
+        }
+        
+        // Expose function to window for SPA navigation
+        window.initializeProgramSlideshows = initializeProgramSlideshows;
     </script>
+    
+    <!-- Unified Layout Sequence for SPA Navigation -->
+    <script src="/js/layout-sequence.js"></script>
 </body>
 </html>

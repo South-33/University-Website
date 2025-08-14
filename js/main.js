@@ -37,16 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
         '/academic-ecosystem/innovation': '/academic-ecosystem/innovation.html',
         
         // Faculty pages
-        '/programs/bachelors/management': '/programs/bachelors/faculty-of-management.html',
-        '/programs/bachelors/finance': '/programs/bachelors/faculty-of-finance-and-accounting.html',
-        '/programs/bachelors/economics': '/programs/bachelors/faculty-of-economics.html',
-        '/programs/bachelors/tourism': '/programs/bachelors/faculty-of-tourism.html',
-        '/programs/bachelors/law': '/programs/bachelors/faculty-of-law.html',
-        '/programs/bachelors/digital-economy': '/programs/bachelors/faculty-of-digital-economy.html',
-        '/programs/bachelors/public-policy': '/programs/bachelors/faculty-of-public-policy.html',
-        '/programs/bachelors/foreign-languages': '/programs/bachelors/faculty-of-foreign-languages.html',
-        '/programs/bachelors/it': '/programs/bachelors/faculty-of-it.html',
-        '/programs/bachelors/robotic-engineering': '/programs/bachelors/robotic-engineering.html'
+        '/programs/bachelors/faculty-of-management': '/programs/bachelors/faculty-of-management.html',
+        '/programs/bachelors/faculty-of-finance-and-accounting': '/programs/bachelors/faculty-of-finance-and-accounting.html',
+        '/programs/bachelors/faculty-of-economics': '/programs/bachelors/faculty-of-economics.html',
+        '/programs/bachelors/faculty-of-tourism': '/programs/bachelors/faculty-of-tourism.html',
+        '/programs/bachelors/faculty-of-law': '/programs/bachelors/faculty-of-law.html',
+        '/programs/bachelors/faculty-of-digital-economy': '/programs/bachelors/faculty-of-digital-economy.html',
+        '/programs/bachelors/faculty-of-public-policy': '/programs/bachelors/faculty-of-public-policy.html',
+        '/programs/bachelors/faculty-of-foreign-languages': '/programs/bachelors/faculty-of-foreign-languages.html',
+        '/programs/bachelors/faculty-of-it': '/programs/bachelors/faculty-of-it.html',
+        '/programs/bachelors/faculty-of-robotic-engineering': '/programs/bachelors/robotic-engineering.html',
+
+        // Masters program detail pages (clean URLs → actual files)
+        '/programs/masters/mba-management': '/programs/masters/mba-management.html',
+        '/programs/masters/mba-marketing': '/programs/masters/mba-marketing.html',
+        '/programs/masters/mba-international-business': '/programs/masters/mba-international-business.html',
+        '/programs/masters/mba-business-law': '/programs/masters/mba-business-law.html',
+        '/programs/masters/mba-family-business': '/programs/masters/mba-family-business.html',
+        '/programs/masters/msc-logistics-and-supply-chain-management': '/programs/masters/msc-logistics-and-supply-chain-management.html',
+        '/programs/masters/msc-management-of-technology': '/programs/masters/msc-management-of-technology.html',
+        '/programs/masters/msc-bank-management': '/programs/masters/msc-bank-management.html',
+        '/programs/masters/msc-accounting': '/programs/masters/msc-accounting.html',
+        '/programs/masters/msc-tourism-and-hospitality': '/programs/masters/msc-tourism-and-hospitality.html',
+        '/programs/masters/msc-information-technology': '/programs/masters/msc-information-technology.html',
+        '/programs/masters/msc-economics': '/programs/masters/msc-economics.html',
+        '/programs/masters/msc-finance': '/programs/masters/msc-finance.html',
+        '/programs/masters/msc-environmental-management': '/programs/masters/msc-environmental-management.html',
+        '/programs/masters/msc-digital-economy': '/programs/masters/msc-digital-economy.html',
+        '/programs/masters/comparative-law': '/programs/masters/comparative-law.html',
+        '/programs/masters/mpa-public-administration': '/programs/masters/mpa-public-administration.html',
+        '/programs/masters/mpp-public-policy': '/programs/masters/mpp-public-policy.html'
     };
     
     // Reverse mapping for converting file paths back to clean URLs
@@ -70,12 +90,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // =========================================================================
 
     function initializeSite() {
-        initializeNavigation();
-        initializeSearch(basePath);
-        initializeHidingHeader();
-        updateActiveNav();
+        // MODIFIED: Instead of calling many header functions, we call the one
+        // exposed by the self-contained header.html script.
+        if (window.initializeHeaderAndSearch) {
+            window.initializeHeaderAndSearch(basePath);
+        } else {
+            console.warn('Header initialization function not found');
+        }
+        
+        // Hide header placeholder when header is loaded
+        if (window.hideHeaderPlaceholder) {
+            window.hideHeaderPlaceholder();
+        }
+        
         initializePageTransitions();
-        handleCleanUrlAccess();
+        initializeLazyLoading(document);
         triggerPageAnimations(document);
         
         if (window.SimpleBilingualManager) {
@@ -113,7 +142,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const loadHeader = headerPlaceholder ? loadWithRetry(`${basePath}/_includes/header.html`)
         .then(data => {
-            headerPlaceholder.outerHTML = data;
+            // Inject header HTML and execute scripts
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = data;
+            // Replace placeholder with actual header nodes (excluding scripts)
+            const scripts = tempDiv.querySelectorAll('script');
+            const headerNodes = Array.from(tempDiv.childNodes).filter(node => node.nodeName.toLowerCase() !== 'script');
+            headerNodes.forEach(node => headerPlaceholder.parentNode.insertBefore(node, headerPlaceholder));
+            headerPlaceholder.parentNode.removeChild(headerPlaceholder);
+            // Execute each script in header
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                if (oldScript.src) {
+                    newScript.src = oldScript.src;
+                    newScript.async = false;
+                } else {
+                    newScript.textContent = oldScript.textContent;
+                }
+                document.head.appendChild(newScript);
+            });
+            
+            // The header now contains its own <script> tag which will execute automatically.
+            // We still trigger the main site initialization.
             setTimeout(() => {
                 try {
                     initializeSite();
@@ -157,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Failed to load footer after retries:', error);
             footerPlaceholder.innerHTML = `
                 <footer class="bg-dark-blue text-white p-4 text-center">
-                    <p>&copy; ${new Date().getFullYear()} National University of Management</p>
+                    <p>© ${new Date().getFullYear()} National University of Management</p>
                 </footer>
             `;
         }) : Promise.resolve();
@@ -377,8 +427,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             currentMain.innerHTML = newMain.innerHTML;
+
+            // Hint the browser to decode images asynchronously to reduce main-thread jank
+            try {
+                const imgs = currentMain.querySelectorAll('img');
+                imgs.forEach(img => {
+                    // Respect existing lazy strategy but prefer async decode
+                    if (!img.hasAttribute('decoding')) {
+                        img.setAttribute('decoding', 'async');
+                    }
+                });
+            } catch (_) {}
             
-            // Load and execute page-specific styles
             const newStyles = newDoc.querySelectorAll('style');
             newStyles.forEach(style => {
                 if (style.textContent && style.textContent.trim()) {
@@ -396,13 +456,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // Execute page-specific inline scripts
             try {
                 executePageScripts(newDoc);
             } catch (error) {
                 console.error('Error executing page scripts:', error);
             }
             
+            // Allow a microtask break before running initializers
             setTimeout(initializePageContent, 0);
             
         } catch (error) {
@@ -412,9 +472,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         function initializePageContent() {
             try {
-                updateActiveNav();
+                // MODIFIED: This now calls the `updateActiveNav` function exposed by the header script.
+                // This is crucial for updating the active nav link after an SPA transition.
+                if (window.updateActiveNav) {
+                    window.updateActiveNav();
+                }
                 
-                // Clean up any existing page-specific intervals/timers to prevent memory leaks
                 if (window.pageCleanup && typeof window.pageCleanup === 'function') {
                     try {
                         window.pageCleanup();
@@ -423,34 +486,67 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Automatically detect and call any initialization functions
-                // Look for functions that start with 'initialize' or 'init'
-                const initFunctionPatterns = /^(initialize|init)[A-Z]/;
-                
-                Object.getOwnPropertyNames(window).forEach(prop => {
-                    if (initFunctionPatterns.test(prop) && typeof window[prop] === 'function') {
-                        try {
-                            window[prop]();
-                        } catch (error) {
-                            console.error(`Error calling ${prop}:`, error);
-                        }
+                // Prioritize lightweight visual setup first for smoother perception
+                const mainEl = document.querySelector('main');
+                triggerPageAnimations(mainEl);
+                initializeLazyLoading(mainEl);
+
+                // Explicitly call initializePage if it exists (for SPA navigation)
+                if (window.initializePage && typeof window.initializePage === 'function') {
+                    try {
+                        window.initializePage();
+                    } catch (error) {
+                        console.error('Error calling initializePage:', error);
+                    }
+                }
+
+                // Run known page-level initializers quickly (small, necessary)
+                const quickInits = [
+                    'initializeImageToTextSlideshow',
+                    'initializeProgramTabs'
+                ];
+                quickInits.forEach(name => {
+                    if (typeof window[name] === 'function') {
+                        try { window[name](); } catch (e) { console.error(`Error calling ${name}:`, e); }
                     }
                 });
-                
-                triggerPageAnimations(document.querySelector('main'));
-                initializeLazyLoading(document.querySelector('main'));
+
+                // Defer any other wide "initialize* / init*" functions to idle time to avoid jank
+                const deferOtherInits = () => {
+                    try {
+                        const initFunctionPatterns = /^(initialize|init)[A-Z]/;
+                        Object.getOwnPropertyNames(window).forEach(prop => {
+                            if (quickInits.includes(prop)) return; // already handled
+                            if (initFunctionPatterns.test(prop) && typeof window[prop] === 'function') {
+                                try {
+                                    window[prop]();
+                                } catch (error) {
+                                    console.error(`Error calling ${prop}:`, error);
+                                }
+                            }
+                        });
+                    } catch (err) {
+                        console.warn('Deferred initializers encountered an error:', err);
+                    }
+                };
+
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(deferOtherInits, { timeout: 400 });
+                } else {
+                    setTimeout(deferOtherInits, 120);
+                }
                 
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
                     mainContent.style.opacity = '1';
-                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                    mainContent.style.transition = 'opacity 0.25s ease-in';
                 }
             } catch (error) {
                 console.error('Error during page content initialization:', error);
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
                     mainContent.style.opacity = '1';
-                    mainContent.style.transition = 'opacity 0.3s ease-in';
+                    mainContent.style.transition = 'opacity 0.25s ease-in';
                 }
             }
         }
@@ -497,276 +593,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }, observerOptions);
         sections.forEach(section => observer.observe(section));
-    }
-    
-    function updateActiveNav() {
-        const currentPath = window.location.pathname.replace(/\/$/, '').replace(/\.html$/, '');
-        const navLinks = document.querySelectorAll('.main-nav a');
-        let bestMatch = null;
-        
-        navLinks.forEach(link => link.classList.remove('active'));
-        navLinks.forEach(link => {
-            const linkHref = link.getAttribute('href');
-            if (!linkHref || linkHref === '#') return;
-            const linkUrl = new URL(link.href);
-            const linkPath = linkUrl.pathname.replace(/\/$/, '').replace(/\.html$/, '');
-            if (currentPath.startsWith(linkPath)) {
-                if (!bestMatch || linkPath.length > bestMatch.path.length) {
-                    bestMatch = { link: link, path: linkPath };
-                }
-            }
-        });
-        
-        if (bestMatch) {
-            bestMatch.link.classList.add('active');
-            const parentDropdown = bestMatch.link.closest('.relative.group');
-            if (parentDropdown) {
-                parentDropdown.querySelector('a')?.classList.add('active');
-            }
-        }
-    }
-
-    function initializeHidingHeader() {
-        const header = document.querySelector('header');
-        const headerBg = document.querySelector('.header-bg-static');
-        if (!header) return;
-        
-        function updateBackgroundHeight() {
-            if (headerBg) {
-                headerBg.style.height = header.offsetHeight + 'px';
-            }
-        }
-        
-        updateBackgroundHeight();
-        window.addEventListener('resize', updateBackgroundHeight);
-        
-        let lastScrollTop = 0;
-        let isHeaderHidden = false;
-        let ticking = false;
-        const scrollThreshold = header.offsetHeight;
-        const minScrollDistance = 5;
-        
-        function updateHeader() {
-            if (window.innerWidth >= 768) {
-                if (isHeaderHidden) {
-                    header.style.transform = 'translateY(0)';
-                    isHeaderHidden = false;
-                }
-                return;
-            }
-            
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollDifference = Math.abs(scrollTop - lastScrollTop);
-            
-            if (scrollDifference < minScrollDistance) {
-                return;
-            }
-            
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold && !isHeaderHidden) {
-                header.style.transform = 'translateY(-100%)';
-                isHeaderHidden = true;
-            }
-            else if ((scrollTop < lastScrollTop || scrollTop <= scrollThreshold) && isHeaderHidden) {
-                header.style.transform = 'translateY(0)';
-                isHeaderHidden = false;
-            }
-            
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }
-        
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    updateHeader();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }
-        
-        window.addEventListener('scroll', requestTick, { passive: true });
-    }
-
-    function initializeNavigation() {
-        document.body.addEventListener('click', function(e) {
-            const exploreLink = e.target.closest('.explore-link, a[href="#intro"]');
-            if (exploreLink) {
-                e.preventDefault();
-                const introSection = document.getElementById('intro');
-                if (introSection) {
-                    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-                    const targetPosition = introSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                }
-            }
-            const navToggle = e.target.closest('.nav-toggle');
-            if (navToggle) {
-                const nav = document.querySelector('#mobile-menu');
-                if (!nav) return;
-                nav.classList.toggle('translate-x-full');
-                navToggle.classList.toggle('is-active');
-                document.body.style.overflow = nav.classList.contains('translate-x-full') ? 'auto' : 'hidden';
-            }
-            if (!e.target.closest('.main-nav .group')) {
-                document.querySelectorAll('.main-nav .group.is-open').forEach(item => item.classList.remove('is-open'));
-            }
-        });
-    }
-
-    function initializeSearch(basePath) {
-        let searchInitialized = false;
-        
-        const tryInitializeSearch = () => {
-            const searchInput = document.querySelector('input[type="search"]');
-            if (searchInput && !searchInitialized) {
-                setupSearch(searchInput, basePath);
-                searchInitialized = true;
-                return true;
-            }
-            return false;
-        };
-        
-        if (!tryInitializeSearch()) {
-            const observer = new MutationObserver(() => {
-                if (tryInitializeSearch()) {
-                    observer.disconnect();
-                }
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
-            
-            document.body.addEventListener('focusin', (e) => {
-                if (e.target.matches('input[type="search"]') && !searchInitialized) {
-                    setupSearch(e.target, basePath);
-                    searchInitialized = true;
-                }
-            }, { once: true });
-        }
-    }
-    
-    function setupSearch(searchInput, basePath) {
-        let fuse = null;
-        const searchContainer = searchInput.closest('div');
-        if (!searchContainer) return;
-        const overlay = document.createElement('div');
-        overlay.className = 'fixed inset-0 bg-black/60 z-40 hidden';
-        document.body.appendChild(overlay);
-        const searchResultsContainer = document.createElement('div');
-        searchResultsContainer.className = 'search-results-dropdown hidden';
-        searchContainer.appendChild(searchResultsContainer);
-        let searchData = [];
-        
-        const savedSearch = sessionStorage.getItem('searchQuery');
-        if (savedSearch) {
-            searchInput.value = savedSearch;
-        }
-        
-        fetch(`${basePath}/js/search-index.json`)
-            .then(r => r.json())
-            .then(data => {
-                searchData = data;
-            })
-            .catch(err => console.error('Error loading search index:', err));
-        
-        const performSearch = (query) => {
-            if (!query || query.length < 2) return [];
-            
-            const lowerQuery = query.toLowerCase();
-            const results = [];
-            
-            searchData.forEach(item => {
-                let score = 0;
-                const titleLower = item.title.toLowerCase();
-                const descLower = item.description.toLowerCase();
-                const tagsLower = item.tags ? item.tags.toLowerCase() : '';
-                
-                if (titleLower.includes(lowerQuery)) {
-                    score += titleLower.indexOf(lowerQuery) === 0 ? 100 : 50;
-                }
-                
-                if (descLower.includes(lowerQuery)) {
-                    score += 25;
-                }
-                
-                if (tagsLower.includes(lowerQuery)) {
-                    score += 10;
-                }
-                
-                if (score > 0) {
-                    results.push({ item, score });
-                }
-            });
-            
-            return results.sort((a, b) => b.score - a.score).slice(0, 10).map(r => r.item);
-        };
-        
-        const render = results => {
-            const ul = document.createElement('ul');
-            results.forEach(result => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = result.url;
-                a.innerHTML = `
-                    <div class="result-title">${result.title}</div>
-                    <div class="result-description">${result.description}</div>
-                `;
-                li.appendChild(a);
-                ul.appendChild(li);
-            });
-            searchResultsContainer.innerHTML = '';
-            searchResultsContainer.appendChild(ul);
-        };
-        const search = () => {
-            if (!searchData.length || searchInput.value.length < 2) { 
-                hide(); 
-                return; 
-            }
-            
-            const results = performSearch(searchInput.value);
-            
-            if (results.length === 0) { 
-                hide(); 
-                return; 
-            }
-            
-            render(results);
-            
-            if (window.innerWidth < 768) {
-                const searchRect = searchInput.getBoundingClientRect();
-                searchResultsContainer.style.top = (searchRect.bottom + 18) + 'px';
-                overlay.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            } else {
-                searchResultsContainer.style.top = '';
-            }
-            
-            searchResultsContainer.classList.remove('hidden');
-        };
-        const hide = () => {
-            setTimeout(() => {
-                if (document.activeElement !== searchInput) {
-                    searchResultsContainer.classList.add('hidden');
-                    overlay.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }
-            }, 150);
-        };
-        searchInput.addEventListener('input', search);
-        searchInput.addEventListener('focus', search);
-        searchInput.addEventListener('click', search);
-        searchInput.addEventListener('blur', hide);
-        searchInput.addEventListener('keydown', e => { 
-            if (e.key === 'Enter') e.preventDefault(); 
-        });
-        overlay.addEventListener('click', hide);
-        searchResultsContainer.addEventListener('mousedown', e => e.preventDefault());
-        searchResultsContainer.addEventListener('click', e => {
-            if (e.target.closest('a')) {
-                sessionStorage.setItem('searchQuery', searchInput.value);
-                searchResultsContainer.classList.add('hidden');
-                overlay.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            }
-        });
     }
 
     // Global utility function for program tab scrolling (used by multiple pages)
