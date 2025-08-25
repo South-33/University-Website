@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus - Kingster University</title>
+    <title>Study with us home page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
@@ -54,46 +54,46 @@
              animation-direction: alternate-reverse;
         }
         /* Make the overlap more dramatic by increasing the negative margin */
-.features-section {
-    position: relative;
-    z-index: 20;
-    background-color: transparent;
-    /* CHANGE THIS VALUE to pull the section up even more */
-    margin-top: -10px; 
-}
+        .features-section {
+            position: relative;
+            z-index: 20;
+            background-color: transparent;
+        /* CHANGE THIS VALUE to pull the section up even more */
+            margin-top: -10px; 
+        }
 
-/* No changes needed for the rest */
-.features-curve {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-}
-.features-curve svg {
-    width: 100%;
-    height: 100%;
-}
-.feature-box {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.feature-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-#parallax-bg {
-    /* Set the background image URL */
-    background-image: url('../Picture/School/13.jpg');
+        /* No changes needed for the rest */
+        .features-curve {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+        }
+        .features-curve svg {
+            width: 100%;
+            height: 100%;
+        }
+        .feature-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        #parallax-bg {
+        /* Set the background image URL */
+            background-image: url('../Picture/School/13.jpg');
     
-    /* Position the background */
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+        /* Position the background */
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
     
-    /* This is important: will-change hints to the browser that we'll be animating this property */
-    will-change: transform;
-}
-.stylish-background-section {
+        /* This is important: will-change hints to the browser that we'll be animating this property */
+            will-change: transform;
+        }
+        .stylish-background-section {
             position: relative; /* Establishes a positioning context for the pseudo-elements */
             overflow: hidden;   /* Hides the parts of the shapes that extend beyond the section's bounds */
             background-color: #f8f9fa; /* A very light, soft gray for a clean and modern look */
@@ -176,7 +176,7 @@
     <!-- MAIN CONTENT -->
     <main class="pt-20">
 
-        <!-- HERO SLIDER SECTION (UPDATED FOR CONFINEMENT) -->
+    <!-- ========= HERO SECTION OPTION 3: DYNAMIC ANGLED OVERLAY ========= -->
 <section class="relative h-[calc(100vh-80px)] min-h-[500px] max-h-[720px] w-full flex items-center bg-gray-800 fade-in-section">
 
     <!-- Background Image Container (Unchanged) -->
@@ -185,129 +185,93 @@
         <div id="hero-bg-2" class="hero-bg-slide"></div>
     </div>
 
-    <!-- MODIFIED: The blue overlay is now the container for the text. -->
-    <!-- It is no longer absolutely positioned but is a flex item of the section. -->
-    <!-- It has a defined width, full height, and uses flex to center the content vertically within itself. -->
-    <div class="relative z-10 w-full md:w-1/2 lg:w-2/5 h-full bg-blue-900/80 flex items-center">
+    <!-- The overlay now has a dynamic angled shape using clip-path -->
+    <div class="relative z-10 w-full md:w-3/5 lg:w-1/2 h-full bg-blue-900/90 flex items-center [clip-path:polygon(0_0,_100%_0,_85%_100%,_0%_100%)]">
 
-        <!-- Content Block -->
-        <!-- This div now simply holds the text and has padding. It will not overflow its parent (the blue box). -->
-        <div class="w-full px-8 sm:px-12 lg:px-16 text-white">
-            <p id="hero-subtitle" class="font-montserrat text-sm md:text-base font-light text-white/90 uppercase tracking-widest mb-4">
+        <!-- Content Block with more padding to avoid the clipped edge -->
+        <div class="w-full px-8 sm:px-12 lg:px-16 lg:pr-24">
+            <p id="hero-subtitle" class="font-montserrat text-sm md:text-base font-light text-white/60 uppercase tracking-widest mb-4">
                 The Best University Of The State
             </p>
 
-            <h1 id="animated-heading" class="font-lora text-[clamp(1.8rem,2vw,2.0rem)] font-bold text-white mb-8 leading-tight">
+            <h1 id="animated-heading" class="font-lora text-4xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 leading-tight text-justify">
                 National University of Management
             </h1>
 
-            <a href="#" id="hero-button" class="inline-block mt-6 bg-white text-[#333333] font-montserrat font-bold py-2 px-4 border border-white hover:bg-transparent hover:text-white transition-all duration-300">
-                Explore Here
-            </a>
+
         </div>
     </div>
 </section>
 
-   
-<!-- ========= SECTION 2 ========= -->
-<section class="features-section pb-16">
+
+<!-- ========= SECTION: Why Study With Us ========= -->
+<section class="bg-white py-16 sm:py-24">
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Upward Curve SVG (No changes here) -->
-        <div class="features-curve" aria-hidden="true">
-            <svg preserveAspectRatio="none" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 100C360 100 360 0 720 0C1080 0 1080 100 1440 100V101H0V100Z" fill="white"/>
-            </svg>
-        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 items-center">
 
-        <div class="relative pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-lg shadow-md overflow-hidden divide-y divide-gray-200 sm:divide-x sm:divide-y-0">
-            
-            <!-- Box 1: University Life -->
-            <div class="feature-box bg-white p-6 text-center">
-                <div class="flex justify-center mb-4">
-                    <!-- ICON COLOR (Deep Blue Accent) -->
-                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
-                </div>
-                <!-- UPDATED TEXT COLOR -->
-                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">University Life</h3>
-                <p class="font-montserrat text-sm text-gray-500">Overall in here</p>
-            </div>
+            <!-- Image Column -->
+            <div class="relative h-96 lg:h-auto">
+                <!-- Decorative background shape -->
+                <div class="absolute inset-0 bg-blue-600 rounded-3xl transform -rotate-6" aria-hidden="true"></div>
 
-            <!-- Box 2: Graduation -->
-            <div class="feature-box bg-white p-6 text-center">
-                <div class="flex justify-center mb-4">
-                    <!-- ICON COLOR (Deep Blue Accent) -->
-                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/></svg>
-                </div>
-                <!-- UPDATED TEXT COLOR -->
-                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">Graduation</h3>
-                <p class="font-montserrat text-sm text-gray-500">Getting Diploma</p>
-            </div>
-
-            <!-- Box 3: Athletics -->
-            <div class="feature-box bg-white p-6 text-center">
-                <div class="flex justify-center mb-4">
-                    <!-- ICON COLOR (Deep Blue Accent) -->
-                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
-                </div>
-                <!-- UPDATED TEXT COLOR -->
-                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">Athletics</h3>
-                <p class="font-montserrat text-sm text-gray-500">Sport Clubs</p>
-            </div>
-            
-            <!-- Box 4: Social -->
-            <div class="feature-box bg-white p-6 text-center">
-                <div class="flex justify-center mb-4">
-                    <!-- ICON COLOR (Deep Blue Accent) -->
-                    <svg class="w-12 h-12 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.928a4.5 4.5 0 017.5 0M12 12.75a4.5 4.5 0 017.5 0m-7.5 2.928a4.5 4.5 0 00-7.5 0m7.5 2.928a4.5 4.5 0 00-7.5 0m1.5-12.812A4.5 4.5 0 0112 6.75a4.5 4.5 0 017.5 0m-7.5 2.928a4.5 4.5 0 017.5 0" /></svg>
-                </div>
-                <!-- UPDATED TEXT COLOR -->
-                <h3 class="font-lora text-xl font-bold text-[#333333] mb-2">Social</h3>
-                <p class="font-montserrat text-sm text-gray-500">Overall in here</p>
-            </div>
-        </div>
-    </div>
-</section>
-    
-<!-- ========= NEW SECTION BASED ON IMAGE ========= -->
-<section class="bg-gray-50 font-sans py-20 sm:py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Main Grid Container -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-            <!-- Left Column: Image Collage with Red Background Shapes -->
-            <div class="relative w-full h-full min-h-[500px] lg:min-h-[600px] flex items-center justify-center p-8">
-                <!-- Blue background shapes -->
-                <div class="absolute top-0 left-0 w-4/5 h-2/5 bg-blue-700 rounded-lg z-0"></div>
-                <div class="absolute bottom-0 right-0 w-4/5 h-3/5 bg-blue-700 rounded-lg z-0"></div>
-
-                <!-- Three Image Stack (Collage) -->
-                <div class="relative z-10 w-full max-w-sm space-y-4">
-                    <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Business team collaborating in a meeting" class="w-full h-auto object-cover rounded-lg shadow-2xl">
-                    <img src="https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Financial advisor meeting with a client" class="w-full h-auto object-cover rounded-lg shadow-2xl">
-                    <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Person working on a laptop with financial charts" class="w-full h-auto object-cover rounded-lg shadow-2xl">
+                <!-- Image Collage -->
+                <div class="relative grid grid-cols-3 gap-4 h-full">
+                    <div class="col-span-2">
+                        <img class="w-full h-full object-cover rounded-xl shadow-lg" src="../Picture/School/56.jpg" alt="Students collaborating around a table.">
+                    </div>
+                    <div class="col-span-1 grid grid-rows-2 gap-4">
+                        <img class="w-full h-full object-cover rounded-xl shadow-lg" src="../Picture/School/57.jpg" alt="Hands of a team coming together.">
+                        <img class="w-full h-full object-cover rounded-xl shadow-lg" src="../Picture/School/58.jpg" alt="A person working on a laptop.">
+                    </div>
                 </div>
             </div>
-            
-            <!-- Right Column: Text Content -->
-            <div class="text-left">
-                <h2 class="font-lora text-4xl sm:text-5xl font-extrabold text-blue-600 uppercase tracking-wide leading-tight">
-                    Why study with NUM?
-                </h2>
-                
-                <p class="mt-6 font-montserrat text-base text-gray-700 leading-relaxed max-w-lg">
-                    The National University of Management (NUM) is one of the top public universities in Cambodia, offering a wide range of academic programs, including bachelor’s, master’s, and doctoral degrees, specializing in fields such as Management, Finance, Accounting, Economics, IT, and Law, with a strong focus on Research, Innovation, and Entrepreneurship.
-                </p>
-                
-                <p class="mt-4 font-montserrat text-base text-gray-700 leading-relaxed max-w-lg">
-                    At NUM, we are committed to providing our students with a high-quality education that prepares them for success in their chosen fields. Our experienced faculty members are dedicated to fostering a supportive and engaging learning environment, encouraging students to think critically and creatively.
+
+            <!-- Text Column -->
+            <div class="lg:pl-8">
+                <h2 class="text-base font-semibold leading-7 text-blue-600">Why Study With NUM?</h2>
+                <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ">A Commitment to Your Success</p>
+                <p class="mt-6 text-lg leading-8 text-gray-600 text-justify">
+                    The National University of Management (NUM) is one of the top public universities in Cambodia, offering a wide range of academic programs that prepare you for success in your chosen field.
                 </p>
 
-                <!-- Decorative Red Line -->
-                <div class="w-32 h-1.5 bg-blue-500 mt-10"></div>
+                <div class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                    <!-- Feature 1 -->
+                    <div class="relative pl-9">
+                        <div class="inline-font-semibold text-gray-900">
+                            <svg class="absolute left-1 top-1 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.5 2A.5.5 0 016 2.5v1.879a.75.75 0 00.44.67l3.5 1.75a.75.75 0 00.62 0l3.5-1.75a.75.75 0 00.44-.67V2.5a.5.5 0 011 0v1.879a2.25 2.25 0 01-1.32 2.012l-3.5 1.75a2.25 2.25 0 01-1.86 0l-3.5-1.75A2.25 2.25 0 014 4.379V2.5A.5.5 0 015.5 2z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M7.5 7.5A.5.5 0 018 8v1.879a.75.75 0 00.44.67l3.5 1.75a.75.75 0 00.62 0l3.5-1.75a.75.75 0 00.44-.67V8a.5.5 0 011 0v1.879a2.25 2.25 0 01-1.32 2.012l-3.5 1.75a2.25 2.25 0 01-1.86 0l-3.5-1.75A2.25 2.25 0 016 9.879V8a.5.5 0 011.5 0v-.5z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="font-bold">Comprehensive Programs.</span>
+                        </div>
+                        <p class="inline text-justify"> We offer bachelor's, master's, and doctoral degrees across fields like Management, Finance, IT, and Law.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="relative pl-9">
+                        <div class="inline-font-semibold text-gray-900">
+                            <svg class="absolute left-1 top-1 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M11.983 1.904a.75.75 0 00-1.292-.656l-5.5 9.25a.75.75 0 001.292.656l5.5-9.25z" />
+                                <path d="M3.234 8.75a.75.75 0 000 1.5h13.532a.75.75 0 000-1.5H3.234z" />
+                            </svg>
+                            <span class="font-bold ">Focus on Innovation.</span>
+                        </div>
+                        <p class="inline text-justify"> Our curriculum has a strong emphasis on Research, Innovation, and Entrepreneurship to prepare you for the future.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="relative pl-9">
+                        <div class="inline-font-semibold text-gray-900">
+                            <svg class="absolute left-1 top-1 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a4.5 4.5 0 01.895 8.908a.75.75 0 01-1.06-1.062A3 3 0 0012.5 15h-5a3 3 0 00-1.836 5.346a.75.75 0 01-1.06 1.062A4.5 4.5 0 015.5 9h9z" />
+                            </svg>
+                            <span class="font-bold">Supportive Environment.</span>
+                        </div>
+                        <p class="inline text-justify"> Our experienced faculty are dedicated to fostering an engaging learning environment that encourages critical and creative thinking.</p>
+                    </div>
+                </div>
             </div>
-            
+
         </div>
     </div>
 </section>
@@ -319,7 +283,7 @@
 
             <!-- Left Column: Text Content -->
             <div>
-                <h1 class="mt-4 text-4xl sm:text-5xl font-bold text-gray-900 leading-tight">
+                <h1 class="mt-4 text-4xl sm:text-5xl font-bold text-gray-900 leading-tight ">
                     Empowering Future Leaders Through Research, Entrepreneurship, &amp; Innovation 🎓
                 </h1>
                 <hr class="w-24 h-1.5 bg-blue-500 my-8 rounded">
@@ -334,8 +298,8 @@
                     <div class="bg-white rounded-lg shadow-lg p-4 text-center">
                         <!-- ICON CHANGE -->
                         <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                           <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z"/>
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
                         </svg>
                         <p class="mt-3 text-2xl font-bold text-blue-800">69th</p>
                         <p class="text-sm font-medium text-gray-600 mt-1">Global Top 400</p>
@@ -343,10 +307,10 @@
 
                     <!-- Award Card 2: Empowerment-Based Management -->
                     <div class="bg-white rounded-lg shadow-lg p-4 text-center">
-                         <!-- ICON CHANGE -->
-                         <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                           <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z"/>
+                        <!-- ICON CHANGE -->
+                        <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
                         </svg>
                         <p class="mt-3 text-2xl font-bold text-blue-800">7th</p>
                         <p class="text-sm font-medium text-gray-600 mt-1">Empowerment-Based Mgt.</p>
@@ -354,10 +318,10 @@
 
                     <!-- Award Card 3: Infrastructure & Technology -->
                     <div class="bg-white rounded-lg shadow-lg p-4 text-center">
-                         <!-- ICON CHANGE -->
-                         <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                           <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z"/>
+                        <!-- ICON CHANGE -->
+                        <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
                         </svg>
                         <p class="mt-3 text-2xl font-bold text-blue-800">34th</p>
                         <p class="text-sm font-medium text-gray-600 mt-1">Infrastructure & Tech</p>
@@ -367,8 +331,8 @@
                     <div class="bg-white rounded-lg shadow-lg p-4 text-center">
                         <!-- ICON CHANGE -->
                         <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                           <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z"/>
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
                         </svg>
                         <p class="mt-3 text-2xl font-bold text-blue-800">34th</p>
                         <p class="text-sm font-medium text-gray-600 mt-1">Brand & Reputation</p>
@@ -380,12 +344,12 @@
             <!-- Right Column: Image Collage (Unchanged) -->
             <div class="grid grid-cols-2 grid-rows-2 gap-4 h-full">
                 <div class="col-span-1 row-span-1">
-                     <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/41.jpg" alt="Two workers welding on a metal frame inside a building.">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/41.jpg" alt="Two workers welding on a metal frame inside a building.">
                 </div>
                 <div class="col-span-1 row-span-1">
                     <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/42.jpg" alt="Welder with helmet working on a metal pipe, creating bright sparks.">
                 </div>
-                 <div class="col-span-1 row-span-1">
+                <div class="col-span-1 row-span-1">
                     <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/43.jpg" alt="Construction worker using surveying equipment on a building site at sunset.">
                 </div>
                 <div class="col-span-1 row-span-1">
@@ -398,17 +362,16 @@
 </section>
 
 <!-- ========= ABOUT & SERVICES SECTION 4 START (CORRECTED) ========= -->
-
 <section class="bg-[#151a25]">
 
     <div class="relative overflow-hidden py-16 sm:py-20">
-        
+
         <div id="parallax-bg" class="parallax-bg absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('../Picture/School/45.jpg');">
             <div class="absolute inset-0 bg-gradient-to-t from-[#151a25] via-[#151a25]/60 to-transparent"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
+
             <!-- Left Column: Title -->
             <div class="text-white mb-8">
                 <div class="flex items-center mb-4">
@@ -424,198 +387,210 @@
             </div>
 
             <!-- Right Column: Description -->
-            <div class="text-gray-200 space-y-4">
+            <div class="text-gray-200 space-y-4 text-justify">
                 <p>
-                    The National University of Management, located in Cambodia, is a modern educational institution with a history of 31 years, having progressed in capacity, diversity, and quality education, emphasizing research, entrepreneurship, and innovation. It is ranked 69th in the World University Rankings for Innovation (WURI) 2025, reflecting its commitment to developing competent, socially responsible individuals who contribute to the country's socio-economic growth.
+                    The National University of Management, located in Cambodia, is a modern educational institution with a history of 42 years, having progressed in capacity, diversity, and quality education, emphasizing research, entrepreneurship, and innovation. It is ranked 69th in the World University Rankings for Innovation (WURI) 2025, reflecting its commitment to developing competent, socially responsible individuals who contribute to the country's socio-economic growth.
                 </p>
                 <p>
                     The National University of Management was established for the public benefit and it is recognized nationally. Throughout our great history, the National University of Management has offered access to a wide range of academic opportunities.
                 </p>
-                <!-- UPDATED ACCENT COLOR (was green) -->
-                <a href="#" class="inline-flex items-center text-white font-semibold mt-4 hover:text-blue-300 transition-colors">
-                    Read More
-                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                </a>
             </div>
         </div>
     </div>
 
-    <!-- Bottom "Services" part with 4 boxes -->
+    <!-- Bottom "Services" part with 3 boxes -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <!-- The only change is here: from lg:grid-cols-4 to lg:grid-cols-3 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
-            <!-- Feature 1: Education Services (UPDATED ACCENT) -->
-            <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
-                    <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
+            <!-- Feature 1: Tuition & Fees -->
+            <div class="h-full flex flex-col justify-center">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-400/10 mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Tuition & Fees</h3>
+                    <p class="text-base text-gray-400 mb-5">Tuition fees vary by program and year of study. Please consult the official website for detailed information.</p>
+                    <a href="../study-with-us/fees.html" class="text-base text-blue-400 font-semibold hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">Fees</h3>
-                <p class="text-gray-400 text-sm mb-4">Tuition fees vary by program and year of study. Please consult the official website for detailed information.</p>
-                <a href="../study-with-us/fees.html" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
             </div>
 
-            <!-- Feature 2: International Hubs (UPDATED ACCENT) -->
-            <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
-                    <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+            <!-- Feature 2: News and Events -->
+            <div class="h-full flex flex-col justify-center">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-400/10 mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">News and Events</h3>
+                    <p class="text-base text-gray-400 mb-5">News and events happening at National University of Management.</p>
+                    <a href="../student-activities/events.html" class="text-base text-blue-400 font-semibold hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">International Hubs</h3>
-                <p class="text-gray-400 text-sm mb-4">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized.</p>
-                <a href="#" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
             </div>
 
-            <!-- Feature 3: Bachelor's and Master's (UPDATED ACCENT) -->
-            <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
-                    <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+            <!-- Feature 3: University Life -->
+            <div class="h-full flex flex-col justify-center">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-400/10 mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">University Life</h3>
+                    <p class="text-base text-gray-400 mb-5">Design your future with us and become a part of our vibrant community.</p>
+                    <a href="../study-with-us/student-mobility.html" class="text-base text-blue-400 font-semibold hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">News and Events</h3>
-                <p class="text-gray-400 text-sm mb-4">News and events happening at National University of Management.</p>
-                <a href="../student-activities/events.html" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
-            </div>
-
-            <!-- Feature 4: University Life (UPDATED ACCENT) -->
-            <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-400/10 mx-auto mb-4">
-                     <svg class="w-8 h-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/></svg>
-                </div>
-                <h3 class="text-lg font-bold text-white mb-2">University Life</h3>
-                <p class="text-gray-400 text-sm mb-4">Design your future with us and become a part of our vibrant community.</p>
-                <a href="../study-with-us/student-mobility.html" class="text-blue-400 font-semibold text-sm hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
             </div>
 
         </div>
     </div>
 </section>
 
-      <!-- ========= SECTION 4.5: PROGRAM INFO CARDS ========= -->
-    <!-- Add the 'stylish-background-section' class here and remove bg-white -->
-    <section class="stylish-background-section py-16 sm:py-24">
-        <!-- Add the 'content-on-top' class to this container -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-on-top">
+<!-- ========= SECTION 4.5: PROGRAM INFO CARDS ========= -->
+<!-- Add the 'stylish-background-section' class here and remove bg-white -->
+<section class="stylish-background-section py-16 sm:py-24">
+    <!-- Add the 'content-on-top' class to this container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-on-top">
 
-            <!-- Section Title & Description -->
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 sm:text-5xl">
+        <!-- Section Title & Description -->
+        <div class="text-center mb-16">
+            <div class="flex flex-col items-center">
+                <!-- Logo circle with icon -->
+                <div class="mb-4 flex items-center justify-center w-16 h-16 rounded-full bg-blue-100">
+                    <svg class="w-8 h-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6" />
+                    </svg>
+                </div>
+                <h2 class="text-4xl font-bold text-gray-900 sm:text-5xl tracking-tight">
                     Our Programs
                 </h2>
-                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-                    This is a brief description of the programs offered by National University of Management, highlighting their commitment to quality education and global recognition.
-                </p>
+                <div class="mt-3 w-20 h-1.5 bg-blue-600 rounded"></div>
             </div>
-            
-            <!-- Main grid container with rounded corners and shadow to lift it off the page -->
-            <div class="grid grid-cols-1 md:grid-cols-3 text-white overflow-hidden rounded-lg shadow-2xl relative">
-
-                <!-- Card 1: Undergraduate -->
-                <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
-                    <!-- Dark blue overlay with a hover effect -->
-                    <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
-                    
-                    <!-- Content Container with hover animation -->
-                    <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
-                        <h3 class="font-lora text-2xl lg:text-3xl font-bold mb-3">Undergraduate</h3>
-                        <p class="font-montserrat text-white/90 max-w-xs mx-auto">
-                            .
-                    </div>
-                </div>
-
-                <!-- Card 2: Graduated & Professional -->
-                <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
-                    <!-- Dark blue overlay with a hover effect -->
-                    <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
-                    
-                    <!-- Content Container with hover animation -->
-                    <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
-                        <h3 class="font-lora text-2xl lg:text-3xl font-bold mb-3">Master</h3>
-                        <p class="font-montserrat text-white/90 max-w-xs mx-auto">
-                            .
-                        </p>
-                    </div>
-                </div>
-                <!-- Card 3: Scholarships & Financial AID -->
-                <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
-                    <!-- Dark blue overlay with a hover effect -->
-                    <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
-                    
-                    <!-- Content Container with hover animation -->
-                    <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
-                        <h3 class="font-lora text-2xl lg:text-3xl font-bold mb-3">Doctorate</h3>
-                        <p class="font-montserrat text-white/90 max-w-xs mx-auto">
-                            .
-                        </p>
-                    </div>
-                </div>
-
-            </div>
+            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto text-justify">
+                The National University of Management (NUM) offers
+                <span class="font-bold text-blue-700">Bachelor’s</span>,
+                <span class="font-bold text-blue-700">Master’s</span>, and
+                <span class="font-bold text-blue-700">Doctorate</span> degrees.
+                The <span class="font-bold text-blue-700">Bachelor’s</span> program builds a solid foundation in business and management,
+                the <span class="font-bold text-blue-700">Master’s</span> program develops advanced skills and leadership,
+                and the <span class="font-bold text-blue-700">Doctorate</span> focuses on research and expertise for academic and professional excellence.
+            </p>
         </div>
-    </section>
+
+        <!-- Main grid container with rounded corners and shadow to lift it off the page -->
+        <div class="grid grid-cols-1 md:grid-cols-3 text-white overflow-hidden rounded-lg shadow-2xl relative">
+
+            <!-- Card 1: Undergraduate -->
+            <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                <!-- Dark blue overlay with a hover effect -->
+                <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+
+                <!-- Content Container with hover animation -->
+                <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 class="font-lora text-2xl lg:text-3xl font-extrabold mb-3 text-white drop-shadow-lg">
+                        Bachelor
+                    </h3>
+                    <p class="font-montserrat text-base font-semibold text-white max-w-xs mx-auto drop-shadow"></p>
+                    Provides students with fundamental knowledge in business, economics, and management to prepare them for professional careers or further study.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2: Graduated & Professional -->
+            <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                <!-- Dark blue overlay with a hover effect -->
+                <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+
+                <!-- Content Container with hover animation -->
+                <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 class="font-lora text-2xl lg:text-3xl font-extrabold mb-3 text-white drop-shadow-lg">
+                        Master
+                    </h3>
+                    <p class="font-montserrat text-base font-semibold text-white max-w-xs mx-auto drop-shadow"></p>
+                    Focuses on advanced skills, leadership, and specialized fields such as finance, marketing, or public administration.
+                    </p>
+                </div>
+            </div>
+            <!-- Card 3: Scholarships & Financial AID -->
+            <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                <!-- Dark blue overlay with a hover effect -->
+                <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+
+                <!-- Content Container with hover animation -->
+                <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 class="font-lora text-2xl lg:text-3xl font-extrabold mb-3 text-white drop-shadow-lg">
+                        Doctorate
+                    </h3>
+                    <p class="font-montserrat text-base font-semibold text-white max-w-xs mx-auto drop-shadow"></p>
+                    Emphasizes research, innovation, and academic excellence, preparing graduates to become experts and contributors to knowledge.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
 <!-- ========= EMBARK ON A JOURNEY SECTION (DARK BLUE THEME) ========= -->
 <!-- UPDATED: Main background color set to a dark slate blue -->
 <section class="relative bg-blue-800 text-white overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10">
-        
+
         <!-- Grid container for the two main columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 items-center">
-            
+
             <!-- Left Column: Main Title & Link -->
             <div class="relative z-10">
                 <!-- Decorative Icon (color adjusted for blue theme) -->
                 <div class="mb-6">
                     <svg class="w-12 h-12 text-blue-300/40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
                     </svg>
                 </div>
-                
+
                 <h2 class="font-lora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
-                    Modern Learning Environment     
+                    Modern Learning Environment
                 </h2>
-                
-                <!-- UPDATED: Link border color adjusted for blue theme -->
-                <a href="#" class="inline-flex items-center gap-x-2 font-semibold mt-10 border-b-2 border-blue-300/50 hover:border-blue-300 transition-all duration-300 pb-1">
-                    Learn More
-                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </a>
+                <div class="mt-3 w-20 h-1.5 bg-red-600 rounded"></div>
             </div>
 
             <!-- ========= HERE IS THE MODIFIED CODE SNIPPET ========= -->
-    <div class="relative z-0">
-        <p class="text-white-200/80 leading-relaxed max-w-lg mb-8">
-            Embark on a journey of knowledge, discovery, and growth at National University of Management. Our admissions process is designed to identify bright, motivated individuals who are eager to contribute to our dynamic academic community.
-        </p>
-        
-        <!-- Container for the video and the circular decoration -->
-        <div class="relative">
-            <!-- 
+            <div class="relative z-0">
+                <p class="text-white-200/80 leading-relaxed max-w-lg mb-8 text-justify">
+                    Embark on a journey of knowledge, discovery, and growth at National University of Management. Our admissions process is designed to identify bright, motivated individuals who are eager to contribute to our dynamic academic community.
+                </p>
+
+                <!-- Container for the video and the circular decoration -->
+                <div class="relative">
+                    <!-- 
                 MODIFIED PART: 
                 - The <img> tag has been replaced with a video container.
                 - `aspect-w-16 aspect-h-9` creates a responsive 16:9 box.
                 - The <video> tag is set to autoplay, loop, and muted.
             -->
-            <div class="relative z-10 w-full rounded-lg shadow-2xl overflow-hidden aspect-w-16 aspect-h-9">
-                <video fade-on-scroll controls playsinline
-                    src="../Video/National University of Management (1).mp4" 
-                    class="w-full h-full object-cover"
-                >
-                    Your browser does not support the video tag.
-                </video>
+                    <div class="relative z-10 w-full rounded-lg shadow-2xl overflow-hidden aspect-w-16 aspect-h-9">
+                        <video fade-on-scroll controls playsinline src="../Video/National University of Management (1).mp4" class="w-full h-full object-cover">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <!-- White circle element - remains unchanged -->
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-white rounded-full z-0 hidden lg:block"></div>
+                </div>
             </div>
-            
-            <!-- White circle element - remains unchanged -->
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-white rounded-full z-0 hidden lg:block"></div>
+
+
+            <!-- Background decorative elements (colors adjusted for blue theme) -->
+            <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 border border-blue-400/10 rounded-full z-0"></div>
+            <div class="absolute bottom-10 right-16 w-24 h-24 text-blue-400/10 z-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471M11.42 15.17L5.877 21A2.652 2.652 0 013 17.25l5.877-5.877m0 0l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471m6.053 0l-3.46-3.46a.563.563 0 01.796-.796l3.46 3.46m-3.46-3.46a.563.563 0 01.796 0l2.471 2.471" />
+                </svg>
             </div>
-        </div>
-            
-    
-    <!-- Background decorative elements (colors adjusted for blue theme) -->
-    <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 border border-blue-400/10 rounded-full z-0"></div>
-    <div class="absolute bottom-10 right-16 w-24 h-24 text-blue-400/10 z-0">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471M11.42 15.17L5.877 21A2.652 2.652 0 013 17.25l5.877-5.877m0 0l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471m6.053 0l-3.46-3.46a.563.563 0 01.796-.796l3.46 3.46m-3.46-3.46a.563.563 0 01.796 0l2.471 2.471" /></svg>
-    </div>
 
 </section>
 
@@ -673,304 +648,128 @@
         </div>
     </div>
 </section>
-
-    <!-- ========= SECTION: MEET OUR PROFESSORS (Updated) ========= -->
-<section class="py-16 sm:py-24 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <!-- Section Header -->
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-lora font-bold text-gray-900 sm:text-5xl">
-                Meet Our Esteemed Faculty
-            </h2>
-            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-                Our professors are distinguished scholars and dedicated mentors who are leaders in their respective fields.
-            </p>
-        </div>
-        
-        <!-- Grid container for professor cards -->
-        <div id="professors-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- Professor Card 1 (Visible) -->
-            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center">
-                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop" alt="Photo of Dr. Eleanor Vance">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">Dr. Eleanor Vance</h3>
-                    <p class="text-blue-700 font-semibold mt-1">Quantum Physics</p>
-                    <p class="text-gray-500 mt-3 text-sm">A leading researcher in quantum computing and string theory with over 20 years of experience.</p>
-                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
-                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Professor Card 2 (Visible) -->
-            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center">
-                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=2071&auto=format&fit=crop" alt="Photo of Dr. Marcus Cole">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">Dr. Marcus Cole</h3>
-                    <p class="text-blue-700 font-semibold mt-1">Business & Strategy</p>
-                    <p class="text-gray-500 mt-3 text-sm">An expert in corporate strategy and international business, with a focus on emerging markets.</p>
-                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
-                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Professor Card 3 (Visible) -->
-            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center">
-                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?q=80&w=1887&auto=format&fit=crop" alt="Photo of Dr. Isabella Rossi">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">Dr. Isabella Rossi</h3>
-                    <p class="text-blue-700 font-semibold mt-1">Fine Arts & History</p>
-                    <p class="text-gray-500 mt-3 text-sm">An acclaimed art historian and curator specializing in the Renaissance period.</p>
-                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
-                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Professor Card 4 (Initially Hidden) -->
-            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center hidden-card">
-                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop" alt="Photo of Dr. Jian Li">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">Dr. Jian Li</h3>
-                    <p class="text-blue-700 font-semibold mt-1">Computer Engineering</p>
-                    <p class="text-gray-500 mt-3 text-sm">A pioneer in artificial intelligence and human-computer interaction research.</p>
-                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
-                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Professor Card 5 (Initially Hidden) -->
-            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center hidden-card">
-                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1581093418546-56c483a48e9f?q=80&w=1887&auto=format&fit=crop" alt="Photo of Dr. Anya Sharma">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">Dr. Anya Sharma</h3>
-                    <p class="text-blue-700 font-semibold mt-1">Biomedical Science</p>
-                    <p class="text-gray-500 mt-3 text-sm">Specializes in genetic engineering and molecular biology, focusing on therapeutic applications.</p>
-                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
-                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Professor Card 6 (Initially Hidden) -->
-            <div class="professor-card bg-white rounded-lg shadow-md overflow-hidden text-center hidden-card">
-                <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop" alt="Photo of Dr. Ben Carter">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">Dr. Ben Carter</h3>
-                    <p class="text-blue-700 font-semibold mt-1">Economics</p>
-                    <p class="text-gray-500 mt-3 text-sm">Author of "The Global Market" and an expert consultant on international trade policies.</p>
-                    <div class="flex justify-center space-x-5 mt-4 text-gray-400">
-                        <a href="#" class="social-link" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter Profile"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="social-link" aria-label="Personal Website"><i class="fas fa-globe fa-lg"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
-        <!-- "See More" Button with the required ID -->
-        <div class="text-center mt-16">
-            <a href="#" id="view-all-btn" class="view-all-button inline-block bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg uppercase tracking-wider text-sm">
-                View All Professors
-            </a>
-        </div>
-
-    </div>
-</section>
-
     </main>
     <div id="footer-placeholder"></div>
 
-    <script>
-    let heroSliderInterval;
-
-    function cleanupHeroAnimations() {
-        if (heroSliderInterval) {
-            clearInterval(heroSliderInterval);
-        }
-        window.removeEventListener("scroll", handleParallax);
-    }
-
-    // ========================================================
-    // ========= PARALLAX FUNCTION
-    // ========================================================
-    function handleParallax() {
-        const parallaxBg = document.querySelector(".parallax-bg");
-        if (!parallaxBg) return;
-
-        const parallaxContainer = parallaxBg.parentElement;
-        if (!parallaxContainer) return;
-
-        const sectionTop = parallaxContainer.offsetTop;
-        const scrollY = window.scrollY;
-        const relativeScrollY = scrollY - sectionTop;
-        
-        if (scrollY + window.innerHeight > sectionTop) {
-             parallaxBg.style.transform = `translateY(${relativeScrollY * 0.4}px)`;
-        }
-    }
-
-    // ========================================================
-    // ========= HERO SLIDER & TEXT ANIMATION
-    // ========================================================
-    function initHeroAnimations() {
-        cleanupHeroAnimations(); 
-
-        window.addEventListener("scroll", handleParallax);
-        handleParallax();
-
-        const subtitle = document.getElementById('hero-subtitle');
-        const heading = document.getElementById('animated-heading');
-        const button = document.getElementById('hero-button');
-        const textToAnimate = "National University of Management";
-
-        if (subtitle) subtitle.classList.remove('visible');
-        if (button) button.classList.remove('visible');
-        if (heading) heading.innerHTML = '';
-        
-        const subtitleDelay = 0;
-        const headingDelayAfterSubtitle = 0;
-        const letterStagger = 30;
-        const buttonDelayAfterHeading = 0;
-
-        setTimeout(() => {
-            if (subtitle) subtitle.classList.add('visible');
-        }, subtitleDelay);
-
-        if (heading && !heading.dataset.animated) {
-            heading.dataset.animated = 'true';
-            textToAnimate.split('').forEach(char => {
-                const span = document.createElement('span');
-                span.className = 'char';
-                span.innerHTML = (char === ' ') ? ' ' : char;
-                heading.appendChild(span);
-            });
-
-            const headingAnimationStartTime = subtitleDelay + 800 + headingDelayAfterSubtitle;
-
-            heading.querySelectorAll('.char').forEach((char, index) => {
-                setTimeout(() => {
-                    char.style.opacity = '1';
-                    char.style.transform = 'translateY(0)';
-                }, headingAnimationStartTime + (index * letterStagger));
-            });
-
-            const headingAnimationDuration = (textToAnimate.length * letterStagger) + 600;
-            const headingAnimationEndTime = headingAnimationStartTime + headingAnimationDuration;
-
-            setTimeout(() => {
-                if (button) button.classList.add('visible');
-            }, headingAnimationEndTime + buttonDelayAfterHeading);
-
-            setTimeout(() => {
-                if (heading) heading.dataset.animated = 'false';
-            }, headingAnimationEndTime + 1000);
-        }
-
-        const slideElements = [document.getElementById('hero-bg-1'), document.getElementById('hero-bg-2')];
-        const images = ['../Picture/school/numdronecompressedframe1.jpg', '../Picture/school/45.jpg'];
-
-        if (images.length > 0 && slideElements[0]) {
-            let currentImageIndex = 0;
-            slideElements.forEach((el, index) => {
-                if (images[index]) el.style.backgroundImage = `url('${images[index]}')`;
-            });
-            slideElements[0].classList.add('active', 'zoom-out');
-            if (slideElements[1]) slideElements[1].classList.remove('zoom-out');
-
-            heroSliderInterval = setInterval(() => {
-                currentImageIndex = (currentImageIndex + 1) % images.length;
-                const activeSlide = document.querySelector('.hero-bg-slide.active');
-                const nextSlide = Array.from(slideElements).find(el => !el.classList.contains('active'));
-
-                if (activeSlide && nextSlide) {
-                    activeSlide.classList.remove('active', 'zoom-out');
-                    nextSlide.classList.add('active', 'zoom-out');
-                    const nextImageIndex = (currentImageIndex + 1) % images.length;
-                    setTimeout(() => {
-                        activeSlide.style.backgroundImage = `url('${images[nextImageIndex]}')`;
-                    }, 1500);
-                }
-            }, 7000);
-        }
-    }
-    
-    // ========================================================
-    // ========= INITIALIZE ALL PAGE SCRIPTS
-    // ========================================================
+   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Initialize hero animations
-        initHeroAnimations();
 
-        // --- START: NEW "SEE MORE / SEE LESS" PROFESSOR SCRIPT ---
-        
-        const viewAllBtn = document.getElementById('view-all-btn');
-        const professorsGrid = document.getElementById('professors-grid');
-        
-        // Only run this logic if the professor section exists on the page
-        if (viewAllBtn && professorsGrid) {
-            const limit = 3; // The number of cards to show initially
-            const allCards = professorsGrid.querySelectorAll('.professor-card');
-            let isExpanded = false; // State to track if cards are shown or hidden
+        // A single variable in the parent scope to manage the slider's interval timer.
+        let heroSliderInterval;
 
-            // 1. Initially hide the cards that are beyond the limit
-            allCards.forEach((card, index) => {
-                if (index >= limit) {
-                    card.classList.add('hidden-card');
-                }
-            });
+        /**
+         * Handles the parallax scrolling effect for the element with the class ".parallax-bg".
+         * It calculates the element's position based on the scroll progress within the viewport
+         * for a smooth, subtle movement effect.
+         */
+        function handleParallax() {
+            const parallaxBg = document.querySelector(".parallax-bg");
+            if (!parallaxBg) return;
 
-            // Make the button visible only if there are cards to hide
-            if (allCards.length <= limit) {
-                viewAllBtn.style.display = 'none';
+            const parallaxContainer = parallaxBg.parentElement;
+            if (!parallaxContainer) return;
+
+            const sectionTop = parallaxContainer.offsetTop;
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+
+            // Only perform calculations if the section is visible on the screen to save resources.
+            if (scrollY + windowHeight > sectionTop && scrollY < sectionTop + parallaxContainer.offsetHeight) {
+                const relativeScroll = scrollY - sectionTop;
+                // The '0.4' multiplier controls the speed of the parallax effect.
+                parallaxBg.style.transform = `translateY(${relativeScroll * 0.4}px)`;
             }
+        }
 
-            // 2. Add the click event listener to the button
-            viewAllBtn.addEventListener('click', function(event) {
-                event.preventDefault();
+        /**
+         * Initializes all animations for the hero section. This includes the text animations
+         * (subtitle and heading) and the background image slider with a Ken Burns effect.
+         */
+        function initHeroAnimations() {
+            // --- 1. CLEANUP & SETUP ---
+            // Clear any previously running intervals and listeners to prevent duplicates or memory leaks.
+            if (heroSliderInterval) {
+                clearInterval(heroSliderInterval);
+            }
+            window.removeEventListener("scroll", handleParallax);
 
-                // Flip the state
-                isExpanded = !isExpanded;
+            // Add the scroll listener for the parallax effect and run it once on load to set the initial position.
+            window.addEventListener("scroll", handleParallax);
+            handleParallax();
 
-                // 3. Show or hide cards based on the new state
-                allCards.forEach((card, index) => {
-                    if (index >= limit) {
-                        if (isExpanded) {
-                            // If expanded, remove the hidden class to show the card
-                            card.classList.remove('hidden-card');
-                        } else {
-                            // If collapsed, add the hidden class to hide the card
-                            card.classList.add('hidden-card');
-                        }
-                    }
+            // --- 2. TEXT ANIMATION ---
+            const subtitle = document.getElementById('hero-subtitle');
+            const heading = document.getElementById('animated-heading');
+            const textToAnimate = "National University of Management";
+
+            // Reset elements to their initial, hidden state before starting the animation.
+            if (subtitle) subtitle.classList.remove('visible');
+            if (heading) heading.innerHTML = '';
+
+            // Animate the subtitle into view first.
+            setTimeout(() => {
+                if (subtitle) subtitle.classList.add('visible');
+            }, 300); // A small delay for a smoother entrance.
+
+            // Animate the main heading by revealing each character sequentially.
+            if (heading) {
+                // Create a <span> for each character to animate them individually.
+                textToAnimate.split('').forEach(char => {
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    // Use a non-breaking space for actual spaces to maintain proper layout.
+                    span.innerHTML = (char === ' ') ? '&nbsp;' : char;
+                    heading.appendChild(span);
                 });
 
-                // 4. Update the button text based on the new state
-                this.textContent = isExpanded ? 'See Less' : 'View All Professors';
-            });
+                const animationStartTime = 800; // Start after the subtitle has appeared.
+                const letterStagger = 30; // Time in milliseconds between each character's appearance.
+
+                heading.querySelectorAll('.char').forEach((char, index) => {
+                    setTimeout(() => {
+                        char.style.opacity = '1';
+                        char.style.transform = 'translateY(0)';
+                    }, animationStartTime + (index * letterStagger));
+                });
+            }
+
+            // --- 3. BACKGROUND IMAGE SLIDER ---
+            const slideElements = [document.getElementById('hero-bg-1'), document.getElementById('hero-bg-2')];
+            const images = ['../Picture/school/numdronecompressedframe1.jpg', '../Picture/school/45.jpg'];
+
+            // Ensure both images and slide elements exist before starting the slider.
+            if (images.length >= 2 && slideElements[0] && slideElements[1]) {
+                
+                // Set the initial background images for the slides.
+                slideElements[0].style.backgroundImage = `url('${images[0]}')`;
+                slideElements[1].style.backgroundImage = `url('${images[1]}')`;
+                
+                // Make the first slide visible immediately on load.
+                slideElements[0].classList.add('active', 'zoom-out');
+                slideElements[1].classList.remove('active', 'zoom-out');
+
+                // Start the interval to switch between the two slides.
+                heroSliderInterval = setInterval(() => {
+                    const activeSlide = document.querySelector('.hero-bg-slide.active');
+                    const nextSlide = Array.from(slideElements).find(el => !el.classList.contains('active'));
+
+                    if (activeSlide && nextSlide) {
+                        // Swap the 'active' class to fade out the old slide and fade in the new one.
+                        activeSlide.classList.remove('active', 'zoom-out');
+                        nextSlide.classList.add('active', 'zoom-out');
+                    }
+                }, 7000); // The time (in ms) each slide is visible.
+            }
         }
-        // --- END: "SEE MORE / SEE LESS" SCRIPT ---
+
+        // Run the main animation function once the DOM is fully loaded and ready.
+        initHeroAnimations();
+
     });
-
-    // This allows you to re-initialize animations if needed
-    window.pageSpecificInit = initHeroAnimations;
 </script>
-
-<script src="../js/main.js" data-base-path=".." defer></script>
+   <!-- Load the footer -->
+   <script src="../js/footer.js" defer></script>
+   <!-- Load the main JS file and pass the base path for relative links -->
+   <script src="../js/main.js" data-base-path=".." defer></script>
 </body>
 </html>

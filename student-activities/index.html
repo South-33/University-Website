@@ -37,7 +37,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
 
-    <!-- RULE ADHERENCE: Header placeholder -->
+ <!-- RULE ADHERENCE: Header placeholder -->
     <div id="header-placeholder"></div>
 
     <main>
@@ -55,9 +55,6 @@
                 <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
                     Campus life at our university is a vibrant journey of personal growth, skill development, and lifelong friendships.
                 </p>
-                <a href="#clubs" class="mt-8 inline-block bg-teal-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-600 transition-all duration-300 transform hover:scale-105">
-                    Explore Clubs
-                </a>
             </div>
         </section>
 
@@ -78,7 +75,7 @@
                 On mobile, it will be a standard block element.
             -->
             <div class="lg:col-span-8 fade-in-section">
-                 <img src="../Picture/school/1.jpg" alt="A vibrant scene of university life with students celebrating" class="w-full h-full min-h-[300px] lg:min-h-[600px] object-cover">
+                 <img src="../Picture/school/50.jpg" alt="A vibrant scene of university life with students celebrating" class="w-full h-full min-h-[300px] lg:min-h-[600px] object-cover">
             </div>
 
             <!-- 
@@ -175,16 +172,12 @@
             <!-- Left Column: Text Content -->
             <div class="text-left fade-in-section">
                 <div class="h-12 w-px bg-gray-300"></div>
-                <h2 class="font-heading text-4xl text-dark-blue uppercase tracking-widest my-6">
+                <h2 class="font-heading text-4xl lg:text-5xl text-dark-blue-900 font-bold leading-tight">
                     class participation<br>of our students
                 </h2>
-                <hr class="w-20 h-0.5 bg-gray-300 mb-8">
-                <p class="font-body text-gray-600 leading-relaxed mb-10">
+                <hr class="w-20 h-0.5 bg-red-500 mb-8">
+                <p class="font-body text-gray-700 leading-relaxed mb-10">
                     Hands-on learning in Computer Architecture! Students are actively assembling and troubleshooting computer hardware, applying their theoretical knowledge to real-world scenarios. From identifying components to ensuring system functionality, this activity enhances their understanding of how computers operate. A great way to bridge theory and practice! </p>
-                <a href="#" class="font-body font-semibold text-dark-blue tracking-widest text-sm group">
-                    VIEW PROGRAMS
-                    <span class="inline-block transition-transform group-hover:translate-x-2 ml-2">→</span>
-                </a>
             </div>
 
             <!-- Right Column: Image Collage -->
@@ -217,8 +210,8 @@
             <!-- Left Column: Text Content -->
             <div class="text-left fade-in-section">
                 <div class="flex items-center space-x-3 mb-4">
-                    <svg class="h-8 w-8 text-blue-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" /></svg>
-                    <p class="font-body text-dark-blue-600 font-semibold tracking-widest">LATEST VIDEO</p>
+                    <svg class="h-8 w-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" /></svg>
+                    <p class="font-body text-yellow-600 font-semibold tracking-widest">LATEST VIDEO</p>
                 </div>
                 <h2 class="font-heading text-4xl lg:text-5xl text-dark-blue-900 font-bold leading-tight">
                     Robotic <br><span class="text-red-600">Testing</span> Video
@@ -226,10 +219,6 @@
                 <p class="font-body text-gray-600 leading-relaxed mt-6 mb-8">
                     There are many variations of passages available but the majority have suffered alteration in some form by injected humour look even slightly believable.
                 </p>
-                <a href="#" class="inline-flex items-center bg-yellow-500 text-blue-900 font-bold text-sm py-4 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all duration-300 group">
-                    LEARN MORE
-                    <span class="inline-block transition-transform group-hover:translate-x-1 ml-2">→</span>
-                </a>
             </div>
 
             <!-- Right Column: Stylish Video Player Box -->
@@ -315,44 +304,13 @@
     </div>
 </section>
 
-<!-- Page-specific JavaScript (Unchanged) -->
-<script>
-    function initVideoControls() {
-        const video = document.getElementById('challenge-video');
-        const unmuteButton = document.getElementById('unmute-button');
-
-        if (video && unmuteButton) {
-            unmuteButton.addEventListener('click', () => {
-                if (video.muted) {
-                    video.muted = false;
-                    unmuteButton.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
-                           <path d="M5.5 3.5A1.5 1.5 0 017 5v10a1.5 1.5 0 01-3 0V5a1.5 1.5 0 011.5-1.5zM12.5 3.5A1.5 1.5 0 0114 5v10a1.5 1.5 0 01-3 0V5a1.5 1.5 0 011.5-1.5z" />
-                        </svg>
-                        Mute Sound`;
-                } else {
-                    video.muted = true;
-                    unmuteButton.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
-                           <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.383-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                        Play Sound`;
-                }
-            });
-        }
-    }
-    
-    window.initVideoControls = initVideoControls;
-    document.addEventListener('DOMContentLoaded', initVideoControls);
-</script>
-
 <!-- Fully Responsive & Professional Image Gallery Section -->
-<section class="py-16 md:py-24 bg-white">
+<section class="py-16 md:py-24 bg-white" id="social-engagement">
     <div class="container mx-auto px-4 sm:px-6">
 
         <!-- Section Header -->
         <div class="max-w-3xl mb-16 text-center mx-auto fade-in-section">
-            <div class="w-24 h-1.5 bg-dark-blue mx-auto mb-6"></div>
+            <div class="w-24 h-1.5 bg-red-700 mx-auto mb-6"></div>
             <h2 class="font-lora text-dark-blue text-4xl md:text-5xl font-bold uppercase tracking-wider">
                 Social Engagement
             </h2>
@@ -399,13 +357,13 @@
 </section>
 
 <!-- ASEAN-China Youth Exchange Gallery Section -->
-<section class="py-16 md:py-24 bg-white">
+<section class="py-16 md:py-24 bg-white" id="asean-china-youth-exchange">
     <div class="container mx-auto px-6">
         <div class="container mx-auto px-6">
         
         <div class="max-w-4xl mb-12 fade-in-section">
     <!-- Decorative line -->
-    <div class="w-20 h-1.5 bg-dark-blue mb-6"></div>
+    <div class="w-20 h-1.5 bg-red-700 mb-6"></div>
 
     <!-- Main heading with two distinct styles -->
     <h2 class="font-lora text-dark-blue leading-none">
@@ -460,38 +418,74 @@
     </div>
 </section>
 
-        <!-- JAVASCRIPT: Place this right before your closing </body> tag or in a <script> tag in the <head> -->
+<!-- JAVASCRIPT: Place this single script block right before your closing </body> tag -->
 <script>
+    /**
+     * Defines the functionality for the video player controls.
+     * This function is made globally available on the `window` object
+     * to maintain the behavior of the original script.
+     */
+    function initVideoControls() {
+        const video = document.getElementById('challenge-video');
+        const unmuteButton = document.getElementById('unmute-button');
+
+        if (video && unmuteButton) {
+            unmuteButton.addEventListener('click', () => {
+                if (video.muted) {
+                    video.muted = false;
+                    unmuteButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                           <path d="M5.5 3.5A1.5 1.5 0 017 5v10a1.5 1.5 0 01-3 0V5a1.5 1.5 0 011.5-1.5zM12.5 3.5A1.5 1.5 0 0114 5v10a1.5 1.5 0 01-3 0V5a1.5 1.5 0 011.5-1.5z" />
+                        </svg>
+                        Mute Sound`;
+                } else {
+                    video.muted = true;
+                    unmuteButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                           <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.383-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Play Sound`;
+                }
+            });
+        }
+    }
+
+    // Make the video function globally accessible
+    window.initVideoControls = initVideoControls;
+
+    /**
+     * This is the main entry point for the page's scripts.
+     * It waits until the HTML document is fully loaded before running any code
+     * that needs to access elements on the page.
+     */
     document.addEventListener('DOMContentLoaded', function() {
+    
+        // --- Logic for "See More/See Less" Highlights Toggle ---
         const toggleBtn = document.getElementById('toggle-highlights-btn');
         const extraCards = document.querySelectorAll('.extra-card');
         
-        // State variable to track if the content is expanded
         let isExpanded = false;
 
         if (toggleBtn && extraCards.length > 0) {
             toggleBtn.addEventListener('click', function() {
-                // Toggle the state
                 isExpanded = !isExpanded;
-
-                // Update the button text based on the state
                 toggleBtn.textContent = isExpanded ? 'See Less' : 'See More';
                 
-                // Toggle visibility classes on each extra card
                 extraCards.forEach(card => {
                     card.classList.toggle('max-h-0');
                     card.classList.toggle('opacity-0');
                     card.classList.toggle('overflow-hidden');
-                    // Add a large enough max-height to ensure content isn't clipped
                     card.classList.toggle('max-h-screen');
-                    
-                    // The negative top margin on the images can sometimes cause layout shifts.
-                    // This small check ensures the layout recalculates properly.
                     card.classList.toggle('mt-8', isExpanded);
-                    card.classList.toggle('p-8', isExpanded); // Ensure padding is restored
+                    card.classList.toggle('p-8', isExpanded);
                 });
             });
         }
+
+        // --- Initialize Video Controls ---
+        // This calls the function defined above to set up the video player.
+        initVideoControls();
+
     });
 </script>
     </main>

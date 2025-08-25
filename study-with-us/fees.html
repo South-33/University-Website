@@ -48,22 +48,6 @@
       font-weight: bold;
       line-height: 1.2;
     }
-  </style>
-</head>
-<body class="bg-white">
-    <div id="header-placeholder"></div>
-    <main>
-<section>
-  <div class="apply-hero-section">
-    <div class="apply-hero-content">
-      <p>Admission</p>
-      <h1>Apply To NUM</h1>
-    </div>
-  </div>
-</section>
-
-<section>
-  <style>
     .about-tuition-fees-section {
       background-color: #fff;
       padding: 4rem 1rem;
@@ -88,8 +72,93 @@
       color: #6c757d;
       line-height: 1.6;
     }
+    .tuition-container-styled {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      max-width: 900px;
+      margin: auto;
+    }
+    .tuition-container-styled h2 {
+      font-weight: 300;
+      font-size: 28px;
+    }
+    .tuition-container-styled p.subtitle {
+      color: #888;
+      margin-top: -15px;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+    .tuition-tabs-styled {
+      margin-bottom: -1px; /* Overlap border */
+    }
+    .tuition-tabs-styled .tab-button {
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      background-color: #f7f7f7;
+      border-bottom: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .tuition-tabs-styled .tab-button.active {
+      background-color: #fff;
+      border-top: 2px solid #8B2332;
+      font-weight: bold;
+    }
+    .fee-table-styled {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+    .fee-table-styled th, .fee-table-styled td {
+      border: 1px solid #ddd;
+      padding: 14px;
+      text-align: left;
+    }
+    .fee-table-styled thead th {
+      background-color: #8B2332; /* Maroon color from image */
+      color: white;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .fee-table-styled .category-cell {
+      background-color: #F5F6FA; /* Light lavender from image */
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      width: 20%;
+    }
+    .fee-table-styled .level-cell {
+      font-weight: 600;
+    }
+    .fee-table-styled tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+    .fee-table-styled .total-row td {
+      background-color: #8B2332;
+      color: white;
+      font-weight: bold;
+      text-align: right;
+    }
+    .fee-table-styled .total-row td:first-child {
+        text-align: left;
+    }
   </style>
+</head>
+<body class="bg-white">
+    <div id="header-placeholder"></div>
+    <main>
+      
+<section>
+  <div class="apply-hero-section">
+    <div class="apply-hero-content">
+      <p>Admission</p>
+      <h1>Apply To NUM</h1>
+    </div>
+  </div>
+</section>
 
+<section>
   <div class="about-tuition-fees-section">
     <div class="about-tuition-fees-container">
       <h2 class="about-tuition-fees-title">About Tuition & Fees</h2>
@@ -100,6 +169,92 @@
   </div>
 </section>
       
+<section class="tuition-fees-image-design">
+  <div class="tuition-container-styled">
+    <h2 style="font-family: 'Lora', serif; font-size: 2rem; font-weight: 700; color: #2e49b5; margin-bottom: 0.5rem;">
+      Tuition & Fees
+    </h2>
+    <h1 class="subtitle" style="font-family: 'Montserrat', Arial, sans-serif; font-size: 1.0rem; font-weight: 500; color: #e01414; letter-spacing: 2px; margin-top: 0.5rem; margin-bottom: 1.5rem;">
+      FALL 2025 - SPRING 2026
+    </h1>
+    <table class="fee-table-styled">
+      <thead>
+        <tr>
+          <th>Program Category</th>
+          <th>Program Level</th>
+          <th>Tuition Fee (One-term)</th>
+          <th>Per Semester</th>
+          <th>Admission Fee per (1 year)</th>
+          <th>Admission Fee per (4 year)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- National Section -->
+        <tr>
+          <td class="category-cell" rowspan="3">National</td>
+          <td class="level-cell">Bachelor</td>
+          <td>$600</td>
+          <td>$300</td>
+          <td>n.d</td>
+          <td>$50</td>
+        </tr>
+        <tr>
+          <td class="level-cell">Master</td>
+          <td>$1200</td>
+          <td>$600</td>
+          <td>n.d</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td class="level-cell">Doctorate</td>
+          <td>$2000</td>
+          <td>$1000</td>
+          <td>n.d</td>
+          <td>$200</td>
+        </tr>
+        <!-- International Section -->
+        <tr>
+          <td class="category-cell" rowspan="3">International</td>
+          <td class="level-cell">Bachelor</td>
+          <td>$800</td>
+          <td>$400</td>
+          <td>$100</td>
+          <td>n.d</td>
+        </tr>
+        <tr>
+          <td class="level-cell">Master</td>
+          <td>$2200</td>
+          <td>$1100</td>
+          <td>$100</td>
+          <td>n.d</td>
+        </tr>
+        <tr>
+          <td class="level-cell">Doctorate</td>
+          <td>$..</td>
+          <td>$..</td>
+          <td>$...</td>
+          <td>$...</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:2rem; background:#fffbe6; border-left:6px solid #e01414; padding:1.5rem 1.25rem; border-radius:6px;">
+      <ol style="margin-top:0.75rem; padding-left:1.2rem; color:#444; font-size:1rem; line-height:1.7;">
+        <li style="color:#e01414; font-size:1.15rem; font-weight:600;">សម្គាល់</li>
+        <li>១. សិស្សត្រូវប្រើម៉ាស៊ីនទឹកប្រាក់ផ្ទាល់ខ្លួនក្នុងការបង់ថ្លៃសិក្សា។</li>
+        <li>២. សិស្សដែលបង់ថ្លៃសិក្សាទៀងទាត់រយៈពេលមួយឆ្នាំ (១-២) ត្រូវបង់ជា $50 ដុល្លារអាមេរិក។</li>
+        <li>៣. សិស្សដែលបង់ថ្លៃសិក្សាខ្វះខាតក្នុងរយៈពេលមួយឆ្នាំសិក្សាត្រូវបង់ប្រាក់ពិន័យចំនួន $50 ដុល្លារអាមេរិក និងត្រូវបានដកចេញពីបញ្ជីសិស្សក្នុងសាលា។</li>
+        <li>៤. សិស្សដែលបង់ថ្លៃសិក្សាមិនទៀងទាត់ក្នុងរយៈពេលមួយឆ្នាំសិក្សា ត្រូវបង់ប្រាក់ពិន័យចំនួន $50 ដុល្លារអាមេរិក ហើយត្រូវបានដកឈ្មោះចេញពីបញ្ជីសិស្ស។</li>
+        <li>៥. សិស្សដែលបង់ថ្លៃសិក្សាមិនទៀងទាត់ក្នុងរយៈពេលពីរ (២) ឆ្នាំសិក្សា ត្រូវបានដកឈ្មោះចេញពីបញ្ជីសិស្ស ហើយត្រូវបង់ប្រាក់ពិន័យចំនួន $100 ដុល្លារអាមេរិក។</li>
+        <li>៦. សិស្សដែលបានចាកចេញកណ្តាលឆ្នាំសិក្សា ត្រូវបង់ថ្លៃសិក្សាឆ្នាំនោះទាំងមូល និងមិនអាចស្នើសុំបង្វិលប្រាក់វិញបានទេ។</li>
+        <strong style="color:#e01414; font-size:1.1rem;">NOTE:</strong>
+        <li>1. Master’s students pay an administrative fee once upon registration. Bachelor’s students pay an annual administration fee at the start of each academic year.</li>
+        <li>2. If a student fails a course in a semester, they must retake it and pay a fee of $30 (bachelor's) or $50 (master's) per course.</li>
+        <li>3. Failing three or more courses in a semester is considered failing the semester. The student must pay tuition for one semester and retake all courses with the next academic year’s cohort.</li>
+        <li>4. Students who fail to defend their graduate thesis as scheduled, or fail the defense, must defend with the next academic year’s cohort and pay tuition fees for each semester.</li>
+      </ol>
+    </div>
+  </div>
+</section>
     </main>
     <div id="footer-placeholder"></div>
     <script src="../js/main.js" data-base-path=".."></script>
