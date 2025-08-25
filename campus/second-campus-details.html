@@ -4,276 +4,383 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veal Sbov Campus: A Global Gateway | National University of Management</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Theme Configuration (global) -->
     <script src="../js/theme.js"></script>
+
+    <!-- Global site-wide styles -->
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/i18n.css">
+
+    <!-- PAGE-SPECIFIC STYLES -->
+    <style>
+        /*
+        =======================================
+        PAGE-SPECIFIC CSS FOR VEAL SBOV CAMPUS
+        =======================================
+        */
+        
+        /* --- 1. Page-Specific Variables & Base Styles --- */
+        :root {
+            --primary-color: #0A0A3E; /* A deep navy blue */
+            --accent-color: #FBBF24;  /* A vibrant yellow/gold */
+            --light-gray: #F7F8FA;
+            --text-light: #E2E8F0; /* Lighter text for dark backgrounds */
+        }
+        .bg-primary { background-color: var(--primary-color); }
+        .text-primary { color: var(--primary-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .text-accent { color: var(--accent-color); }
+        .bg-light-gray { background-color: var(--light-gray); }
+        .text-text-light { color: var(--text-light); }
+        .font-heading { font-family: 'Lora', serif; }
+        .font-body { font-family: 'Montserrat', sans-serif; }
+
+        /* --- 2. Scroll-Triggered & Staggered Animations --- */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .is-visible .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .is-visible .stagger-item:nth-child(1) { animation-delay: 0.2s; }
+        .is-visible .stagger-item:nth-child(2) { animation-delay: 0.4s; }
+        .is-visible .stagger-item:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* --- 3. Component-Specific Styles --- */
+        /* FADE SLIDESHOW */
+        .slider-container { position: relative; overflow: hidden; }
+        .slider-track { position: relative; width: 100%; height: 100%; }
+        .slider-container .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 1;
+        }
+        .slider-container .slide.active { opacity: 1; z-index: 2; }
+        .slide-content { animation: fadeInUp 1s ease-out 0.5s both; }
+
+        /* TYPEWRITER CURSOR */
+        .typewriter-cursor::after {
+            content: '|'; display: inline-block; margin-left: 2px;
+            animation: blink 1s infinite; color: var(--primary-color);
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* HERO BG ANIMATION */
+        @keyframes pan { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .animate-pan { animation: pan 40s infinite linear alternate; background-size: 150% 150%; }
+    </style>
 </head>
-<body class="font-body">
+<body class="bg-light-lavender">
+
     <div id="header-placeholder"></div>
 
     <main>
-        <!-- CREATIVE HERO: Emphasizes "International" with refined typography, not jarring colors -->
+        <!-- HERO SECTION -->
         <section class="relative flex items-center justify-center min-h-[80vh] bg-cover bg-center text-white overflow-hidden animate-pan"
-            style="background-image: linear-gradient(rgba(10,10,62,0.8), rgba(10,10,62,0.7)), url('image/num_veal_sbov1.jpg');">
-            <div class="relative z-10 flex flex-col items-center justify-center w-full text-center py-20 px-4">
-                <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl mb-4 drop-shadow-lg tracking-tight scroll-animate">
-                    Veal Sbov Campus
-                </h1>
-                <!-- Elegant sub-heading replaces the red badge for a more premium feel -->
-                <p class="font-heading italic text-2xl md:text-3xl text-accent mb-6 scroll-animate" style="animation-delay: 0.2s;">Your Gateway to a Global Education</p>
-                <div class="w-24 h-1.5 bg-white mx-auto mb-8 rounded-full scroll-animate" style="animation-delay: 0.4s;"></div>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-text-light leading-relaxed scroll-animate" style="animation-delay: 0.6s;">
-                    Home to our prestigious International Program, the Veal Sbov campus is a modern, dynamic environment designed for the leaders of tomorrow.
-                </p>
-                <a href="#about-campus" class="bg-accent text-primary rounded-full px-10 py-4 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 scroll-animate" style="animation-delay: 0.8s;">
-                    Explore the Campus
-                </a>
+            style="background-image: linear-gradient(rgba(10,10,62,0.8), rgba(10,10,62,0.7)), url('image/vealsbov/e1.jpg');">
+            <div class="relative z-20 flex flex-col items-center justify-center w-full text-center py-20 px-4">
+                <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl mb-4 drop-shadow-lg tracking-tight scroll-animate">Veal Sbov Campus</h1>
+                <p class="font-heading italic text-2xl md:text-3xl text-yellow-300 mb-6 scroll-animate" style="animation-delay: 0.2s;">Your Gateway to a Global Education</p>
+                <div class="w-24 h-1.5 bg-accent mx-auto mb-8 rounded-full scroll-animate" style="animation-delay: 0.4s;"></div>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-text-light leading-relaxed scroll-animate" style="animation-delay: 0.6s;">Home to our prestigious International Program, this campus is a modern, dynamic environment designed for the leaders of tomorrow.</p>
+                <a href="#about-campus" class="bg-accent text-primary rounded-full px-10 py-4 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 scroll-animate" style="animation-delay: 0.8s;">Explore Campus</a>
             </div>
         </section>
 
-        <!-- CREATIVE ABOUT SECTION: Overlapping grid layout focused on the International Program's strengths -->
+        <!-- ABOUT SECTION -->
         <section id="about-campus" class="py-24 lg:py-32 bg-light-gray overflow-hidden">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="font-heading text-4xl md:text-5xl text-primary scroll-animate">A Campus Designed for Global Minds</h2>
-                    <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">We provide the facilities, faculty, and framework for a world-class education.</p>
+                    <h2 id="typewriter-heading" class="font-heading text-4xl md:text-5xl text-primary h-16 md:h-20 flex items-center justify-center">
+                        <span class="typewriter-text"></span><span class="typewriter-cursor"></span>
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Providing the facilities, faculty, and framework for a world-class education.</p>
                 </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-                    <!-- Overlapping Image -->
-                    <div class="lg:col-span-3 rounded-3xl shadow-2xl overflow-hidden scroll-animate">
-                         <img src="image/veal_sbov_view.jpg" alt="A serene view of the Veal Sbov campus" class="w-full h-full object-cover">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- VIDEO PLAYER (Replaces the slider) -->
+                    <div class="relative w-full rounded-3xl shadow-2xl overflow-hidden aspect-video scroll-animate bg-black">
+                        <video class="w-full h-full object-cover" controls playsinline poster="image/vealsbov/veal_sbov_view.jpg">
+                            <source src="image/vealsbov/National University of Management - International Campus.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
-
-                    <!-- Overlapping Feature Card 1 -->
-                    <div class="lg:col-span-3 lg:col-start-3 p-8 md:p-12 bg-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.3s;">
-                        <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0 text-accent">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9M3 12a9 9 0 019-9m-9 9a9 9 0 009 9m-9-9h18" /></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-heading text-3xl text-primary mb-3">Global Curriculum</h3>
-                                <p class="text-slate-600 leading-relaxed">
-                                    Our programs are benchmarked against international standards, developed in partnership with leading global universities to ensure your degree is recognized and respected worldwide.
-                                </p>
-                            </div>
+                    <div class="flex flex-col gap-8">
+                        <div class="p-8 md:p-12 bg-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.3s;">
+                            <h3 class="font-heading text-3xl text-primary mb-4">A Global Epicenter</h3>
+                            <p class="text-slate-600 leading-relaxed">The Veal Sbov campus is the dedicated home of our International Program, offering a state-of-the-art environment for global learning, cross-cultural collaboration, and academic innovation.</p>
                         </div>
-                    </div>
-
-                    <!-- Overlapping Feature Card 2 -->
-                    <div class="lg:col-span-3 lg:col-start-1 lg:row-start-2 p-8 md:p-12 bg-primary text-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.4s;">
-                         <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0 text-accent">
-                               <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m-1 4h1m-1 4h1m6-10v10m6-10v10" /></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-heading text-3xl mb-3">State-of-the-Art Facilities</h3>
-                                <p class="text-text-light leading-relaxed opacity-90">
-                                   From modern classrooms and digital libraries to collaborative spaces, the Veal Sbov campus is equipped with the tools and technology you need to thrive.
-                                </p>
-                           </div>
+                        <div class="p-8 md:p-12 bg-primary text-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.4s;">
+                            <h3 class="font-heading text-3xl text-accent mb-4">Modern Vision, Global Impact</h3>
+                            <p class="text-text-light leading-relaxed opacity-90">Designed with a forward-thinking vision, this campus provides the infrastructure and atmosphere for students to become influential leaders on the world stage, ready to tackle global challenges.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CREATIVE GALLERY: Using the consistent "Storytelling Slider" component -->
+        <!-- GALLERY SECTION -->
         <section class="py-24 lg:py-32 bg-white">
             <div class="max-w-7xl mx-auto px-6">
-                 <div class="text-center mb-16">
+                <div class="text-center mb-16">
                     <h2 class="font-heading text-4xl md:text-5xl text-primary scroll-animate">A Day at Veal Sbov</h2>
                     <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Glimpses into the vibrant life and learning at our international campus.</p>
                 </div>
-                <div class="relative w-full max-w-5xl mx-auto h-[350px] md:h-[550px] rounded-2xl shadow-2xl overflow-hidden story-slider scroll-animate">
-                    
-                    <!-- Slide 1 -->
-                    <div class="slide active">
-                        <img src="image/student_vealsbov2.jpg" alt="International students collaborating" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white">
-                            <div class="slide-content">
-                                <h3 class="font-heading text-3xl">Cross-Cultural Collaboration</h3>
-                                <p class="mt-2 max-w-xl text-lg opacity-90">Work with peers from diverse backgrounds in a truly global classroom.</p>
-                            </div>
-                        </div>
+                <div class="relative w-full max-w-5xl mx-auto h-[350px] md:h-[550px] rounded-2xl shadow-2xl overflow-hidden slider-container story-slider scroll-animate">
+                    <div class="slider-track h-full">
+                        <div class="slide"><img src="image/vealsbov/student_vealsbov.jpg" alt="International students collaborating" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Cross-Cultural Collaboration</h3><p class="mt-2 max-w-xl text-lg opacity-90">Work with peers from diverse backgrounds in a truly global classroom.</p></div></div></div>
+                        <div class="slide"><img src="image/vealsbov/student_vealsbov2.jpg" alt="Students engaging with faculty" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Expert Guidance</h3><p class="mt-2 max-w-xl text-lg opacity-90">Learn from international faculty who are leaders in their fields.</p></div></div></div>
+                        <div class="slide"><img src="image/vealsbov/veal_sbov_view.jpg" alt="Modern learning space" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Inspiring Learning Spaces</h3><p class="mt-2 max-w-xl text-lg opacity-90">Facilities designed to foster innovation, focus, and teamwork.</p></div></div></div>
+                        <div class="slide"><img src="image/vealsbov/e1.jpg" alt="NUM Veal Sbov Campus Library" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Resource-Rich Library</h3><p class="mt-2 max-w-xl text-lg opacity-90">Access to extensive academic resources and digital libraries.</p></div></div></div>
+                        <div class="slide"><img src="image/vealsbov/e2.jpg" alt="Veal Sbov Campus outdoor area" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Campus Life</h3><p class="mt-2 max-w-xl text-lg opacity-90">A vibrant community with events, activities, and student organizations.</p></div></div></div>
                     </div>
-                    <!-- Slide 2 -->
-                    <div class="slide">
-                        <img src="image/art2.jpg" alt="Modern learning space" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white">
-                            <div class="slide-content">
-                                <h3 class="font-heading text-3xl">Inspiring Learning Spaces</h3>
-                                <p class="mt-2 max-w-xl text-lg opacity-90">Facilities designed to foster innovation, focus, and teamwork.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 3 -->
-                    <div class="slide">
-                        <img src="image/student_vealsbov.jpg" alt="Students engaging with faculty" class="w-full h-full object-cover">
-                         <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white">
-                            <div class="slide-content">
-                                <h3 class="font-heading text-3xl">Expert Guidance</h3>
-                                <p class="mt-2 max-w-xl text-lg opacity-90">Learn from international faculty who are leaders in their fields.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Slider Navigation -->
-                    <div class="absolute top-1/2 left-4 right-4 flex justify-between z-10 -translate-y-1/2">
-                        <button id="story-slider-prev" class="bg-black/40 text-white rounded-full p-3 shadow-lg hover:bg-black/70 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                        </button>
-                        <button id="story-slider-next" class="bg-black/40 text-white rounded-full p-3 shadow-lg hover:bg-black/70 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                        </button>
-                    </div>
+                </div>
+            </section>
+
+        <!-- FACILITIES SECTION -->
+        <section class="py-24 lg:py-32 bg-light-gray">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-primary scroll-animate"><span class="block font-extrabold text-3xl md:text-4xl leading-none">Built for</span><span class="block text-4xl md:text-5xl mt-1">Global Success</span></h2>
+                    <p class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Our facilities are tailored to the needs of an international curriculum.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                    <div class="scroll-animate" style="animation-delay: 0.3s;"><div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full flex flex-col group transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+                        <div class="relative h-64 slider-container facility-slider"><div class="slider-track h-full">
+                                <div class="slide"><img src="image/vealsbov/classroom.jpg" alt="Modern university classrooms" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/vealsbov/schoolgatev3.png" alt="Technology in the classroom" class="w-full h-full object-cover"></div>
+                        </div><div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div></div>
+                        <div class="p-8 flex-grow"><h3 class="font-heading text-2xl text-primary mb-3">Modern Classrooms</h3><p class="text-slate-600 leading-relaxed">Equipped with the latest technology to facilitate interactive and engaging learning experiences for all students.</p></div>
+                    </div></div>
+                    <div class="scroll-animate" style="animation-delay: 0.5s;"><div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full flex flex-col group transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+                        <div class="relative h-64 slider-container facility-slider"><div class="slider-track h-full">
+                               <div class="slide"><img src="image/vealsbov/student_vealsbov.jpg" alt="Collaborative study lounge" class="w-full h-full object-cover"></div>
+                               <div class="slide"><img src="image/vealsbov/student_vealsbov2.jpg" alt="Students working together in a lounge" class="w-full h-full object-cover"></div>
+                        </div><div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div></div>
+                        <div class="p-8 flex-grow"><h3 class="font-heading text-2xl text-primary mb-3">Collaborative Lounges</h3><p class="text-slate-600 leading-relaxed">Dynamic spaces designed for group projects, networking, and fostering a strong sense of community among students.</p></div>
+                    </div></div>
+                    <div class="scroll-animate" style="animation-delay: 0.7s;"><div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full flex flex-col group transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+                        <div class="relative h-64 slider-container facility-slider"><div class="slider-track h-full">
+                                <div class="slide"><img src="image/vealsbov/s2.jpg" alt="Digital resource center" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/vealsbov/s1.jpg" alt="Online databases and journals" class="w-full h-full object-cover"></div>
+                        </div><div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div></div>
+                        <div class="p-8 flex-grow"><h3 class="font-heading text-2xl text-primary mb-3">Digital Resource Center</h3><p class="text-slate-600 leading-relaxed">Full access to extensive online libraries, academic journals, and research databases from around the world.</p></div>
+                    </div></div>
                 </div>
             </div>
         </section>
-
-        <!-- CREATIVE FEATURES SECTION: Replaces the redundant program sections with a clear, focused list of benefits -->
+        
+        <!-- PROGRAM ADVANTAGE SECTION -->
         <section class="py-24 lg:py-32 bg-primary text-white">
-            <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div class="scroll-animate">
-                    <h2 class="font-heading text-4xl md:text-5xl mb-6">The International Program <span class="text-accent">Advantage</span></h2>
-                    <p class="text-lg leading-relaxed mb-10 text-text-light opacity-90">
-                        Our program is meticulously designed to provide not just a degree, but a transformative experience that prepares you for success on the world stage.
-                    </p>
-                    <div class="space-y-6">
-                        <!-- Feature Item 1 -->
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-4xl md:text-5xl scroll-animate">The International Program <span class="text-accent">Advantage</span></h2>
+                    <p class="mt-4 text-lg text-text-light max-w-3xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Our program is meticulously designed to provide not just a degree, but a transformative experience that prepares you for success on the world stage.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center scroll-animate" style="animation-delay: 0.4s;">
+                    <div class="space-y-8">
                         <div class="flex items-start gap-4 stagger-item">
-                            <div class="flex-shrink-0 bg-accent text-primary h-8 w-8 rounded-full flex items-center justify-center font-bold">✓</div>
+                            <div class="flex-shrink-0 bg-accent text-primary h-10 w-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg">✓</div>
                             <div>
-                                <h4 class="font-bold text-xl mb-1">World-Class Faculty</h4>
+                                <h4 class="font-bold text-xl mb-1 text-white">World-Class Faculty</h4>
                                 <p class="text-text-light opacity-80">Learn from a diverse team of experienced international professors and industry experts.</p>
                             </div>
                         </div>
-                        <!-- Feature Item 2 -->
                         <div class="flex items-start gap-4 stagger-item">
-                            <div class="flex-shrink-0 bg-accent text-primary h-8 w-8 rounded-full flex items-center justify-center font-bold">✓</div>
+                            <div class="flex-shrink-0 bg-accent text-primary h-10 w-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg">✓</div>
                             <div>
-                                <h4 class="font-bold text-xl mb-1">Global Partnership Network</h4>
-                                <p class="text-text-light opacity-80">Benefit from our extensive network of partner universities for exchange programs and study abroad opportunities.</p>
+                                <h4 class="font-bold text-xl mb-1 text-white">Global Partnership Network</h4>
+                                <p class="text-text-light opacity-80">Benefit from our extensive network of partner universities for exchange programs and dual-degree opportunities.</p>
                             </div>
                         </div>
-                        <!-- Feature Item 3 -->
                         <div class="flex items-start gap-4 stagger-item">
-                           <div class="flex-shrink-0 bg-accent text-primary h-8 w-8 rounded-full flex items-center justify-center font-bold">✓</div>
+                           <div class="flex-shrink-0 bg-accent text-primary h-10 w-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg">✓</div>
                             <div>
-                                <h4 class="font-bold text-xl mb-1">International Career Pathways</h4>
+                                <h4 class="font-bold text-xl mb-1 text-white">International Career Pathways</h4>
                                 <p class="text-text-light opacity-80">Gain the skills, perspective, and connections needed to launch a successful career anywhere in the world.</p>
                             </div>
                         </div>
                     </div>
+                    <div class="stagger-item" style="animation-delay: 0.8s;">
+                        <img src="image/vealsbov/s7.jpg" alt="International students collaborating on a project" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+                    </div>
+                        <div class="lg:col-span-2"><h3 class="font-heading text-3xl text-accent mb-4">Rooted in Cambodia, Ready for the Future</h3><p class="text-lg leading-relaxed mb-6 text-text-light">Our National Program is crafted to meet the demands of local industries, empowering students to build successful careers and contribute to national development.</p><a href="#contact" class="mt-8 inline-block bg-accent text-primary rounded-full px-8 py-3 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300">Explore International Degrees</a></div>
+                    </div>
+                    </div>
                 </div>
-                 <div class="scroll-animate" style="animation-delay: 0.2s;">
-                    <img src="image/art3.jpg" alt="Students in a modern classroom setting" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+            </div>
+        </section>
+        
+        <!-- NEW REQUIREMENTS SECTION -->
+        <section class="py-24 lg:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-4xl md:text-5xl text-primary scroll-animate">Graduation Milestones</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Fulfilling these requirements is the final step in earning your degree.</p>
+                </div>
+                <div class="mt-16 max-w-2xl mx-auto">
+                    <!-- Graduation Requirements Card -->
+                    <div class="bg-primary text-white rounded-2xl shadow-lg p-8 lg:p-10 flex flex-col scroll-animate" style="animation-delay: 0.3s;">
+                        <div class="flex-shrink-0 w-16 h-16 rounded-full bg-accent text-primary flex items-center justify-center shadow-md mb-6">
+                            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="font-heading text-3xl text-accent mb-4">Graduation Requirements</h3>
+                        <p class="text-text-light opacity-90 mb-6">To successfully obtain a Bachelor's degree, students must fulfill these academic milestones:</p>
+                        <ul class="space-y-4 text-text-light leading-relaxed flex-grow">
+                             <li class="flex items-start"><span class="text-accent font-bold mr-3 mt-1">✓</span><span>Complete a four-year program of study.</span></li>
+                             <li class="flex items-start"><span class="text-accent font-bold mr-3 mt-1">✓</span><span>Earn a minimum of 120 credits across all coursework.</span></li>
+                             <li class="flex items-start"><span class="text-accent font-bold mr-3 mt-1">✓</span><span>Pass all subject examinations in the final semester.</span></li>
+                             <li class="flex items-start"><span class="text-accent font-bold mr-3 mt-1">✓</span><span>Successfully write and defend a bachelor's thesis.</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- MAP & DIRECTIONS: Cleaned up and integrated into the design flow -->
-        <section class="py-24 lg:py-32 bg-light-gray">
+        <!-- MAP & DIRECTIONS SECTION -->
+        <section id="contact" class="py-24 lg:py-32 bg-light-gray">
             <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-                <div class="scroll-animate">
-                    <h3 class="font-heading text-4xl mb-4 text-primary">Visit Us</h3>
-                    <p class="mb-6 text-lg text-slate-600">Our campus is located in a serene setting, ideal for focused learning. We look forward to welcoming you.</p>
-                    <div class="mt-8 space-y-4">
-                        <div class="flex items-start">
-                             <div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                             </div>
-                             <div class="ml-4">
-                                <h4 class="font-bold text-lg">Address</h4>
-                                <p class="text-slate-600">Veal Sbov, Khan Chbar Ampov, Phnom Penh, Cambodia</p>
-                             </div>
-                        </div>
-                         <div class="flex items-start">
-                             <div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                             </div>
-                             <div class="ml-4">
-                                <h4 class="font-bold text-lg">Office Hours</h4>
-                                <p class="text-slate-600">Monday - Friday: 8:00 AM - 5:00 PM</p>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded-2xl shadow-2xl overflow-hidden aspect-w-4 aspect-h-3 scroll-animate" style="animation-delay: 0.2s;">
-                    <!-- NOTE: Update the Google Maps embed URL to the correct one for Veal Sbov Campus -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4026.4901303685074!2d104.96323757513623!3d11.522317744992847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095764e0ab95c1%3A0xf0eb18a89a0ff44d!2sNUM%20SATELLITE%20Campus%20Veal%20Sbov!5e1!3m2!1sen!2skh!4v1752499898406!5m2!1sen!2skh"
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-full"></iframe>
-                </div>
+                <div class="scroll-animate"><h3 class="font-heading text-4xl mb-4 text-primary">Visit Veal Sbov Campus</h3><p class="mb-6 text-lg text-slate-600">Our campus is located in a serene setting, ideal for focused learning. We look forward to welcoming you.</p><div class="mt-8 space-y-4"><div class="flex items-start"><div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4"><h4 class="font-bold text-lg">Address</h4><p class="text-slate-600">Veal Sbov, Khan Chbar Ampov, Phnom Penh, Cambodia</p></div></div><div class="flex items-start"><div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div><div class="ml-4"><h4 class="font-bold text-lg">Office Hours</h4><p class="text-slate-600">Monday - Friday: 8:00 AM - 5:00 PM</p></div></div></div></div>
+                <div class="rounded-2xl shadow-2xl overflow-hidden aspect-w-16 aspect-h-9 scroll-animate" style="animation-delay: 0.2s;"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4026.4901303685074!2d104.96323757513623!3d11.522317744992847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095764e0ab95c1%3A0xf0eb18a89a0ff44d!2sNUM%20SATELLITE%20Campus%20Veal%20Sbov!5e1!3m2!1sen!2skh!4v1752499898406!5m2!1sen!2skh" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-full"></iframe></div>
             </div>
         </section>
     </main>
 
-    <!-- Primary application script -->
+    <div id="footer-placeholder"></div>
+    
+    <!-- PAGE-SPECIFIC JAVASCRIPT (SPA-Compatible) -->
+    <script>
+        /*
+        ========================================
+        SPA-COMPATIBLE SCRIPT FOR VEAL SBOV PAGE
+        ========================================
+        */
+        
+        let vealSbovPageObserver = null;
+        const vealSbovPageIntervals = [];
+        let typewriterState = { timeoutId: null, active: false };
+
+        // 🎯 PAGE-SPECIFIC INITIALIZATION
+        function initializeVealSbovPage() {
+            console.log("Initializing Veal Sbov Campus page features.");
+            pageCleanup(); // Ensure clean state for SPA navigation
+
+            // --- 1. SCROLL-TRIGGERED ANIMATIONS ---
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            if (scrollElements.length > 0) {
+                vealSbovPageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                    });
+                }, { threshold: 0.1 });
+                scrollElements.forEach(el => vealSbovPageObserver.observe(el));
+            }
+
+            // --- 2. FADE SLIDESHOWS ---
+            const sliders = [
+                { selector: '.story-slider', interval: 5000 },
+            ];
+            document.querySelectorAll('.facility-slider').forEach((slider, i) => {
+                sliders.push({ element: slider, interval: 3500 + i * 500 });
+            });
+            sliders.forEach(sliderConfig => {
+                const sliderEl = sliderConfig.element || document.querySelector(sliderConfig.selector);
+                if (sliderEl) initializeSlider(sliderEl, sliderConfig.interval);
+            });
+            
+            // --- 3. TYPEWRITER EFFECT ---
+            startTypewriter();
+        }
+        
+        // 🧹 OPTIONAL CLEANUP
+        function pageCleanup() {
+            if (vealSbovPageObserver) {
+                vealSbovPageObserver.disconnect();
+                vealSbovPageObserver = null;
+            }
+            vealSbovPageIntervals.forEach(clearInterval);
+            vealSbovPageIntervals.length = 0;
+            if (typewriterState.timeoutId) clearTimeout(typewriterState.timeoutId);
+            typewriterState.active = false;
+            console.log('Veal Sbov Campus page cleanup completed.');
+        }
+        
+        // --- HELPER FUNCTIONS ---
+        function initializeSlider(sliderElement, interval) {
+            if (!sliderElement) return;
+            const slides = sliderElement.querySelectorAll('.slide');
+            if (slides.length <= 1) {
+                if(slides.length === 1) slides[0].classList.add('active');
+                return; 
+            }
+            let currentSlide = 0;
+            slides.forEach(s => s.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+            const intervalId = setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, interval);
+            vealSbovPageIntervals.push(intervalId);
+        }
+        
+        function startTypewriter() {
+            const typewriterElement = document.querySelector('.typewriter-text');
+            if (!typewriterElement) return;
+            typewriterState.active = true;
+            const textToType = "Designed for Global Minds";
+            let charIndex = 0, isDeleting = false;
+            const typeSpeed = 150, deleteSpeed = 100, pauseDuration = 2000;
+            function typeEffect() {
+                if (!typewriterState.active) return;
+                if (isDeleting) {
+                    if (charIndex > 0) {
+                        typewriterElement.textContent = textToType.substring(0, charIndex-- - 1);
+                        typewriterState.timeoutId = setTimeout(typeEffect, deleteSpeed);
+                    } else {
+                        isDeleting = false;
+                        typewriterState.timeoutId = setTimeout(typeEffect, 500);
+                    }
+                } else {
+                    if (charIndex < textToType.length) {
+                        typewriterElement.textContent = textToType.substring(0, charIndex++ + 1);
+                        typewriterState.timeoutId = setTimeout(typeEffect, typeSpeed);
+                    } else {
+                        isDeleting = true;
+                        typewriterState.timeoutId = setTimeout(typeEffect, pauseDuration);
+                    }
+                }
+            }
+            typeEffect();
+        }
+        
+        // 🔄 Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializeVealSbovPage);
+        
+        // 🌐 Make functions globally available for SPA navigation (REQUIRED)
+        window.initializeVealSbovPage = initializeVealSbovPage;
+        window.pageCleanup = pageCleanup;
+    </script>
+    
+    <!-- Site-wide Scripts (global logic) - DO NOT MODIFY -->
     <script src="/js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
-
-    <!-- JAVASCRIPT: Page-specific creative animations & interactions -->
-    <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-
-        // --- SCRIPT 1: Scroll-triggered animations ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.scroll-animate').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // --- SCRIPT 2: "Storytelling" Image Slider Logic ---
-        const storySlider = {
-            slides: document.querySelectorAll('.story-slider .slide'),
-            prevBtn: document.getElementById('story-slider-prev'),
-            nextBtn: document.getElementById('story-slider-next'),
-            current: 0,
-            interval: null,
-
-            init() {
-                if (!this.slides.length) return;
-                this.nextBtn.addEventListener('click', () => this.next());
-                this.prevBtn.addEventListener('click', () => this.prev());
-                this.showSlide(this.current);
-                this.startAutoplay();
-            },
-            showSlide(index) {
-                this.slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            },
-            next() {
-                this.current = (this.current + 1) % this.slides.length;
-                this.showSlide(this.current);
-                this.resetAutoplay();
-            },
-            prev() {
-                this.current = (this.current - 1 + this.slides.length) % this.slides.length;
-                this.showSlide(this.current);
-                this.resetAutoplay();
-            },
-            startAutoplay() {
-                this.interval = setInterval(() => this.next(), 6000);
-            },
-            resetAutoplay() {
-                clearInterval(this.interval);
-                this.startAutoplay();
-            }
-        };
-        storySlider.init();
-
-    });
-    </script>
 </body>
 </html>

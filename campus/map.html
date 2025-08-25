@@ -12,7 +12,6 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/i18n.css">
 
     <!-- Tailwind CSS Theme Configuration -->
     <script>
@@ -44,19 +43,19 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 animate-fade-in-up delay-200">
             <div class="bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                <a href="/campus/main-campus-details" class="block">
-                    <img src="image/num_front.jpg" alt="Main Campus Aerial View" class="w-full h-64 object-cover">
+                <a href="main-campus-details.html" class="block">
+                    <img src="image/mainimage/num_front.jpg" alt="Main Campus Aerial View" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h2 class="text-3xl font-bold text-blue-700 mb-3">Main Campus</h2>
                         <p class="text-gray-700 mb-4">Our sprawling main campus is the heart of academic life, featuring diverse faculties, research centers, and student amenities.</p>
-                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full hover:bg-blue-200 transition-colors duration-200">Explore Main Campus &rarr;</span>
+                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full hover:bg-blue-200 transition-colors duration-200">Explore Main Campus →</span>
                     </div>
                 </a>
             </div>
 
             <div class="bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                <a href="/campus/second-campus-details" class="block">
-                    <img src="image/num_veal_sbov1.jpg" alt="Second Campus Building" class="w-full h-64 object-cover">
+                <a href="second-campus-details.html" class="block">
+                    <img src="image/vealsbov/gate1.jpg" alt="Second Campus Building" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <div class="flex items-center mb-3">
                             <h2 class="text-3xl font-bold text-green-700">Veal Sbov Campus</h2>
@@ -65,7 +64,7 @@
                             </span>
                         </div>
                         <p class="text-gray-700 mb-4">Dedicated to technology and innovation, this campus fosters groundbreaking research and entrepreneurial spirit.</p>
-                        <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full hover:bg-green-200 transition-colors duration-200">Explore Veal Sbov Campus &rarr;</span>
+                        <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full hover:bg-green-200 transition-colors duration-200">Explore Veal Sbov Campus →</span>
                     </div>
                 </a>
             </div>
@@ -73,17 +72,42 @@
 
         <section class="mt-16 text-center">
             <h2 class="text-4xl font-bold text-blue-800 mb-6">Interactive Map Overview</h2>
-            <p class="text-lg text-gray-700 mb-8 max-w-4xl mx-auto">Get a quick glimpse of our campus locations. Click on any campus above for a detailed interactive map and specific building information.</p>
-            <div class="bg-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center h-96 w-full animate-fade-in delay-500">
-                <img src="../Picture/university-map-placeholder.png" alt="University Map Overview" class="max-w-full h-auto object-contain">
+            <p class="text-lg text-gray-700 mb-8 max-w-4xl mx-auto">Get quick access to our campus locations. Scan a QR code with your phone's camera to open the location directly in your map application.</p>
+            
+            <!-- Container for the QR Codes -->
+            <div class="bg-gray-200 rounded-lg shadow-inner p-8 md:p-12 w-full animate-fade-in delay-500">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+
+                    <!-- QR Code 1: Main Campus -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center flex flex-col items-center justify-start transition-transform duration-300 hover:scale-105">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Main Campus Location</h3>
+                        <p class="text-gray-600 mb-4">Scan for directions to our main campus.</p>
+                        <!-- 
+                            IMPORTANT: Replace this src with the actual QR code image for the Main Campus.
+                            Example: <img src="image/maincampus/main_campus_qr.png" ...> 
+                        -->
+                        <img src="image/mainimage/maincampus_map.png" alt="QR Code for Main Campus" class="w-48 h-48 object-contain">
+                    </div>
+
+                    <!-- QR Code 2: Veal Sbov Campus -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center flex flex-col items-center justify-start transition-transform duration-300 hover:scale-105">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">Veal Sbov Campus Location</h3>
+                        <p class="text-gray-600 mb-4">Scan for directions to our international campus.</p>
+                        <!-- 
+                            IMPORTANT: This is your existing QR code.
+                            Replace it if you have a different one for this campus.
+                        -->
+                        <img src="image/vealsbov/adobe-express-qr-code.png" alt="QR Code for Veal Sbov Campus" class="w-48 h-48 object-contain">
+                    </div>
+
+                </div>
             </div>
-            <p class="text-sm text-gray-500 mt-4">Note: Full interactive features available on individual campus detail pages.</p>
+            <p class="text-sm text-gray-500 mt-4">Note: For detailed building information, please explore the individual campus pages above.</p>
         </section>
     </main>
 
     <div id="footer-placeholder"></div>
 
-    <script src="/js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

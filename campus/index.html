@@ -1,46 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="i18n-title" content="navigation.campus">
-    <title>Campus - National University of Management</title>
+    <title>University Campus Map - National University of Management</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com  "></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Theme Configuration (global) -->
     <script src="../js/theme.js"></script>
+
+    <!-- Global site-wide styles -->
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/i18n.css">
+
+    <!-- PAGE-SPECIFIC STYLES -->
+    <style>
+        /* Fade-in animations */
+        .fade-in-section > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s,
+                        transform 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s;
+        }
+        .fade-in-section.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom styles for campus cards */
+        .campus-card {
+            @apply bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300;
+        }
+        .campus-card:hover {
+            @apply scale-105 shadow-2xl;
+        }
+        .campus-card img {
+            @apply w-full h-64 object-cover;
+        }
+        .campus-card-content {
+            @apply p-6;
+        }
+        .campus-card h2 {
+            @apply text-3xl font-bold text-dark-blue mb-3;
+        }
+        .campus-card p {
+            @apply text-dark-blue/80 mb-4;
+        }
+        .campus-card .explore-link {
+            @apply inline-block bg-indigo-100 text-dark-blue text-sm font-semibold px-4 py-2 rounded-full transition-colors duration-200;
+        }
+        .campus-card:hover .explore-link {
+            @apply bg-dark-blue text-white;
+        }
+    </style>
 </head>
-<body class="bg-white">
+<body class="bg-light-lavender font-body">
+
     <div id="header-placeholder"></div>
+
     <main>
-        <div class="bg-white pt-28 pb-16">
+        <!-- Hero Section -->
+        <section class="relative h-[35vh] min-h-[250px] flex items-center justify-center text-center text-white">
+            <div class="absolute inset-0">
+                <img src="https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Campus Map" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-dark-blue/70"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
+                <h1 class="font-heading text-4xl md:text-6xl mb-4">Discover Our Vibrant Campuses</h1>
+                <p class="text-lg md:text-xl text-white/90">Navigate our state-of-the-art facilities. Select a campus below to explore its unique features.</p>
+            </div>
+        </section>
+
+        <!-- Campus Selection Section -->
+        <section class="py-24 fade-in-section">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                    <!-- Main Campus Card -->
+                    <div class="campus-card">
+                        <a href="main-campus-details.html" class="block">
+                            <img src="../image/mainimage/num_front.jpg" alt="Main Campus Aerial View">
+                            <div class="campus-card-content">
+                                <h2>Main Campus</h2>
+                                <p>The heart of academic life, featuring diverse faculties, research centers, and student amenities.</p>
+                                <span class="explore-link">Explore Main Campus &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Veal Sbov Campus Card -->
+                    <div class="campus-card">
+                        <a href="second-campus-details.html" class="block">
+                            <img src="../image/vealsbov/num_veal_sbov1.jpg" alt="Second Campus Building">
+                            <div class="campus-card-content">
+                                <div class="flex items-center mb-3">
+                                    <h2 class="text-3xl font-bold text-dark-blue !mb-0">Veal Sbov Campus</h2>
+                                    <span class="inline-block bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full ml-3 shadow">
+                                        International
+                                    </span>
+                                </div>
+                                <p>Dedicated to technology and innovation, fostering groundbreaking research and entrepreneurial spirit.</p>
+                                <span class="explore-link">Explore Veal Sbov Campus &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Map Placeholder Section -->
+        <section class="bg-white py-24 font-body fade-in-section">
             <div class="max-w-6xl mx-auto px-5 text-center">
-                <h1 class="text-4xl md:text-5xl font-heading text-dark-blue" data-i18n="campus.title">Our Campus</h1>
-                <p class="text-lg text-gray-700 font-body mt-4 max-w-3xl mx-auto" data-i18n="campus.subtitle">
-                    Explore our modern facilities and vibrant campus life.
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-6">University Map Overview</h2>
+                <p class="text-dark-blue/80 text-lg leading-relaxed mb-8">
+                    Get a quick glimpse of our campus locations. Click a card above for a detailed interactive map.
                 </p>
+                <div class="bg-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center h-96 w-full">
+                    <img src="../Picture/university-map-placeholder.png" alt="University Map Overview" class="max-w-full h-auto object-contain">
+                </div>
+                 <p class="text-sm text-gray-500 mt-4">Note: Full interactive features are available on individual campus pages.</p>
             </div>
-        </div>
-        <div class="bg-light-lavender py-20">
-            <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-10">
-                <a href="/campus/map" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
-                    <h2 class="text-2xl font-heading text-dark-blue" data-i18n="navigation.map">Map</h2>
-                    <p class="mt-2 font-body text-gray-600" data-i18n="campus.map_description">Navigate our campus with our interactive map.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold" data-i18n="common.learn_more">Learn More &rarr;</span>
-                </a>
-                <a href="/campus/facilities" class="block bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-1 transition-all">
-                    <h2 class="text-2xl font-heading text-dark-blue" data-i18n="navigation.facilities">Facilities</h2>
-                    <p class="mt-2 font-body text-gray-600" data-i18n="campus.facilities_description">Discover our state-of-the-art labs, libraries, and student spaces.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold" data-i18n="common.learn_more">Learn More &rarr;</span>
-                </a>
-            </div>
-        </div>
+        </section>
     </main>
+
     <div id="footer-placeholder"></div>
-    <script src="/js/i18n.js"></script>
+    
+    <!-- PAGE-SPECIFIC JAVASCRIPT (SPA-Compatible) -->
+    <script>
+        // 🎯 PAGE-SPECIFIC INITIALIZATION (auto-detected by SPA)
+        function initializeMapPage() {
+            console.log('Map page initialized');
+            // Page-specific JS can go here.
+            // For this page, animations are handled by the SPA's intersection observer,
+            // so no extra JS is needed for initialization unless you add new features.
+        }
+        
+        // 🧹 OPTIONAL CLEANUP (called before SPA navigation)
+        function pageCleanup() {
+            console.log('Map page cleanup completed');
+            // Clear any intervals, timeouts, or event listeners to prevent memory leaks
+        }
+        
+        // 🔄 Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializeMapPage);
+        
+        // 🌐 Make functions globally available for SPA navigation (REQUIRED)
+        window.initializeMapPage = initializeMapPage;
+        window.pageCleanup = pageCleanup;
+    </script>
+    
+    <!-- Site-wide Scripts (global logic) -->
+    <script src="../js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

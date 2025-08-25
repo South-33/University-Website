@@ -4,314 +4,388 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The NUM Campus Experience | National University of Management</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Theme Configuration (global) -->
+    <!-- IMPORTANT: Update path if in subdirectory: js/theme.js → ../js/theme.js -->
     <script src="../js/theme.js"></script>
+
+    <!-- Global site-wide styles -->
+    <!-- IMPORTANT: Update path if in subdirectory: css/main.css → ../css/main.css -->
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/i18n.css">
+
+    <!-- PAGE-SPECIFIC STYLES (Recommended for team collaboration) -->
+    <style>
+        /*
+        ===============================
+        PAGE-SPECIFIC CSS FOR MAIN CAMPUS
+        ===============================
+        */
+        
+        /* --- 1. Page-Specific Variables & Base Styles --- */
+        :root {
+            --primary-color: #0A0A3E; /* A deep navy blue */
+            --accent-color: #FBBF24;  /* A vibrant yellow/gold */
+            --light-gray: #F7F8FA;
+            --text-light: #E2E8F0; /* Lighter text for dark backgrounds */
+        }
+        .bg-primary { background-color: var(--primary-color); }
+        .text-primary { color: var(--primary-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .text-accent { color: var(--accent-color); }
+        .bg-light-gray { background-color: var(--light-gray); }
+        .text-text-light { color: var(--text-light); }
+        .font-heading { font-family: 'Lora', serif; }
+        .font-body { font-family: 'Montserrat', sans-serif; }
+
+        /* --- 2. Scroll-Triggered Animations --- */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 3. Component-Specific Styles --- */
+        /* FADE SLIDESHOW */
+        .slider-container { position: relative; overflow: hidden; }
+        .slider-track { position: relative; width: 100%; height: 100%; }
+        .slider-container .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 1;
+        }
+        .slider-container .slide.active { opacity: 1; z-index: 2; }
+        .slide-content { animation: fadeInUp 1s ease-out 0.5s both; }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* PROGRAM PANELS */
+        .program-toggle-button.active {
+            background-color: var(--accent-color); color: var(--primary-color);
+            box-shadow: 0 4px 14px 0 rgba(0,0,0,0.1);
+        }
+        .program-content-panel { display: none; opacity: 0; }
+        .program-content-panel.active { 
+            display: grid; opacity: 1; grid-template-columns: repeat(1, minmax(0, 1fr)); 
+        }
+        @media (min-width: 1024px) {
+            .program-content-panel.active { grid-template-columns: 3fr 2fr; }
+        }
+        .program-content-panel.is-exiting { animation: slideOutToLeft 0.5s ease-out forwards; }
+        .program-content-panel.is-entering { animation: slideInFromRight 0.5s ease-out forwards; }
+
+        @keyframes slideInFromRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideOutToLeft { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } }
+
+        /* TYPEWRITER CURSOR */
+        .typewriter-cursor::after {
+            content: '|'; display: inline-block; margin-left: 2px;
+            animation: blink 1s infinite; color: var(--primary-color);
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    </style>
 </head>
-<body class="font-body">
+<body class="bg-light-lavender">
+
     <div id="header-placeholder"></div>
 
     <main>
-        <!-- CREATIVE HERO: Added subtle background pan animation for a "living" feel -->
-        <section class="relative flex items-center justify-center min-h-[80vh] bg-cover bg-center text-white overflow-hidden animate-pan"
-            style="background-image: linear-gradient(rgba(10,10,62,0.8), rgba(10,10,62,0.7)), url('image/num_front.jpg');">
-            <div class="relative z-10 flex flex-col items-center justify-center w-full text-center py-20 px-4">
-                <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl mb-4 drop-shadow-lg tracking-tight scroll-animate">
-                    Main Campus
-                </h1>
+        <!-- HERO SECTION -->
+        <section class="relative flex items-center justify-center min-h-[80vh] text-white overflow-hidden">
+            <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+                <source src="NumdronestableboomerangCompressed.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="absolute top-0 left-0 w-full h-full bg-primary opacity-10 z-10"></div>
+            <div class="relative z-20 flex flex-col items-center justify-center w-full text-center py-20 px-4">
+                <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl mb-4 drop-shadow-lg tracking-tight scroll-animate">Main Campus</h1>
                 <p class="font-heading italic text-2xl md:text-3xl text-yellow-300 mb-6 scroll-animate" style="animation-delay: 0.2s;">A Legacy of Excellence</p>
                 <div class="w-24 h-1.5 bg-accent mx-auto mb-8 rounded-full scroll-animate" style="animation-delay: 0.4s;"></div>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-text-light leading-relaxed scroll-animate" style="animation-delay: 0.6s;">
-                    Discover state-of-the-art facilities, comprehensive services, and a vibrant community at the heart of NUM. Your journey starts here.
-                </p>
-                <a href="#about-campus" class="bg-accent text-primary rounded-full px-10 py-4 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 scroll-animate" style="animation-delay: 0.8s;">
-                    Explore Campus
-                </a>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-text-light leading-relaxed scroll-animate" style="animation-delay: 0.6s;">Discover state-of-the-art facilities, comprehensive services, and a vibrant community at the heart of NUM. Your journey starts here.</p>
+                <a href="#about-campus" class="bg-accent text-primary rounded-full px-10 py-4 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 scroll-animate" style="animation-delay: 0.8s;">Explore Campus</a>
             </div>
         </section>
 
-        <!-- CREATIVE ABOUT SECTION: Dynamic overlapping grid layout for visual interest -->
+        <!-- ABOUT SECTION -->
         <section id="about-campus" class="py-24 lg:py-32 bg-light-gray overflow-hidden">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="font-heading text-4xl md:text-5xl text-primary scroll-animate">The Heart of Our University</h2>
+                    <h2 id="typewriter-heading" class="font-heading text-4xl md:text-5xl text-primary h-16 md:h-20 flex items-center justify-center">
+                        <span class="typewriter-text"></span><span class="typewriter-cursor"></span>
+                    </h2>
                     <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Fostering innovation, community, and academic excellence since our founding.</p>
                 </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-                    <!-- Overlapping Image -->
-                    <div class="lg:col-span-3 lg:row-span-2 rounded-3xl shadow-2xl overflow-hidden scroll-animate">
-                         <img src="image/num_building.png" alt="A modern NUM campus building" class="w-full h-full object-cover">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative w-full h-[350px] md:h-[500px] rounded-3xl shadow-2xl overflow-hidden slider-container about-slider scroll-animate">
+                        <div class="slider-track h-full">
+                            <div class="slide"><img src="image/mainimage/rector2.jpg" alt="Students on campus" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="image/mainimage/rector.jpg" alt="Campus architecture detail" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="image/mainimage/numbuilding.jpg" alt="Campus building" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="image/mainimage/e4.jpg" alt="Event at NUM" class="w-full h-full object-cover"></div>  
+                            <div class="slide"><img src="image/mainimage/numgate.png" alt="NUM Main Gate" class="w-full h-full object-cover"></div>
+                        </div>
                     </div>
-
-                    <!-- Overlapping Text Card 1 -->
-                    <div class="lg:col-span-3 lg:col-start-3 p-8 md:p-12 bg-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.3s;">
-                        <h3 class="font-heading text-3xl text-primary mb-4">A Hub of Learning</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            Our Main Campus is the vibrant core of NUM, offering a dynamic environment for exceptional learning, groundbreaking research, and enriching student life. With modern facilities and a supportive community, we empower our students for success.
-                        </p>
-                    </div>
-
-                    <!-- Overlapping Text Card 2 -->
-                    <div class="lg:col-span-3 p-8 md:p-12 bg-primary text-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.4s;">
-                        <h3 class="font-heading text-3xl text-accent mb-4">Rich History, Bright Future</h3>
-                        <p class="text-text-light leading-relaxed opacity-90">
-                           Since its founding, NUM has evolved into a leading national institution. We honor our legacy by pioneering new educational methods and engaging deeply with our community to shape the leaders of tomorrow.
-                        </p>
+                    <div class="flex flex-col gap-8">
+                        <div class="p-8 md:p-12 bg-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.3s;">
+                            <h3 class="font-heading text-3xl text-primary mb-4">A Hub of Learning</h3>
+                            <p class="text-slate-600 leading-relaxed">Our Main Campus is the vibrant core of NUM, offering a dynamic environment for exceptional learning, groundbreaking research, and enriching student life. With modern facilities and a supportive community, we empower our students for success.</p>
+                        </div>
+                        <div class="p-8 md:p-12 bg-primary text-white rounded-3xl shadow-2xl z-10 scroll-animate" style="animation-delay: 0.4s;">
+                            <h3 class="font-heading text-3xl text-accent mb-4">Rich History, Bright Future</h3>
+                            <p class="text-text-light leading-relaxed opacity-90">Since its founding, NUM has evolved into a leading national institution. We honor our legacy by pioneering new educational methods and engaging deeply with our community to shape the leaders of tomorrow.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CREATIVE GALLERY: "Storytelling" slider with text content that changes with the image -->
+        <!-- GALLERY SECTION -->
         <section class="py-24 lg:py-32 bg-white">
             <div class="max-w-7xl mx-auto px-6">
                  <div class="text-center mb-16">
                     <h2 class="font-heading text-4xl md:text-5xl text-primary scroll-animate">Campus Life in Motion</h2>
                     <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Experience the energy and diversity of our campus through these moments.</p>
                 </div>
-                <div class="relative w-full max-w-5xl mx-auto h-[350px] md:h-[550px] rounded-2xl shadow-2xl overflow-hidden story-slider scroll-animate">
-                    
-                    <!-- Slide 1 -->
-                    <div class="slide active">
-                        <img src="image/num_building.png" alt="Architectural detail of NUM" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white">
-                            <div class="slide-content">
-                                <h3 class="font-heading text-3xl">Iconic Architecture</h3>
-                                <p class="mt-2 max-w-xl text-lg opacity-90">Modern design that inspires creativity and collaboration.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="slide">
-                        <img src="image/student1.jpg" alt="Students collaborating at NUM" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white">
-                            <div class="slide-content">
-                                <h3 class="font-heading text-3xl">Vibrant Community</h3>
-                                <p class="mt-2 max-w-xl text-lg opacity-90">A diverse and energetic student body is the heart of our campus.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 3 -->
-                    <div class="slide">
-                        <img src="image/campus1.webp" alt="A green space on campus" class="w-full h-full object-cover">
-                         <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white">
-                            <div class="slide-content">
-                                <h3 class="font-heading text-3xl">Spaces to Grow</h3>
-                                <p class="mt-2 max-w-xl text-lg opacity-90">Lush green spaces for study, relaxation, and connection.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Slider Navigation -->
-                    <div class="absolute top-1/2 left-4 right-4 flex justify-between z-10 -translate-y-1/2">
-                        <button id="story-slider-prev" class="bg-black/40 text-white rounded-full p-3 shadow-lg hover:bg-black/70 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                        </button>
-                        <button id="story-slider-next" class="bg-black/40 text-white rounded-full p-3 shadow-lg hover:bg-black/70 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                        </button>
+                <div class="relative w-full max-w-5xl mx-auto h-[350px] md:h-[550px] rounded-2xl shadow-2xl overflow-hidden slider-container story-slider scroll-animate">
+                    <div class="slider-track h-full">
+                        <div class="slide"><img src="image/mainimage/s11.jpg" alt="Students collaborating at NUM" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Vibrant Community</h3><p class="mt-2 max-w-xl text-lg opacity-90">A diverse and energetic student body is the heart of our campus.</p></div></div></div>
+                        <div class="slide"><img src="image/mainimage/s12.jpg" alt="A green space on campus" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Spaces to Grow</h3><p class="mt-2 max-w-xl text-lg opacity-90">Lush green spaces for study, relaxation, and connection.</p></div></div></div>
+                        <div class="slide"><img src="image/mainimage/rector3.jpg" alt="Students engaged in a lecture" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Engaging Lectures</h3><p class="mt-2 max-w-xl text-lg opacity-90">Interactive learning experiences that spark curiosity and innovation.</p></div></div></div>
+                        <div class="slide"><img src="image/mainimage/s2.jpg" alt="NUM students at an event" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Campus Events</h3><p class="mt-2 max-w-xl text-lg opacity-90">A calendar full of activities that bring our community together.</p></div></div></div>
+                        <div class="slide"><img src="image/mainimage/student.jpg" alt="Student smiling" class="w-full h-full object-cover"><div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full text-white"><div class="slide-content"><h3 class="font-heading text-3xl">Focused Study</h3><p class="mt-2 max-w-xl text-lg opacity-90">Dedicated students are the foundation of our academic success.</p></div></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CREATIVE PROGRAMS SECTION: Interactive toggle to switch between National & International programs -->
+        <!-- FACILITIES SECTION -->
+        <section class="py-24 lg:py-32 bg-light-gray">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-primary scroll-animate"><span class="block font-extrabold text-3xl md:text-4xl leading-none">State-of-the-Art</span><span class="block text-4xl md:text-5xl mt-1">Facilities</span></h2>
+                    <p class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Designed for learning, collaboration, and personal growth.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                    <div class="scroll-animate" style="animation-delay: 0.3s;"><div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full flex flex-col group transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+                        <div class="relative h-64 slider-container facility-slider"><div class="slider-track h-full">
+                                <div class="slide"><img src="image/mainimage/library.jpg" alt="Modern university library" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/mainimage/e8.jpg" alt="Interior of the library" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/mainimage/e9.jpg" alt="Students in the library" class="w-full h-full object-cover"></div>
+                        </div><div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div></div>
+                        <div class="p-8 flex-grow"><h3 class="font-heading text-2xl text-primary mb-3">Resourceful Library</h3><p class="text-slate-600 leading-relaxed">Access a vast collection of books, digital archives, and quiet study zones to support your academic journey.</p></div>
+                    </div></div>
+                    <div class="scroll-animate" style="animation-delay: 0.5s;"><div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full flex flex-col group transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+                        <div class="relative h-64 slider-container facility-slider"><div class="slider-track h-full">
+                                <div class="slide"><img src="image/mainimage/art1 copy.jpg" alt="Innovation hub collaboration space" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/mainimage/art2.jpg" alt="Students working on a project in the innovation hub" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/mainimage/art3.jpg" alt="Close-up of technology in the innovation hub" class="w-full h-full object-cover"></div>
+                        </div><div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div></div>
+                        <div class="p-8 flex-grow"><h3 class="font-heading text-2xl text-primary mb-3">Innovation Hub</h3><p class="text-slate-600 leading-relaxed">A dynamic space for collaboration, entrepreneurship, and turning groundbreaking ideas into reality.</p></div>
+                    </div></div>
+                    <div class="scroll-animate" style="animation-delay: 0.7s;"><div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full flex flex-col group transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+                        <div class="relative h-64 slider-container facility-slider"><div class="slider-track h-full">
+                                <div class="slide"><img src="image/mainimage/cafe.jpg" alt="University cafeteria seating area" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/mainimage/cafe2.jpg" alt="A variety of food options at the cafeteria" class="w-full h-full object-cover"></div>
+                                <div class="slide"><img src="image/mainimage/cafe1.jpg" alt="Students enjoying a meal together" class="w-full h-full object-cover"></div>
+                        </div><div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div></div>
+                        <div class="p-8 flex-grow"><h3 class="font-heading text-2xl text-primary mb-3">Campus Cafeteria</h3><p class="text-slate-600 leading-relaxed">Enjoy a variety of delicious and healthy meals in a vibrant social setting. The perfect place to refuel and connect.</p></div>
+                    </div></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- PROGRAMS SECTION -->
         <section class="py-24 lg:py-32 bg-primary text-white">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="font-heading text-4xl md:text-5xl scroll-animate">Find Your Path</h2>
                     <p class="mt-4 text-lg text-text-light max-w-2xl mx-auto scroll-animate" style="animation-delay: 0.2s;">Whether your ambitions are local or global, we have a program designed for you.</p>
                 </div>
-
-                <!-- Interactive Toggle Buttons -->
                 <div id="program-toggle-container" class="flex justify-center mb-12 scroll-animate" style="animation-delay: 0.4s;">
                     <div class="flex space-x-2 p-2 bg-slate-800 rounded-full">
                         <button data-program="national" class="program-toggle-button active w-full sm:w-auto font-semibold px-6 py-3 rounded-full text-white transition-all duration-300">National Program</button>
                         <button data-program="international" class="program-toggle-button w-full sm:w-auto font-semibold px-6 py-3 rounded-full text-white transition-all duration-300">International Program</button>
                     </div>
                 </div>
-                
-                <!-- Content panels that switch based on toggle -->
-                <div class="relative">
-                    <!-- National Program Panel -->
+                <div class="relative overflow-hidden scroll-animate" style="animation-delay: 0.6s;">
                     <div id="program-content-national" class="program-content-panel active items-center gap-12 lg:gap-16">
-                        <div class="lg:col-span-3">
-                            <img src="image/student.jpg" alt="Students in a national program setting" class="rounded-2xl shadow-xl w-full h-auto object-cover">
-                        </div>
-                        <div class="lg:col-span-2">
-                            <h3 class="font-heading text-3xl text-accent mb-4">Rooted in Cambodia, Ready for the Future</h3>
-                            <p class="text-lg leading-relaxed mb-6 text-text-light">Our National Program is crafted to meet the demands of local industries, empowering students to build successful careers and contribute to national development.</p>
-                            <ul class="space-y-3 text-lg list-none">
-                                <li class="flex items-start stagger-item"><span class="text-accent mr-3 mt-1">✓</span> Industry-relevant curriculum</li>
-                                <li class="flex items-start stagger-item"><span class="text-accent mr-3 mt-1">✓</span> Strong local business networks</li>
-                                <li class="flex items-start stagger-item"><span class="text-accent mr-3 mt-1">✓</span> Internships and job placement</li>
-                            </ul>
-                            <a href="#contact" class="mt-8 inline-block bg-accent text-primary rounded-full px-8 py-3 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300">
-                                Explore National Degrees
-                            </a>
-                        </div>
+                        <div class="lg:col-span-3"><img src="image/mainimage/rector.jpg" alt="National program setting" class="rounded-2xl shadow-xl w-full h-auto object-cover"></div>
+                        <div class="lg:col-span-2"><h3 class="font-heading text-3xl text-accent mb-4">Rooted in Cambodia, Ready for the Future</h3><p class="text-lg leading-relaxed mb-6 text-text-light">Our National Program is crafted to meet the demands of local industries, empowering students to build successful careers and contribute to national development.</p><a href="#contact" class="mt-8 inline-block bg-accent text-primary rounded-full px-8 py-3 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300">Explore National Degrees</a></div>
                     </div>
-                    <!-- International Program Panel -->
                     <div id="program-content-international" class="program-content-panel items-center gap-12 lg:gap-16">
-                        <div class="lg:col-span-3">
-                            <img src="image/image3.jpg" alt="International students collaborating" class="rounded-2xl shadow-xl w-full h-auto object-cover">
-                        </div>
-                        <div class="lg:col-span-2">
-                            <h3 class="font-heading text-3xl text-accent mb-4">Your Gateway to the World</h3>
-                            <p class="text-lg leading-relaxed mb-6 text-text-light">Immerse yourself in a global learning environment. Our International Program prepares you for leadership roles in a connected world through partnerships with top universities.</p>
-                            <ul class="space-y-3 text-lg list-none">
-                                <li class="flex items-start stagger-item"><span class="text-accent mr-3 mt-1">✓</span> Globally recognized degrees</li>
-                                <li class="flex items-start stagger-item"><span class="text-accent mr-3 mt-1">✓</span> Study abroad opportunities</li>
-                                <li class="flex items-start stagger-item"><span class="text-accent mr-3 mt-1">✓</span> Multicultural learning environment</li>
-                            </ul>
-                             <a href="#contact" class="mt-8 inline-block bg-accent text-primary rounded-full px-8 py-3 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300">
-                                Discover Global Pathways
-                            </a>
-                        </div>
+                        <div class="lg:col-span-3"><img src="image/mainimage/rector.jpg" alt="International students collaborating" class="rounded-2xl shadow-xl w-full h-auto object-cover"></div>
+                        <div class="lg:col-span-2"><h3 class="font-heading text-3xl text-accent mb-4">Your Gateway to the World</h3><p class="text-lg leading-relaxed mb-6 text-text-light">Immerse yourself in a global learning environment. Our International Program prepares you for leadership roles in a connected world through partnerships with top universities.</p><a href="#contact" class="mt-8 inline-block bg-accent text-primary rounded-full px-8 py-3 font-bold text-lg shadow-lg hover:bg-white transition-all duration-300">Discover Global Pathways</a></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- MAP & DIRECTIONS: Cleaned up and integrated into the design flow -->
-        <section class="py-24 lg:py-32 bg-light-gray">
+        <!-- MAP & DIRECTIONS SECTION -->
+        <section id="contact" class="py-24 lg:py-32 bg-light-gray">
             <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-                <div class="scroll-animate">
-                    <h3 class="font-heading text-4xl mb-4 text-primary">Visit Us</h3>
-                    <p class="mb-6 text-lg text-slate-600">Our campus is conveniently located and accessible. We look forward to welcoming you.</p>
-                    <div class="mt-8 space-y-4">
-                        <div class="flex items-start">
-                             <div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                             </div>
-                             <div class="ml-4">
-                                <h4 class="font-bold text-lg">Address</h4>
-                                <p class="text-slate-600">St. 96, Sangkat Wat Phnom, Khan Daun Penh, Phnom Penh, Cambodia</p>
-                             </div>
-                        </div>
-                         <div class="flex items-start">
-                             <div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                             </div>
-                             <div class="ml-4">
-                                <h4 class="font-bold text-lg">Office Hours</h4>
-                                <p class="text-slate-600">Monday - Friday: 8:00 AM - 5:00 PM</p>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded-2xl shadow-2xl overflow-hidden aspect-w-4 aspect-h-3 scroll-animate" style="animation-delay: 0.2s;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4025.736926494208!2d104.9160520751368!3d11.574775143960865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951431e152d17%3A0x9b79af8befbd4a18!2sNational%20University%20of%20Management!5e1!3m2!1sen!2skh!4v1750758520427!5m2!1sen!2skh"
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full"></iframe>
-                </div>
+                <div class="scroll-animate"><h3 class="font-heading text-4xl mb-4 text-primary">Visit Us</h3><p class="mb-6 text-lg text-slate-600">Our campus is conveniently located and accessible. We look forward to welcoming you.</p><div class="mt-8 space-y-4"><div class="flex items-start"><div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4"><h4 class="font-bold text-lg">Address</h4><p class="text-slate-600">St. 96, Sangkat Wat Phnom, Khan Daun Penh, Phnom Penh, Cambodia</p></div></div><div class="flex items-start"><div class="flex-shrink-0 h-12 w-12 rounded-full bg-white text-primary flex items-center justify-center shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div><div class="ml-4"><h4 class="font-bold text-lg">Office Hours</h4><p class="text-slate-600">Monday - Friday: 8:00 AM - 5:00 PM</p></div></div></div></div>
+                <div class="rounded-2xl shadow-2xl overflow-hidden aspect-w-16 aspect-h-9 scroll-animate" style="animation-delay: 0.2s;"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4025.736926494208!2d104.9160520751368!3d11.574775143960865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951431e152d17%3A0x9b79af8befbd4a18!2sNational%20University%20of%20Management!5e1!3m2!1sen!2skh!4v1750758520427!5m2!1sen!2skh" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-full"></iframe></div>
             </div>
         </section>
     </main>
 
     <div id="footer-placeholder"></div>
-
-    <!-- Primary application script -->
-    <script src="/js/i18n.js"></script>
-    <script src="../js/main.js" data-base-path=".."></script>
-
-    <!-- JAVASCRIPT: Page-specific creative animations & interactions -->
+    
+    <!-- PAGE-SPECIFIC JAVASCRIPT (SPA-Compatible) -->
     <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        // --- CREATIVE SCRIPT 1: Scroll-triggered animations ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    // Optional: unobserve after first animation
-                    // observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
-        });
-
-        document.querySelectorAll('.scroll-animate').forEach(el => {
-            observer.observe(el);
-        });
+        /*
+        ========================================
+        SPA-COMPATIBLE SCRIPT FOR MAIN CAMPUS PAGE
+        ========================================
+        */
         
-        // --- CREATIVE SCRIPT 2: "Storytelling" Image Slider Logic ---
-        const storySlider = {
-            slides: document.querySelectorAll('.story-slider .slide'),
-            prevBtn: document.getElementById('story-slider-prev'),
-            nextBtn: document.getElementById('story-slider-next'),
-            current: 0,
-            interval: null,
+        // State variables to manage resources that need cleanup
+        let campusPageObserver = null;
+        const campusPageIntervals = [];
+        let typewriterState = { timeoutId: null, active: false };
 
-            init() {
-                if (!this.slides.length) return;
-                this.nextBtn.addEventListener('click', () => this.next());
-                this.prevBtn.addEventListener('click', () => this.prev());
-                this.showSlide(this.current);
-                this.startAutoplay();
-            },
-            showSlide(index) {
-                this.slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            },
-            next() {
-                this.current = (this.current + 1) % this.slides.length;
-                this.showSlide(this.current);
-                this.resetAutoplay();
-            },
-            prev() {
-                this.current = (this.current - 1 + this.slides.length) % this.slides.length;
-                this.showSlide(this.current);
-                this.resetAutoplay();
-            },
-            startAutoplay() {
-                this.interval = setInterval(() => this.next(), 6000);
-            },
-            resetAutoplay() {
-                clearInterval(this.interval);
-                this.startAutoplay();
+        // 🎯 PAGE-SPECIFIC INITIALIZATION (auto-detected by SPA)
+        function initializeCampusPage() {
+            console.log("Initializing Main Campus page features.");
+            pageCleanup();
+            
+            // --- 1. SCROLL-TRIGGERED ANIMATIONS ---
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            if (scrollElements.length > 0) {
+                campusPageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                scrollElements.forEach(el => campusPageObserver.observe(el));
             }
-        };
-        storySlider.init();
 
-        // --- CREATIVE SCRIPT 3: Interactive Program Explorer Logic ---
+            // --- 2. FADE SLIDESHOWS ---
+            const sliders = [
+                { selector: '.about-slider', interval: 4000 },
+                { selector: '.story-slider', interval: 5000 },
+            ];
+            document.querySelectorAll('.facility-slider').forEach((slider, i) => {
+                sliders.push({ element: slider, interval: 3500 + i * 500 });
+            });
+            sliders.forEach(sliderConfig => {
+                const sliderEl = sliderConfig.element || document.querySelector(sliderConfig.selector);
+                if (sliderEl) initializeSlider(sliderEl, sliderConfig.interval);
+            });
+
+            // --- 3. INTERACTIVE PROGRAM EXPLORER ---
+            programExplorer.init();
+            
+            // --- 4. TYPEWRITER EFFECT ---
+            startTypewriter();
+        }
+        
+        // 🧹 OPTIONAL CLEANUP (called by SPA before navigating away)
+        function pageCleanup() {
+            if (campusPageObserver) {
+                campusPageObserver.disconnect();
+                campusPageObserver = null;
+            }
+            campusPageIntervals.forEach(clearInterval);
+            campusPageIntervals.length = 0;
+            if (typewriterState.timeoutId) clearTimeout(typewriterState.timeoutId);
+            typewriterState.active = false;
+            programExplorer.destroy();
+            console.log('Main Campus page cleanup completed.');
+        }
+        
+        // --- HELPER FUNCTIONS & OBJECTS ---
+        function initializeSlider(sliderElement, interval) {
+            const slides = sliderElement.querySelectorAll('.slide');
+            if (slides.length <= 1) return;
+            let currentSlide = 0;
+            slides.forEach(s => s.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+            const showNextSlide = () => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            };
+            const intervalId = setInterval(showNextSlide, interval);
+            campusPageIntervals.push(intervalId);
+        }
         const programExplorer = {
-            container: document.getElementById('program-toggle-container'),
-            buttons: document.querySelectorAll('.program-toggle-button'),
-            panels: document.querySelectorAll('.program-content-panel'),
-
+            container: null, handler: null,
             init() {
+                this.container = document.getElementById('program-toggle-container');
                 if (!this.container) return;
-                this.container.addEventListener('click', (e) => {
+                this.handler = (e) => {
                     const button = e.target.closest('.program-toggle-button');
-                    if (button) {
-                        const programId = button.dataset.program;
-                        this.switchProgram(programId);
-                    }
-                });
+                    if (button && !button.classList.contains('active')) this.switchProgram(button.dataset.program);
+                };
+                this.container.addEventListener('click', this.handler);
             },
             switchProgram(programId) {
-                this.buttons.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.program === programId);
-                });
-                this.panels.forEach(panel => {
-                    panel.classList.toggle('active', panel.id === `program-content-${programId}`);
-                    // Re-trigger stagger animations on the now-active panel
-                    if (panel.id === `program-content-${programId}`) {
-                        panel.closest('.scroll-animate')?.classList.remove('is-visible');
-                        setTimeout(() => panel.closest('.scroll-animate')?.classList.add('is-visible'), 10);
-                    }
-                });
+                const buttons = this.container.querySelectorAll('.program-toggle-button');
+                buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.program === programId));
+                const panels = document.querySelectorAll('.program-content-panel');
+                const currentPanel = Array.from(panels).find(p => p.classList.contains('active'));
+                const nextPanel = document.getElementById(`program-content-${programId}`);
+                if (currentPanel && currentPanel !== nextPanel) {
+                    currentPanel.classList.add('is-exiting');
+                    currentPanel.addEventListener('animationend', () => { currentPanel.classList.remove('active', 'is-exiting'); }, { once: true });
+                }
+                if (nextPanel) {
+                    nextPanel.classList.add('active', 'is-entering');
+                    nextPanel.addEventListener('animationend', () => { nextPanel.classList.remove('is-entering'); }, { once: true });
+                }
+            },
+            destroy() {
+                if (this.container && this.handler) this.container.removeEventListener('click', this.handler);
             }
         };
-        programExplorer.init();
-
-    });
+        function startTypewriter() {
+            const typewriterElement = document.querySelector('.typewriter-text');
+            if (!typewriterElement) return;
+            typewriterState.active = true;
+            const textToType = "The Heart of Our University";
+            let charIndex = 0; let isDeleting = false; const typeSpeed = 150, deleteSpeed = 100, pauseDuration = 2000;
+            function typeEffect() {
+                if (!typewriterState.active) return;
+                if (isDeleting) {
+                    if (charIndex > 0) {
+                        typewriterElement.textContent = textToType.substring(0, charIndex-- - 1);
+                        typewriterState.timeoutId = setTimeout(typeEffect, deleteSpeed);
+                    } else { isDeleting = false; typewriterState.timeoutId = setTimeout(typeEffect, 500); }
+                } else {
+                    if (charIndex < textToType.length) {
+                        typewriterElement.textContent = textToType.substring(0, charIndex++ + 1);
+                        typewriterState.timeoutId = setTimeout(typeEffect, typeSpeed);
+                    } else { isDeleting = true; typewriterState.timeoutId = setTimeout(typeEffect, pauseDuration); }
+                }
+            }
+            typeEffect();
+        }
+        
+        // 🔄 Initialize on DOM ready (initial page load)
+        document.addEventListener('DOMContentLoaded', initializeCampusPage);
+        
+        // 🌐 Make functions globally available for SPA navigation (REQUIRED)
+        window.initializeCampusPage = initializeCampusPage;
+        window.pageCleanup = pageCleanup;
     </script>
+    
+    <!-- Site-wide Scripts (global logic) - DO NOT MODIFY -->
+    <!-- IMPORTANT: For new pages in subdirectories, update the main.js path (e.g., js/main.js → ../js/main.js) and the data-base-path attribute (e.g., data-base-path="." → data-base-path="..") -->
+    <script src="/js/i18n.js"></script>
+    <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

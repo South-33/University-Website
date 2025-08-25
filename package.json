@@ -1,0 +1,24 @@
+{
+  "name": "num",
+  "version": "1.0.0",
+  "description": "Please python run cmd script: python -m http.server",
+  "main": "convert-page-to-bilingual.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/South-33/NUM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/South-33/NUM/issues"
+  },
+  "homepage": "https://github.com/South-33/NUM#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

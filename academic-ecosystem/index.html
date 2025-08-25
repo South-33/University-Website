@@ -1,276 +1,188 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Ecosystem - National University of Management</title>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Dependencies -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Tailwind CSS Theme Configuration (global) -->
-    <script src="../js/theme.js"></script>
-    
-    <!-- Global site-wide styles -->
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/i18n.css">
-    
-    <!-- PAGE-SPECIFIC STYLES -->
-    <style>
-        /* Fade-in animations for SPA compatibility */
-        .fade-in-section > * {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s,
-                        transform 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.1s;
-        }
-        .fade-in-section.is-visible > * {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Slide overlay animation */
-        @keyframes slideOverlay {
-            0% { transform: translateX(0%); opacity: 1; }
-            100% { transform: translateX(100%); opacity: 0; }
-        }
-        
-        .slide-in-text-container {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .slide-in-text-container .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #E9E8F5;
-            z-index: 5;
-            animation: slideOverlay 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            animation-delay: 0.3s;
-        }
-        
-        /* Card hover effects */
-        .ecosystem-card {
-            transition: all 0.3s ease-in-out;
-        }
-        .ecosystem-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        /* Zoom-in animation */
-        .zoom-in {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .zoom-in.is-visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-    </style>
-</head>
-<body class="bg-white font-body">
-    <div id="header-placeholder"></div>
-
-    <main>
-        <div class="bg-white pt-28 pb-16">
-            <div class="max-w-6xl mx-auto px-5 text-center">
-                <h1 class="text-4xl md:text-5xl font-heading text-dark-blue">Academic Ecosystem</h1>
-                <p class="text-lg text-gray-700 font-body mt-4 max-w-3xl mx-auto">
-                    Learn about our commitment to research, innovation, and collaboration.
-                </p>
-            </div>
-        </div>
-
-        <div class="bg-light-lavender py-20">
-            <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-3 gap-10">
-                <a href="/academic-ecosystem/research" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <h2 class="text-2xl font-heading text-dark-blue">Research</h2>
-                    <p class="mt-2 font-body text-gray-600">Driving discovery and creating impact through our research initiatives.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
-                </a>
-                <a href="/academic-ecosystem/partners" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <h2 class="text-2xl font-heading text-dark-blue">Partners</h2>
-                    <p class="mt-2 font-body text-gray-600">Collaborating with industry leaders to provide real-world opportunities.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
-                </a>
-                <a href="/academic-ecosystem/innovation" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <h2 class="text-2xl font-heading text-dark-blue">Innovation</h2>
-                    <p class="mt-2 font-body text-gray-600">Fostering a culture of creativity and entrepreneurial thinking.</p>
-                    <span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="bg-white py-20">
-            <div class="max-w-6xl mx-auto px-5">
-                <div class="relative inline-block mb-16 mx-auto block text-center overflow-hidden fade-in-section">
-                    <div class="slide-in-text-container">
-                        <h2 class="text-3xl font-heading text-dark-blue text-content">Key Centers and Institutions</h2>
-                        <div class="overlay"></div>
-                    </div>
-                </div>
-
-                <!-- Center of Excellence for R&D and Innovation (CERI) -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <img src="image/ceri_logo.jpeg" alt="CERI Logo" class="max-w-full max-h-full object-contain">
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Center of Excellence for R&D and Innovation (CERI)</h3>
-                        <p class="font-body text-gray-700">The National University of Management’s Center of Excellence for R&D and Innovation (CERI), previously NUM-Research Center, was established in 2013. It emerged from the university’s initiative to bridge academia and the business community, fostering collaboration and promoting research activities among faculty members and researchers worldwide.</p>
-                    </div>
-                </div>
-
-                <!-- ASEAN Economic Research Institution (AERI) -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">ASEAN Economic Research Institution (AERI)</h3>
-                        <p class="font-body text-gray-700">Chosen by the Ministry of Education, Youth, and Sports, this institute supports academic research on economic issues and policy development, aligning with the goals of the ASEAN Economic Community (AEC). It confirms NUM's commitment to enhance and encourage research in economic strategy and policy, driven by Cambodia's ASEAN chairmanship.</p>
-                    </div>
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <img src="image/aeri_logo.jpeg" alt="AERI Logo" class="max-w-full max-h-full object-contain">
-                    </div>
-                </div>
-
-                <!-- Center for Digital Law -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <img src="image/digital_law.jpeg" alt="Center for Digital Law Logo" class="max-w-full max-h-full object-contain">
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Center for Digital Law</h3>
-                        <p class="font-body text-gray-700">Located at the NUM Veal Sbov Campus, this center collaborates with various faculties to support technology transfer, conduct research on technology and digital laws, and provide specialized legal training in the digital domain.</p>
-                    </div>
-                </div>
-
-                <!-- The CamboVerse Center -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">The CamboVerse Center</h3>
-                        <p class="font-body text-gray-700">This center focuses on developing virtual and augmented reality experiences to preserve and disseminate Cambodian cultural heritage. By merging modern technology with cultural education, it aims to foster a deeper global appreciation of Cambodian culture and history.</p>
-                    </div>
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <img src="image/cambo.jpeg" alt="CamboVerse Center Logo" class="max-w-full max-h-full object-contain">
-                    </div>
-                </div>
-
-                <!-- ===== START: NEW SECTIONS ===== -->
-
-                <!-- Administration and Student Services -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <img src="image/service.jpg" alt="Administration and Student Services Logo" class="max-w-full max-h-full object-contain rounded-sm">
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Administration and Student Services</h3>
-                        <p class="font-body text-gray-700">Located at the NUM Veal Sbov Campus, this section provides essential administrative support, streamlines student enrollment, monitors academic progress, and offers comprehensive guidance and counseling to enhance the overall student experience and support their holistic development.</p>
-                    </div>
-                </div>
-
-                <!-- NUM Social Innovation Lab -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">NUM Social Innovation Lab</h3>
-                        <p class="font-body text-gray-700">Part of the EU-funded South-East Asian Social Innovation Network (SEASIN) and supported by SMART Axiata, this lab is a space for seminars, workshops, and an incubator to develop and launch new social ventures and promote social entrepreneurship.</p>
-                    </div>
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <img src="image/num_social.png" alt="NUM Social Innovation Lab Logo" class="max-w-full max-h-full object-contain rounded-sm">
-                    </div>
-                </div>
-
-                <!-- NUM Career Center -->
-                <div class="grid md:grid-cols-[150px_1fr] gap-8 items-center mb-12 bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                        <img src="image/num_career.jpeg" alt="NUM Career Center Logo" class="max-w-full max-h-full object-contain rounded-sm">
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">NUM Career Center</h3>
-                        <p class="font-body text-gray-700">Supported by USAID, this center is part of the "Digital Career Development" project with UC Berkeley. It aims to enhance digital employment skills, increase scholarships and internships, and build relationship opportunities to support the careers of Cambodian youth.</p>
-                    </div>
-                </div>
-
-                <!-- Digital Technology Center (DTC) -->
-                <div class="grid md:grid-cols-[1fr_150px] gap-8 items-center bg-white p-8 rounded-lg shadow-md ecosystem-card zoom-in">
-                    <div>
-                        <h3 class="text-2xl font-heading text-dark-blue mb-3">Digital Technology Center (DTC)</h3>
-                        <p class="font-body text-gray-700">Donated by the Ministry of Post and Telecommunication, the DTC is dedicated to developing a university research hub, corporate innovation facilities, and a community tech hub. It provides essential infrastructure, training, and support to advance digital skills, technologies, and transformation.</p>
-                    </div>
-                    <div class="w-32 h-32 flex justify-center items-center bg-white border p-2 rounded-md mx-auto">
-                         <img src="image/lap.jpg" alt="Digital Technology Center Logo" class="max-w-full max-h-full object-contain rounded-sm">
-                    </div>
-                </div>
-                 <!-- ===== END: NEW SECTIONS ===== -->
-
-            </div>
-        </div>
-    </main>
-
-    <div id="footer-placeholder"></div>
-
-    <!-- PAGE-SPECIFIC JAVASCRIPT -->
+    <!-- Tailwind Config -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAnimations();
-        });
-        
-        function initializeAnimations() {
-            // Initialize fade-in sections
-            const fadeInSections = document.querySelectorAll('.fade-in-section');
-            const zoomInElements = document.querySelectorAll('.zoom-in');
-            
-            // Intersection Observer for animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            // Observe fade-in sections
-            fadeInSections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Observe zoom-in elements
-            zoomInElements.forEach(element => {
-                observer.observe(element);
-            });
-            
-            // Trigger animations immediately if already in viewport
-            setTimeout(() => {
-                fadeInSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        section.classList.add('is-visible');
-                    }
-                });
-                
-                zoomInElements.forEach(element => {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        element.classList.add('is-visible');
-                    }
-                });
-            }, 100);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'dark-blue': '#0A0A3E', 'light-lavender': '#E9E8F5' },
+                    fontFamily: { heading: ['Lora', 'serif'], body: ['Montserrat', 'sans-serif'] }
+                }
+            }
         }
     </script>
     
-    <!-- Site-wide Scripts (global logic) -->
-    <script src="/js/i18n.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        .modal-open { overflow: hidden; }
+        @keyframes blink { 50% { opacity: 0; } }
+        #typewriter-heading::after {
+          content: '|';
+          display: inline-block;
+          margin-left: 0.2rem;
+          color: #0A0A3E; /* dark-blue */
+          animation: blink 0.8s infinite step-end;
+        }
+    </style>
+</head>
+
+<body class="bg-white font-body">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Sections 1 and 2 -->
+        <section class="bg-white pt-28 pb-16">
+            <div class="max-w-6xl mx-auto px-5 text-center">
+                <h1 class="text-4xl md:text-5xl font-heading text-dark-blue">Academic Ecosystem</h1>
+                <p class="text-lg text-gray-700 font-body mt-4 max-w-3xl mx-auto">Learn about our commitment to research, innovation, and collaboration.</p>
+            </div>
+        </section>
+        <section class="bg-light-lavender py-20">
+            <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-3 gap-10">
+                <a href="research.html" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <h2 class="text-2xl font-heading text-dark-blue">Research</h2><p class="mt-2 font-body text-gray-600">Driving discovery and creating impact.</p><span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
+                </a>
+                <a href="partners.html" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <h2 class="text-2xl font-heading text-dark-blue">Partners</h2><p class="mt-2 font-body text-gray-600">Collaborating to provide real-world opportunities.</p><span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
+                </a>
+                <a href="innovation.html" class="block bg-white p-8 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <h2 class="text-2xl font-heading text-dark-blue">Innovation</h2><p class="mt-2 font-body text-gray-600">Fostering a culture of entrepreneurial thinking.</p><span class="mt-4 inline-block text-dark-blue font-bold">Learn More →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section 3: Key Centers -->
+        <section class="bg-white py-20">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16 h-12 flex items-center justify-center">
+                    <h2 id="typewriter-heading" class="text-3xl font-heading text-dark-blue"></h2>
+                </div>
+                <div id="centers-container" class="flex flex-col gap-16 md:gap-24"></div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="footer-placeholder"></div>
+
+    <!-- Modal Popup Structure -->
+    <div id="modal-container" class="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50 transition-opacity duration-300 ease-out opacity-0 pointer-events-none">
+        <div id="modal-box" class="bg-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col md:flex-row transform transition-all duration-300 ease-out scale-95 opacity-0">
+            <button id="modal-close-btn" class="absolute -top-3 -right-3 bg-white rounded-full p-2 shadow-lg text-dark-blue hover:bg-light-lavender z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div class="w-full md:w-2/5 h-64 md:h-auto"><img id="modal-image" src="" alt="" class="w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none"></div>
+            <div class="w-full md:w-3/5 p-8 flex flex-col overflow-y-auto">
+                <h3 id="modal-title" class="text-3xl font-heading font-bold text-red-600 mb-4"></h3>
+                <p id="modal-description" class="font-body text-gray-700 leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
     <script src="../js/main.js" data-base-path=".."></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        const centersData = [
+            { name: "Center of Excellence for R&D and Innovation (CERI)", description: "The National University of Management’s Center of Excellence for R&D and Innovation (CERI), previously NUM-Research Center, was established in 2013. It emerged from the university’s initiative to bridge academia and the business community,fostering collaboration. CERI also aims to promote research activities among faculty members and researchers worldwide, enhancing innovation and knowledge exchange. Motivated by the strong commitment of NUM management and staff, several development partners, including the World Bank, the Asian Development Bank, and the United Nations Development Program in Cambodia, have provided support for the implementation of various project activities under the center.", imageUrl: "image/ceri_logo.jpeg", imageAlt: "CERI Logo", imageType: "logo" },
+            { name: "ASEAN Economic Research Institution (AERI)", description: "The National University of Management is proud to be chosen by the Ministry of Education, Youth, and Sports to establish an institute dedicated to supporting academic research. The institute will focus on economic issues and policy development, aligning with the goals of the ASEAN Economic Community (AEC) The establishment of the ASEAN Economic Research Institute confirms NUM’s commitment to enhance and encourage research among faculties in the area of economic strategy and policy. The initial impetus for this project comes from Cambodia taking the Chair of ASEAN in 2022 and it is expected that research will be initially driven by the theme and direction of Cambodia’s chairmanship in continuing the development of AEC in line with the ASEAN Charter.", imageUrl: "image/aeri_logo.jpeg", imageAlt: "AERI Logo", imageType: "logo" },
+            { name: "Center for Digital Law", description: "The Center of Digital Law is located in the NUM’s Veal Sbov Campus and collaborate with other related faculties including School of Public Policy, Faculty of Law, Faculty of Digital Economy, Faculty of Information Technology, like-minded research centers as well as NUM School of Graduate Studies. The missions of the Center for Digital Law at NUM include (i) technology transfer support (acting as Technology Transfer Office-TTO);(ii) research and study on technology and digital laws; and (iii) legal training.", imageUrl: "image/digital_law.jpeg", imageAlt: "Center for Digital Law", imageType: "logo" }, /* <-- THIS IS THE FIX */
+            { name: "The CamboVerse Center", description: "The CamboVerse Center focuses on exploring and developing virtual and augmented reality experiences with a particular emphasis on Cambodian cultural and historical contexts. Such a center promotes the preservation and innovative dissemination of cultural heritage through modern technology, making it accessible to a global audience and future generations. By merging technology with cultural education, the CamboVerse Center hopes to foster a deeper global appreciation and understanding of Cambodian culture, history, and  contributions", imageUrl: "image/cambo.jpeg", imageAlt: "CamboVerse Center", imageType: "logo" },
+            { name: "Administration and Student Services", description: "The Section for Administration and Student Services, located at the NUM Veal Sbov Campus, is dedicated to providing essential administrative and support functions that streamline student enrollment, monitor academic progress, and promote student welfare. This unit offers comprehensive guidance and counseling services addressing both academic and personal concerns, thereby enhancing the overall student experience and supporting their holistic development throughout their academic journey.", imageUrl: "image/service.jpg", imageAlt: "Administration and Student Services", imageType: "logo" },
+            { name: "NUM Social Innovation Lab", description: "The NUM Social Innovation Lab is part of the EU-funded South-East Asian Social Innovation Network (SEASIN), with additional support provided by SMART Axiata. The Social Innovation Lab serves as a space for seminars and interactive workshops on social innovation and entrepreneurship. It also functions as an incubator to help develop and launch new social ventures", imageUrl: "image/num_social.png", imageAlt: "NUM Social Innovation Lab Logo", imageType: "logo" },
+            { name: "NUM Career Center", description: "With the support of USAID Cambodia, the University of California Berkley (UCB), in collaboration with The Asia Foundation and the National University of Management, has launched the “Digital Career Development” project. This five-year project aims to enhance digital employment skills by strengthening the capacity of higher education institutions in Cambodia to receive international standard assessments, increase the number of scholarships, internships and relationship building opportunities to support the implementation of skills and employment opportunities for Cambodian youth. NUM as a partner of the project, commenced the Career Center supported by USAID", imageUrl: "image/num_career.jpeg", imageAlt: "NUM Career Center", imageType: "logo" },
+            { name: "Digital Technology Center (DTC)", description: "The Digital Technology Center(DTC), donated by the Ministry of Post and Telecommunication, is dedicated to developing university research hub, corporate innovation facilities, training center,  and community tech hub, aiming to advance digital skills, technologies, and transformation across various sectors. The DTC provides essential infrastructure, expertise, training, and supports to promote digital innovation and inclusion.", imageUrl: "image/lap.jpg", imageAlt: "Digital Technology Center", imageType: "logo" },
+            { name: "NUM Robotic Creative Lab", description: "Robotic Lab is established to support IT students with their mechanical practices and develop robotic competition. The competition also fosters student engagement in scientific and applied research.", imageUrl: "image/robotic.png", imageAlt: "NUM Robotic Creative Lab", imageType: "logo" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const centersContainer = document.getElementById('centers-container');
+            const modalContainer = document.getElementById('modal-container');
+            const modalBox = document.getElementById('modal-box');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            
+            function renderCenters() {
+                centersContainer.innerHTML = centersData.map((center, index) => {
+                    const imageOrderClass = index % 2 !== 0 ? 'md:order-last' : '';
+                    const isLogo = center.imageType === 'logo';
+
+                    // The container for the image has a fixed height (h-72).
+                    // For logos, we add padding (p-10) to create a uniform inner box.
+                    // ADDED BORDER HERE
+                    const wrapperClasses = isLogo
+                        ? 'h-72 flex items-center justify-center bg-white p-10 border-2 border-red-500' 
+                        : 'h-80'; 
+
+                    // The image itself fits inside its container.
+                   const imageClasses = isLogo
+                        ? 'object-contain max-h-56 w-auto' 
+                        : 'object-cover w-full h-full'; 
+                    return `
+                        <div class="center-item grid grid-cols-1 md:grid-cols-5 items-center gap-8 md:gap-12 cursor-pointer group" data-id="${index}" data-aos="fade-up">
+                            
+                            <!-- Image Column -->
+                            <div class="md:col-span-2 ${imageOrderClass}">
+                                <div class="overflow-hidden rounded-xl shadow-lg ${wrapperClasses}">
+                                    <img src="${center.imageUrl}" alt="${center.imageAlt}" 
+                                         class="transform group-hover:scale-105 transition-transform duration-500 ease-out ${imageClasses}">
+                                </div>
+                            </div>
+
+                            <!-- Text Column -->
+                            <div class="md:col-span-3">
+                                <h3 class="text-2xl md:text-3xl font-heading font-bold text-red-600 mb-3 group-hover:text-dark-blue transition-colors duration-300">${center.name}</h3>
+                                <p class="font-body text-gray-700 leading-relaxed mb-4">${center.description.substring(0, 220)}...</p>
+                                <span class="font-bold text-dark-blue inline-block transition-transform group-hover:translate-x-1 duration-300">Read More →</span>
+                            </div>
+
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // ADDED BORDER TO MODAL LOGO HERE
+            function openModal(center) { document.getElementById('modal-title').textContent = center.name; document.getElementById('modal-description').textContent = center.description; const modalImage = document.getElementById('modal-image'); modalImage.src = center.imageUrl; modalImage.alt = center.imageAlt; modalImage.className = `w-full h-full rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none ${center.imageType === 'logo' ? 'object-contain bg-white p-4 border border-gray-200' : 'object-cover'}`; document.body.classList.add('modal-open'); modalContainer.classList.remove('pointer-events-none', 'opacity-0'); modalBox.classList.remove('opacity-0', 'scale-95'); }
+            function closeModal() { document.body.classList.remove('modal-open'); modalContainer.classList.add('pointer-events-none', 'opacity-0'); modalBox.classList.add('opacity-0', 'scale-95'); }
+            
+            centersContainer.addEventListener('click', (e) => { 
+                const item = e.target.closest('.center-item'); 
+                if (item) { 
+                    openModal(centersData[item.dataset.id]); 
+                } 
+            });
+            modalCloseBtn.addEventListener('click', closeModal);
+            modalContainer.addEventListener('click', (e) => { if (e.target === modalContainer) { closeModal(); } });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); } });
+
+            const typewriter = {
+                element: document.getElementById('typewriter-heading'),
+                text: "Key Centers and Institutions",
+                typeSpeed: 75,
+                deleteSpeed: 50,
+                pauseDuration: 2000,
+                textIndex: 0,
+                isDeleting: false,
+                timeoutId: null,
+                loop: function() { const currentText = this.text; let currentSpeed = this.isDeleting ? this.deleteSpeed : this.typeSpeed; if (this.isDeleting) { this.element.textContent = currentText.substring(0, this.textIndex - 1); this.textIndex--; } else { this.element.textContent = currentText.substring(0, this.textIndex + 1); this.textIndex++; } if (!this.isDeleting && this.textIndex === currentText.length) { currentSpeed = this.pauseDuration; this.isDeleting = true; } else if (this.isDeleting && this.textIndex === 0) { currentSpeed = this.pauseDuration; this.isDeleting = false; } this.timeoutId = setTimeout(() => this.loop(), currentSpeed); },
+                start: function() { if (this.element && !this.timeoutId) { this.loop(); } },
+                stop: function() { clearTimeout(this.timeoutId); this.timeoutId = null; }
+            };
+            const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { typewriter.start(); } else { typewriter.stop(); } }); }, { threshold: 0.1 });
+            if (typewriter.element) { observer.observe(typewriter.element); }
+
+            renderCenters();
+            AOS.init({ duration: 800, once: true, offset: 150 });
+        });
+    </script>
 </body>
 </html>
