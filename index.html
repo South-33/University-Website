@@ -79,16 +79,18 @@
         .typewriter-cursor {
             display: inline-block;
             background-color: #FFC72C;
-            width: 4px;
-            height: 2.5rem; /* For text-4xl */
-            margin-left: 0.5rem;
+            width: 3px;
+            /* Responsive Change: Adjusted height for different text sizes */
+            height: 2rem; /* For text-3xl */
+            margin-left: 0.25rem;
             animation: blink 1s step-end infinite;
             vertical-align: bottom;
         }
+        @media (min-width: 640px) {
+             .typewriter-cursor { height: 2.5rem; } /* For sm:text-4xl */
+        }
         @media (min-width: 768px) {
-            .typewriter-cursor {
-                height: 3rem; /* For md:text-5xl */
-            }
+            .typewriter-cursor { height: 3rem; } /* For md:text-5xl */
         }
         @keyframes blink {
             from, to { background-color: transparent; }
@@ -116,40 +118,43 @@
 
     <main>
         <!-- HERO SECTION (UoM STYLE) -->
-        <section class="relative h-[600px] flex items-center text-white bg-dark-blue">
-            <div class="absolute inset-0">
-                <!-- Swiper -->
-                <div class="swiper hero-slider h-full w-full">
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide"><img src="Picture/1/num_front.jpg" alt="NUM Campus Building" class="w-full h-full object-cover"></div>
-                        <div class="swiper-slide"><img src="Picture/1/e1.jpg" alt="Aerial view of NUM" class="w-full h-full object-cover"></div>
-                        <div class="swiper-slide"><img src="Picture/1/e2.jpg" alt="NUM Veal Sbov Campus Render" class="w-full h-full object-cover"></div>
-                        <div class="absolute inset-0 bg-dark-blue/60"></div>
-                    </div>
-                    <!-- Add Pagination -->
-                    <div class="swiper-pagination"></div>
-                    <!-- Add Navigation -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
-               
-            </div>
-            <div class="relative z-10 max-w-7xl mx-auto px-5">
-                <div class="max-w-xl">
-                    <h1 class="font-heading text-5xl md:text-6xl font-extrabold">Your Future Starts Here</h1>
-                    <p class="font-body text-xl mt-4 text-white/90">
-                        Discover why NUM is a global leader in innovation and entrepreneurship.
-                    </p>
-                    <a href="#" class="inline-block bg-gold text-dark-blue font-bold px-8 py-3 rounded-full mt-8 hover:bg-gold/90 transition-all">
-                        → Explore Our Courses
-                    </a>
-                </div>
-            </div>
-        </section>
+        <!-- Responsive Change: Replaced h-[600px] with responsive height h-[85vh] on mobile and md:h-[600px] on desktop -->
+       <!-- Main section acts as the positioning and flex container -->
+<section class="relative h-[85vh] md:h-[600px] flex items-center text-white">
+
+    <!-- LAYER 1: BACKGROUND SLIDER -->
+    <!-- This div is absolute, filling the parent section. It sits on the bottom layer (z-index 0) -->
+    <div class="swiper hero-slider absolute inset-0 h-full w-full">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="Picture/1/main-campus-view.jpg" alt="NUM Campus Building" class="w-full h-full object-cover"></div>
+            <div class="swiper-slide"><img src="Picture/1/vealsbov_building.jpg" alt="Aerial view of NUM" class="w-full h-full object-cover"></div>
+            <div class="swiper-slide"><img src="Picture/1/viewbacksite.jpg" alt="NUM Veal Sbov Campus Render" class="w-full h-full object-cover"></div>
+        </div>
+    </div>
+
+    <!-- LAYER 2: DARK OVERLAY -->
+    <!-- This is also absolute, covering the slider. z-10 lifts it above the images. -->
+    <div class="absolute inset-0 bg-dark-blue/60 z-10"></div>
+
+    <!-- LAYER 3: TEXT CONTENT -->
+    <!-- This div is relative with a higher z-index. The 'flex' on the parent <section> will center this block vertically. -->
+    <div class="relative z-20 w-full max-w-7xl mx-auto px-5 text-center md:text-left">
+        <div class="max-w-xl">
+            <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold">Your Future Starts Here</h1>
+            <p class="font-body text-lg md:text-xl mt-4 text-white/90">
+                Discover why NUM is a global leader in innovation and entrepreneurship.
+            </p>
+            <a href="#" class="inline-block bg-gold text-dark-blue font-bold px-8 py-3 rounded-full mt-8 hover:bg-gold/90 transition-all">
+                → Explore Our Courses
+            </a>
+        </div>
+    </div>
+
+</section>
 
         <!-- ICON GRID LINKS (UoM STYLE) -->
-        <section class="bg-light-lavender py-20">
+        <!-- Responsive Change: Adjusted vertical padding for mobile -->
+        <section class="bg-light-lavender py-16 md:py-20">
             <div class="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Card 1: Courses -->
                 <a href="/NUM/programs/bachelors.html" class="group flex items-start gap-4"><div class="bg-dark-blue text-gold rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center mt-1">→</div><div><h2 class="font-heading text-xl font-bold text-dark-blue group-hover:text-gold transition-colors">Courses</h2><p class="font-body text-slate-600 mt-1">Find the right course and see why studying with us is different.</p></div></a>
@@ -163,13 +168,16 @@
         </section>
 
         <!-- WELCOME TO NUM SECTION (NEW) -->
-        <section class="py-24 bg-white">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="py-16 lg:py-24 bg-white">
             <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
                  <div>
-                    <img src="Picture/1/art1%20copy.jpg" alt="Hallway at National University of Management" class="rounded-lg shadow-xl w-full h-96 object-cover">
+                    <!-- Responsive Change: Reduced image height on mobile -->
+                    <img src="Picture/1/art.jpg" alt="Hallway at National University of Management" class="rounded-lg shadow-xl w-full h-80 md:h-96 object-cover">
                 </div>
                 <div>
-                    <h2 class="font-heading text-4xl text-dark-blue">Welcome to NUM</h2>
+                    <!-- Responsive Change: Adjusted heading font size -->
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue">Welcome to NUM</h2>
                     <div class="w-16 h-1 bg-gold my-4"></div>
                     <p class="font-body text-slate-700 my-6 leading-relaxed">Throughout the course of 42 years, the National University of Management has been developing progressively in terms of capacity, diversity, and quality education, based on our core values of research, entrepreneurship, and innovation, which take our students and alumni to a brighter future.</p>
                      <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Learn about our history</span><span class="arrow">→</span></a>
@@ -178,35 +186,39 @@
         </section>
 
         <!-- FEATURED CONTENT: RECTOR'S MESSAGE (UoM STYLE) -->
-        <section class="py-24 bg-light-lavender">
-            <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
-                <div>
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="py-16 lg:py-24 bg-light-lavender">
+            <!-- MODIFICATION: Changed grid to 5 columns on desktop for better balance. -->
+            <div class="max-w-6xl mx-auto px-5 grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+                <!-- Text content now takes 3/5 of the width on desktop -->
+                <div class="md:col-span-3">
                     <p class="font-heading font-bold text-sm text-gold tracking-widest">LEADERSHIP</p>
-                    <h2 class="font-heading text-4xl text-dark-blue mt-2">A Message from the Rector</h2>
+                    <!-- Responsive Change: Adjusted heading font size -->
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mt-2">A Message from the Rector</h2>
                     <p class="font-body text-md text-slate-700 my-6 leading-relaxed">On behalf of the National University of Management, I would like to express my sincere thanks to the Royal Government of Cambodia, Ministry of Education Youth and Sport, Ministry of Health, and the World Health Organization, that have worked tirelessly to protect and prevent the spread of the COVID 19 pandemic to our Cambodian community. In these challenging times, my colleagues and I are sincerely committed to working closely with students, faculty, staff, and collaborative partners to find innovative ways to offer greater flexibility for the learning experience via a new path of online/remote learning and hybrid classrooms with small in-person seminars and tutorials following SOP requirements. With best wishes to you and good health in these challenging times! Dr. HOR Peng Rector of the National University of Management</p>
                     <p class="font-heading text-lg font-bold text-dark-blue">Dr. HOR Peng</p>
                     <p class="font-body text-dark-blue/70">Rector, National University of Management</p>
                     <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-6 link-arrow hover:text-gold"><span>Read more</span><span class="arrow">→</span></a>
                 </div>
-                <div>
-                     <img src="https://cs.num.edu.kh/images/203%2C772x914%2B79%2B87/12079624/photo_2024-11-2110.13.52.jpeg" alt="Dr. Hor Peng, Rector of NUM" class="rounded-lg shadow-xl w-full object-cover">
+                <!-- Image content now takes 2/5 of the width and appears first on mobile -->
+                <div class="md:col-span-2 row-start-1 md:row-auto">
+                     <img src="Picture/1/rector.jpg" alt="Dr. Hor Peng, Rector of NUM" class="rounded-lg shadow-xl w-full object-cover">
                 </div>
             </div>
         </section>
 
         <!-- CORRECTED 3-COLUMN STATIC GRID SECTION -->
-        <section class="bg-white py-24">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-white py-16 lg:py-24">
             <div class="max-w-7xl mx-auto px-5">
-                <!-- Use a standard grid instead of a slider -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    
                     <!-- Column 1: Mission -->
                     <div>
                         <div class="flex flex-col h-full">
                             <h3 class="font-heading text-2xl font-bold text-dark-blue">OUR MISSION</h3>
                             <div class="w-16 h-1 bg-gold my-4"></div>
                             <p class="font-body text-slate-700 leading-relaxed mb-6">TO BE A LEADING UNIVERSITY IN EDUCATION, RESEARCH, INNOVATION AND ENTREPRENURSHIP</p>
-                            <img src="Picture/1/e1.jpg" alt="Aerial view of the main NUM campus" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
+                            <img src="Picture/1/art.jpg" alt="Aerial view of the main NUM campus" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
                         </div>
                     </div>
                     <!-- Column 2: Vision -->
@@ -215,7 +227,7 @@
                             <h3 class="font-heading text-2xl font-bold text-dark-blue">OUR VISION</h3>
                             <div class="w-16 h-1 bg-gold my-4"></div>
                             <p class="font-body text-slate-700 leading-relaxed mb-6">TO CULTIVATE INNOVATIVE, LEADERS, MANAGERS, AND ENTREPRENEURS WHO CAN DRIVE POSITIVE CHANGE IN SOCIETY.</p>
-                            <img src="Picture/1/e2.jpg" alt="Render of the new NUM campus" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
+                            <img src="Picture/1/numgoldlogo.jpg" alt="Render of the new NUM campus" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
                         </div>
                     </div>
                     <!-- Column 3: CORE VALUES -->
@@ -223,8 +235,6 @@
                        <div class="flex flex-col h-full">
                         <h3 class="font-heading text-2xl font-bold text-dark-blue">CORE VALUES</h3>
                         <div class="w-16 h-1 bg-gold my-4"></div>
-
-                        <!-- The list of values using a standard unordered list -->
                         <ul class="font-body text-slate-700 leading-relaxed mb-6 list-disc list-inside space-y-2">
                             <li>QUALITY</li>
                             <li>RESEARCH</li>
@@ -232,8 +242,7 @@
                             <li>COMMUNITY</li>
                             <li>GREEN</li>
                         </ul>
-
-                        <img src="Picture/1/art1 copy.jpg" alt="Hallway at National University of Management" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
+                        <img src="Picture/1/student_learning.jpg" alt="Hallway at National University of Management" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
                     </div>
                     </div>
                 </div>
@@ -241,11 +250,13 @@
         </section>
 
         <!-- WHY CHOOSE NUM SECTION (NEW) -->
-        <section class="bg-light-lavender py-24">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-light-lavender py-16 lg:py-24">
             <div class="max-w-6xl mx-auto px-5 text-center">
-                <h2 class="font-heading text-4xl text-dark-blue">Why Choose NUM?</h2>
+                <!-- Responsive Change: Adjusted heading font size -->
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue">Why Choose NUM?</h2>
                 <p class="font-body text-slate-700 my-4 leading-relaxed max-w-2xl mx-auto">We empower you with the skills, connections, and mindset to not just succeed, but to lead.</p>
-                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+                <div class="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
                     <!-- Point 1 -->
                     <div class="group">
                         <div class="flex-shrink-0 mb-4">
@@ -280,18 +291,21 @@
             </div>
         </section>
 
-         <section class="py-24 bg-dark-blue text-white">
+        <!-- Responsive Change: Adjusted vertical padding -->
+         <section class="py-16 lg:py-24 bg-dark-blue text-white">
             <div class="max-w-6xl mx-auto px-5">
-                <div class="text-center mb-16 animate-on-scroll animate-slide-up">
-                    <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-4 h-20 flex items-center justify-center">
+                <div class="text-center mb-12 md:mb-16 animate-on-scroll animate-slide-up">
+                    <!-- Responsive Change: Adjusted heading font size and container height -->
+                    <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 h-24 md:h-20 flex items-center justify-center">
                         <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
                     </h2>
                     <p class="font-body text-lg max-w-3xl mx-auto text-white/80">Our commitment to forward-thinking education is recognized on the world stage by WURI 2025.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="md:col-span-2 bg-gradient-to-br from-gold/20 to-gold/5 rounded-2xl p-10 text-center flex flex-col justify-center animate-on-scroll animate-slide-up">
+                    <div class="md:col-span-2 bg-gradient-to-br from-gold/20 to-gold/5 rounded-2xl p-6 md:p-10 text-center flex flex-col justify-center animate-on-scroll animate-slide-up">
                         <p class="text-sm font-semibold uppercase text-gold tracking-widest">WURI RANKING FOR INNOVATION</p>
+                        <!-- Note: The clamp() function is inherently responsive. No change needed here. -->
                         <p class="font-heading font-extrabold text-white my-2" style="font-size: clamp(6rem, 20vw, 10rem); line-height: 1;">69<span class="text-gold text-5xl align-super">th</span></p>
                     </div>
                     <div class="bg-white/5 rounded-2xl p-8 animate-on-scroll animate-slide-up" style="transition-delay: 150ms;">
@@ -310,15 +324,16 @@
                         <p class="mt-1 font-body text-white/70">Cultivating the next generation of innovators and business leaders.</p>
                     </div>
                 </div>
-                
         </section>
 
         <!-- NEW SECTION: WE ARE RANKED... -->
-        <section class="bg-white py-24 overflow-hidden">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-white py-16 lg:py-24 overflow-hidden">
             <div class="max-w-7xl mx-auto px-5 grid lg:grid-cols-2 gap-16 items-center">
                 <!-- Left Column: Text -->
                 <div class="animate-on-scroll animate-slide-up">
-                    <h2 class="font-heading text-4xl md:text-5xl font-bold text-dark-blue leading-tight">
+                    <!-- Responsive Change: Adjusted heading font size -->
+                    <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-blue leading-tight">
                         WE ARE RANKED AMONG TOP GLOBAL INNOVATIVE UNIVERSITIES
                     </h2>
                     <p class="font-body text-xl text-slate-700 mt-6">
@@ -328,7 +343,6 @@
                     <p class="font-body text-slate-600 leading-relaxed">
                         The World University Rankings for Innovation (The WURI) assesses higher education institutions' real contributions to industry and society, highlighting innovative education, research, and engagement to society. The ranking aims to spotlight higher education institutions that excel in these innovative approaches, thereby inspiring advancements across the academic and societal landscape. NUM was ranked among top innovative universities in the world.
                     </p>
-                    <!-- "Read More" button styled to match the provided image -->
                     <div class="inline-block mt-8">
                         <a href="#" class="block bg-red-700 text-white font-heading font-bold uppercase tracking-wider px-8 py-2 hover:bg-red-800 transition-colors duration-200" style="text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);">
                                  READ MORE
@@ -336,24 +350,29 @@
                     </div>
                 </div>
                 <!-- Right Column: Image -->
-                <div>
-                    <img src="Picture/1/wuri.jpg" alt="WURI 2023 Rankings and Partners" class="w-3/4 h-auto mx-auto cursor-pointer transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 active:scale-95">
+                <!-- Responsive Change: Reordered for image to appear first on mobile screens -->
+                <div class="row-start-1 lg:row-auto">
+                    <!-- Responsive Change: Changed image width from w-3/4 to w-full on mobile -->
+                    <img src="Picture/1/wuri.jpg" alt="WURI 2023 Rankings and Partners" class="w-full lg:w-3/4 h-auto mx-auto cursor-pointer transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 active:scale-95">
                 </div>
             </div>
         </section>
 
         <!-- GO GLOBAL WITH NUM (ENHANCED STUDENT MOBILITY SECTION) -->
-        <section class="bg-light-lavender py-24">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-light-lavender py-16 lg:py-24">
             <div class="max-w-7xl mx-auto px-5">
                 <!-- Section Header -->
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <p class="font-heading font-bold text-sm text-gold tracking-widest">GLOBAL OPPORTUNITIES</p>
-                    <h2 class="font-heading text-4xl md:text-5xl text-dark-blue mt-2 font-extrabold">Go Global with NUM</h2>
+                    <!-- Responsive Change: Adjusted heading font size -->
+                    <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl text-dark-blue mt-2 font-extrabold">Go Global with NUM</h2>
                     <p class="font-body text-slate-700 mt-4 text-lg leading-relaxed">Your education extends far beyond our campus. We offer a world of opportunity to immerse yourself in new cultures, build an international network, and gain a global perspective that is essential for tomorrow's leaders.</p>
                 </div>
 
                 <!-- 3-Column Feature Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20 text-center md:text-left">
+                <!-- Responsive Change: Centered content on mobile with text-center md:text-left -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16 md:mb-20 text-center md:text-left">
                     <!-- Feature 1: Semester Exchange -->
                     <div class="flex flex-col items-center md:items-start">
                         <div class="bg-dark-blue text-gold rounded-full p-3 mb-4">
@@ -387,12 +406,15 @@
                 </div>
 
                 <!-- Student Testimonial -->
-                <div class="bg-white rounded-lg shadow-xl p-8 md:p-12 grid md:grid-cols-3 gap-8 items-center mb-20">
+                <!-- Responsive Change: Adjusted padding -->
+                <div class="bg-white rounded-lg shadow-xl p-8 md:p-12 grid md:grid-cols-3 gap-8 items-center mb-16 md:mb-20">
                     <div class="md:col-span-1">
-                        <img src="Picture/1/student_exchange1.jpg" alt="A smiling exchange student" class="rounded-full w-40 h-40 object-cover mx-auto shadow-md border-4 border-gold">
+                        <!-- Responsive Change: Smaller image on mobile -->
+                        <img src="Picture/1/student_exchange1.jpg" alt="A smiling exchange student" class="rounded-full w-32 h-32 md:w-40 md:h-40 object-cover mx-auto shadow-md border-4 border-gold">
                     </div>
-                    <blockquote class="md:col-span-2">
-                        <p class="font-body text-xl md:text-2xl text-slate-700 leading-relaxed italic">"My semester exchange in South Korea was the highlight of my university life. It pushed me out of my comfort zone and gave me the confidence to pursue an international career. The support from NUM's global office was fantastic."</p>
+                    <blockquote class="md:col-span-2 text-center md:text-left">
+                        <!-- Responsive Change: Adjusted font size -->
+                        <p class="font-body text-lg md:text-2xl text-slate-700 leading-relaxed italic">"My semester exchange in South Korea was the highlight of my university life. It pushed me out of my comfort zone and gave me the confidence to pursue an international career. The support from NUM's global office was fantastic."</p>
                         <cite class="block font-heading font-bold text-dark-blue mt-4 not-italic">Sokunthea Lim</cite>
                         <p class="font-body text-slate-500 not-italic">BBA, Exchange to Seoul National University</p>
                     </blockquote>
@@ -401,11 +423,13 @@
         </section>
 
         <!-- STUDENT MOBILITY SECTION (NEW) - MOVED TO BE A FULL-WIDTH SECTION -->
-        <section class="bg-dark-blue py-24">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-dark-blue py-16 lg:py-24">
             <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-16 items-center">
                 <!-- Left Column: Text Content -->
                 <div class="text-white">
-                    <h2 class="font-heading text-4xl text-white font-bold">Student Mobility</h2>
+                    <!-- Responsive Change: Adjusted heading font size -->
+                    <h2 class="font-heading text-3xl md:text-4xl text-white font-bold">Student Mobility</h2>
                     <div class="w-20 h-1 bg-gold my-6"></div>
                     <p class="font-body text-lg text-white/80 leading-relaxed">
                         With partnerships in over 30 institutions abroad, our students have the opportunity to immerse themselves in diverse cultures and gain invaluable experience that will enhance their academic and professional careers through exchange programs and international internships. We encourage students to take part in exchange programs where they can spend a semester or year studying at a partner university overseas. At NUM, students have endless opportunities to broaden their horizons and expand their skill set through international experiences.
@@ -413,36 +437,38 @@
                 </div>
                 
                 <!-- Right Column: Image Collage -->
-                <div>
+                <!-- Responsive Change: Reordered to show image first on mobile -->
+                <div class="row-start-1 md:row-auto">
                     <img src="Picture/1/student mobility.png" alt="A collage of students participating in international exchange programs and internships." class="max-w-full h-auto rounded-lg shadow-2xl">
                 </div>
             </div>
         </section>
 
         <!-- NEWS HEADLINES (UoM STYLE) - NOW WITH STATIC PARTNER LOGOS -->
-        <section class="bg-light-lavender py-24">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-light-lavender py-16 lg:py-24">
             <div class="max-w-7xl mx-auto px-5">
 
-                <!-- Partner Logos - CORRECTED -->
-                <div class="mb-20">
+                <!-- Partner Logos -->
+                <div class="mb-16 md:mb-20">
                     <h3 class="font-heading text-center text-2xl text-dark-blue font-bold mb-8">A Selection of Our Global Partners</h3>
-                    <!-- Replaced Swiper with a static flexbox grid -->
+                    <!-- This flexbox with wrap is already mobile-friendly -->
                     <div class="flex flex-wrap justify-center items-center gap-x-12 sm:gap-x-16 gap-y-8">
-                        <img src="Picture/1/l1.png" alt="Partner Logo 1" class="h-12 object-contain">
-                        <img src="Picture/1/l2.png" alt="Partner Logo 2" class="h-12 object-contain">
-                        <img src="Picture/1/l3.png" alt="Partner Logo 3" class="h-12 object-contain">
-                        <img src="Picture/1/l4.png" alt="Partner Logo 4" class="h-12 object-contain">
-                        <img src="Picture/1/l5.png" alt="Partner Logo 5" class="h-12 object-contain">
-                        <img src="Picture/1/l6.png" alt="Partner Logo 6" class="h-12 object-contain">
-                        <img src="Picture/1/l7.png" alt="Partner Logo 7" class="h-12 object-contain">
-                        <img src="Picture/1/l8.png" alt="Partner Logo 8" class="h-12 object-contain">
-                        <img src="Picture/1/l9.png" alt="Partner Logo 9" class="h-12 object-contain">
-                        <img src="Picture/1/l10.png" alt="Partner Logo 10" class="h-12 object-contain">
-                        <img src="Picture/1/l11.png" alt="Partner Logo 11" class="h-12 object-contain">
+                        <img src="Picture/1/l1.png" alt="Partner Logo 1" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l2.png" alt="Partner Logo 2" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l3.png" alt="Partner Logo 3" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l4.png" alt="Partner Logo 4" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l5.png" alt="Partner Logo 5" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l6.png" alt="Partner Logo 6" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l7.png" alt="Partner Logo 7" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l8.png" alt="Partner Logo 8" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l9.png" alt="Partner Logo 9" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l10.png" alt="Partner Logo 10" class="h-10 md:h-12 object-contain">
+                        <img src="Picture/1/l11.png" alt="Partner Logo 11" class="h-10 md:h-12 object-contain">
                     </div>
                 </div>
 
-                <!-- News Headlines (Structure is correct) -->
+                <!-- News Headlines -->
                 <div class="grid md:grid-cols-3 gap-8 text-left max-w-6xl mx-auto">
                     <div><p class="font-heading font-bold text-sm text-gold tracking-widest">RESEARCH</p><a href="#" class="group"><h3 class="font-heading text-xl font-bold text-dark-blue mt-2 group-hover:underline">→ How scientific tools are tracing the evolution of ancient manuscripts</h3></a></div>
                     <div><p class="font-heading font-bold text-sm text-gold tracking-widest">INNOVATION</p><a href="#" class="group"><h3 class="font-heading text-xl font-bold text-dark-blue mt-2 group-hover:underline">→ Student Startup Wins National Competition with AI-Powered App</h3></a></div>
@@ -452,10 +478,12 @@
         </section>
 
         <!-- STUDY IN A PLACE LIKE NO OTHER (UoM Style) -->
-        <section class="bg-white pt-24">
+        <!-- Responsive Change: Adjusted top padding -->
+        <section class="bg-white pt-16 lg:pt-24">
             <div class="max-w-6xl mx-auto px-5">
                 <div class="max-w-3xl">
-                    <h2 class="font-heading text-4xl text-dark-blue">Study in a place like no other</h2>
+                    <!-- Responsive Change: Adjusted heading font size -->
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue">Study in a place like no other</h2>
                     <p class="font-body text-slate-700 my-4 leading-relaxed">The National University of Management is a truly unique environment. We're creating a range of sustainable facilities and precincts to enable ground-breaking discoveries, now and into the future.</p>
                     <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Our sustainability commitment</span><span class="arrow">→</span></a>
                 </div>
@@ -463,14 +491,15 @@
         </section>
         
         <!-- CAMPUS & FACILITIES GRID WITH SLIDERS (UoM Style) -->
-        <section class="bg-white pt-12 pb-24">
+        <!-- Responsive Change: Adjusted bottom padding -->
+        <section class="bg-white pt-12 pb-16 lg:pb-24">
             <div class="max-w-6xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Card: Our Campuses -->
                 <div>
                     <div class="swiper campus-image-slider h-64 rounded-lg overflow-hidden shadow-lg">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="Picture/1/s10.jpg" alt="NUM Campus" class="w-full h-full object-cover"></div>
-                            <div class="swiper-slide"><img src="Picture/1/e1.jpg" alt="NUM Campus Aerial" class="w-full h-full object-cover"></div>
+                            <div class="swiper-slide"><img src="Picture/1/viewbacksite.jpg" alt="NUM Campus" class="w-full h-full object-cover"></div>
+                            <div class="swiper-slide"><img src="Picture/1/num_building.jpg" alt="NUM Campus Aerial" class="w-full h-full object-cover"></div>
                         </div>
                     </div>
                     <h3 class="font-heading text-2xl text-dark-blue font-bold mt-4">Our campuses</h3>
@@ -482,7 +511,7 @@
                     <div class="swiper campus-image-slider h-64 rounded-lg overflow-hidden shadow-lg">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"><img src="Picture/1/e6.jpg" alt="Research Lab" class="w-full h-full object-cover"></div>
-                            <div class="swiper-slide"><img src="Picture/1/art1%20copy.jpg" alt="University Hallway" class="w-full h-full object-cover"></div>
+                            <div class="swiper-slide"><img src="Picture/1/art.jpg" alt="University Hallway" class="w-full h-full object-cover"></div>
                         </div>
                     </div>
                     <h3 class="font-heading text-2xl text-dark-blue font-bold mt-4">Research facilities</h3>
@@ -506,7 +535,7 @@
                     <div class="swiper campus-image-slider h-64 rounded-lg overflow-hidden shadow-lg">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"><img src="Picture/1/student_exchange.jpg" alt="Campus aerial view" class="w-full h-full object-cover"></div>
-                            <div class="swiper-slide"><img src="Picture/1/student_exchange1.jpg" alt="New campus accommodation concept" class="w-full h-full object-cover"></div>
+                            <div class="swiper-slide"><img src="Picture/1/num_international_college.jpg" alt="New campus accommodation concept" class="w-full h-full object-cover"></div>
                             <div class="swiper-slide"><img src="Picture/1/student_exchange2.jpg" alt="Student accommodation interior" class="w-full h-full object-cover"></div>
                         </div>
                     </div>
@@ -518,7 +547,8 @@
         </section>
 
         <!-- MULTI-COLUMN CONTENT BLOCKS -->
-        <section class="bg-light-lavender py-24 space-y-20">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-light-lavender py-16 lg:py-24 space-y-20">
             <!-- Block: Our New Campus -->
             <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -531,8 +561,8 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"><img src="Picture/1/num_veal_sbov1.jpg" alt="Architectural render of new campus" class="w-full h-80 object-cover"></div>
                             <div class="swiper-slide"><img src="Picture/1/gate.jpg" alt="Another render of the new campus" class="w-full h-80 object-cover"></div>
-                            <div class="swiper-slide"><img src="Picture/1/e1.jpg" alt="New campus render" class="w-full h-80 object-cover"></div>
-                            <div class="swiper-slide"><img src="Picture/1/e2.jpg" alt="New campus render" class="w-full h-80 object-cover"></div>
+                            <div class="swiper-slide"><img src="Picture/1/vealsbov_building.jpg" alt="New campus render" class="w-full h-80 object-cover"></div>
+                            <div class="swiper-slide"><img src="Picture/1/e2 copy.jpg" alt="New campus render" class="w-full h-80 object-cover"></div>
                         </div>
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
@@ -541,12 +571,14 @@
             </div>
         </section>
         <!-- START: RECENT NEWS SECTION (REPLICATED FROM DESIGN) -->
-        <section class="bg-white py-24">
+        <!-- Responsive Change: Adjusted vertical padding -->
+        <section class="bg-white py-16 lg:py-24">
             <div class="max-w-7xl mx-auto px-5">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-16">
 
                     <!-- ===== LEFT COLUMN: MAIN NEWS GRID ===== -->
                     <div class="lg:col-span-2">
+                        <!-- Responsive Change: Adjusted heading font size -->
                         <h2 class="font-heading text-3xl md:text-4xl font-bold text-dark-blue mb-8">Recent News</h2>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -554,64 +586,68 @@
                             <!-- News Card 1 -->
                             <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
                                 <a href="#" class="block">
-                                    <img class="w-full h-56 object-cover" src="https://numuniversity.com/wp-content/uploads/2025/08/photo_2025-08-01_15-47-18.jpg" alt="News Image 1">
+                                    <img class="w-full h-56 object-cover" src="Picture/1/ការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ.jpg" alt="News Image 1">
                                 </a>
                                 <div class="p-6 flex flex-col flex-grow">
                                     <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">NUM</span>
                                     <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
-                                        <a href="#">ឯកឧត្តមបណ្ឌិតសភាចារ្យ ហង់ជួន ណារ៉ុន និង ឯកឧត្តមសាស្ត្រាចារ្យ ហោ ប៉េង បានទទួលជួបពិភាក្សាការងារជាមួយ...</a>
+                                        <a href="#">និស្សិតជំនាញសេដ្ឋកិច្ចពាណិជ្ជសាស្ត្រ ជំនាន់៣០​ នៃសាកលវិទ្យាល័យជាតិគ្រប់គ្រង បានឡើងការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ ឆ្នាំសិក្សា២០២៤-២០២៥</a>
                                     </h3>
                                     <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow">
-                                        នាព្រឹកថ្ងៃទី០១ ខែឧសភា ឆ្នាំ២០២៤ នេះ ឯកឧត្តមសាស្ត្រាចារ្យ ហោ ប៉េង សាកលវិទ្យាធិការ នៃសាកលវិទ្យាល័យជាតិគ្រប់គ្រង បានទទួលជួបពិភាក្សាការងារជាមួយ...
+                                        នៅថ្ងៃទី២៥ និងទី២៦ ខែសីហា ឆ្នាំ២០២៥ និស្សិតជំនាញសេដ្ឋកិច្ចពាណិជ្ជសាស្ត្រ ជំនាន់៣០​ នៃសាកលវិទ្យាល័យជាតិគ្រប់គ្រង បានឡើងការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ ឆ្នាំសិក្សា២០២៤-២០២៥
                                     </p>
-                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-07">August 7, 2025</time>
+                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-07">August 26, 2025</time>
                                 </div>
                             </article>
 
                             <!-- News Card 2 -->
                             <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
                                 <a href="https://www.facebook.com/share/p/1Janrp4PEa/" class="block">
-                                    <img class="w-full h-56 object-cover" src="https://numuniversity.com/wp-content/uploads/2025/08/imgi_55_530439858_1170463951774821_8491220148373170911_n-1024x1024.png" alt="News Image 2">
+                                    <img class="w-full h-56 object-cover" src="Picture/1/num_international_college.jpg" alt="News Image 2">
                                 </a>
                                 <div class="p-6 flex flex-col flex-grow">
-                                    <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">Faculty of Management</span>
+                                    <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">Num International College</span>
                                     <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
-                                        <a href="#">រៀបចំការការពារសារណាបទថ្នាក់បរិញ្ញាបត្រ នៅ Green Park (NUM Main Campus) ដោយនិស្សិតឆ្នាំទី៤</a>
+                                        <a href="#">NUM International College Student Pursuing a Dual-Degree Program in the USA 🇺🇸</a>
                                     </h3>
                                     <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow">
-                                        មហាវិទ្យាល័យគ្រប់គ្រង នៃសាកលវិទ្យាល័យជាតិគ្រប់គ្រង បានរៀបចំការការពារសារណាបទ នៅ Green Park (NUM Main Campus) ដោយនិស្សិតឆ្នាំទី៤ ដែលជាផ្នែកមួយមិនអាចខ្វះបាន...
+                                        NUMIC is proud to congratulate Mr. Rotanak Seilasak, a Senior Student, who is leaving Cambodia to pursue a dual-degree program at the University of Wisconsin-Green Bay in the United States.
+                                        This remarkable opportunity allows Seilasak to advance his academic journey while representing NUMIC abroad.
+                                        NUMIC wishes Seilasak the very best in his studies and future endeavors. We extend our sincere thanks to the University of Wisconsin-Green Bay for their support of this program.
                                     </p>
-                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-13">August 13, 2025</time>
+                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-13">August 27, 2025</time>
                                 </div>
                             </article>
 
                             <!-- News Card 3 -->
                             <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
                                 <a href="#" class="block">
-                                    <img class="w-full h-56 object-cover" src="https://numuniversity.com/wp-content/uploads/2025/08/530702941_1169441178543765_6606851459786488246_n.jpg" alt="News Image 3">
+                                    <img class="w-full h-56 object-cover" src="Picture/1/bacll.jpg" alt="News Image 3">
                                 </a>
                                 <div class="p-6 flex flex-col flex-grow">
                                     <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">NUM</span>
                                     <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
-                                        <a href="#">ប្រជុំសំណេះសំណាលជាមួយនិស្សិតមូលដ្ឋាន ដែលបានប្រឡងជាប់អាហារូបករណ៍</a>
+                                        <a href="#">ការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ សម័យប្រឡង៖ ២៨-២៩ សីហា ២០២៥ នៅសល់តែ២ថ្ងៃទៀតទេ!
+                                        សាកលវិទ្យាល័យជាតិគ្រប់គ្រង សូមជូនពរប្អូនៗសិស្សានុសិស្សថ្នាក់ទី១២ ទាំងអស់ឱ្យទទួលបានជោគជ័យក្នុងការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ នាពេលខាងមុខនេះ៕</a>
                                     </h3>
                                     <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow"></p>
-                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-11">August 11, 2025</time>
+                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-11">August 27, 2025</time>
                                 </div>
                             </article>
                             
                             <!-- News Card 4 -->
                             <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
                                 <a href="#" class="block">
-                                    <img class="w-full h-56 object-cover" src="https://numuniversity.com/wp-content/uploads/2025/08/532262604_1169425305212019_8305072755952003623_n.jpg" alt="News Image 4">
+                                    <img class="w-full h-56 object-cover" src="Picture/1/bussiness_law_poster.jpg" alt="News Image 4">
                                 </a>
                                 <div class="p-6 flex flex-col flex-grow">
                                     <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">NUM</span>
                                     <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
-                                        <a href="#">ការការពារសារណាបទបញ្ចប់ថ្នាក់បរិញ្ញាបត្រTop10 ជំនាន់ទី៣០</a>
+                                        <a href="#">សូមស្វាគមន៍ការចុះឈ្មោះចូលសិក្សាថ្នាក់បរិញ្ញាបត្រជាន់ខ្ពស់ជំនាន់ទី២៨ លើជំនាញនីតិពាណិជ្ជកម្ម (Master of Business Law) 
+                                        ចាប់ផ្តើមចូលសិក្សា ចាប់ពីថ្ងៃទី០១ ខែកញ្ញា ឆ្នាំ២០២៥ តទៅ តាមប្រព័ន្ធអនឡាញខ្លះ និងក្នុងថ្នាក់ខ្លះ តាមកាលវិភាគកំណត់របស់សាកលវិទ្យាល័យ។</a>
                                     </h3>
                                     <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow"></p>
-                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-11">August 11, 2025</time>
+                                    <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-11">August 27, 2025</time>
                                 </div>
                             </article>
 
@@ -625,28 +661,29 @@
                             
                             <!-- Sidebar Item 1 -->
                             <a href="#" class="flex items-start gap-4 group">
-                                <img src="Picture/1/e9.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
+                                <img src="Picture/1/bussiness_law_poster.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
                                 <div>
                                     <h4 class="font-heading font-bold text-dark-blue group-hover:text-gold transition-colors leading-tight">MASTER'S PROGRAM ENROLLMENT Open</h4>
-                                    <p class="font-body text-sm text-slate-500 mt-1">August 12, 2025</p>
+                                    <p class="font-body text-sm text-slate-500 mt-1">August 27, 2025</p>
                                 </div>
                             </a>
 
                             <!-- Sidebar Item 2 -->
                             <a href="#" class="flex items-start gap-4 group">
-                                <img src="Picture/1/e2.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
+                                <img src="Picture/1/ការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
                                 <div>
                                     <h4 class="font-heading font-bold text-dark-blue group-hover:text-gold transition-colors leading-tight">ការការពារសារណាបទបញ្ចប់ថ្នាក់បរិញ្ញាបត្រTop10 ជំនាន់ទី៣០</h4>
-                                    <p class="font-body text-sm text-slate-500 mt-1">August 11, 2025</p>
+                                    <p class="font-body text-sm text-slate-500 mt-1">August 27, 2025</p>
                                 </div>
                             </a>
 
                             <!-- Sidebar Item 3 -->
                             <a href="#" class="flex items-start gap-4 group">
-                                <img src="Picture/1/student_exchange1.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
+                                <img src="Picture/1/bacll.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
                                 <div>
-                                    <h4 class="font-heading font-bold text-dark-blue group-hover:text-gold transition-colors leading-tight">ប្រជុំសំណេះសំណាលជាមួយនិស្សិតមូលដ្ឋាន ដែលបានប្រឡងជាប់អាហារូបករណ៍</h4>
-                                    <p class="font-body text-sm text-slate-500 mt-1">August 11, 2025</p>
+                                    <h4 class="font-heading font-bold text-dark-blue group-hover:text-gold transition-colors leading-tight">ការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ សម័យប្រឡង៖ ២៨-២៩ សីហា ២០២៥ នៅសល់តែ២ថ្ងៃទៀតទេ!
+                                        សាកលវិទ្យាល័យជាតិគ្រប់គ្រង សូមជូនពរប្អូនៗសិស្សានុសិស្សថ្នាក់ទី១២ ទាំងអស់ឱ្យទទួលបានជោគជ័យក្នុងការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ នាពេលខាងមុខនេះ៕</h4>
+                                    <p class="font-body text-sm text-slate-500 mt-1">August 27, 2025</p>
                                 </div>
                             </a>
 
