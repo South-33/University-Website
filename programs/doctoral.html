@@ -40,7 +40,7 @@
     
     <main>
         <!-- Hero Section -->
-        <section class="relative h-[35vh] min-h-[250px] flex items-center justify-center text-center text-white font-body">
+        <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center text-center text-white font-body">
             <div class="absolute inset-0">
                 <img src="https://images.pexels.com/photos/159775/library-la-trobe-study-students-159775.jpeg" alt="Doctoral Research" class="w-full h-full object-cover" width="1920" height="1280">
                 <div class="absolute inset-0 bg-dark-blue/70"></div>
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                            <a href="/programs/doctoral/doctor-of-philosophy" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                         </div>
                     </div>
                     <!-- Doctor of Business Administration (DBA) -->
@@ -109,7 +109,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                            <a href="/programs/doctoral/doctor-of-business-administration" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                         </div>
                     </div>
                     <!-- Doctoral Program in Public Policy -->
@@ -128,7 +128,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="/programs/doctoral" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
+                            <a href="/programs/doctoral/doctoral-program-in-public-policy" class="mt-auto bg-dark-blue text-white rounded-full px-6 py-2 inline-block font-medium hover:opacity-85 transition-opacity self-center">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -198,69 +198,6 @@
     <!-- Unified Layout Sequence for SPA Navigation -->
     <script src="/js/layout-sequence.js"></script>
 
-    <script>
-        /**
-         * Finds all cards with the 'image-to-text-card' class and sets up
-         * a cross-fade slideshow between the image and a text description.
-         * Named with 'initialize' prefix for SPA auto-detection.
-         */
-        function initializeImageToTextSlideshow() {
-            const cards = document.querySelectorAll('.image-to-text-card');
-            if (cards.length === 0) {
-                return; // No cards found, do nothing
-            }
-
-            // Clear any existing intervals to prevent duplicates during SPA navigation
-            cards.forEach(card => {
-                if (card.slideshowInterval) {
-                    clearInterval(card.slideshowInterval);
-                }
-            });
-
-            cards.forEach(card => {
-                const image = card.querySelector('img');
-                const textOverlay = card.querySelector('div'); // The description div
-
-                if (!image || !textOverlay) {
-                    console.warn('Card is missing image or text overlay for slideshow.', card);
-                    return;
-                }
-
-                // Always reset to the first slide (image visible) on init/tab switch
-                image.classList.add('opacity-100');
-                image.classList.remove('opacity-0');
-                textOverlay.classList.add('opacity-0');
-                textOverlay.classList.remove('opacity-100');
-
-                // Track state for this interval
-                let isImageVisible = true;
-
-                // Store interval reference on the card element for cleanup
-                card.slideshowInterval = setInterval(() => {
-                    if (isImageVisible) {
-                        // Fade out image, fade in text
-                        image.classList.remove('opacity-100');
-                        image.classList.add('opacity-0');
-                        textOverlay.classList.remove('opacity-0');
-                        textOverlay.classList.add('opacity-100');
-                    } else {
-                        // Fade out text, fade in image
-                        textOverlay.classList.remove('opacity-100');
-                        textOverlay.classList.add('opacity-0');
-                        image.classList.remove('opacity-0');
-                        image.classList.add('opacity-100');
-                    }
-                    isImageVisible = !isImageVisible;
-                }, 5000); // Switch every 5 seconds
-            });
-        }
-
-        // Initialize on DOM ready (initial page load)
-        document.addEventListener('DOMContentLoaded', initializeImageToTextSlideshow);
-
-        // Make function globally available for SPA navigation
-        window.initializeImageToTextSlideshow = initializeImageToTextSlideshow;
-    </script>
 
 </body>
 </html>

@@ -11,9 +11,32 @@
     <script src="../../js/theme.js"></script>
     <link rel="stylesheet" href="../../css/main.css">
     <style>
-
-        
-        
+        /* Program Card Slideshow Styles */
+        .program-slideshow {
+            position: relative;
+            overflow: hidden;
+            /* On mobile, absolutely positioned slides don't contribute to height -> set a minimum */
+            min-height: 220px;
+        }
+        .program-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .program-slide.active { opacity: 1; }
+        .program-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (min-width: 768px) {
+            /* Clear the mobile min-height on md+ so desktop layout remains as designed */
+            .program-slideshow { min-height: 0; }
+        }
     </style>
 </head>
 <body class="body-loading bg-light-lavender">
@@ -68,8 +91,16 @@
                 <div class="space-y-12">
                     <!-- Program Detail: Business Economics -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Business meeting with economic charts">
+                        <div class="md:w-1/3 program-slideshow" data-program="business-economics">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business meeting with economic charts">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/6696150/pexels-photo-6696150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team analyzing market data">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Financial graphs and laptop">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -88,14 +119,22 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="business-economics.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Economic Development -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Economic development planning">
+                        <div class="md:w-1/3 program-slideshow" data-program="economic-development">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Economic development planning">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/669617/pexels-photo-669617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="City growth and infrastructure">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/669616/pexels-photo-669616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Policy analysis meeting">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -114,7 +153,7 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="economic-development.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -248,6 +287,31 @@
             // DOM is already loaded, initialize immediately
             initializeStatsAnimation();
         }
+        
+        // Program Slideshow Functionality
+        function initializeProgramSlideshows() {
+            const slideshows = document.querySelectorAll('.program-slideshow');
+            slideshows.forEach((slideshow, index) => {
+                const slides = slideshow.querySelectorAll('.program-slide');
+                if (slides.length <= 1) return;
+                let currentSlide = 0;
+                function showNextSlide() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+                // Start slideshow with 4-second intervals and staggered delays for wave effect
+                setTimeout(() => {
+                    setInterval(showNextSlide, 4000);
+                }, index * 100);
+            });
+        }
+        // Initialize program slideshows
+        document.addEventListener('DOMContentLoaded', initializeProgramSlideshows);
+        if (document.readyState !== 'loading') {
+            initializeProgramSlideshows();
+        }
+        window.initializeProgramSlideshows = initializeProgramSlideshows;
     </script>
     
     <!-- Unified Layout Sequence for SPA Navigation -->

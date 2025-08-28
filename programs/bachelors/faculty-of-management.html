@@ -11,9 +11,12 @@
     <script src="../../js/theme.js"></script>
     <link rel="stylesheet" href="../../css/main.css">
     <style>
-
-        
-        
+        /* Program Card Slideshow Styles */
+        .program-slideshow { position: relative; overflow: hidden; min-height: 220px; }
+        .program-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+        .program-slide.active { opacity: 1; }
+        .program-slide img { width: 100%; height: 100%; object-fit: cover; }
+        @media (min-width: 768px) { .program-slideshow { min-height: 0; } }
     </style>
 </head>
 <body class="body-loading bg-light-lavender">
@@ -70,8 +73,16 @@
                 <div class="space-y-12">
                     <!-- Program Detail: Management -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Business management meeting">
+                        <div class="md:w-1/3 program-slideshow" data-program="management">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business management meeting">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team collaboration and leadership">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Strategic planning session">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -82,21 +93,29 @@
                                 <p class="text-dark-blue/80 mb-6">Master the art of leadership and organizational excellence. This comprehensive program develops strategic thinking, decision-making skills, and the ability to lead teams effectively in dynamic business environments.</p>
                                 <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
                                 <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Strategic Management</li>
                                     <li>Organizational Behavior</li>
-                                    <li>Human Resource Management</li>
                                     <li>Operations Management</li>
+                                    <li>Strategic Management</li>
+                                    <li>Leadership & Ethics</li>
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/management" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Marketing -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Marketing strategy and analytics">
+                        <div class="md:w-1/3 program-slideshow" data-program="marketing">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Marketing strategy and analytics">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3184463/pexels-photo-3184463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Digital marketing collaboration">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Marketing presentation">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -107,21 +126,29 @@
                                 <p class="text-dark-blue/80 mb-6">Create compelling brand experiences and drive business growth through strategic marketing. Learn to understand consumer behavior, develop marketing campaigns, and leverage digital channels to reach target audiences effectively.</p>
                                 <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
                                 <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Consumer Behavior Analysis</li>
-                                    <li>Digital Marketing Strategy</li>
-                                    <li>Brand Management</li>
-                                    <li>Market Research & Analytics</li>
+                                    <li>Startup Management</li>
+                                    <li>Innovation & Creativity</li>
+                                    <li>Venture Finance</li>
+                                    <li>Business Planning</li>
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/marketing" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Entrepreneurship -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Entrepreneur presenting business idea">
+                        <div class="md:w-1/3 program-slideshow" data-program="entrepreneurship">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Entrepreneur presenting business idea">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3184431/pexels-photo-3184431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Startup team brainstorming">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Pitching to investors">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -139,7 +166,109 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/entrepreneurship" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Program Detail: BBA in International Business -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="intl-business">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="International business setting">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Global business teamwork">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="International meeting">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor of Business Administration (BBA) in International Business</h3>
+                                <p class="text-dark-blue/80 mb-6">Focus on global markets, cross-border trade, and international management strategies to navigate the complexities of the global economy.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>International Marketing</li>
+                                    <li>Global Finance</li>
+                                    <li>Cross-Cultural Management</li>
+                                    <li>International Trade Law</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors/international-business" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Program Detail: BBA in Global Entrepreneurship & Innovation -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="global-entrepreneurship">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Global entrepreneurship and innovation">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Innovation workshop">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Global networking">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor of Business Administration (BBA) in Global Entrepreneurship & Innovation</h3>
+                                <p class="text-dark-blue/80 mb-6">Launch and scale ventures in a global context. Learn to identify international opportunities and manage innovation across borders.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Global Venture Creation</li>
+                                    <li>Social Entrepreneurship</li>
+                                    <li>Innovation Strategy</li>
+                                    <li>International Market Entry</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors/global-entrepreneurship" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Program Detail: BBA in Supply Chain Management -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="supply-chain">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Supply chain management and logistics">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/4488641/pexels-photo-4488641.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Warehouse operations">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/6169062/pexels-photo-6169062.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Logistics planning">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor of Business Administration (BBA) in Supply Chain Management</h3>
+                                <p class="text-dark-blue/80 mb-6">Master the complexities of global logistics, procurement, and distribution networks to ensure efficiency and resilience in a connected world.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Global Logistics</li>
+                                    <li>Strategic Sourcing</li>
+                                    <li>Supply Chain Analytics</li>
+                                    <li>Inventory Management</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors/supply-chain-management" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -266,14 +395,34 @@
             observer.observe(statsSection);
         }
         
+        // Program Slideshow Functionality
+        function initializeProgramSlideshows() {
+            const slideshows = document.querySelectorAll('.program-slideshow');
+            slideshows.forEach((slideshow, index) => {
+                const slides = slideshow.querySelectorAll('.program-slide');
+                if (slides.length <= 1) return;
+                let currentSlide = 0;
+                function showNextSlide() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+                // Wave effect: stagger start time based on index
+                setTimeout(() => {
+                    setInterval(showNextSlide, 4000);
+                }, index * 100);
+            });
+        }
+
         // SPA initialization function - called by main.js during navigation
         function initializePage() {
             initializeStatsAnimation();
-            // Add any other page-specific initialization here
+            initializeProgramSlideshows();
         }
         
-        // Expose page initialization function for SPA
+        // Expose page initialization function and slideshow init for SPA
         window.initializePage = initializePage;
+        window.initializeProgramSlideshows = initializeProgramSlideshows;
         
         // Initialize on DOM load (for direct page access)
         document.addEventListener('DOMContentLoaded', initializePage);

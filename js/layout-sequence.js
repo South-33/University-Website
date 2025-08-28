@@ -7,11 +7,7 @@
             const headerPlaceholder = document.getElementById('header-placeholder');
             const placeholder = document.getElementById('header-loading-placeholder');
             const contentContainer = document.getElementById('main-content-container');
-            // Flexible hero section detection - supports multiple common patterns
-            const heroSection = document.querySelector('.hero-section') || 
-                               document.querySelector('#hero') || 
-                               document.querySelector('section[class*="hero"]') || 
-                               document.querySelector('.hero');
+            // Flexible hero detection is performed dynamically inside setHeroHeight for SPA safety
             
             // Early exit if critical elements are missing
             if (!headerPlaceholder || !placeholder || !contentContainer) {
@@ -36,11 +32,26 @@
             function setHeroHeight() {
                 const header = document.querySelector('header');
                 if (!header || header.offsetHeight === 0) {
-                    return; // Header not ready
+                    return false; // Header not ready
                 }
+
+                // Dynamically resolve the hero each time (SPA navigation safe)
+                const heroSection = document.querySelector('.hero-section') ||
+                                   document.querySelector('#hero') ||
+                                   document.querySelector('section[class*="hero"]') ||
+                                   document.querySelector('.hero');
+                const isFixedHero = !!(heroSection && heroSection.hasAttribute('data-fixed-hero'));
 
                 // 1. Clean up previous styles to ensure a single source of truth
                 if (heroSection) {
+                    if (isFixedHero) {
+                        // Respect fixed-height heroes: ensure no inline overrides remain
+                        heroSection.style.removeProperty('height');
+                        heroSection.style.removeProperty('min-height');
+                        heroSection.style.removeProperty('padding-top');
+                        document.documentElement.style.removeProperty('--header-height');
+                        return true;
+                    }
                     heroSection.style.removeProperty('height');
                     heroSection.style.removeProperty('min-height');
                     heroSection.style.removeProperty('padding-top');
@@ -53,7 +64,7 @@
                 const exactHeaderHeight = Math.round(headerRect.height);
                 
                 // 3. Set the definitive height in pixels (only for hero section if it exists)
-                if (heroSection) {
+                if (heroSection && !isFixedHero) {
                     const exactHeroHeight = viewportHeight - exactHeaderHeight;
                     heroSection.style.height = `${exactHeroHeight}px`;
                     heroSection.style.minHeight = `${exactHeroHeight}px`;
@@ -63,7 +74,23 @@
 
                     // Optional: Log hero height calculation (useful for debugging)
                     // console.log(`🎯 Hero height: ${exactHeroHeight}px (${viewportHeight}vh - ${exactHeaderHeight}px header)`);
+                    return true;
                 }
+                return false;
+            }
+
+            // Retry helper: attempts to set hero height across multiple frames/timeouts
+            function ensureHeroCalculated(maxAttempts = 30, delayMs = 80) {
+                let attempt = 0;
+                function tryCalc() {
+                    const ok = setHeroHeight();
+                    if (ok) return;
+                    attempt++;
+                    if (attempt < maxAttempts) {
+                        setTimeout(() => requestAnimationFrame(tryCalc), delayMs);
+                    }
+                }
+                tryCalc();
             }
 
             function completeHeaderLoad() {
@@ -107,11 +134,12 @@
 
                     if (header && header.offsetHeight > 0) {
                         clearInterval(interval);
-                        setHeroHeight();
+                        ensureHeroCalculated();
                         completeHeaderLoad();
                     } else if (attempts > maxAttempts) {
                         clearInterval(interval);
                         console.warn('Header failed to load in time. Forcing layout unlock.');
+                        ensureHeroCalculated();
                         completeHeaderLoad();
                     }
                 }, 20);
@@ -125,7 +153,67 @@
             }
 
             // Re-calculate on resize for responsive correctness
-            window.addEventListener('resize', setHeroHeight);
+            window.addEventListener('resize', () => {
+                // Avoid overriding fixed-height heroes on resize
+                ensureHeroCalculated(4, 30);
+            });
+
+            // Also re-run once everything (images/fonts) is loaded
+            window.addEventListener('load', () => ensureHeroCalculated());
+
+            // Re-calc on SPA navigations and history changes
+            window.addEventListener('popstate', () => setTimeout(() => ensureHeroCalculated(30, 80), 0));
+            window.addEventListener('hashchange', () => setTimeout(() => ensureHeroCalculated(30, 80), 0));
+            document.addEventListener('spa:navigated', () => setTimeout(() => ensureHeroCalculated(30, 80), 0));
+
+            // Patch history API to detect SPA navigations
+            (function patchHistoryForSpa(){
+                if (window.__layoutSequenceHistoryPatched) return;
+                window.__layoutSequenceHistoryPatched = true;
+                const { pushState, replaceState } = history;
+                function emitSpaNavigated(){
+                    try { document.dispatchEvent(new Event('spa:navigated')); } catch(e) {}
+                }
+                history.pushState = function(){
+                    const res = pushState.apply(this, arguments);
+                    setTimeout(emitSpaNavigated, 0);
+                    return res;
+                };
+                history.replaceState = function(){
+                    const res = replaceState.apply(this, arguments);
+                    setTimeout(emitSpaNavigated, 0);
+                    return res;
+                };
+            })();
+
+            // Mutation observer: when hero mounts/replaces within main container, recalc
+            try {
+                const observer = new MutationObserver((mutations) => {
+                    for (const m of mutations) {
+                        if (m.type === 'childList') {
+                            const added = Array.from(m.addedNodes || []);
+                            if (added.some(n => n.nodeType === 1 && (
+                                n.matches?.('.hero-section, #hero, section[class*="hero"], .hero') ||
+                                n.querySelector?.('.hero-section, #hero, section[class*="hero"], .hero')
+                            ))) {
+                                // Defer to next frame to ensure layout is ready
+                                requestAnimationFrame(() => ensureHeroCalculated(30, 80));
+                                break;
+                            }
+                        }
+                    }
+                });
+                if (contentContainer) {
+                    observer.observe(contentContainer, { childList: true, subtree: true });
+                }
+            } catch (e) {
+                console.warn('MutationObserver unavailable:', e);
+            }
+
+            // Expose manual refresh hook for SPA routers
+            window.LayoutSequence.refresh = function() {
+                ensureHeroCalculated();
+            };
 
             // Layout sequence initialized successfully
         }
