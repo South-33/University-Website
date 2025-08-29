@@ -125,6 +125,15 @@ document.addEventListener('DOMContentLoaded', function() {
     Object.entries(urlMapping).forEach(([cleanUrl, filePath]) => {
         reverseUrlMapping[filePath] = cleanUrl;
     });
+
+    // Explicit page-level initializers for SPA (clean and file paths)
+    // Avoids reflective calls while still supporting pages that don't expose `initializePage`
+    const pageInitializerByPath = {
+        '/campus/main-campus-details': 'initializeCampusPage',
+        '/campus/main-campus-details.html': 'initializeCampusPage',
+        '/campus/second-campus-details': 'initializeVealSbovPage',
+        '/campus/second-campus-details.html': 'initializeVealSbovPage'
+    };
     
     // Function to convert clean URL to file path
     function getFilePathFromCleanUrl(cleanUrl) {
@@ -173,6 +182,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         initializeLazyLoading(document);
+        // Ensure page-level initialization runs on direct loads as well
+        if (window.initializePage && typeof window.initializePage === 'function') {
+            try {
+                window.initializePage();
+            } catch (error) {
+                console.error('Error calling initializePage on direct load:', error);
+            }
+        }
         document.body.classList.add('is-visible');
     }
 
@@ -278,27 +295,61 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             
-            if (link && 
-                link.hostname === window.location.hostname && 
-                !link.getAttribute('href').startsWith('#') && 
-                link.target !== '_blank' &&
-                !link.hasAttribute('data-no-transition')) {
-                
-                e.preventDefault();
-                let destination = link.href;
-                
-                // Don't transition if we're already on the same page
-                if (destination === window.location.href) {
-                    return;
-                }
-                
-                startPageTransition(destination);
+            if (!link) return;
+
+            // Respect modifier keys and download behavior
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === '_blank' || link.hasAttribute('download')) {
+                return;
             }
+
+            // Skip hash-only links
+            const hrefAttr = link.getAttribute('href') || '';
+            if (hrefAttr.startsWith('#')) return;
+
+            // Only intercept same-origin http(s)
+            let urlObj;
+            try { urlObj = new URL(link.href); } catch { return; }
+            if (urlObj.hostname !== window.location.hostname) return;
+            if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') return;
+
+            e.preventDefault();
+
+            // Normalize to clean URL if mapping exists (keeps pretty URLs in history)
+            let destination = link.href;
+            try {
+                const maybeClean = getCleanUrlFromFilePath(urlObj.pathname);
+                if (maybeClean !== urlObj.pathname) {
+                    destination = new URL(maybeClean + urlObj.search + urlObj.hash, window.location.origin).href;
+                }
+            } catch (_) {}
+
+            // Don't transition if we're already on the same page (normalize both)
+            const normalizePath = (u) => {
+                try {
+                    const x = new URL(u);
+                    let p = x.pathname.replace(/\/+$/, '');
+                    p = getCleanUrlFromFilePath(p);
+                    return p + (x.search || '') + (x.hash || '');
+                } catch { return u; }
+            };
+            if (normalizePath(destination) === normalizePath(window.location.href)) {
+                return;
+            }
+
+            startPageTransition(destination);
         });
 
         // Handle browser back/forward navigation
         window.addEventListener('popstate', (e) => {
-            startPageTransition(window.location.href, null, false);
+            // Normalize current location to clean URL for consistency
+            try {
+                const curr = new URL(window.location.href);
+                const clean = getCleanUrlFromFilePath(curr.pathname);
+                const dest = new URL(clean + curr.search + curr.hash, window.location.origin).href;
+                startPageTransition(dest, null, false);
+            } catch {
+                startPageTransition(window.location.href, null, false);
+            }
         });
     }
     
@@ -476,6 +527,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!currentMain) {
                 throw new Error('No main element found in current page');
             }
+
+            // IMPORTANT: Clean up the PREVIOUS page BEFORE executing new page scripts.
+            // Calling cleanup here ensures we call the prior page's cleanup, not the new page's.
+            if (window.pageCleanup && typeof window.pageCleanup === 'function') {
+                try {
+                    window.pageCleanup();
+                } catch (error) {
+                    console.warn('Error during previous page cleanup:', error);
+                }
+            }
             
             document.title = titleText;
             
@@ -535,13 +596,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.updateActiveNav();
                 }
                 
-                if (window.pageCleanup && typeof window.pageCleanup === 'function') {
-                    try {
-                        window.pageCleanup();
-                    } catch (error) {
-                        console.warn('Error during page cleanup:', error);
-                    }
-                }
+                // Note: Do NOT call pageCleanup here; at this point, window.pageCleanup
+                // refers to the NEW page and would wipe out its just-rendered state.
                 
                 // Prioritize lightweight visual setup first for smoother perception
                 const mainEl = document.querySelector('main');
@@ -555,6 +611,44 @@ document.addEventListener('DOMContentLoaded', function() {
                     } catch (error) {
                         console.error('Error calling initializePage:', error);
                     }
+                }
+
+                // Call page-specific initializer based on current path mapping (for pages without initializePage)
+                try {
+                    const currentPath = new URL(destination, window.location.origin).pathname;
+                    const initName = pageInitializerByPath[currentPath];
+                    let initCalled = false;
+                    if (initName) {
+                        console.debug('[SPA] Dispatch by mapping:', { currentPath, initName, exists: typeof window[initName] === 'function' });
+                        if (typeof window[initName] === 'function') {
+                            window[initName]();
+                            initCalled = true;
+                        }
+                    } else {
+                        console.debug('[SPA] No mapping for path:', currentPath);
+                    }
+
+                    // Fallback: if mapping missing or function not defined, try known initializers present on window
+                    if (!initCalled) {
+                        const fallbacks = [
+                            'initializeCampusPage',          // main campus
+                            'initializeVealSbovPage',        // second campus
+                            'initializeMapPage'              // campus index/map
+                        ];
+                        for (const name of fallbacks) {
+                            if (typeof window[name] === 'function') {
+                                console.debug('[SPA] Fallback initializer:', name);
+                                try { window[name](); } catch (e) { console.error(`Error calling ${name}:`, e); }
+                                initCalled = true;
+                                break;
+                            }
+                        }
+                        if (!initCalled) {
+                            console.warn('[SPA] No page initializer found for path:', currentPath);
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Page-specific initializer dispatch failed:', e);
                 }
 
                 // Run known page-level initializers quickly (small, necessary)
