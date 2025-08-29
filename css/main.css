@@ -58,13 +58,46 @@ body {
     /* This is the REAL background color that shows during SPA transitions */
     background-color: #ffffff;
     transition: none;
-    font-family: 'Inter', sans-serif; /* Added a default font */
+    font-family: 'Montserrat', sans-serif; /* Match theme.js body font */
     color: #333; /* Default text color */
     line-height: 1.6;
     transform: translateZ(0);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+/* Global font utility classes (match js/theme.js) */
+.font-heading { font-family: 'Lora', serif; }
+.font-body { font-family: 'Montserrat', sans-serif; }
+
+/* Swiper sizing: make containers and slides fill their parents */
+.hero-slider,
+.hero-slider .swiper-wrapper,
+.hero-slider .swiper-slide { height: 100%; }
+.hero-slider img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Ensure hero slider always spans the full section width */
+.hero-slider { position: absolute; inset: 0; width: 100% !important; }
+/* Ensure each slide occupies full width (pre/post Swiper init) */
+.hero-slider .swiper-wrapper { display: flex; }
+.hero-slider .swiper-slide { flex: 0 0 100% !important; width: 100% !important; }
+
+/* (moved hero-section styles into index.html to keep page self-contained) */
+
+.campus-image-slider,
+.campus-image-slider .swiper-wrapper,
+.campus-image-slider .swiper-slide { height: 100%; }
+.campus-image-slider img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.veal-sbov-slider .swiper-wrapper,
+.veal-sbov-slider .swiper-slide { height: 100%; }
+.veal-sbov-slider img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Global fallback to ensure any Swiper fills its container */
+.swiper { width: 100%; height: 100%; }
+.swiper-wrapper { height: 100%; }
+.swiper-slide { height: 100%; }
+.swiper-slide > img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Ensure header and footer stay on top */
 header, footer {

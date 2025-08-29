@@ -3,57 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National University of Management</title>
+    <title>National University of Management | A Legacy of Innovation & Excellence</title>
+    
+    <!-- Google Fonts (from original h.html) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Preload first hero image for instant paint -->
+    <link rel="preload" as="image" href="Picture/1/main-campus-view.jpg" fetchpriority="high">
+    
+    <!-- Tailwind CSS (from original h.html) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/theme.js"></script>
-    <script src="js/simple-i18n.js"></script>
+    
+    <!-- Swiper.js for sliders (from original h.html) -->
+
+
+    <!-- Scripts & Styles from Template -->
+    <script src="js/theme.js"></script> 
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/i18n.css">
+
+    <!-- Tailwind Config (from original h.html) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gold': '#FFC72C',
+                        'dark-blue': '#0A0A3E',
+                        'light-lavender': '#F5F6FA', // A light grey/off-white
+                    },
+                    boxShadow: {
+                        'gold/20': '0 10px 15px -3px rgba(255, 199, 44, 0.2), 0 4px 6px -2px rgba(255, 199, 44, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
     
-    <!-- Homepage-specific styles -->
+    <!-- Redesigned Homepage Styles (from original h.html) -->
     <style>
-        /* Hero video loading transition - extracted from main.css for modularity */
-        #hero-image {
-            transition: opacity 1s ease-out;
+        
+
+        /* Custom link for "Read More" style links */
+        .link-arrow {
+            transition: color 0.2s ease-in-out;
+        }
+        .link-arrow .arrow {
+            transition: transform 0.2s ease-in-out;
+        }
+        .link-arrow:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Custom Swiper Styles */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #FFC72C; /* gold */
+            transition: color 0.2s ease-in-out;
+        }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            color: #ffffff;
+        }
+        .swiper-pagination-bullet {
+            background: #ffffff;
+            opacity: 0.7;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #FFC72C; /* gold */
+            opacity: 1;
         }
         
-        /* Force perfect squares for bento grid 1x1 items */
-        .bento-square {
-            aspect-ratio: 1 / 1;
-            width: 100%;
-            height: 100%;
+        /* Typewriter Effect Styles */
+        .typewriter-cursor {
+            display: inline-block;
+            background-color: #FFC72C;
+            width: 3px;
+            /* Responsive Change: Adjusted height for different text sizes */
+            height: 2rem; /* For text-3xl */
+            margin-left: 0.25rem;
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
         }
-        
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 1.5rem;
-            width: 100%;
-            height: 600px;
+        @media (min-width: 640px) {
+             .typewriter-cursor { height: 2.5rem; } /* For sm:text-4xl */
         }
-        
-        @media (max-width: 1023px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-                height: auto;
-            }
+        @media (min-width: 768px) {
+            .typewriter-cursor { height: 3rem; } /* For md:text-5xl */
         }
-        
-        @media (max-width: 767px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
+        @keyframes blink {
+            from, to { background-color: transparent; }
+            50% { background-color: #FFC72C; }
+        }
+
+        /* Scroll Animation Styles */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.animate-slide-up {
+            transform: translateY(40px);
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="body-loading">
+<body class="body-loading bg-light-lavender">
 
-    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <!-- Header Loading Placeholder (from template.html for SPA consistency) -->
     <div id="header-placeholder">
         <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
             <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
@@ -64,375 +124,751 @@
             </div>
         </div>
     </div>
-    
-    <!-- Page Content Container - initially hidden until header loads -->
+
+    <!-- Page Content Container (from template.html for SPA transitions) -->
     <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+        <!-- Homepage-only styles: kept inside main so SPA always loads them when navigating in -->
+        <style>
+          /* Homepage-only hero styles (scoped to avoid cross-page interference) */
+          .home-hero { position: relative; overflow: hidden; height: 100vh; min-height: 100vh; }
+          /* Prefer dynamic viewport units where supported to handle mobile URL bars */
+          @supports (height: 100dvh) {
+            .home-hero { height: 100dvh; min-height: 100dvh; }
+          }
+          @supports (height: 100svh) {
+            .home-hero { min-height: 100svh; }
+          }
+          .home-hero .hero-slider { position: absolute; inset: 0; width: 100%; height: 100%; }
+          .home-hero .swiper-wrapper, .home-hero .swiper-slide { height: 100%; }
+          .home-hero .swiper-slide > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        </style>
+        <main>
+            <!-- HERO SECTION (UoM STYLE) -->
+            <!-- Responsive Change: Replaced h-[600px] with responsive height h-[85vh] on mobile and md:h-[600px] on desktop -->
+           <!-- Main section acts as the positioning and flex container -->
+    <section class="home-hero relative w-full min-h-[300px] flex items-center text-white">
     
-    <!-- Temporary Language Toggle for Homepage -->
-    <div class="fixed top-4 right-4 z-50">
-        <button class="language-toggle bg-dark-blue text-white px-4 py-2 rounded-full shadow-lg hover:bg-dark-blue/90 transition-colors">
-            <span class="lang-en">ខ្មែរ</span>
-            <span class="lang-km">EN</span>
-        </button>
+        <!-- LAYER 1: BACKGROUND SLIDER -->
+        <!-- This div is absolute, filling the parent section. It sits on the bottom layer (z-index 0) -->
+        <div class="swiper hero-slider absolute inset-0 h-full w-full">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="Picture/1/main-campus-view.jpg" alt="NUM Campus Building" class="w-full h-full object-cover"></div>
+                <div class="swiper-slide"><img src="Picture/1/vealsbov_building.jpg" alt="Aerial view of NUM" class="w-full h-full object-cover"></div>
+                <div class="swiper-slide"><img src="Picture/1/viewbacksite.jpg" alt="NUM Veal Sbov Campus Render" class="w-full h-full object-cover"></div>
+            </div>
+        </div>
+    
+        <!-- LAYER 2: DARK OVERLAY -->
+        <!-- This is also absolute, covering the slider. z-10 lifts it above the images. -->
+        <div class="absolute inset-0 bg-dark-blue/75 z-10"></div>
+    
+        <!-- LAYER 3: TEXT CONTENT -->
+        <!-- Left-aligned like a standard hero -->
+        <div class="relative z-20 w-full max-w-7xl mx-auto px-5 text-left">
+            <div class="max-w-xl">
+                <h1 class="font-body text-4xl sm:text-5xl md:text-6xl font-extrabold">Your Future Starts Here</h1>
+                <p class="font-body text-lg md:text-xl mt-4 text-white/90">
+                    Discover why NUM is a global leader in innovation and entrepreneurship.
+                </p>
+                <a href="#" class="inline-block bg-gold text-dark-blue font-bold px-8 py-3 rounded-full mt-8 hover:bg-gold/90 transition-all">
+                    → Explore Our Courses
+                </a>
+            </div>
+        </div>
+    
+    </section>
+    
+            <!-- ICON GRID LINKS (UoM STYLE) -->
+            <!-- Responsive Change: Adjusted vertical padding for mobile -->
+            <section class="bg-light-lavender py-16 md:py-20">
+                <div class="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Card 1: Courses -->
+                    <a href="/NUM/programs/bachelors.html" class="group flex items-start gap-4"><div class="bg-dark-blue text-gold rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center mt-1">→</div><div><h2 class="font-heading text-xl font-bold text-dark-blue group-hover:text-gold transition-colors">Courses</h2><p class="font-body text-slate-600 mt-1">Find the right course and see why studying with us is different.</p></div></a>
+                    <!-- Card 2: Research -->
+                    <a href="research.html" class="group flex items-start gap-4"><div class="bg-dark-blue text-gold rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center mt-1">→</div><div><h2 class="font-heading text-xl font-bold text-dark-blue group-hover:text-gold transition-colors">Research</h2><p class="font-body text-slate-600 mt-1">Find out how we're making a difference with our impactful research.</p></div></a>
+                    <!-- Card 3: How to Apply -->
+                    <a href="fee.html" class="group flex items-start gap-4"><div class="bg-dark-blue text-gold rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center mt-1">→</div><div><h2 class="font-heading text-xl font-bold text-dark-blue group-hover:text-gold transition-colors">How to Apply</h2><p class="font-body text-slate-600 mt-1">Your step-by-step guide to joining the NUM community.</p></div></a>
+                    <!-- Card 4: Student Life -->
+                    <a href="student-voice.html" class="group flex items-start gap-4"><div class="bg-dark-blue text-gold rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center mt-1">→</div><div><h2 class="font-heading text-xl font-bold text-dark-blue group-hover:text-gold transition-colors">Student Life</h2><p class="font-body text-slate-600 mt-1">Connect with our vibrant community, in person and online.</p></div></a>
+                </div>
+            </section>
+    
+            <!-- WELCOME TO NUM SECTION (NEW) -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="py-16 lg:py-24 bg-white">
+                <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
+                     <div>
+                        <!-- Responsive Change: Reduced image height on mobile -->
+                        <img src="Picture/1/art.jpg" alt="Hallway at National University of Management" class="rounded-lg shadow-xl w-full h-80 md:h-96 object-cover">
+                    </div>
+                    <div>
+                        <!-- Responsive Change: Adjusted heading font size -->
+                        <h2 class="font-heading text-3xl md:text-4xl text-dark-blue">Welcome to NUM</h2>
+                        <div class="w-16 h-1 bg-gold my-4"></div>
+                        <p class="font-body text-slate-700 my-6 leading-relaxed">Throughout the course of 42 years, the National University of Management has been developing progressively in terms of capacity, diversity, and quality education, based on our core values of research, entrepreneurship, and innovation, which take our students and alumni to a brighter future.</p>
+                         <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Learn about our history</span><span class="arrow">→</span></a>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- FEATURED CONTENT: RECTOR'S MESSAGE (UoM STYLE) -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="py-16 lg:py-24 bg-light-lavender">
+                <!-- MODIFICATION: Changed grid to 5 columns on desktop for better balance. -->
+                <div class="max-w-6xl mx-auto px-5 grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+                    <!-- Text content now takes 3/5 of the width on desktop -->
+                    <div class="md:col-span-3">
+                        <p class="font-heading font-bold text-sm text-gold tracking-widest">LEADERSHIP</p>
+                        <!-- Responsive Change: Adjusted heading font size -->
+                        <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mt-2">A Message from the Rector</h2>
+                        <p class="font-body text-md text-slate-700 my-6 leading-relaxed">On behalf of the National University of Management, I would like to express my sincere thanks to the Royal Government of Cambodia, Ministry of Education Youth and Sport, Ministry of Health, and the World Health Organization, that have worked tirelessly to protect and prevent the spread of the COVID 19 pandemic to our Cambodian community. In these challenging times, my colleagues and I are sincerely committed to working closely with students, faculty, staff, and collaborative partners to find innovative ways to offer greater flexibility for the learning experience via a new path of online/remote learning and hybrid classrooms with small in-person seminars and tutorials following SOP requirements. With best wishes to you and good health in these challenging times! Dr. HOR Peng Rector of the National University of Management</p>
+                        <p class="font-heading text-lg font-bold text-dark-blue">Dr. HOR Peng</p>
+                        <p class="font-body text-dark-blue/70">Rector, National University of Management</p>
+                        <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-6 link-arrow hover:text-gold"><span>Read more</span><span class="arrow">→</span></a>
+                    </div>
+                    <!-- Image content now takes 2/5 of the width and appears first on mobile -->
+                    <div class="md:col-span-2 row-start-1 md:row-auto">
+                         <img src="Picture/1/rector.jpg" alt="Dr. Hor Peng, Rector of NUM" class="rounded-lg shadow-xl w-full object-cover">
+                    </div>
+                </div>
+            </section>
+    
+            <!-- CORRECTED 3-COLUMN STATIC GRID SECTION -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-white py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <!-- Column 1: Mission -->
+                        <div>
+                            <div class="flex flex-col h-full">
+                                <h3 class="font-heading text-2xl font-bold text-dark-blue">OUR MISSION</h3>
+                                <div class="w-16 h-1 bg-gold my-4"></div>
+                                <p class="font-body text-slate-700 leading-relaxed mb-6">TO BE A LEADING UNIVERSITY IN EDUCATION, RESEARCH, INNOVATION AND ENTREPRENURSHIP</p>
+                                <img src="Picture/1/art.jpg" alt="Aerial view of the main NUM campus" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
+                            </div>
+                        </div>
+                        <!-- Column 2: Vision -->
+                        <div>
+                            <div class="flex flex-col h-full">
+                                <h3 class="font-heading text-2xl font-bold text-dark-blue">OUR VISION</h3>
+                                <div class="w-16 h-1 bg-gold my-4"></div>
+                                <p class="font-body text-slate-700 leading-relaxed mb-6">TO CULTIVATE INNOVATIVE, LEADERS, MANAGERS, AND ENTREPRENEURS WHO CAN DRIVE POSITIVE CHANGE IN SOCIETY.</p>
+                                <img src="Picture/1/numgoldlogo.jpg" alt="Render of the new NUM campus" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
+                            </div>
+                        </div>
+                        <!-- Column 3: CORE VALUES -->
+                        <div>
+                           <div class="flex flex-col h-full">
+                            <h3 class="font-heading text-2xl font-bold text-dark-blue">CORE VALUES</h3>
+                            <div class="w-16 h-1 bg-gold my-4"></div>
+                            <ul class="font-body text-slate-700 leading-relaxed mb-6 list-disc list-inside space-y-2">
+                                <li>QUALITY</li>
+                                <li>RESEARCH</li>
+                                <li>INNOVATION</li>
+                                <li>COMMUNITY</li>
+                                <li>GREEN</li>
+                            </ul>
+                            <img src="Picture/1/student_learning.jpg" alt="Hallway at National University of Management" class="w-full h-64 object-cover rounded-lg shadow-md mt-auto">
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- WHY CHOOSE NUM SECTION (NEW) -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-light-lavender py-16 lg:py-24">
+                <div class="max-w-6xl mx-auto px-5 text-center">
+                    <!-- Responsive Change: Adjusted heading font size -->
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue">Why Choose NUM?</h2>
+                    <p class="font-body text-slate-700 my-4 leading-relaxed max-w-2xl mx-auto">We empower you with the skills, connections, and mindset to not just succeed, but to lead.</p>
+                    <div class="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+                        <!-- Point 1 -->
+                        <div class="group">
+                            <div class="flex-shrink-0 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-dark-blue">Cultivate an Entrepreneurial Mindset</h3>
+                            <p class="font-body text-slate-600 mt-2">We go beyond theory, embedding a practical, entrepreneurial spirit into every program. With our focus on innovation, you'll learn to launch ventures, lead change, and build the future.</p>
+                        </div>
+                        <!-- Point 2 -->
+                        <div class="group">
+                            <div class="flex-shrink-0 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-dark-blue">Unrivaled Industry Connections</h3>
+                            <p class="font-body text-slate-600 mt-2">Gain a competitive edge with exclusive internships, guest lectures from top executives, and extensive networking opportunities within Cambodia's thriving business ecosystem.</p>
+                        </div>
+                        <!-- Point 3 -->
+                        <div class="group">
+                            <div class="flex-shrink-0 mb-4">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M10 3.562l2-2.054a1.144 1.144 0 011.618 0l2 2.054M12 21.038v-5.25A2.25 2.25 0 0114.25 13.5h.038A2.25 2.25 0 0116.5 15.75v5.25M4.5 10.5a8.25 8.25 0 1015 0a8.25 8.25 0 00-15 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-dark-blue">A Global Gateway</h3>
+                            <p class="font-body text-slate-600 mt-2">Join a diverse community with robust international partnerships and student exchange programs. We prepare you to succeed not just in Cambodia, but on the global stage.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Responsive Change: Adjusted vertical padding -->
+             <section class="py-16 lg:py-24 bg-dark-blue text-white">
+                <div class="max-w-6xl mx-auto px-5">
+                    <div class="text-center mb-12 md:mb-16 animate-on-scroll animate-slide-up">
+                        <!-- Responsive Change: Adjusted heading font size and container height -->
+                        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 h-24 md:h-20 flex items-center justify-center">
+                            <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
+                        </h2>
+                        <p class="font-body text-lg max-w-3xl mx-auto text-white/80">Our commitment to forward-thinking education is recognized on the world stage by WURI 2025.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="md:col-span-2 bg-gradient-to-br from-gold/20 to-gold/5 rounded-2xl p-6 md:p-10 text-center flex flex-col justify-center animate-on-scroll animate-slide-up">
+                            <p class="text-sm font-semibold uppercase text-gold tracking-widest">WURI RANKING FOR INNOVATION</p>
+                            <!-- Note: The clamp() function is inherently responsive. No change needed here. -->
+                            <p class="font-heading font-extrabold text-white my-2" style="font-size: clamp(6rem, 20vw, 10rem); line-height: 1;">69<span class="text-gold text-5xl align-super">th</span></p>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-8 animate-on-scroll animate-slide-up" style="transition-delay: 150ms;">
+                            <p class="font-heading text-6xl font-extrabold text-gold">6<span class="text-4xl">th</span></p>
+                            <h3 class="mt-2 text-xl font-semibold">Symbol & Promotion</h3>
+                            <p class="mt-1 font-body text-white/70">Recognized for our strong brand and influence.</p>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-8 animate-on-scroll animate-slide-up" style="transition-delay: 250ms;">
+                            <p class="font-heading text-6xl font-extrabold text-gold">9<span class="text-4xl">th</span></p>
+                            <h3 class="mt-2 text-xl font-semibold">Student Mobility & Openness</h3>
+                            <p class="mt-1 font-body text-white/70">Fostering a truly global and connected campus.</p>
+                        </div>
+                        <div class="md:col-span-2 bg-white/5 rounded-2xl p-8 animate-on-scroll animate-slide-up" style="transition-delay: 350ms;">
+                            <p class="font-heading text-6xl font-extrabold text-gold">32<span class="text-4xl">nd</span></p>
+                            <h3 class="mt-2 text-xl font-semibold">Entrepreneurial Spirit</h3>
+                            <p class="mt-1 font-body text-white/70">Cultivating the next generation of innovators and business leaders.</p>
+                        </div>
+                    </div>
+            </section>
+    
+            <!-- NEW SECTION: WE ARE RANKED... -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-white py-16 lg:py-24 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-5 grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Left Column: Text -->
+                    <div class="animate-on-scroll animate-slide-up">
+                        <!-- Responsive Change: Adjusted heading font size -->
+                        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-blue leading-tight">
+                            WE ARE RANKED AMONG TOP GLOBAL INNOVATIVE UNIVERSITIES
+                        </h2>
+                        <p class="font-body text-xl text-slate-700 mt-6">
+                            Evidence of our standards of quality of academic education and research.
+                        </p>
+                        <div class="w-20 h-0.5 bg-slate-300 my-8"></div>
+                        <p class="font-body text-slate-600 leading-relaxed">
+                            The World University Rankings for Innovation (The WURI) assesses higher education institutions' real contributions to industry and society, highlighting innovative education, research, and engagement to society. The ranking aims to spotlight higher education institutions that excel in these innovative approaches, thereby inspiring advancements across the academic and societal landscape. NUM was ranked among top innovative universities in the world.
+                        </p>
+                        <div class="inline-block mt-8">
+                            <a href="#" class="block bg-red-700 text-white font-heading font-bold uppercase tracking-wider px-8 py-2 hover:bg-red-800 transition-colors duration-200" style="text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);">
+                                     READ MORE
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Right Column: Image -->
+                    <!-- Responsive Change: Reordered for image to appear first on mobile screens -->
+                    <div class="row-start-1 lg:row-auto">
+                        <!-- Responsive Change: Changed image width from w-3/4 to w-full on mobile -->
+                        <img src="Picture/1/wuri.jpg" alt="WURI 2023 Rankings and Partners" class="w-full lg:w-3/4 h-auto mx-auto cursor-pointer transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 active:scale-95">
+                    </div>
+                </div>
+            </section>
+    
+            <!-- GO GLOBAL WITH NUM (ENHANCED STUDENT MOBILITY SECTION) -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-light-lavender py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-5">
+                    <!-- Section Header -->
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <p class="font-heading font-bold text-sm text-gold tracking-widest">GLOBAL OPPORTUNITIES</p>
+                        <!-- Responsive Change: Adjusted heading font size -->
+                        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl text-dark-blue mt-2 font-extrabold">Go Global with NUM</h2>
+                        <p class="font-body text-slate-700 mt-4 text-lg leading-relaxed">Your education extends far beyond our campus. We offer a world of opportunity to immerse yourself in new cultures, build an international network, and gain a global perspective that is essential for tomorrow's leaders.</p>
+                    </div>
+    
+                    <!-- 3-Column Feature Grid -->
+                    <!-- Responsive Change: Centered content on mobile with text-center md:text-left -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16 md:mb-20 text-center md:text-left">
+                        <!-- Feature 1: Semester Exchange -->
+                        <div class="flex flex-col items-center md:items-start">
+                            <div class="bg-dark-blue text-gold rounded-full p-3 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                </svg>
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-dark-blue">Semester Exchange</h3>
+                            <p class="font-body text-slate-600 mt-2">Study for a full semester at one of our partner universities across Asia, Europe, or North America, earning credits toward your NUM degree.</p>
+                        </div>
+                        <!-- Feature 2: International Internships -->
+                        <div class="flex flex-col items-center md:items-start">
+                            <div class="bg-dark-blue text-gold rounded-full p-3 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-dark-blue">Global Internships</h3>
+                            <p class="font-body text-slate-600 mt-2">Gain invaluable professional experience by working with multinational companies and organizations through our curated internship programs abroad.</p>
+                        </div>
+                        <!-- Feature 3: Summer & Short Programs -->
+                        <div class="flex flex-col items-center md:items-start">
+                             <div class="bg-dark-blue text-gold rounded-full p-3 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-dark-blue">Cultural Immersions</h3>
+                            <p class="font-body text-slate-600 mt-2">Participate in focused 2-4 week summer schools or cultural workshops for a condensed but powerful international learning experience.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Student Testimonial -->
+                    <!-- Responsive Change: Adjusted padding -->
+                    <div class="bg-white rounded-lg shadow-xl p-8 md:p-12 grid md:grid-cols-3 gap-8 items-center mb-16 md:mb-20">
+                        <div class="md:col-span-1">
+                            <!-- Responsive Change: Smaller image on mobile -->
+                            <img src="Picture/1/student_exchange1.jpg" alt="A smiling exchange student" class="rounded-full w-32 h-32 md:w-40 md:h-40 object-cover mx-auto shadow-md border-4 border-gold">
+                        </div>
+                        <blockquote class="md:col-span-2 text-center md:text-left">
+                            <!-- Responsive Change: Adjusted font size -->
+                            <p class="font-body text-lg md:text-2xl text-slate-700 leading-relaxed italic">"My semester exchange in South Korea was the highlight of my university life. It pushed me out of my comfort zone and gave me the confidence to pursue an international career. The support from NUM's global office was fantastic."</p>
+                            <cite class="block font-heading font-bold text-dark-blue mt-4 not-italic">Sokunthea Lim</cite>
+                            <p class="font-body text-slate-500 not-italic">BBA, Exchange to Seoul National University</p>
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- STUDENT MOBILITY SECTION (NEW) - MOVED TO BE A FULL-WIDTH SECTION -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-dark-blue py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-16 items-center">
+                    <!-- Left Column: Text Content -->
+                    <div class="text-white">
+                        <!-- Responsive Change: Adjusted heading font size -->
+                        <h2 class="font-heading text-3xl md:text-4xl text-white font-bold">Student Mobility</h2>
+                        <div class="w-20 h-1 bg-gold my-6"></div>
+                        <p class="font-body text-lg text-white/80 leading-relaxed">
+                            With partnerships in over 30 institutions abroad, our students have the opportunity to immerse themselves in diverse cultures and gain invaluable experience that will enhance their academic and professional careers through exchange programs and international internships. We encourage students to take part in exchange programs where they can spend a semester or year studying at a partner university overseas. At NUM, students have endless opportunities to broaden their horizons and expand their skill set through international experiences.
+                        </p>
+                    </div>
+                    
+                    <!-- Right Column: Image Collage -->
+                    <!-- Responsive Change: Reordered to show image first on mobile -->
+                    <div class="row-start-1 md:row-auto">
+                        <img src="Picture/1/student mobility.png" alt="A collage of students participating in international exchange programs and internships." class="max-w-full h-auto rounded-lg shadow-2xl">
+                    </div>
+                </div>
+            </section>
+    
+            <!-- NEWS HEADLINES (UoM STYLE) - NOW WITH STATIC PARTNER LOGOS -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-light-lavender py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-5">
+    
+                    <!-- Partner Logos -->
+                    <div class="mb-16 md:mb-20">
+                        <h3 class="font-heading text-center text-2xl text-dark-blue font-bold mb-8">A Selection of Our Global Partners</h3>
+                        <!-- This flexbox with wrap is already mobile-friendly -->
+                        <div class="flex flex-wrap justify-center items-center gap-x-12 sm:gap-x-16 gap-y-8">
+                            <img src="Picture/1/l1.png" alt="Partner Logo 1" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l2.png" alt="Partner Logo 2" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l3.png" alt="Partner Logo 3" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l4.png" alt="Partner Logo 4" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l5.png" alt="Partner Logo 5" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l6.png" alt="Partner Logo 6" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l7.png" alt="Partner Logo 7" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l8.png" alt="Partner Logo 8" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l9.png" alt="Partner Logo 9" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l10.png" alt="Partner Logo 10" class="h-10 md:h-12 object-contain">
+                            <img src="Picture/1/l11.png" alt="Partner Logo 11" class="h-10 md:h-12 object-contain">
+                        </div>
+                    </div>
+    
+                    <!-- News Headlines -->
+                    <div class="grid md:grid-cols-3 gap-8 text-left max-w-6xl mx-auto">
+                        <div><p class="font-heading font-bold text-sm text-gold tracking-widest">RESEARCH</p><a href="#" class="group"><h3 class="font-heading text-xl font-bold text-dark-blue mt-2 group-hover:underline">→ How scientific tools are tracing the evolution of ancient manuscripts</h3></a></div>
+                        <div><p class="font-heading font-bold text-sm text-gold tracking-widest">INNOVATION</p><a href="#" class="group"><h3 class="font-heading text-xl font-bold text-dark-blue mt-2 group-hover:underline">→ Student Startup Wins National Competition with AI-Powered App</h3></a></div>
+                        <div><p class="font-heading font-bold text-sm text-gold tracking-widest">COMMUNITY</p><a href="#" class="group"><h3 class="font-heading text-xl font-bold text-dark-blue mt-2 group-hover:underline">→ Annual Alumni Homecoming Gala Celebrates 40 Years of Excellence</h3></a></div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- STUDY IN A PLACE LIKE NO OTHER (UoM Style) -->
+            <!-- Responsive Change: Adjusted top padding -->
+            <section class="bg-white pt-16 lg:pt-24">
+                <div class="max-w-6xl mx-auto px-5">
+                    <div class="max-w-3xl">
+                        <!-- Responsive Change: Adjusted heading font size -->
+                        <h2 class="font-heading text-3xl md:text-4xl text-dark-blue">Study in a place like no other</h2>
+                        <p class="font-body text-slate-700 my-4 leading-relaxed">The National University of Management is a truly unique environment. We're creating a range of sustainable facilities and precincts to enable ground-breaking discoveries, now and into the future.</p>
+                        <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Our sustainability commitment</span><span class="arrow">→</span></a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CAMPUS & FACILITIES GRID WITH SLIDERS (UoM Style) -->
+            <!-- Responsive Change: Adjusted bottom padding -->
+            <section class="bg-white pt-12 pb-16 lg:pb-24">
+                <div class="max-w-6xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card: Our Campuses -->
+                    <div>
+                        <div class="swiper campus-image-slider h-64 rounded-lg overflow-hidden shadow-lg">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="Picture/1/viewbacksite.jpg" alt="NUM Campus" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/num_building.jpg" alt="NUM Campus Aerial" class="w-full h-full object-cover"></div>
+                            </div>
+                        </div>
+                        <h3 class="font-heading text-2xl text-dark-blue font-bold mt-4">Our campuses</h3>
+                        <p class="font-body text-slate-700 my-2 leading-relaxed">Our historic main campus is at the heart of Phnom Penh, with a new satellite campus extending our reach.</p>
+                        <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Take a virtual tour</span><span class="arrow">→</span></a>
+                    </div>
+                    <!-- Card: Research Facilities -->
+                    <div>
+                        <div class="swiper campus-image-slider h-64 rounded-lg overflow-hidden shadow-lg">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="Picture/1/e6.jpg" alt="Research Lab" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/art.jpg" alt="University Hallway" class="w-full h-full object-cover"></div>
+                            </div>
+                        </div>
+                        <h3 class="font-heading text-2xl text-dark-blue font-bold mt-4">Research facilities</h3>
+                        <p class="font-body text-slate-700 my-2 leading-relaxed">Our research infrastructure network supports innovation in Cambodia and internationally.</p>
+                        <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Our research infrastructure</span><span class="arrow">→</span></a>
+                    </div>
+                    <!-- Card: Libraries and Collections -->
+                    <div>
+                        <div class="swiper campus-image-slider h-64 rounded-lg overflow-hidden shadow-lg">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="Picture/1/library.jpg" alt="Library Interior" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/e9.jpg" alt="New campus render" class="w-full h-full object-cover"></div>
+                            </div>
+                        </div>
+                        <h3 class="font-heading text-2xl text-dark-blue font-bold mt-4">Libraries and collections</h3>
+                        <p class="font-body text-slate-700 my-2 leading-relaxed">Our diverse libraries and collections provide access to the knowledge and research curated at the University.</p>
+                        <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Get involved in our cultural facilities</span><span class="arrow">→</span></a>
+                    </div>
+                    <!-- Card: Accommodation -->
+                    <div>
+                        <div class="swiper campus-image-slider h-64 rounded-lg overflow-hidden shadow-lg">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="Picture/1/student_exchange.jpg" alt="Campus aerial view" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/num_international_college.jpg" alt="New campus accommodation concept" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/student_exchange2.jpg" alt="Student accommodation interior" class="w-full h-full object-cover"></div>
+                            </div>
+                        </div>
+                        <h3 class="font-heading text-2xl text-dark-blue font-bold mt-4">Exchange program</h3>
+                        <p class="font-body text-slate-700 my-2 leading-relaxed">Find accommodation that suits your needs and lifestyle. Join our vibrant community near campus.</p>
+                        <a href="#" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>Discover accommodation</span><span class="arrow">→</span></a>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- MULTI-COLUMN CONTENT BLOCKS -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-light-lavender py-16 lg:py-24 space-y-20">
+                <!-- Block: Our New Campus -->
+                <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="font-heading text-3xl text-dark-blue font-bold">Our bold new Veal Sbov Campus</h3>
+                        <p class="font-body text-slate-700 my-4 leading-relaxed">A major urban renewal project is set to become the University's newest precinct. It's a globally connected hub where industry, government and community will come together to transform education.</p>
+                         <a href="second-campus-details.html" class="group inline-flex items-center gap-2 font-bold text-dark-blue mt-2 link-arrow hover:text-gold"><span>More about the new campus</span><span class="arrow">→</span></a>
+                    </div>
+                    <div class="relative">
+                        <!-- Fix slider height by setting container height and letting slides fill it -->
+                        <div class="swiper veal-sbov-slider h-80 md:h-96 rounded-lg overflow-hidden shadow-xl">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="Picture/1/num_veal_sbov1.jpg" alt="Architectural render of new campus" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/gate.jpg" alt="Another render of the new campus" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/vealsbov_building.jpg" alt="New campus render" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="Picture/1/e2 copy.jpg" alt="New campus render" class="w-full h-full object-cover"></div>
+                            </div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- START: RECENT NEWS SECTION (REPLICATED FROM DESIGN) -->
+            <!-- Responsive Change: Adjusted vertical padding -->
+            <section class="bg-white py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-5">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-16">
+    
+                        <!-- ===== LEFT COLUMN: MAIN NEWS GRID ===== -->
+                        <div class="lg:col-span-2">
+                            <!-- Responsive Change: Adjusted heading font size -->
+                            <h2 class="font-heading text-3xl md:text-4xl font-bold text-dark-blue mb-8">Recent News</h2>
+    
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                
+                                <!-- News Card 1 -->
+                                <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
+                                    <a href="#" class="block">
+                                        <img class="w-full h-56 object-cover" src="Picture/1/ការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ.jpg" alt="News Image 1">
+                                    </a>
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">NUM</span>
+                                        <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
+                                            <a href="#">និស្សិតជំនាញសេដ្ឋកិច្ចពាណិជ្ជសាស្ត្រ ជំនាន់៣០​ នៃសាកលវិទ្យាល័យជាតិគ្រប់គ្រង បានឡើងការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ ឆ្នាំសិក្សា២០២៤-២០២៥</a>
+                                        </h3>
+                                        <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow">
+                                            នៅថ្ងៃទី២៥ និងទី២៦ ខែសីហា ឆ្នាំ២០២៥ និស្សិតជំនាញសេដ្ឋកិច្ចពាណិជ្ជសាស្ត្រ ជំនាន់៣០​ នៃសាកលវិទ្យាល័យជាតិគ្រប់គ្រង បានឡើងការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ ឆ្នាំសិក្សា២០២៤-២០២៥
+                                        </p>
+                                        <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-07">August 26, 2025</time>
+                                    </div>
+                                </article>
+    
+                                <!-- News Card 2 -->
+                                <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
+                                    <a href="https://www.facebook.com/share/p/1Janrp4PEa/" class="block">
+                                        <img class="w-full h-56 object-cover" src="Picture/1/num_international_college.jpg" alt="News Image 2">
+                                    </a>
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">Num International College</span>
+                                        <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
+                                            <a href="#">NUM International College Student Pursuing a Dual-Degree Program in the USA 🇺🇸</a>
+                                        </h3>
+                                        <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow">
+                                            NUMIC is proud to congratulate Mr. Rotanak Seilasak, a Senior Student, who is leaving Cambodia to pursue a dual-degree program at the University of Wisconsin-Green Bay in the United States.
+                                            This remarkable opportunity allows Seilasak to advance his academic journey while representing NUMIC abroad.
+                                            NUMIC wishes Seilasak the very best in his studies and future endeavors. We extend our sincere thanks to the University of Wisconsin-Green Bay for their support of this program.
+                                        </p>
+                                        <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-13">August 27, 2025</time>
+                                    </div>
+                                </article>
+    
+                                <!-- News Card 3 -->
+                                <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
+                                    <a href="#" class="block">
+                                        <img class="w-full h-56 object-cover" src="Picture/1/bacll.jpg" alt="News Image 3">
+                                    </a>
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">NUM</span>
+                                        <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
+                                            <a href="#">ការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ សម័យប្រឡង៖ ២៨-២៩ សីហា ២០២៥ នៅសល់តែ២ថ្ងៃទៀតទេ!
+                                            សាកលវិទ្យាល័យជាតិគ្រប់គ្រង សូមជូនពរប្អូនៗសិស្សានុសិស្សថ្នាក់ទី១២ ទាំងអស់ឱ្យទទួលបានជោគជ័យក្នុងការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ នាពេលខាងមុខនេះ៕</a>
+                                        </h3>
+                                        <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow"></p>
+                                        <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-11">August 27, 2025</time>
+                                    </div>
+                                </article>
+                                
+                                <!-- News Card 4 -->
+                                <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
+                                    <a href="#" class="block">
+                                        <img class="w-full h-56 object-cover" src="Picture/1/bussiness_law_poster.jpg" alt="News Image 4">
+                                    </a>
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <span class="bg-dark-blue text-white font-heading font-semibold text-xs px-3 py-1 -mt-12 relative z-10 self-start">NUM</span>
+                                        <h3 class="font-heading text-lg font-bold text-dark-blue mt-4 hover:text-gold transition-colors">
+                                            <a href="#">សូមស្វាគមន៍ការចុះឈ្មោះចូលសិក្សាថ្នាក់បរិញ្ញាបត្រជាន់ខ្ពស់ជំនាន់ទី២៨ លើជំនាញនីតិពាណិជ្ជកម្ម (Master of Business Law) 
+                                            ចាប់ផ្តើមចូលសិក្សា ចាប់ពីថ្ងៃទី០១ ខែកញ្ញា ឆ្នាំ២០២៥ តទៅ តាមប្រព័ន្ធអនឡាញខ្លះ និងក្នុងថ្នាក់ខ្លះ តាមកាលវិភាគកំណត់របស់សាកលវិទ្យាល័យ។</a>
+                                        </h3>
+                                        <p class="font-body text-slate-600 mt-2 text-sm leading-relaxed flex-grow"></p>
+                                        <time class="font-body text-xs text-slate-400 mt-4" datetime="2025-08-11">August 27, 2025</time>
+                                    </div>
+                                </article>
+    
+                            </div>
+                        </div>
+    
+                        <!-- ===== RIGHT COLUMN: SIDEBAR ===== -->
+                        <aside>
+                            <h3 class="font-heading text-2xl font-bold text-dark-blue mb-8">Events And Post</h3>
+                            <div class="space-y-6">
+                                
+                                <!-- Sidebar Item 1 -->
+                                <a href="#" class="flex items-start gap-4 group">
+                                    <img src="Picture/1/bussiness_law_poster.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
+                                    <div>
+                                        <h4 class="font-heading font-bold text-dark-blue group-hover:text-gold transition-colors leading-tight">MASTER'S PROGRAM ENROLLMENT Open</h4>
+                                        <p class="font-body text-sm text-slate-500 mt-1">August 27, 2025</p>
+                                    </div>
+                                </a>
+    
+                                <!-- Sidebar Item 2 -->
+                                <a href="#" class="flex items-start gap-4 group">
+                                    <img src="Picture/1/ការពារសារណាបញ្ចប់ការសិក្សាថ្នាក់បរិញ្ញាបត្រ.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
+                                    <div>
+                                        <h4 class="font-heading font-bold text-dark-blue group-hover:text-gold transition-colors leading-tight">ការការពារសារណាបទបញ្ចប់ថ្នាក់បរិញ្ញាបត្រTop10 ជំនាន់ទី៣០</h4>
+                                        <p class="font-body text-sm text-slate-500 mt-1">August 27, 2025</p>
+                                    </div>
+                                </a>
+    
+                                <!-- Sidebar Item 3 -->
+                                <a href="#" class="flex items-start gap-4 group">
+                                    <img src="Picture/1/bacll.jpg" alt="Sidebar post thumbnail" class="w-24 h-20 object-cover rounded-md flex-shrink-0">
+                                    <div>
+                                        <h4 class="font-heading font-bold text-dark-blue group-hover:text-gold transition-colors leading-tight">ការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ សម័យប្រឡង៖ ២៨-២៩ សីហា ២០២៥ នៅសល់តែ២ថ្ងៃទៀតទេ!
+                                            សាកលវិទ្យាល័យជាតិគ្រប់គ្រង សូមជូនពរប្អូនៗសិស្សានុសិស្សថ្នាក់ទី១២ ទាំងអស់ឱ្យទទួលបានជោគជ័យក្នុងការប្រឡងសញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ នាពេលខាងមុខនេះ៕</h4>
+                                        <p class="font-body text-sm text-slate-500 mt-1">August 27, 2025</p>
+                                    </div>
+                                </a>
+    
+                            </div>
+                        </aside>
+    
+                    </div>
+                </div>
+            </section>
+            <!-- END: RECENT NEWS SECTION -->
+    
+        </main>
+        
+        <!-- FOOTER PLACEHOLDER (from template.html) -->
+        <div id="footer-placeholder"></div>
     </div>
-
-    <main>
-        <section id="hero" class="hero-section relative flex items-center justify-center overflow-hidden text-center text-white">
-            <!-- Static image shown first for instant loading -->
-            <img id="hero-image" src="/Picture/School/numdronecompressedframe1.jpg" alt="NUM Campus" class="absolute top-0 left-0 w-full h-full object-cover object-top z-0 transition-opacity duration-1000">
-            
-            <!-- Hero Content -->
-            <div class="relative z-20 flex flex-col items-center justify-center h-full w-full">
-                <!-- Centered Title -->
-                <h1 class="font-heading text-4xl md:text-6xl text-center mb-8 drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
-                    <span class="lang-en">National University of Management</span>
-                    <span class="lang-km">សាកលវិទ្យាល័យជាតិគ្រប់គ្រង</span>
-                </h1>
-                <p class="font-body text-lg md:text-xl max-w-3xl mx-auto drop-shadow-md" style="text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);">
-                    <span class="lang-en">A Hub of Research, Entrepreneurship, and Innovation for a Brighter Future.</span>
-                    <span class="lang-km">មជ្ឈមណ្ឌលនៃការស្រាវជ្រាវ ការបង្កើតអាជីវកម្ម និងការបង្កើតថ្មីសម្រាប់អនាគតដ៏ភ្លឺស្វាង។</span>
-                </p>
-                <!-- Lower Third Explore Link -->
-                <div class="absolute bottom-16">
-                    <a href="#intro" class="explore-link flex flex-col items-center gap-4 text-3xl uppercase tracking-[2px] text-white drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
-                        <span class="lang-en">Explore</span>
-                        <span class="lang-km">ស្វែងយល់</span>
-                        <span class="animate-bounce text-[2.7rem]">↓</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="intro" class="bg-light-lavender py-20">
-            <div class="max-w-6xl mx-auto px-5 text-center">
-                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue leading-tight">
-                    <span class="lang-en">A Legacy of Excellence, A Vision for the Future</span>
-                    <span class="lang-km">បេតិកភណ្ឌនៃឧត្តមភាព និងចក្ខុវិស័យសម្រាប់អនាគត</span>
-                </h2>
-                <p class="font-body text-lg text-dark-blue/80 max-w-4xl mx-auto mt-6">
-                    <span class="lang-en">Since our inception, the National University of Management has been dedicated to developing competent, ethical, and socially responsible leaders. We champion a dynamic learning environment where quality education, impactful research, and groundbreaking innovation converge to shape the next generation of professionals.</span>
-                    <span class="lang-km">ចាប់តាំងពីការបង្កើតរបស់យើង សាកលវិទ្យាល័យជាតិគ្រប់គ្រងបានលះបង់ខ្លួនក្នុងការអភិវឌ្ឍមេដឹកនាំដែលមានសមត្ថភាព គុណធម៌ និងទំនួលខុសត្រូវចំពោះសង្គម។ យើងគាំទ្របរិយាកាសអប់រំដ៏សកម្មដែលការអប់រំមានគុណភាព ការស្រាវជ្រាវដែលមានឥទ្ធិពល និងការបង្កើតថ្មីដ៏ទំនើបបានបញ្ចូលគ្នាដើម្បីបង្កើតជំនាន់ថ្មីនៃអ្នកជំនាញ។</span>
-                </p>
-            </div>
-        </section>
-
-        <!-- Bento Grid Container - 2x3 Layout -->
-        <section class="bg-white py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5">
-                <!-- 2x3 Bento Grid Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style="grid-template-rows: repeat(2, 1fr); min-height: 500px;">
-                    
-                    <!-- Mission & Vision Card - Takes 1x2 space -->
-                    <div class="lg:col-span-1 lg:row-span-2">
-                        <div class="relative flex items-end p-10 text-white rounded-[20px] bg-cover bg-center h-full min-h-[300px]" style="background-image: url('https://images.pexels.com/photos/3816807/pexels-photo-3816807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-[20px]"></div>
-                            <div class="relative z-10">
-                                <h4 class="font-heading text-3xl md:text-4xl mb-6">Our Mission & Vision</h4>
-                                <p class="mb-8 text-lg leading-relaxed">We are committed to developing competent and socially responsible human resources with high intellectual knowledge, skills, and ethics. Our key mission is to improve and apply the best quality standards in education, research, and innovation.</p>
-                                <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity text-lg">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Personal Visit Card - Takes 2x1 space -->
-                    <div class="lg:col-span-2 lg:row-span-1">
-                        <div class="bg-dark-blue text-white p-8 rounded-[20px] h-full flex flex-col justify-between">
-                            <div>
-                                <h4 class="font-heading text-2xl md:text-3xl mb-4">Explore</h4>
-                                <p class="mb-6 text-lg leading-relaxed">Discover our diverse range of programs, designed to foster critical thinking, creativity, and collaboration.</p>
-                            </div>
-                            <a href="#" class="bg-transparent border border-white text-white rounded-full px-6 py-3 inline-block font-medium hover:bg-white hover:text-dark-blue transition-colors text-lg self-start">Arrange Visit</a>
-                        </div>
-                    </div>
-
-                    <!-- Academic Programs Card - Takes 1x1 space -->
-                    <div class="lg:col-span-1 lg:row-span-1">
-                        <div class="bg-cover bg-center rounded-[20px] h-full w-full relative" style="background-image: url('https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); aspect-ratio: 1/1;">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-[20px]"></div>
-                            <div class="absolute bottom-6 left-6 text-white">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Admissions Text Card - Takes 1x1 space -->
-                    <div class="lg:col-span-1 lg:row-span-1">
-                        <div class="bg-light-lavender text-dark-blue p-8 rounded-[20px] h-full w-full flex flex-col justify-between" style="aspect-ratio: 1/1;">
-                            <div>
-                                <h4 class="font-heading text-2xl mb-4">Explore</h4>
-                                <p class="mb-6 text-lg leading-relaxed">Discover our diverse range of programs, designed to foster critical thinking, creativity, and collaboration.</p>
-                            </div>
-                            <a href="#" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity text-lg self-start">Explore Programs</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Ethos Section - Separate for easy modification -->
-        <section class="bg-light-lavender py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5">
-                <div class="grid lg:grid-cols-2 gap-12 items-stretch">
-                    
-                    <!-- Ethos Text Card -->
-                    <div class="text-dark-blue">
-                        <h3 class="font-heading text-4xl lg:text-5xl mb-6">The Ethos and the Environment</h3>
-                        <p class="mb-6 text-lg">At NUM Academy, our ethos goes beyond academia. We believe in nurturing the whole child, promoting resilience, creativity, and global awareness. Set against the backdrop of Kent's natural beauty, our campus offers an environment where students are inspired daily, both by the lessons in the classroom and the serenity outside.</p>
-                        <a href="#" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Read More</a>
-                    </div>
-                    
-                    <!-- Ethos Image Card -->
-                    <div class="h-full flex">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Picture/School/num_front.jpg" alt="Happy students waving" class="lazy-load w-full h-full rounded-[20px] block object-cover">
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 text-white bg-cover bg-center font-body" style="background-image: linear-gradient(rgba(10, 10, 62, 0.85), rgba(10, 10, 62, 0.85)), url('https://images.pexels.com/photos/1206101/pexels-photo-1206101.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-            <div class="max-w-6xl mx-auto px-5">
-                <h3 class="font-heading text-5xl mb-16 text-center">
-                    <span class="lang-en">Why Choose NUM?</span>
-                    <span class="lang-km">ហេតុអ្វីជ្រើសរីស NUM?</span>
-                </h3>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
-
-                    <!-- Feature 1: Expert Faculty -->
-                    <div class="flex flex-col items-center md:items-start">
-                        <div class="bg-white/10 p-4 rounded-full mb-4">
-                            <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-2.308M15 19.128v-3.864m0-11.012A9.337 9.337 0 0012.243 2.5a9.337 9.337 0 00-4.121 2.308m6.878 11.012a9.37 9.37 0 01-2.625-.372m0 0a9.37 9.37 0 01-2.625.372m0 0v-3.864m0 11.012a9.337 9.337 0 01-4.121-2.308M1.343 12.343a9.337 9.337 0 012.308-4.121m11.012 6.878a9.37 9.37 0 01.372-2.625m-.372 2.625a9.37 9.37 0 01.372 2.625m0 0a9.337 9.337 0 012.308 4.121m-11.012-6.878a9.37 9.37 0 01-.372-2.625m.372 2.625a9.37 9.37 0 01-.372 2.625m0 0A9.337 9.337 0 011.343 12.343m6.878-6.878a9.337 9.337 0 014.121-2.308m-4.121 2.308L12 12m0 0l-2.343 2.343m0-4.686L12 12m0 0l2.343-2.343m0 4.686L12 12" /></svg>
-                        </div>
-                        <h4 class="font-heading text-xl mb-2">
-                            <span class="lang-en">Expert Faculty</span>
-                            <span class="lang-km">អ្នកបញ្ញាជំនាញ</span>
-                        </h4>
-                        <p class="text-white/80">
-                            <span class="lang-en">Learn from industry leaders and renowned academics who drive your success.</span>
-                            <span class="lang-km">សិក្សាពីមេដឹកនាំអាជីវកម្ម និងអ្នកសិក្សាដែលមានឈ្មាតិជំរ៉ាវដែលនាំទៅការជោជះរបស់អ្នក។</span>
-                        </p>
-                    </div>
-
-                    <!-- Feature 2: Career-Focused Curriculum -->
-                    <div class="flex flex-col items-center md:items-start">
-                        <div class="bg-white/10 p-4 rounded-full mb-4">
-                            <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.073a2.25 2.25 0 01-2.25 2.25h-13.5a2.25 2.25 0 01-2.25-2.25V6.328a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 6.328v4.073m-2.25-4.073V6.328m2.25 4.073l-3.75-1.5m-1.5 1.5l-3.75-1.5M3 14.15l3.75-1.5m-1.5 1.5l3.75-1.5m0 0l3.75 1.5m-12.75-3l3.75-1.5m1.5 1.5l3.75-1.5m-1.5-1.5l3.75-1.5m3.75 1.5l3.75-1.5M4.5 6.328v12.045A2.25 2.25 0 006.75 20.623h10.5a2.25 2.25 0 002.25-2.25V6.328m-15 0h15v12.045a2.25 2.25 0 01-2.25 2.25H6.75a2.25 2.25 0 01-2.25-2.25V6.328z" /></svg>
-                        </div>
-                        <h4 class="font-heading text-xl mb-2">
-                            <span class="lang-en">Future-Ready Programs</span>
-                            <span class="lang-km">កម្មវិធីរបស់អនាគត</span>
-                        </h4>
-                        <p class="text-white/80">
-                            <span class="lang-en">Practical skills and cutting-edge knowledge that employers actually want.</span>
-                            <span class="lang-km">ជំនាញប្រិយាបត្រិម និងចំណេះដឹងដែលមានទំនាក់ទំនឹបដែលនាយការពិតជះចង់។</span>
-                        </p>
-                    </div>
-
-                    <!-- Feature 3: State-of-the-Art Facilities -->
-                    <div class="flex flex-col items-center md:items-start">
-                        <div class="bg-white/10 p-4 rounded-full mb-4">
-                            <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-1.5-.545M3 12l3-1m0 0l.5-1.5m-.5 1.5L3 12m3-1l3-1m0 0l1.5.545m-1.5-.545L12 9m3 3l-3-1m0 0l-1.5.545M12 15l1.5 1.5m-1.5-1.5l-1.5 1.5" /></svg>
-                        </div>
-                        <h4 class="font-heading text-xl mb-2">
-                            <span class="lang-en">Modern Campus</span>
-                            <span class="lang-km">សាកលវិទ្យាល័យទំនាក់ទំនឹប</span>
-                        </h4>
-                        <p class="text-white/80">
-                            <span class="lang-en">World-class labs, libraries, and facilities designed for innovation.</span>
-                            <span class="lang-km">បញ្ញាល័យផ្ទះការ បញ្ញាល័យសៀវភៅ និងមូលដ្ហានទំនាក់ទំនឹបដែលត្រូវបានរចនាសម្រាប់ការបង្កើតថ្មី។</span>
-                        </p>
-                    </div>
-
-                    <!-- Feature 4: A Legacy of Success -->
-                    <div class="flex flex-col items-center md:items-start">
-                        <div class="bg-white/10 p-4 rounded-full mb-4">
-                            <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-.07.002-.018.002-.003.001-.001.001L12 6.493l4.242 3.654-.001-.001-.003-.001-.018-.002-.07-.002a50.57 50.57 0 00-2.658-.813m-15.482 0A50.57 50.57 0 0112 6.493v1.017a48.627 48.627 0 01-8.232 4.41z" /></svg>
-                        </div>
-                        <h4 class="font-heading text-xl mb-2">
-                            <span class="lang-en">Proven Success</span>
-                            <span class="lang-km">ការជោជះដែលបានបង្ហាញ</span>
-                        </h4>
-                        <p class="text-white/80">
-                            <span class="lang-en">Join 15,000+ alumni making their mark globally in business and tech.</span>
-                            <span class="lang-km">ចូលរួមជាមួយបុត្រសិស្សចាស់ 15,000+ នាកដែលកំពុងបង្កើតសញ្ញាណរបស់ពួកគេនៅទូទៅពិភពលោកក្នុងវិស័យអាជីវកម្ម និងបច្ចេកវិទ្យា។</span>
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="text-center mt-16">
-                    <a href="#" class="bg-transparent border border-white text-white rounded-full px-8 py-3 inline-block font-medium hover:bg-white hover:text-dark-blue transition-colors">Explore Our Programs</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-light-lavender py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5">
-                <div class="text-center mb-16">
-                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue">Explore Our Academic Programs</h2>
-                    <p class="mt-4 text-lg text-dark-blue/80 max-w-3xl mx-auto">From business and technology to the arts and sciences, our programs are designed to equip you with the knowledge and skills for a successful future.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                    <!-- Program Card 1: Business & Economics -->
-                    <div class="relative rounded-[20px] overflow-hidden group h-96">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business meeting" class="lazy-load w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                            <h3 class="font-heading text-2xl mb-2">Business & Economics</h3>
-                            <p class="mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-40">Lead the future of commerce with programs in finance, marketing, and management.</p>
-                            <a href="#" class="text-white font-bold self-start opacity-0 group-hover:opacity-100 transition-opacity duration-300">Learn More →</a>
-                        </div>
-                    </div>
-
-                    <!-- Program Card 2: Science & Technology -->
-                    <div class="relative rounded-[20px] overflow-hidden group h-96">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Woman working on a computer" class="lazy-load w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                            <h3 class="font-heading text-2xl mb-2">Science & Technology</h3>
-                            <p class="mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-40">Drive innovation with cutting-edge programs in computer science, engineering, and data analytics.</p>
-                            <a href="#" class="text-white font-bold self-start opacity-0 group-hover:opacity-100 transition-opacity duration-300">Learn More →</a>
-                        </div>
-                    </div>
-
-                    <!-- Program Card 3: Arts & Humanities -->
-                    <div class="relative rounded-[20px] overflow-hidden group h-96">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Open book in a library" class="lazy-load w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                            <h3 class="font-heading text-2xl mb-2">Arts & Humanities</h3>
-                            <p class="mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-40">Explore human culture, history, and expression through our diverse arts and humanities programs.</p>
-                            <a href="#" class="text-white font-bold self-start opacity-0 group-hover:opacity-100 transition-opacity duration-300">Learn More →</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-            <section id="recent-highlights" class="bg-white py-20 font-body">
-            <div class="max-w-6xl mx-auto px-5">
-                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-12 text-center">Recent Highlights & News</h2>
-                
-                <!-- Highlights Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-
-                    <!-- Highlight Card 1 -->
-                    <div class="bg-light-lavender rounded-[20px] overflow-hidden flex flex-col group">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Guest Lecture on Logistics" class="lazy-load w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="font-heading text-xl text-dark-blue mb-2">Guest Lecture on Logistics</h3>
-                            <p class="text-dark-blue/80 font-body flex-grow">Join our upcoming guest lecture on Logistics Practices in Cambodia, covering customs clearance and container transport. A great opportunity for students to gain industry insights.</p>
-                            <a href="https://www.facebook.com/photo/?fbid=888494116642299&set=a.624959129662467" target="_blank" class="text-dark-blue font-bold self-start mt-4">Read More →</a>
-                        </div>
-                    </div>
-
-                    <!-- Highlight Card 2: Placeholder -->
-                    <div class="bg-light-lavender rounded-[20px] overflow-hidden flex flex-col group">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Placeholder Image" class="lazy-load w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="font-heading text-xl text-dark-blue mb-2">New Scholarship Opportunities</h3>
-                            <p class="text-dark-blue/80 font-body flex-grow">We are excited to announce new scholarship programs for the upcoming academic year. Discover how you can apply and fund your education at NUM.</p>
-                            <a href="#" target="_blank" class="text-dark-blue font-bold self-start mt-4">Read More →</a>
-                        </div>
-                    </div>
-
-                    <!-- Highlight Card 3: Placeholder -->
-                    <div class="bg-light-lavender rounded-[20px] overflow-hidden flex flex-col group">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Placeholder Image" class="lazy-load w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="font-heading text-xl text-dark-blue mb-2">Campus Career Fair</h3>
-                            <p class="text-dark-blue/80 font-body flex-grow">Connect with leading companies and explore internship and job opportunities at our annual career fair. Don't miss this chance to kickstart your career.</p>
-                            <a href="#" target="_blank" class="text-dark-blue font-bold self-start mt-4">Read More →</a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- See More Button -->
-                <div class="text-center">
-                    <a href="https://www.facebook.com/num.edu.kh" target="_blank" class="bg-dark-blue text-white rounded-full px-8 py-3 inline-block font-medium hover:opacity-85 transition-opacity">
-                        See More on Facebook
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="footer-placeholder"></div>
     
-    <!-- PAGE-SPECIFIC JAVASCRIPT (Video only; height handled globally) -->
+    <!-- PAGE-SPECIFIC JAVASCRIPT (SPA-Compatible) -->
     <script>
-        function initializeHeroVideo() {
-            const heroImage = document.getElementById('hero-image');
-            const heroVideo = document.getElementById('hero-video');
-            
-            if (!heroImage || !heroVideo) return;
-            
-            // Start loading the video in the background
-            const loadVideo = () => {
-                // Check if video can play through without buffering
-                const canPlayThrough = new Promise((resolve) => {
-                    const handleCanPlayThrough = () => {
-                        heroVideo.removeEventListener('canplaythrough', handleCanPlayThrough);
-                        resolve();
-                    };
-                    heroVideo.addEventListener('canplaythrough', handleCanPlayThrough);
+        // 🎯 PAGE-SPECIFIC INITIALIZATION (auto-detected by SPA)
+        function initializeHomepageFeatures() {
+            // Idempotency guard to avoid double init within the same mount
+            if (window.__home && window.__home.initialized) {
+                console.log('Homepage already initialized; skipping.');
+                return;
+            }
+
+            window.__home = window.__home || { initialized: false, swipers: [], resizeHandler: null };
+            // --- Helper function to load scripts dynamically ---
+            function loadScript(src, callback) {
+                let script = document.createElement('script');
+                script.src = src;
+                script.onload = () => callback();
+                script.onerror = () => console.error(`Failed to load script: ${src}`);
+                document.head.appendChild(script);
+            }
+
+            // --- Helper function to load CSS dynamically ---
+            function loadCss(href) {
+                if (!document.querySelector(`link[href="${href}"]`)) {
+                    let link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = href;
+                    document.head.appendChild(link);
+                }
+            }
+
+            // --- Main initialization logic ---
+            function initSlidersAndAnimations() {
+                // Hero Slider
+                const heroSwiper = new Swiper('.hero-slider', {
+                    loop: true,
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true },
+                    autoplay: { delay: 5000, disableOnInteraction: false },
+                });
+                window.__home.swipers.push(heroSwiper);
+
+                // Campus & Facilities Image Sliders
+                const cardSliderOptions = {
+                    loop: true, effect: 'fade', fadeEffect: { crossFade: true },
+                    autoplay: { delay: 3500, disableOnInteraction: false },
+                    allowTouchMove: false,
+                };
+                document.querySelectorAll('.campus-image-slider').forEach(sliderEl => {
+                    const s = new Swiper(sliderEl, cardSliderOptions);
+                    window.__home.swipers.push(s);
                 });
                 
-                // Load the video
-                heroVideo.load();
-                
-                // When video is ready, fade from image to video
-                canPlayThrough.then(() => {
-                    setTimeout(() => {
-                        // Start playing the video
-                        heroVideo.play().catch(err => {
-                            // Video autoplay failed - user interaction required
-                            // Keep the image if video fails to play
-                            console.warn('Video autoplay failed:', err);
-                            return;
-                        });
-                        
-                        // Fade in the video
-                        heroVideo.style.opacity = '1';
-                        
-                        // Fade out the image after video starts
-                        setTimeout(() => {
-                            heroImage.style.opacity = '0';
-                            
-                            // Remove image from DOM after fade completes
-                            setTimeout(() => {
-                                heroImage.style.display = 'none';
-                            }, 1000);
-                        }, 500);
-                    }, 1000); // Wait 1 second before starting transition
+                // Veal Sbov Slider
+                const vealSbov = new Swiper('.veal-sbov-slider', {
+                    loop: true,
+                    autoplay: { delay: 4000, disableOnInteraction: false },
+                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
                 });
-            };
-            
-            // Start loading video after a short delay to prioritize page load
-            setTimeout(loadVideo, 500);
+                window.__home.swipers.push(vealSbov);
+
+                // Hero height handled purely by CSS (100dvh/100svh fallbacks) to avoid SPA jitter
+
+                // --- Typewriter Effect ---
+                const textElement = document.getElementById('typewriter-text');
+                if (textElement) {
+                    const textToAnimate = "A Global Leader in Innovation";
+                    let charIndex = 0; let isDeleting = false;
+                    const animateTypewriter = () => {
+                        let currentText = textToAnimate; let speed = 150;
+                        if (isDeleting) {
+                            textElement.textContent = currentText.substring(0, charIndex - 1); charIndex--; speed = 75;
+                            if (charIndex === 0) { isDeleting = false; setTimeout(animateTypewriter, 500); return; }
+                        } else {
+                            textElement.textContent = currentText.substring(0, charIndex + 1); charIndex++;
+                            if (charIndex === currentText.length) { isDeleting = true; setTimeout(animateTypewriter, 3000); return; }
+                        }
+                        setTimeout(animateTypewriter, speed);
+                    }
+                    animateTypewriter();
+                }
+
+                // --- Scroll Animation Observer ---
+                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+                
+                window.__home.initialized = true;
+                console.log("Homepage features initialized with Swiper.");
+            }
+
+            // --- Check if Swiper is loaded, if not, load it ---
+            if (typeof Swiper === 'undefined') {
+                console.log('Swiper not found, loading dynamically...');
+                loadCss('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css');
+                loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', initSlidersAndAnimations);
+            } else {
+                console.log('Swiper already loaded, initializing features.');
+                initSlidersAndAnimations();
+            }
         }
         
-        // Initialize on DOM ready (initial page load)
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.LayoutSequence && typeof window.LayoutSequence.refresh === 'function') {
-                window.LayoutSequence.refresh();
+        // 🧹 OPTIONAL CLEANUP (called before SPA navigation)
+        function pageCleanup() {
+            // Destroy Swiper instances and remove listeners to prevent duplicates on SPA navs
+            if (window.__home) {
+                if (Array.isArray(window.__home.swipers)) {
+                    try { window.__home.swipers.forEach(s => s && s.destroy && s.destroy(true, true)); } catch (_) {}
+                }
+                if (window.__home.resizeHandler) {
+                    try { window.removeEventListener('resize', window.__home.resizeHandler); } catch (_) {}
+                }
+                window.__home.initialized = false;
+                window.__home.swipers = [];
+                window.__home.resizeHandler = null;
             }
-            initializeHeroVideo();
-        });
+            console.log('Homepage cleanup completed.');
+        }
+
+        // 🚀 MASTER INITIALIZATION FUNCTION (called by main.js and on initial load)
+        function initializePage() {
+            initializeHomepageFeatures();
+        }
         
-        // Make video init globally available for SPA navigation if needed
-        window.initializeHeroVideo = initializeHeroVideo;
+        // 🌐 Make functions globally available for SPA navigation (REQUIRED)
+        window.initializePage = initializePage;
+        window.initializeHomepageFeatures = initializeHomepageFeatures;
+        window.pageCleanup = pageCleanup;
+
     </script>
-    <script src="/js/i18n.js"></script>
+    
+    <!-- Site-wide Scripts (from template.html) - These load header/footer and manage SPA navigation -->
+    <script src="js/i18n.js"></script>
     <script src="js/main.js" data-base-path="."></script>
-    
-    <!-- Use global layout sequence for hero sizing across SPA -->
     <script src="js/layout-sequence.js"></script>
-    
+
 </body>
 </html>

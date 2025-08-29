@@ -162,9 +162,11 @@ document.addEventListener('DOMContentLoaded', function() {
             try { window.initializeImageToTextSlideshow(); } catch (e) { console.warn('Slideshow init failed:', e); }
         }
         
-        if (window.SimpleBilingualManager) {
+        // Initialize i18n only if not already initialized by i18n.js
+        if (window.SimpleBilingualManager && !window.__i18nInitialized) {
             try {
                 new SimpleBilingualManager();
+                window.__i18nInitialized = true;
             } catch (error) {
                 console.error('Failed to initialize bilingual system:', error);
             }
@@ -566,30 +568,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // Defer any other wide "initialize* / init*" functions to idle time to avoid jank
-                const deferOtherInits = () => {
-                    try {
-                        const initFunctionPatterns = /^(initialize|init)[A-Z]/;
-                        Object.getOwnPropertyNames(window).forEach(prop => {
-                            if (quickInits.includes(prop)) return; // already handled
-                            if (initFunctionPatterns.test(prop) && typeof window[prop] === 'function') {
-                                try {
-                                    window[prop]();
-                                } catch (error) {
-                                    console.error(`Error calling ${prop}:`, error);
-                                }
-                            }
-                        });
-                    } catch (err) {
-                        console.warn('Deferred initializers encountered an error:', err);
-                    }
-                };
-
-                if ('requestIdleCallback' in window) {
-                    window.requestIdleCallback(deferOtherInits, { timeout: 400 });
-                } else {
-                    setTimeout(deferOtherInits, 120);
-                }
+                // IMPORTANT: Avoid reflectively calling every initialize*/init* function on window.
+                // This was causing multiple re-initializations (e.g., homepage features, header),
+                // leading to duplicated listeners/instances and occasional blank states.
+                // We now rely on:
+                // - page-level window.initializePage()
+                // - explicit quickInits above
+                // If more initializers are needed, register them explicitly in quickInits.
                 
                 const mainContent = document.querySelector('main');
                 if (mainContent) {

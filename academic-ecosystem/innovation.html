@@ -28,15 +28,18 @@
     </script>
 
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/i18n.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-white font-body">
+    <style>
+        /* Local fade-in once the shell marks body as visible */
+        body.is-visible #main-content-container { opacity: 1; }
+    </style>
     <div id="header-placeholder"></div>
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-500 will-change-[opacity]">
     <main>
         <!-- ===== 1. Dynamic Hero Section (On-Brand) ===== -->
         <section class="relative bg-cover bg-center text-white py-40" style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop');">
-             <!-- Replace with a real photo of your innovation hub or students collaborating -->
             <div class="absolute inset-0 bg-dark-blue opacity-80"></div>
             <div class="relative max-w-4xl mx-auto px-5 text-center z-10" data-aos="fade-in">
                 <h1 class="text-4xl md:text-6xl font-black font-heading tracking-tight">Where Ideas Take Flight</h1>
@@ -46,17 +49,17 @@
             </div>
         </section>
 
-        <!-- ===== 2. Pillars of Innovation (On-Brand) ===== -->
+        <!-- ===== 2. Pillars of Innovation (Enhanced with Hover Effects) ===== -->
         <section class="py-24 bg-white">
             <div class="max-w-6xl mx-auto px-5">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Our Innovation Ecosystem</h2>
+                    <h2 id="innovation-heading" class="text-3xl md:text-4xl font-heading text-dark-blue min-h-[48px] md:min-h-[56px] flex justify-center items-center"></h2>
                     <p class="mt-4 text-lg text-gray-600 font-body max-w-3xl mx-auto">We provide the tools, mentorship, and environment necessary for groundbreaking ideas to flourish.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- Pillar 1: Incubator -->
-                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center p-6 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-light-lavender text-dark-blue mx-auto mb-5">
                              <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                         </div>
@@ -65,7 +68,7 @@
                     </div>
 
                     <!-- Pillar 2: Workshops -->
-                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center p-6 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-light-lavender text-dark-blue mx-auto mb-5">
                             <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         </div>
@@ -74,7 +77,7 @@
                     </div>
 
                     <!-- Pillar 3: Technology -->
-                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center p-6 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-light-lavender text-dark-blue mx-auto mb-5">
                              <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
                         </div>
@@ -83,7 +86,7 @@
                     </div>
 
                      <!-- Pillar 4: Mentorship -->
-                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-center p-6 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-light-lavender text-dark-blue mx-auto mb-5">
                             <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                         </div>
@@ -94,42 +97,50 @@
             </div>
         </section>
 
-        <!-- ===== 3. NEW: Startup Spotlight (On-Brand) ===== -->
-        <section class="py-24 bg-light-lavender">
-            <div class="max-w-6xl mx-auto px-5">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Startup Spotlight</h2>
-                    <p class="mt-4 text-lg text-gray-700 font-body">Celebrating the success stories born from our innovation hub.</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <!-- Startup 1 -->
-                    <div data-aos="fade-right">
-                        <div class="bg-white rounded-lg p-6 shadow-lg">
-                            <img src="https://via.placeholder.com/150x60/0A0A3E/FFFFFF?text=KhmerAgriTech" alt="KhmerAgriTech Logo" class="h-14 mb-4">
-                            <h3 class="text-2xl font-heading text-dark-blue mb-3">KhmerAgriTech</h3>
-                            <p class="font-body text-gray-700">An award-winning platform using drone technology and AI to help Cambodian farmers improve crop yields and sustainability. Now serving over 5,000 farms nationwide.</p>
-                        </div>
-                    </div>
-                    <!-- Startup 2 -->
-                    <div data-aos="fade-left">
-                         <div class="bg-white rounded-lg p-6 shadow-lg">
-                            <img src="https://via.placeholder.com/150x60/0A0A3E/FFFFFF?text=EduVerse" alt="EduVerse Logo" class="h-14 mb-4">
-                            <h3 class="text-2xl font-heading text-dark-blue mb-3">EduVerse</h3>
-                            <p class="font-body text-gray-700">A virtual reality platform that creates immersive historical and cultural learning experiences, currently being piloted in high schools across Southeast Asia.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+       <!-- ===== 3. Innovation Initiatives (Your new, excellent section) ===== -->
+       <section class="py-24 bg-light-lavender">
+           <div class="max-w-6xl mx-auto px-5">
+               <div class="text-center mb-16" data-aos="fade-up">
+                   <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Innovation Initiatives at NUM</h2>
+                   <p class="mt-4 text-lg text-gray-700 font-body max-w-3xl mx-auto">Highlighting key centers fostering entrepreneurship, social impact, and technological advancement.</p>
+               </div>
+               <div class="grid md:grid-cols-2 gap-12 items-start"> <!-- Changed to items-start for alignment -->
+                   <!-- Social Innovation Lab -->
+                   <div data-aos="fade-right" class="h-full">
+                       <div class="bg-white rounded-lg p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full flex flex-col">
+                           <img src="image/num_social.png" alt="Social Innovation Lab Logo" class="h-14 mb-4 self-start">
+                           <h3 class="text-2xl font-heading text-dark-blue mb-3">NUM Social Innovation Lab</h3>
+                           <p class="font-body text-gray-700 flex-grow">
+                               A space for seminars, workshops, and incubation of social ventures, empowering students and entrepreneurs with tools for real-world impact. Also serves as Cambodia’s National Business Model Competition hub.
+                           </p>
+                       </div>
+                   </div>
+                   <!-- CamboVerse Center -->
+                   <div data-aos="fade-left" class="h-full">
+                       <div class="bg-white rounded-lg p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full flex flex-col">
+                           <img src="image/cambo.jpeg" alt="CamboVerse Center Logo" class="h-14 mb-4 self-start">
+                           <h3 class="text-2xl font-heading text-dark-blue mb-3">CamboVerse Center</h3>
+                           <p class="font-body text-gray-700 mb-4 flex-grow">
+                               Dedicated to Virtual and Augmented Reality development, promoting Cambodian cultural heritage through immersive technology and global outreach.
+                           </p>
+                           <a href="https://camboverse.world/" target="_blank" rel="noopener noreferrer" class="inline-block self-start font-bold text-dark-blue hover:text-blue-700 transition-colors group mt-auto">
+                               Explore
+                               <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">→</span>
+                           </a>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
 
-        <!-- ===== 4. NEW: Call to Action (On-Brand) ===== -->
+        <!-- ===== 4. Call to Action (On-Brand) ===== -->
         <section class="py-20 bg-dark-blue">
             <div class="max-w-4xl mx-auto px-5 text-center" data-aos="zoom-in">
                 <h2 class="text-3xl font-heading text-white">Have a Groundbreaking Idea?</h2>
                 <p class="text-lg text-light-lavender mt-4 mb-8 font-body">
                    Our innovation hub is the perfect place to start. Connect with us to explore resources, join events, and bring your vision to life.
                 </p>
-                <a href="#" class="inline-block bg-white text-dark-blue px-8 py-3 rounded-md font-bold font-body hover:bg-light-lavender transition-colors">
+                <a href="#" class="inline-block bg-white text-dark-blue px-8 py-4 rounded-md font-bold font-body hover:bg-light-lavender transition-colors text-lg">
                     Get Involved
                 </a>
             </div>
@@ -137,14 +148,47 @@
     </main>
 
     <div id="footer-placeholder"></div>
-    <script src="/js/i18n.js"></script>
+    <script src="../js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Typewriter Effect Library -->
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
     <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-        });
+        // SPA-compatible lifecycle
+        let _twInstance = null;
+        function initializePage() {
+            if (window.AOS) { AOS.init({ duration: 800, once: true }); }
+
+            const innovationHeading = document.getElementById('innovation-heading');
+            if (window.Typewriter && innovationHeading) {
+                _twInstance = new Typewriter(innovationHeading, {
+                    loop: true,
+                    delay: 75,
+                    cursor: '|'
+                });
+                _twInstance
+                    .typeString('Our Innovation Ecosystem')
+                    .pauseFor(3000)
+                    .deleteAll()
+                    .start();
+            }
+
+            const container = document.getElementById('main-content-container');
+            if (container && getComputedStyle(container).opacity === '0') {
+                if (document.body.classList.contains('is-visible')) {
+                    container.style.opacity = '1';
+                } else {
+                    requestAnimationFrame(() => { container.style.opacity = '1'; });
+                }
+            }
+        }
+
+        function pageCleanup() {
+            if (_twInstance && _twInstance.stop) { try { _twInstance.stop(); } catch(e) {} }
+            _twInstance = null;
+        }
     </script>
 </body>
 </html>

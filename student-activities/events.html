@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Events - National University of Management</title>
+    <title>Gallery - National University of Management</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,6 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/i18n.css">
 
     <!-- Tailwind CSS Theme Configuration -->
     <script>
@@ -21,8 +20,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'dark-blue': '#0A0A3E',
-                        'light-lavender': '#E9E8F5',
+                        'dark-blue': '#0A0A3E', // Adjusted for closer match to serif headings
+                        'light-lavender': '#F9F9F9', // Using a light gray for sections
+                        'maroon-red': '#A92C37', // A more accurate deep red from image
                     },
                     fontFamily: {
                         heading: ['Lora', 'serif'],
@@ -31,38 +31,542 @@
                 }
             }
         }
+        
     </script>
+    <!-- Splide CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css">
 
 </head>
-<body class="bg-white">
+
+<body class="bg-white font-body">
 
     <div id="header-placeholder"></div>
 
     <main>
-        <!-- 
-        ===================================================================
-        YOUR PAGE CONTENT GOES HERE
-        ===================================================================
+        <style>
+            /* Local fade-in container for SPA */
+            #main-content-container { opacity: 0; transform: translateY(8px); transition: opacity 300ms ease, transform 300ms ease; }
+            body.is-visible #main-content-container { opacity: 1; transform: none; }
+        </style>
+        <div id="main-content-container">
         
-        Instructions:
-        1. Copy this file and rename it (e.g., "about-us.html").
-        2. Place it in the "pages" directory.
-        3. Change the <title> in the <head> to match your new page.
-        4. Add your HTML content inside this <main> tag.
-        
-        Everything else (header, footer, styles, scripts) will
-        be handled automatically.
-        -->
 
-        <div class="h-screen flex items-center justify-center">
-            <h1 class="text-4xl font-heading text-dark-blue">Your Content Here</h1>
+        <!-- Hero Section -->
+        <!-- REPLACE your old hero section with this new structure -->
+
+<section class="relative h-[650px] text-white">
+    <!-- Layer 1: The Background Image Slider -->
+    <div id="background-slider" class="splide absolute top-0 left-0 w-full h-full">
+        <div class="splide__track w-full h-full">
+            <ul class="splide__list">
+                <!-- Slide 1 -->
+                <li class="splide__slide">
+                    <div class="w-full h-full bg-cover bg-center" style="background-image: url('../Picture/School/teacher1.jpg');" alt="Background 1"></div>
+                </li>
+                <!-- Slide 2 (Add your second image path here) -->
+                <li class="splide__slide">
+                    <div class="w-full h-full bg-cover bg-center" style="background-image: url('../Picture/School/student1.jpg');" alt="Background 2"></div>
+                </li>
+                <!-- Slide 3 (Add your third image path here) -->
+                <li class="splide__slide">
+                    <div class="w-full h-full bg-cover bg-center" style="background-image: url('../Picture/School/school10.jpg');" alt="Background 3"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Layer 2: The Foreground Content (Your Text) -->
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    <div class="relative z-10 h-full flex items-center justify-center">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-heading font-bold mb-4">Discover the world of possibility with NUM!</h1>
+        </div>
+    </div>
+</section>
+
+        <!-- News & Updates Section -->
+<!-- News & Updates Section -->
+<section class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-6">
+        <!-- Section Header -->
+        <div class="flex justify-between items-center mb-12">
+            <div class="flex items-center">
+                <h2 class="text-3xl md:text-4xl font-serif text-gray-800 font-bold">News & Events</h2>
+                <span class="block h-0.5 w-16 bg-red-700 ml-6"></span>
+            </div>
         </div>
 
+        <!-- Main Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-x-12 gap-y-8">
+
+            <!-- [ANIMATED] Large News Card (Left Column) -->
+            <!-- Add "group" class here to define the hover area -->
+            <a href="#robot" class="group lg:col-span-3 bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+                <!-- The image container crops the zooming image -->
+                <div class="overflow-hidden">
+                    <img 
+                        src="../Picture/School/robotic1.jpg" 
+                        alt="Three students collaborating around a laptop" 
+                        class="w-full h-96 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                    >
+                </div>
+                <div class="p-8 flex-grow flex flex-col">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="flex items-center">
+                            <span class="h-2 w-2 bg-purple-500 rounded-full mr-2"></span>
+                            <span class="text-xs font-semibold text-gray-600 font-sans tracking-wider uppercase">Students</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
+                            <span class="text-xs font-semibold text-gray-600 font-sans tracking-wider uppercase">Competitions</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-3xl font-bold text-gray-800 mb-4 leading-snug">The thrilling world of robotics competitions</h3>
+                    <p class="text-gray-500 text-sm font-sans mt-auto">NUM — June, 2025</p>
+                </div>
+            </a>
+
+            <!-- [ANIMATED] Smaller News Cards Column (Right Column) -->
+            <div class="lg:col-span-2 grid grid-cols-1 gap-8">
+
+                <!-- Small Card 1 -->
+                <a href="/Student-Activities/index.html#asean-china-youth-exchange" class="group bg-white shadow-lg rounded-lg overflow-hidden flex items-center">
+                    <div class="w-40 h-full overflow-hidden">
+                         <img 
+                            src="../Picture/School/asean4.jpg" 
+                            alt="Medical students looking at a tablet" 
+                            class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                        >
+                    </div>
+                    <div class="p-6 flex flex-col justify-center">
+                        <div class="flex items-center space-x-4 mb-2">
+                            <div class="flex items-center">
+                                <span class="h-2 w-2 bg-blue-500 rounded-full mr-2"></span>
+                                <span class="text-xs font-semibold text-gray-600 font-sans tracking-wider uppercase">Siem Reap</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="h-2 w-2 bg-purple-500 rounded-full mr-2"></span>
+                                <span class="text-xs font-semibold text-gray-600 font-sans tracking-wider uppercase">Cultural Exchange</span>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-gray-800 leading-tight">Asean Summit 2025</h3>
+                    </div>
+                </a>
+
+                <!-- Small Card 2 -->
+                <a href="/Student-Activities/index.html#social-engagement" class="group bg-white shadow-lg rounded-lg overflow-hidden flex items-center">
+                    <div class="w-40 h-full overflow-hidden">
+                        <img 
+                            src="../Picture/School/charity2.jpg" 
+                            alt="Students collaborating around a table from above" 
+                            class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                        >
+                    </div>
+                    <div class="p-6 flex flex-col justify-center">
+                        <div class="flex items-center space-x-4 mb-2">
+                            <div class="flex items-center">
+                                <span class="h-2 w-2 bg-blue-500 rounded-full mr-2"></span>
+                                <span class="text-xs font-semibold text-gray-600 font-sans tracking-wider uppercase">Province</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
+                                <span class="text-xs font-semibold text-gray-600 font-sans tracking-wider uppercase">Charity</span>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-gray-800 leading-tight">Social Engagement</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 bg-light-lavender">
+    <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Column: Welcome Text -->
+        <div class="text-left">
+            <h2 class="text-3xl md:text-4xl font-heading text-dark-blue font-bold">
+                Welcome to the National University of Management
+            </h2>
+            <hr class="w-24 h-1 bg-maroon-red mt-4 mb-6">
+            <p class="font-body text-gray-700 mb-4 leading-relaxed">
+                We are united in our mission to solve real-world problems for a better tomorrow.
+            </p>
+        </div>
+
+        <!-- Right Column: Image Box -->
+        <div class="group">
+            <div class="rounded-lg shadow-xl overflow-hidden">
+                <img src="../Picture/School/student2.jpg" alt="Campus of the National University of Management" class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110">
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <!-- Features & About Us Section -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+
+        <!-- Part 1: Top Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
+            
+            <!-- Feature 1: Innovative Courses -->
+            <div class="flex items-start space-x-4">
+                <div>
+                    <!-- Custom SVG Icon -->
+                    <svg class="h-16 w-16 text-maroon-red" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-1.621-1.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 7.5a.75.75 0 01.75.75v3.375c0 .621-.504 1.125-1.125 1.125h-1.5c-.621 0-1.125-.504-1.125-1.125V15a.75.75 0 01.75-.75h1.5z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Innovative Courses</h3>
+                    <p class="font-body text-gray-600 leading-relaxed">Explore wide-range of innovative and essential courses</p>
+                </div>
+            </div>
+
+            <!-- Feature 2: Top Instructors -->
+            <div class="flex items-start space-x-4">
+                <div>
+                    <!-- Custom SVG Icon -->
+                    <svg class="h-16 w-16 text-maroon-red" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+                      <path d="M12 21a9 9 0 100-18 9 9 0 000 18zM12 3a9 9 0 100 18" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 16.52a8.9 8.9 0 00-7.82 0" />
+                      <path fill="currentColor" d="M12 12.75a3 3 0 003-3V7.5a3 3 0 00-6 0v2.25a3 3 0 003 3z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Top Instructors</h3>
+                    <p class="font-body text-gray-600 leading-relaxed">Learn from the best experts and professors of the subjects</p>
+                </div>
+            </div>
+
+            <!-- Feature 3: Online Education -->
+            <div class="flex items-start space-x-4">
+                <div>
+                    <!-- Custom SVG Icon -->
+                    <svg class="h-16 w-16 text-maroon-red" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-1.621-1.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9l-3.75 3 3.75 3" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-heading text-xl font-bold text-dark-blue mb-2">Online Education</h3>
+                    <p class="font-body text-gray-600 leading-relaxed">Allow you to learn and experience anywhere, anytime</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Part 2: About Us Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <!-- Left Column: Title with Background Crest -->
+            <div class="relative text-left">
+                <!-- Faded Background Crest SVG -->
+                <svg class="absolute inset-0 w-full h-full text-gray-100 -translate-x-8" fill="currentColor" viewBox="0 0 32 32">
+                    <path d="M16 0L0 6v2l16 10L32 8V6zm14 10.4L16 19.6 2 10.4V22c0 .7.1 1.4.4 2H2v-2h2c0-2.8 2.2-5 5-5s5 2.2 5 5h2c0-2.8 2.2-5 5-5s5 2.2 5 5h2v2c.3-.6.4-1.3.4-2zM9 24c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3zm14 0c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/>
+                </svg>
+
+                <div class="relative z-10">
+                    <p class="font-body text-maroon-red font-semibold tracking-widest mb-2">ABOUT US</p>
+                    <hr class="w-24 h-1 bg-maroon-red mb-6">
+                    <h2 class="text-4xl md:text-5xl font-heading text-dark-blue font-bold leading-tight">
+                        We Are One of The Largest, Most Diverse Universities in Cambodia
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Right Column: Text and Button -->
+            <div class="text-left">
+                <p class="font-body text-gray-700 leading-relaxed mb-6 text-justify">
+                    Our community is being called to reimagine the future. As the only university where a renowned design school comes together with premier colleges, we are making learning more relevant and transformational. We are enriched by the wide range of experiences and perspectives of our students, faculty, staff and alumni.
+                </p>
+                <p class="font-body text-gray-700 leading-relaxed mb-8 text-justify">
+                    Preparing students to make meaningful contributions to society as leaders in a complex world.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+ <!-- Welcome Section -->
+<section class="py-16 md:py-24 bg-gray-50 fade-in-section">
+    <div class="container mx-auto px-4">
+        <!-- Main container with white background and border -->
+        <div class="bg-white shadow-md border border-gray-200 p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left Column: Text Content -->
+            <div class="text-left">
+                <h2 class="text-4xl lg:text-5xl font-heading text-dark-blue font-bold">Competition about Popularity champion in robocon cambodia 2025</h2>
+                <hr class="w-24 h-1 bg-maroon-red my-6">
+                
+                <div class="prose max-w-none text-gray-600 font-body text-justify">
+                    <p>
+                        This is the "Competition About Popularity Champion in RoboCon Cambodia 2025," showcasing a robotics event organized under the RoboCon banner, featuring the Cambodian flag and official logos. The left side shows a gymnasium setting with participants operating robots on a court, while the right side highlights a workshop or lab where students, dressed in uniforms, work on a robotic structure, possibly a basketball-playing robot. The event appears to involve technical challenges and teamwork, with text in Khmer providing additional context about the competition.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Column: Videos -->
+            <div class="grid grid-cols-1 gap-8">
+
+                <!-- Video 1 -->
+                <div class="bg-black rounded-lg overflow-hidden shadow-lg">
+                     <!-- ✅ FIX: Height increased to h-96 and controls are now visible -->
+                     <video  fade-on-scroll controls pysinline
+                           src="../Video/NUM_01_Robocon_2025_Popularity_Video-rIhyI_KRTNUbE2yJ4t2GIQ.mp4" 
+                           class="w-full h-96 object-cover">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="bg-black rounded-lg overflow-hidden shadow-lg">
+                    <!-- ✅ FIX: Height increased to h-96 and controls are now visible -->
+                    <video  fade-on-scroll controls playsinline
+                           src="../Video/NUM_02_Robocon_2025_Popularity_Video-jmBIurZFlBK5ThH1vinBwA.mp4" 
+                           class="w-full h-96 object-cover">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        <!-- Studying at UniCamp Section -->
+<section class="py-16 md:py-24 bg-white" id="robot">
+    <div class="container mx-auto px-6 text-left">
+        <h2 class="text-3xl md:text-4xl font-heading text-dark-blue font-bold">Robotic Competitions</h2>
+        <p class="font-body text-gray-600 mt-2">National Match</p>
+        <hr class="w-24 h-1 bg-maroon-red mt-4 mb-16">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Program 1 with Zoom Effect -->
+            <!-- Add 'group' to the container to control child elements on hover -->
+            <div class="group bg-white overflow-hidden">
+                <!-- Add 'overflow-hidden' to the image container to crop the zoom -->
+                <div class="overflow-hidden">
+                    <img 
+                        src="../Picture/School/robotic2.jpg" 
+                        alt="Undergraduate Admissions" 
+                        class="w-full h-auto object-cover mb-6 transition-transform duration-500 ease-in-out group-hover:scale-110"
+                    >
+                </div>
+                <h3 class="font-heading text-xl font-semibold text-dark-blue mb-2">Our Students Rehearsal</h3>
+                <p class="font-body text-gray-700 text-justify">Participants engaging in a robotics competition, collaborating to build and program their robots. The atmosphere is filled with excitement as teams demonstrate their engineering skills and problem-solving abilities.</p>
+            </div>
+
+            <!-- Program 2 with Zoom Effect -->
+            <div class="group bg-white overflow-hidden">
+                <div class="overflow-hidden">
+                    <img 
+                        src="../Picture/School/robotic4.jpg" 
+                        alt="Graduate Admissions" 
+                        class="w-full h-auto object-cover mb-6 transition-transform duration-500 ease-in-out group-hover:scale-110"
+                    >
+                </div>
+                <h3 class="font-heading text-xl font-semibold text-dark-blue mb-2">Preparing for the National Match</h3>
+                <p class="font-body text-gray-700 text-justify">An overview of a competitive event, showcasing various teams preparing their setups. The environment is lively, with spectators and judges observing as participants showcase their talents in a well-decorated arena.</p>
+            </div>
+
+            <!-- Program 3 with Zoom Effect -->
+            <div class="group bg-white overflow-hidden">
+                <div class="overflow-hidden">
+                    <img 
+                        src="../Picture/School/robotic3.jpg" 
+                        alt="Continuing Education" 
+                        class="w-full h-auto object-cover mb-6 transition-transform duration-500 ease-in-out group-hover:scale-110"
+                    >
+                </div>
+                <h3 class="font-heading text-xl font-semibold text-dark-blue mb-2">Match started up</h3>
+                <p class="font-body text-gray-700 text-justify">Students participating in a robocon event, focusing on teamwork and strategy. The scene captures the intensity of the competition as participants aim to outscore their opponents in a dynamic game setting.</p>
+            </div>
+
+        </div>
+    </div>
+    
+<!-- Upcoming Events Section with Image Slideshow -->
+<section class="py-16 md:py-24 bg-light-lavender">
+    
+    <!-- ✅ FIX: The duplicate id has been removed from this line. -->
+    <div class="container mx-auto px-6 text-left"> 
+
+        <h2 class="text-3xl md:text-4xl font-heading text-dark-blue font-bold">Program-base Competition</h2>
+        <hr class="w-24 h-1 bg-maroon-red mt-4 mb-16">
+        
+        <div class="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
+            <!-- Slideshow Column (Left) -->
+            <!-- This ID is now unique and will be targeted correctly by the script -->
+            <div id="program-slideshow" class="splide w-full aspect-video rounded-md overflow-hidden bg-gray-200" aria-label="Competition Images Slideshow">
+                <div class="splide__track h-full">
+                    <ul class="splide__list h-full">
+                        <li class="splide__slide">
+                            <img src="../Picture/School/program1.jpg" alt="Students studying" class="w-full h-full object-cover">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="../Picture/School/program2.jpg" alt="Team collaborating" class="w-full h-full object-cover">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="../Picture/School/program3.jpg" alt="Presenting a project" class="w-full h-full object-cover">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="../Picture/School/program4.jpg" alt="Presenting a project" class="w-full h-full object-cover">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="../Picture/School/program5.jpg" alt="Presenting a project" class="w-full h-full object-cover">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Text Content Column (Right) -->
+            <div class="text-left">
+                <h2 class="font-serif text-4xl md:text-5xl text-gray-800 font-bold leading-tight mb-8">
+                    Programming-based algorithm challenge competition 2025
+                </h2>
+                <p class="font-sans text-gray-600 mb-6 leading-relaxed text-justify">
+                    Participants engaged in various coding challenges, collaborated in teams, showcased their problem-solving skills, and networked with peers and mentors while enhancing their programming knowledge during the exciting competition.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-100 font-sans">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <!-- Grid container is now always a single column, stacking the content -->
+        <div class="grid grid-cols-1 gap-y-16">
+
+            <!-- Top Area: Text Content -->
+            <div>
+                <h1 class="mt-4 text-4xl sm:text-5xl font-bold text-blue-600 leading-tight">
+                    Welcome to the new opening of the school year! 
+                    (<span class="text-red-500">2025-2026</span>) 🎓
+                </h1>
+                <hr class="w-24 h-1.5 bg-blue-500 my-8 rounded">
+                <p class="mt-8 text-lg text-gray-800 leading-relaxed max-w-2xl font-body"></p>
+                    <span class="font-bold text-red-600">National University of Management</span> will open registration for the upcoming academic year <span class="font-bold text-blue-700">2025-2026</span> starting from
+                    <span class="inline-block font-bold text-white bg-blue-600 px-3 py-1 rounded-md shadow-sm mx-1">September 1st, 2025</span>,
+                    and classes will begin on
+                    <span class="inline-block font-bold text-white bg-maroon-red px-3 py-1 rounded-md shadow-sm mx-1">September 10, 2025</span>.
+                </p>
+            </div>
+
+            <!-- Bottom Area: Image Collage (now full-width) -->
+            <div class="grid grid-cols-2 grid-rows-2 gap-4 h-full">
+                <!-- ... your four images are unchanged ... -->
+                <div class="col-span-1 row-span-1">
+                     <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/admission1.jpg" alt="Two workers welding on a metal frame inside a building.">
+                </div>
+                <div class="col-span-1 row-span-1">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/admission2.jpg" alt="Welder with helmet working on a metal pipe, creating bright sparks.">
+                </div>
+                 <div class="col-span-1 row-span-1">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/admission3.jpg" alt="Construction worker using surveying equipment on a building site at sunset.">
+                </div>
+                <div class="col-span-1 row-span-1">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/admission4.jpg" alt="Construction worker using surveying equipment on a building site at sunset.">
+                </div>
+            </div>
+
+        </div>
+    </div>
+        </section>
+        </div>
+<script>
+  // Page-scoped state
+  let bgSplide = null;
+  let progSplide = null;
+  let parallaxScrollHandler = null;
+
+  function fixSplideStructure(sliderId) {
+    const slider = document.getElementById(sliderId);
+    if (!slider) return false;
+    if (slider.querySelector('.splide__track')) return true;
+    const slides = Array.from(slider.children);
+    if (slides.length === 0) return false;
+    slider.innerHTML = '';
+    slider.classList.add('splide');
+    const track = document.createElement('div');
+    track.className = 'splide__track';
+    const list = document.createElement('ul');
+    list.className = 'splide__list';
+    slides.forEach(slide => {
+      const li = document.createElement('li');
+      li.className = 'splide__slide';
+      li.innerHTML = slide.outerHTML;
+      list.appendChild(li);
+    });
+    track.appendChild(list);
+    slider.appendChild(track);
+    return true;
+  }
+
+  function initializePage() {
+    document.body.classList.add('is-visible');
+    // Ensure Splide is available
+    if (typeof Splide !== 'undefined') {
+      if (fixSplideStructure('background-slider')) {
+        try {
+          bgSplide = new Splide('#background-slider', {
+            type: 'fade', rewind: true, autoplay: true, interval: 2000, speed: 2000,
+            arrows: false, pagination: false, pauseOnHover: false, pauseOnFocus: false,
+          });
+          bgSplide.mount();
+        } catch (e) { console.error('Background slider failed:', e?.message || e); }
+      }
+      if (fixSplideStructure('program-slideshow')) {
+        try {
+          progSplide = new Splide('#program-slideshow', {
+            type: 'fade', autoplay: true, interval: 2000, speed: 2000, rewind: true,
+            arrows: false, pagination: false, pauseOnHover: false, pauseOnFocus: false,
+          });
+          progSplide.mount();
+        } catch (e) { console.error('Program slideshow failed:', e?.message || e); }
+      }
+    }
+    const parallaxBg = document.getElementById('parallax-bg');
+    if (parallaxBg) {
+      let ticking = false;
+      const updateParallax = () => {
+        const scrollPosition = window.pageYOffset;
+        parallaxBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+        ticking = false;
+      };
+      parallaxScrollHandler = () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      };
+      window.addEventListener('scroll', parallaxScrollHandler, { passive: true });
+    }
+  }
+
+  function pageCleanup() {
+    try { if (bgSplide && bgSplide.destroy) bgSplide.destroy(true); } catch (_) {}
+    try { if (progSplide && progSplide.destroy) progSplide.destroy(true); } catch (_) {}
+    if (parallaxScrollHandler) {
+      window.removeEventListener('scroll', parallaxScrollHandler);
+      parallaxScrollHandler = null;
+    }
+  }
+</script>
     </main>
 
     <div id="footer-placeholder"></div>
     
-    <script src="/js/i18n.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>
