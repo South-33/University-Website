@@ -97,7 +97,7 @@
                     Get a quick glimpse of our campus locations. Click a card above for a detailed interactive map.
                 </p>
                 <div class="bg-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center h-96 w-full">
-                    <img src="../Picture/university-map-placeholder.png" alt="University Map Overview" class="max-w-full h-auto object-contain">
+                    <img src="../image/mainimage/numbuilding.jpg" alt="University Map Overview" class="max-w-full h-auto object-contain">
                 </div>
                  <p class="text-sm text-gray-500 mt-4">Note: Full interactive features are available on individual campus pages.</p>
             </div>
@@ -108,6 +108,8 @@
     
     <!-- PAGE-SPECIFIC JAVASCRIPT (SPA-Compatible) -->
     <script>
+        (function(){
+        'use strict';
         // 🎯 PAGE-SPECIFIC INITIALIZATION (auto-detected by SPA)
         function initializeMapPage() {
             console.log('Map page initialized');
@@ -128,6 +130,7 @@
         // 🌐 Make functions globally available for SPA navigation (REQUIRED)
         window.initializeMapPage = initializeMapPage;
         window.pageCleanup = pageCleanup;
+        })();
     </script>
     
     <!-- Site-wide Scripts (global logic) -->
