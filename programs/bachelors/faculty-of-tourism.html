@@ -20,6 +20,25 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Program slideshow styles */
+        .program-slideshow {
+            position: relative;
+            height: 100%;
+            min-height: 220px; /* ensures height on mobile */
+        }
+        .program-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.9s ease-in-out;
+        }
+        .program-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .program-slide.active { opacity: 1; }
     </style>
 </head>
 <body class="body-loading bg-light-lavender">
@@ -56,14 +75,30 @@
         <section class="bg-light-lavender py-24 font-body">
             <div class="max-w-5xl mx-auto px-5 flex flex-col md:flex-row items-center gap-12 fade-in-section">
                 <div class="md:w-1/3 text-center">
-                    <img src="https://plus.unsplash.com/premium_photo-1683140661222-59e4fc995a41?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dr. Sophea Chea, Dean of IT" class="w-48 h-48 rounded-full mx-auto object-cover ring-4 ring-dark-blue/20 shadow-xl">
-                    <h3 class="font-heading text-2xl mt-6 text-dark-blue">Dr. Sophea Chea</h3>
-                    <p class="text-dark-blue/70 font-medium">Dean, Faculty of Information Technology</p>
+                    <img src="https://numer.digital/public/faculties/Faculty%20of%20Tourism/_MG_7257.JPG" alt="Prof. Ung Veasna, Acting Dean of the Faculty of Tourism" class="w-48 h-48 md:w-56 md:h-56 rounded-full mx-auto object-cover ring-4 ring-dark-blue/20 shadow-xl">
+                    <h3 class="font-heading text-2xl mt-6 text-dark-blue">Prof. Ung Veasna</h3>
+                    <p class="text-dark-blue/70 font-medium">Acting Dean, Faculty of Tourism</p>
                 </div>
                 <div class="md:w-2/3 text-center md:text-left">
-                    <blockquote class="relative text-center md:text-left max-w-prose mx-auto md:mx-0">
-
-                        <p class="font-heading text-2xl md:text-3xl text-dark-blue leading-snug">"We are not just teaching technology; we are cultivating the next generation of innovators and leaders who will drive Cambodia's digital future."</p>
+                    <blockquote class="relative text-center md:text-left md:max-w-prose lg:max-w-[62ch] space-y-4 mx-auto md:mx-0">
+                        <p class="text-dark-blue/85 md:text-[1.05rem] leading-relaxed md:leading-8">
+                            Dear students, faculty members, and esteemed visitors. <br>
+                            Welcome to the Faculty of Tourism at the National University of Management (NUM).
+                        </p>
+                        <p class="text-dark-blue/85 md:text-[1.05rem] leading-relaxed md:leading-8">
+                            Our Bachelor of Tourism and Hospitality Management blends academic excellence with practical skills for a dynamic industry. You’ll learn from dedicated lecturers and mentors who bring research and consultancy to the classroom. Through study tours, internships, and field trips with strong industry partners, you gain real-world experience and clear career pathways.
+                        </p>
+                        <p class="text-dark-blue/85 md:text-[1.05rem] leading-relaxed md:leading-8">
+                            We foster an inclusive and supportive community. I invite you to explore our opportunities and make full use of our resources together we will set new benchmarks for excellence.
+                        </p>
+                        <p class="mt-6 text-dark-blue font-semibold">
+                            With warm regards,
+                        </p>
+                        <p class="mt-2 text-dark-blue font-semibold text-base md:text-lg">
+                            Prof. Ung Veasna<br>
+                            Acting Dean, Faculty of Tourism<br>
+                            National University of Management, Phnom Penh, Cambodia
+                        </p>
                     </blockquote>
                 </div>
             </div>
@@ -77,8 +112,16 @@
                 <div class="space-y-12">
                     <!-- Program Detail: Tourism Management -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Tourism management professionals">
+                        <div class="md:w-1/3 program-slideshow" data-program="tourism-management">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tourism management professionals">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/219794/pexels-photo-219794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Travel planning and destination overview">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sustainable tourism in nature">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -89,21 +132,29 @@
                                 <p class="text-dark-blue/80 mb-6">Master the art of creating memorable travel experiences. This comprehensive program covers destination management, tourism planning, and sustainable tourism practices to prepare you for leadership roles in the global tourism industry.</p>
                                 <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
                                 <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Tourism Planning & Development</li>
+                                    <li>Tourism Policy & Planning</li>
+                                    <li>Cultural Heritage Management</li>
                                     <li>Destination Marketing</li>
-                                    <li>Sustainable Tourism Practices</li>
-                                    <li>Tourism Economics & Policy</li>
+                                    <li>Ecotourism & Sustainable Development</li>
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/tourism-management" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Hospitality Management -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Luxury hotel lobby">
+                        <div class="md:w-1/3 program-slideshow" data-program="hospitality-management">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxury hotel lobby">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/750243/pexels-photo-750243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Hotel front desk service">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fine dining hospitality">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -114,14 +165,14 @@
                                 <p class="text-dark-blue/80 mb-6">Excel in the dynamic hospitality industry. Learn hotel operations, guest services, food & beverage management, and event planning to create exceptional experiences for travelers and guests worldwide.</p>
                                 <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
                                 <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
-                                    <li>Hotel Operations Management</li>
-                                    <li>Food & Beverage Service</li>
-                                    <li>Event Planning & Management</li>
-                                    <li>Guest Relations & Service Excellence</li>
+                                    <li>Hospitality Operations</li>
+                                    <li>Service Quality Management</li>
+                                    <li>Event & Conference Management</li>
+                                    <li>Food & Beverage Management</li>
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/hospitality-management" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -246,14 +297,34 @@
             observer.observe(statsSection);
         }
         
+        // Program Slideshow Functionality
+        function initializeProgramSlideshows() {
+            const slideshows = document.querySelectorAll('.program-slideshow');
+            slideshows.forEach((slideshow, index) => {
+                const slides = slideshow.querySelectorAll('.program-slide');
+                if (slides.length <= 1) return;
+                let currentSlide = 0;
+                function showNextSlide() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+                // Wave effect: stagger start time based on index
+                setTimeout(() => {
+                    setInterval(showNextSlide, 4000);
+                }, index * 100);
+            });
+        }
+
         // SPA initialization function - called by main.js during navigation
         function initializePage() {
             initializeStatsAnimation();
-            // Add any other page-specific initialization here
+            initializeProgramSlideshows();
         }
         
         // Expose page initialization function for SPA
         window.initializePage = initializePage;
+        window.initializeProgramSlideshows = initializeProgramSlideshows;
         
         // Initialize on DOM load (for direct page access)
         document.addEventListener('DOMContentLoaded', initializePage);

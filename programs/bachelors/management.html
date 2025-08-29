@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bachelor's in Management - National University of Management</title>
+    <meta name="description" content="Earn a BBA in Management at the National University of Management. Develop leadership, strategy, HR, marketing, finance, and operations skills with hands-on projects and industry partnerships.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bachelor's in Management - National University of Management">
+    <meta property="og:description" content="Develop leadership and strategic skills with NUM’s Management program. Explore curriculum, student life, and careers.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:url" content="/programs/bachelors/management.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bachelor's in Management - National University of Management">
+    <meta name="twitter:description" content="Explore NUM’s BBA in Management: objectives, curriculum, careers, and student life.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?q=80&w=1200&auto=format&fit=crop">
+    <link rel="canonical" href="/programs/bachelors/management.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../js/theme.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <style>
+        /* Curriculum year card and course list styles (moved from main.css) */
+        .curriculum-year-card {
+            box-shadow: 0 4px 24px 0 rgba(30, 34, 90, 0.07), 0 1.5px 6px 0 rgba(30, 34, 90, 0.03);
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .course-list {
+            list-style: disc inside;
+            margin-left: 1.25rem;
+            color: #374151;
+        }
+        .curriculum-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            color: rgba(49, 46, 129, 0.7);
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .curriculum-tab.active-tab {
+            color: #ffffff;
+            background-color: #1e1b4b; /* darker indigo */
+            border: 1px solid #1e1b4b; /* ensure solid edge, not translucent */
+            box-shadow: 0 12px 18px -4px rgba(0, 0, 0, 0.18), 0 6px 8px -4px rgba(0, 0, 0, 0.12);
+            transform: scale(1.05);
+        }
+        .fade-in-section > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.17, 0.55, 0.55, 1),
+                        transform 0.6s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+        .fade-in-section.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            height: 2px;
+            width: 100%;
+            background-color: #e5e7eb;
+            z-index: -1;
+        }
+        .course-list {
+            list-style: none;
+            padding: 0;
+        }
+        .course-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .course-list li:last-child {
+            margin-bottom: 0;
+        }
+        .course-list li::before {
+            content: '-';
+            position: absolute;
+            left: 0;
+            color: #4338ca;
+            font-weight: bold;
+        }
+
+        .faculty-card, .project-card, .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .faculty-card:hover, .project-card:hover, .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #4f46e5; /* Indigo 600 */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca; /* Indigo 700 */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn-secondary:hover {
+            background-color: white;
+            color: #1e293b; /* Slate 800 */
+        }
+        /* Glass button for overlays */
+        .btn-glass {
+            background: rgba(255,255,255,0.14);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .btn-glass:hover {
+            background: rgba(255,255,255,0.24);
+            box-shadow: 0 10px 20px -10px rgba(0,0,0,0.35);
+        }
+        /* Tag chip */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.9);
+            color: #1f2937;
+            border: 1px solid rgba(226,232,240,0.9);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        /* Sticky Program Sub-Navigation */
+        .program-subnav {
+            position: sticky;
+            top: var(--header-height, 64px);
+            z-index: 9000;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(1.2) blur(8px);
+            -webkit-backdrop-filter: saturate(1.2) blur(8px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+        }
+        .program-subnav .subnav-link {
+            color: rgba(30, 41, 59, 0.8);
+            transition: color 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+        }
+        .program-subnav .subnav-link:hover {
+            color: var(--brand-dark, #1e293b);
+            transform: translateY(-1px);
+        }
+        .program-subnav .subnav-link.active {
+            color: var(--brand-dark, #1e293b);
+            font-weight: 600;
+        }
+        /* Subtle glassy chip hover effect (self-contained, no movement) */
+        .glassy-chip {
+            transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            will-change: background, box-shadow;
+        }
+        .glassy-chip:hover,
+        .glassy-chip.is-hovered { /* works with touch hover emulation */
+            background: rgba(255,255,255,0.16);
+            border-color: rgba(255,255,255,0.35);
+            box-shadow: 0 8px 20px -12px rgba(0,0,0,0.4);
+        }
+        /* At-a-Glance cards */
+        .glance-card {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.875rem;
+            border-radius: 0.75rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        @media (max-width: 768px) {
+            .glance-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                padding-bottom: 0.25rem;
+            }
+            .glance-scroll > * {
+                scroll-snap-align: start;
+                flex: 0 0 auto;
+            }
+        }
+        /* Mobile cross-fade for curriculum cards */
+        @media (max-width: 1023.98px) { /* below lg */
+            #curriculum-cards {
+                position: relative;
+                transition: height 0.35s ease;
+                will-change: height;
+            }
+            #curriculum-cards .curriculum-year-card {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0; /* allow auto height based on content */
+                width: 100%;
+                opacity: 0;
+                pointer-events: none; /* prevent interaction when hidden */
+                transition: opacity 0.35s ease-in-out;
+                z-index: 0;
+            }
+            #curriculum-cards .curriculum-year-card.active-year {
+                opacity: 1;
+                pointer-events: auto;
+                z-index: 1;
+            }
+        }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            #curriculum-cards { transition: none !important; }
+            #curriculum-cards .curriculum-year-card { transition: none !important; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOccupationalProgram",
+      "name": "Bachelor of Business Administration (BBA) in Management",
+      "url": "/programs/bachelors/management.html",
+      "provider": {
+        "@type": "CollegeOrUniversity",
+        "name": "National University of Management",
+        "url": "/"
+      },
+      "timeToComplete": "P4Y",
+      "occupationalCategory": ["Operations Manager","Marketing Manager","HR Specialist","Financial Analyst","Entrepreneur"],
+      "educationalCredentialAwarded": "BBA in Management"
+    }
+    </script>
+</head>
+<body class="body-loading bg-light-lavender scroll-smooth">
+
+    <!-- Header Loading Placeholder - zero-performance dynamic height matching -->
+    <div id="header-placeholder">
+        <div id="header-loading-placeholder" class="fixed top-0 left-0 w-full bg-dark-blue z-[10000]">
+            <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-center">
+                <div class="animate-pulse">
+                    <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="h-2 bg-white/20 rounded w-20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-300">
+        <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-[300px] flex items-center justify-center text-center text-white font-body">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Business management hero background" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-dark-blue/75"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto px-5 fade-in-section">
+                <h1 class="font-heading text-4xl md:text-6xl mb-2">Bachelor's Degree in Management</h1>
+                <p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">Develop leadership, strategic thinking, and operational excellence to drive organizations forward in a dynamic economy.</p>
+                <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur border border-white/20 mt-6 mx-auto glassy-chip">
+                    <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+                    <span class="text-white/90 text-xs md:text-sm tracking-wide">National Program</span>
+                </div>
+                <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur border border-white/20 mt-2 mx-auto glassy-chip">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="text-white/90 text-xs md:text-sm tracking-wide">Applications open for 2026</span>
+                </div>
+            </div>
+            <!-- Subtle scroll cue -->
+            <a id="hero-scroll-cue" href="#overview" aria-label="Scroll to program overview" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 hover:text-white focus:outline-none rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+            </a>
+        </section>
+
+
+        <!-- Program Overview Section -->
+        <section id="overview" class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="grid lg:grid-cols-2 gap-12 items-stretch">
+                    <!-- Objectives Column styled like SPARK cards -->
+                    <div class="h-full">
+                        <div class="relative bg-gradient-to-br from-light-lavender/30 to-white/20 p-8 md:p-12 rounded-2xl border border-indigo-200 ring-1 ring-indigo-200/80 h-full min-h-[420px] transition">
+                            <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-5 text-center">Core Objectives</h2>
+                            <div class="relative">
+                                <div class="absolute left-5 top-14 bottom-14 w-px bg-indigo-200 hidden sm:block"></div>
+                                <ul class="space-y-5">
+                                    <li class="relative sm:pl-14 pl-0">
+                                        <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0 font-semibold">1</span>
+                                        <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 md:p-5 shadow-sm ring-1 ring-indigo-100/60 transition duration-300 hover:ring-[1.5px] hover:ring-indigo-300/60 hover:shadow-none mx-auto sm:mx-0">
+                                            <p class="text-dark-blue/80 text-base md:text-lg text-center sm:text-left">Develop a solid foundation in core business areas: management, marketing, accounting, and economics.</p>
+                                        </div>
+                                    </li>
+                                    <li class="relative sm:pl-14 pl-0">
+                                        <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0 font-semibold">2</span>
+                                        <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 md:p-5 shadow-sm ring-1 ring-indigo-100/60 transition duration-300 hover:ring-[1.5px] hover:ring-indigo-300/60 hover:shadow-none mx-auto sm:mx-0">
+                                            <p class="text-dark-blue/80 text-base md:text-lg text-center sm:text-left">Build analytical, leadership, and communication skills for effective organizational decision-making.</p>
+                                        </div>
+                                    </li>
+                                    <li class="relative sm:pl-14 pl-0">
+                                        <span class="sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 transform w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center shadow ring-1 ring-indigo-200 mx-auto sm:mx-0 mb-3 sm:mb-0 font-semibold">3</span>
+                                        <div class="bg-white/80 backdrop-blur-sm border border-indigo-100 rounded-xl p-4 md:p-5 shadow-sm ring-1 ring-indigo-100/60 transition duration-300 hover:ring-[1.5px] hover:ring-indigo-300/60 hover:shadow-none mx-auto sm:mx-0">
+                                            <p class="text-dark-blue/80 text-base md:text-lg text-center sm:text-left">Prepare graduates to lead ethically and manage teams across diverse industries in Cambodia and the region.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image matching height (cross-fade slideshow) -->
+                    <div class="relative h-full min-h-[420px]">
+                        <div id="overview-slideshow" class="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-indigo-100 h-full">
+                            <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Team collaboration in business meeting" class="slideshow-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-in-out opacity-100" />
+                            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=2069&auto=format&fit=crop" alt="Students studying management and strategy" class="slideshow-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-in-out opacity-0" />
+                            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2069&auto=format&fit=crop" alt="Marketing and analytics dashboard" class="slideshow-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-in-out opacity-0" />
+                            <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=2069&auto=format&fit=crop" alt="Business planning and brainstorming" class="slideshow-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-in-out opacity-0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        // Cross-fade slideshow for the overview right image card
+        (function () {
+            const container = document.getElementById('overview-slideshow');
+            if (!container) return;
+            const slides = Array.from(container.querySelectorAll('.slideshow-slide'));
+            if (slides.length <= 1) return;
+
+            let index = 0;
+            // Ensure correct initial ARIA state
+            slides.forEach((s, i) => {
+                s.setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
+            });
+
+            const intervalMs = 5000; // 5s per slide
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (prefersReduced.matches) return; // Respect users who prefer less motion
+
+            setInterval(() => {
+                const prev = index;
+                index = (index + 1) % slides.length;
+                // Fade out previous
+                slides[prev].classList.remove('opacity-100');
+                slides[prev].classList.add('opacity-0');
+                slides[prev].setAttribute('aria-hidden', 'true');
+                // Fade in next
+                slides[index].classList.remove('opacity-0');
+                slides[index].classList.add('opacity-100');
+                slides[index].setAttribute('aria-hidden', 'false');
+            }, intervalMs);
+        })();
+        </script>
+
+        <script>
+        /* Note: Hero scroll cue is handled in setupHeroScrollCue() below to avoid duplicate listeners. */
+        </script>
+
+        
+
+        <!-- Why Choose -->
+        <section id="why" class="bg-white py-20 md:py-24 fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32">
+            <div class="max-w-7xl mx-auto px-5">
+            <div class="text-center mb-14">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">Why Management at NUM?</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-light-lavender rounded-2xl p-8 text-center border border-slate-200">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 mx-auto shadow">
+                    <svg class="w-10 h-10 text-[color:var(--brand-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                </div>
+                <h3 class="font-heading text-xl text-[color:var(--brand-dark)] mb-2">Experienced Faculty</h3>
+                <p class="text-slate-700">Learn from business scholars and industry practitioners across management disciplines.</p>
+                </div>
+                <div class="feature-card bg-light-lavender rounded-2xl p-8 text-center border border-slate-200">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 mx-auto shadow">
+                    <svg class="w-10 h-10 text-[color:var(--brand-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18M7 7v10"/></svg>
+                </div>
+                <h3 class="font-heading text-xl text-[color:var(--brand-dark)] mb-2">Industry Partnerships</h3>
+                <p class="text-slate-700">Internships and projects with leading companies, NGOs, and government agencies.</p>
+                </div>
+                <div class="feature-card bg-light-lavender rounded-2xl p-8 text-center border border-slate-200">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 mx-auto shadow">
+                    <svg class="w-10 h-10 text-[color:var(--brand-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6m-7 4h8a2 2 0 002-2V7l-4-4H8a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="font-heading text-xl text-[color:var(--brand-dark)] mb-2">Career-Ready Skills</h3>
+                <p class="text-slate-700">Curriculum aligned with real-world management roles across sectors.</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        
+
+        <!-- Curriculum Section -->
+        <section id="curriculum" class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32 program-tabs-section">
+            <div class="max-w-7xl mx-auto px-5">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-16 text-center">Program Curriculum</h2>
+
+                <!-- Mobile-First Tabs (shown on < lg) -->
+                <div class="mb-8 lg:hidden">
+                    <div class="bg-white/50 backdrop-blur-sm rounded-2xl p-5 shadow-sm border border-white/20">
+                        <div class="grid grid-cols-2 gap-3" role="tablist" aria-label="Curriculum Years">
+                            <button class="curriculum-tab w-full px-6 py-3 rounded-full font-medium active-tab" data-year="1" role="tab" aria-selected="true" aria-controls="year-1-panel" id="year-1-tab">Year 1</button>
+                            <button class="curriculum-tab w-full px-6 py-3 rounded-full font-medium" data-year="2" role="tab" aria-selected="false" aria-controls="year-2-panel" id="year-2-tab">Year 2</button>
+                            <button class="curriculum-tab w-full px-6 py-3 rounded-full font-medium" data-year="3" role="tab" aria-selected="false" aria-controls="year-3-panel" id="year-3-tab">Year 3</button>
+                            <button class="curriculum-tab w-full px-6 py-3 rounded-full font-medium" data-year="4" role="tab" aria-selected="false" aria-controls="year-4-panel" id="year-4-tab">Year 4</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Grid for Year Cards -->
+                <div id="curriculum-cards" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+
+                    <!-- Year 1 Card -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg curriculum-year-card" data-year="1" role="tabpanel" id="year-1-panel" aria-labelledby="year-1-tab" aria-hidden="false">
+                        <h3 class="font-heading text-2xl text-dark-blue mb-2">Year 1</h3>
+                        <p class="text-dark-blue/70 font-body">Foundational Business Skills</p>
+                        <hr class="border-dark-blue/10 my-6">
+                        <div class="grid md:grid-cols-2">
+                            <div class="md:pr-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester I</h4>
+                                <ul class="course-list">
+                                    <li>Introduction to Business (ITB)</li>
+                                    <li>Public Administration (PUA)</li>
+                                    <li>Cambodian Economy (CAE)</li>
+                                    <li>Principles of Management (PMG)</li>
+                                    <li>Business English 1 (BUE1)</li>
+                                </ul>
+                            </div>
+                            <div class="mt-6 md:mt-0 md:border-l md:border-dark-blue/10 md:pl-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester II</h4>
+                                <ul class="course-list">
+                                    <li>Business Law (BUL)</li>
+                                    <li>Basics of Computer (BAC)</li>
+                                    <li>Mathematical Analysis (MAT)</li>
+                                    <li>Principles of Marketing (PMK)</li>
+                                    <li>Business English 2 (BUE2)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Year 2 Card -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg curriculum-year-card" data-year="2" role="tabpanel" id="year-2-panel" aria-labelledby="year-2-tab" aria-hidden="true">
+                        <h3 class="font-heading text-2xl text-dark-blue mb-2">Year 2</h3>
+                        <p class="text-dark-blue/70 font-body">Core Management and Analytical Skills</p>
+                        <hr class="border-dark-blue/10 my-6">
+                        <div class="grid md:grid-cols-2">
+                            <div class="md:pr-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester I</h4>
+                                <ul class="course-list">
+                                    <li>Research Methodology (REM)</li>
+                                    <li>Organizational Behavior (ORB)</li>
+                                    <li>Business Statistics (BUS)</li>
+                                    <li>Microeconomics (ME)</li>
+                                    <li>Writing Skills (WRS)</li>
+                                </ul>
+                            </div>
+                            <div class="mt-6 md:mt-0 md:border-l md:border-dark-blue/10 md:pl-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester II</h4>
+                                <ul class="course-list">
+                                    <li>Marketing for Services (MAS)</li>
+                                    <li>Human Resource Management (HRM)</li>
+                                    <li>Principles of Accounting (POA)</li>
+                                    <li>Macroeconomics (MAE)</li>
+                                    <li>Business Correspondence (BUC)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Year 3 Card -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg curriculum-year-card" data-year="3" role="tabpanel" id="year-3-panel" aria-labelledby="year-3-tab" aria-hidden="true">
+                        <h3 class="font-heading text-2xl text-dark-blue mb-2">Year 3</h3>
+                        <p class="text-dark-blue/70 font-body">Advanced Management Applications</p>
+                        <hr class="border-dark-blue/10 my-6">
+                        <div class="grid md:grid-cols-2">
+                            <div class="md:pr-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester I</h4>
+                                <ul class="course-list">
+                                    <li>Managerial Accounting (MAA)</li>
+                                    <li>Environmental Business Management (EBM)</li>
+                                    <li>Cross Cultural Management (CCM)</li>
+                                    <li>Marketing Research (MRE)</li>
+                                    <li>Performance Management (PEM)</li>
+                                </ul>
+                            </div>
+                            <div class="mt-6 md:mt-0 md:border-l md:border-dark-blue/10 md:pl-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester II</h4>
+                                <ul class="course-list">
+                                    <li>Office Management (OFM)</li>
+                                    <li>Financial Management (FMG)</li>
+                                    <li>Marketing Management (MAM)</li>
+                                    <li>E-Commerce (E-com)</li>
+                                    <li>Inventory Management (INM)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Year 4 Card -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg curriculum-year-card" data-year="4" role="tabpanel" id="year-4-panel" aria-labelledby="year-4-tab" aria-hidden="true">
+                        <h3 class="font-heading text-2xl text-dark-blue mb-2">Year 4</h3>
+                        <p class="text-dark-blue/70 font-body">Strategic Leadership and Capstone</p>
+                        <hr class="border-dark-blue/10 my-6">
+                        <div class="grid md:grid-cols-2">
+                            <div class="md:pr-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester I</h4>
+                                <ul class="course-list">
+                                    <li>Management of Technology (MOT)</li>
+                                    <li>Investment Management (IVM)</li>
+                                    <li>Project Management (PRM)</li>
+                                    <li>Total Quality Management (TQM)</li>
+                                    <li>Commercial Transactions (COT)</li>
+                                </ul>
+                            </div>
+                            <div class="mt-6 md:mt-0 md:border-l md:border-dark-blue/10 md:pl-8">
+                                <h4 class="font-bold text-lg text-dark-blue mb-3">Semester II</h4>
+                                <ul class="course-list">
+                                    <li>Business Ethics (BET)</li>
+                                    <li>Entrepreneurship (ENS)</li>
+                                    <li>Logistic Management (LOG)</li>
+                                    <li>International Business Management (IBM)</li>
+                                    <li>Strategic Management (STM)</li>
+                                    <li>Research Writing & Presentation (RWP)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Projects Showcase -->
+        <section id="projects" class="bg-white py-24 font-body fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32">
+            <div class="max-w-7xl mx-auto px-5">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Student Project Showcase</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">See what our students are creating. From market research and HR analytics to operations simulations, our projects connect classroom theory with real business impact.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1740&auto=format&fit=crop" alt="Team developing a market entry strategy" class="absolute inset-0 w-full h-96 lg:h-[26rem] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                        <div class="relative h-96 lg:h-[26rem]"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-5 text-center">
+                            <h3 class="font-heading text-xl text-white drop-shadow mb-1">Market Entry Strategy</h3>
+                            <p class="text-white/95 text-sm md:text-base leading-relaxed">Comprehensive market analysis and go-to-market plan for a regional product launch.</p>
+                            <div class="mt-3 flex justify-center">
+                                <a href="../../projects/market-entry-strategy.html" class="btn btn-glass inline-flex items-center">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=1740&auto=format&fit=crop" alt="Students building an HR analytics dashboard" class="absolute inset-0 w-full h-96 lg:h-[26rem] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                        <div class="relative h-96 lg:h-[26rem]"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-5 text-center">
+                            <h3 class="font-heading text-xl text-white drop-shadow mb-1">HR Analytics Dashboard</h3>
+                            <p class="text-white/95 text-sm md:text-base leading-relaxed">Data-driven insights on retention, engagement, and workforce planning using real datasets.</p>
+                            <div class="mt-3 flex justify-center">
+                                <a href="../../projects/hr-analytics-dashboard.html" class="btn btn-glass inline-flex items-center">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-96 lg:h-[26rem] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+                            <source src="https://videos.pexels.com/video-files/3182812/3182812-uhd_2560_1440_25fps.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                        <div class="relative h-96 lg:h-[26rem]"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-5 text-center">
+                            <h3 class="font-heading text-xl text-white drop-shadow mb-1">Operations Simulation</h3>
+                            <p class="text-white/95 text-sm md:text-base leading-relaxed">Discrete-event simulation to optimize service operations throughput and customer wait times.</p>
+                            <div class="mt-3 flex justify-center">
+                                <a href="../../projects/operations-simulation.html" class="btn btn-glass inline-flex items-center">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Life Showcase Section -->
+        <section id="student-life" class="bg-white py-24 font-body fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32">
+            <div class="max-w-7xl mx-auto px-5">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">A Glimpse into Student Life</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">Experience the collaborative, real-world learning environment that defines our Management program.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Image 1 -->
+                    <div class="group relative overflow-hidden rounded-xl lg:col-span-2 h-72 md:h-80 lg:h-96">
+                        <img src="https://images.pexels.com/photos/5726794/pexels-photo-5726794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students presenting their project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white font-semibold">Project Presentations</p>
+                        </div>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="group relative overflow-hidden rounded-xl h-72 md:h-80 lg:h-96">
+                        <img src="https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Professor mentoring a student" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white font-semibold">Faculty Mentorship</p>
+                        </div>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="group relative overflow-hidden rounded-xl h-72 md:h-80 lg:h-96">
+                        <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students collaborating in a business workshop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white font-semibold">Field Testing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Opportunities Section -->
+        <section id="careers" class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32">
+            <div class="max-w-7xl mx-auto px-5">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Career Opportunities</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">Turn your passion for business into impact with diverse roles across private, public, and non-profit sectors.</p>
+                </div>
+                
+                <!-- Visual-first career grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Card: Operations Manager -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-[388px]">
+            <img src="https://images.unsplash.com/photo-1556745753-b2904692b3cd?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Operations team reviewing processes" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ease-in-out group-hover:opacity-100 opacity-80"></div>
+            <div class="relative h-full p-8 flex flex-col justify-center text-center text-white">
+                <div class="relative">
+                    <div class="mb-2">
+                        <div class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block shadow-lg">HIGH DEMAND</div>
+                    </div>
+                    <h3 class="font-heading text-2xl mb-1 drop-shadow-md">Operations Manager</h3>
+                    <div class="absolute left-0 right-0 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out">
+                        <p class="text-base font-body mt-2">Optimize processes, manage teams, and enhance efficiency across departments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Marketing Manager -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-[388px]">
+            <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Marketing team planning campaign" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ease-in-out group-hover:opacity-100 opacity-80"></div>
+            <div class="relative h-full p-8 flex flex-col justify-center text-center text-white">
+                <div class="relative">
+                    <div class="mb-2">
+                        <div class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block shadow-lg">GROWTH</div>
+                    </div>
+                    <h3 class="font-heading text-2xl mb-1 drop-shadow-md">Marketing Manager</h3>
+                    <div class="absolute left-0 right-0 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out">
+                        <p class="text-base font-body mt-2">Lead market research, strategy, and campaigns to build brand and sales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: HR Specialist -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-[388px]">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="HR specialist interviewing candidate" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ease-in-out group-hover:opacity-100 opacity-80"></div>
+            <div class="relative h-full p-8 flex flex-col justify-center text-center text-white">
+                <div class="relative">
+                    <div class="mb-2">
+                        <div class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block shadow-lg">PEOPLE</div>
+                    </div>
+                    <h3 class="font-heading text-2xl mb-1 drop-shadow-md">HR Specialist</h3>
+                    <div class="absolute left-0 right-0 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out">
+                        <p class="text-base font-body mt-2">Recruit, develop, and retain talent while fostering a strong organizational culture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Financial Analyst -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-[388px]">
+            <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Financial analyst reviewing charts" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ease-in-out group-hover:opacity-100 opacity-80"></div>
+            <div class="relative h-full p-8 flex flex-col justify-center text-center text-white">
+                <div class="relative">
+                    <div class="mb-2">
+                        <div class="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block shadow-lg">ANALYTICS</div>
+                    </div>
+                    <h3 class="font-heading text-2xl mb-1 drop-shadow-md">Financial Analyst</h3>
+                    <div class="absolute left-0 right-0 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out">
+                        <p class="text-base font-body mt-2">Analyze financial data to support budgeting, forecasting, and strategic decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Entrepreneur/SME Owner -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-[388px]">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Entrepreneur presenting business plan" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ease-in-out group-hover:opacity-100 opacity-80"></div>
+            <div class="relative h-full p-8 flex flex-col justify-center text-center text-white">
+                <div class="relative">
+                    <div class="mb-2">
+                        <div class="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block shadow-lg">STARTUP</div>
+                    </div>
+                    <h3 class="font-heading text-2xl mb-1 drop-shadow-md">Entrepreneur / SME Owner</h3>
+                    <div class="absolute left-0 right-0 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out">
+                        <p class="text-base font-body mt-2">Launch and scale ventures by applying strategy, finance, and marketing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Project Manager -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-[388px]">
+            <img src="https://images.unsplash.com/photo-1531379410502-63bfe8cdaf6f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Project manager coordinating team tasks on a whiteboard" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ease-in-out group-hover:opacity-100 opacity-80"></div>
+            <div class="relative h-full p-8 flex flex-col justify-center text-center text-white">
+                <div class="relative">
+                    <div class="mb-2">
+                        <div class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block shadow-lg">LEADERSHIP</div>
+                    </div>
+                    <h3 class="font-heading text-2xl mb-1 drop-shadow-md">Project Manager</h3>
+                    <div class="absolute left-0 right-0 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out">
+                        <p class="text-base font-body mt-2">Plan, execute, and deliver cross-functional projects on time and on budget.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+        </section>
+
+
+
+        <!-- Admissions Section -->
+        <section id="admissions" class="bg-white py-24 font-body fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="text-center mb-14">
+                <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-3">Admissions</h2>
+                <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">Find out what you need to apply, estimated tuition and fees, and key deadlines.</p>
+              </div>
+  
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Requirements -->
+                <div class="bg-light-lavender rounded-2xl p-8 border border-brand-100 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-lg">
+                  <h3 class="font-heading text-2xl text-dark-blue mb-4">Requirements</h3>
+                  <ul class="list-disc pl-5 space-y-3 text-dark-blue/80">
+                    <li>Completed application form</li>
+                    <li>High school diploma or equivalent</li>
+                    <li>Official transcripts</li>
+                    <li>English proficiency (IELTS/TOEFL) for international applicants</li>
+                    <li>Optional: SAT/ACT scores, portfolio or project links</li>
+                  </ul>
+                </div>
+  
+                <!-- Tuition & Fees -->
+                <div class="bg-light-lavender rounded-2xl p-8 border border-brand-100 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-lg">
+                  <h3 class="font-heading text-2xl text-dark-blue mb-4">Tuition &amp; Fees (Estimated)</h3>
+                  <div class="space-y-3 text-dark-blue/80">
+                    <div class="flex items-center justify-between"><span>Tuition (per year)</span><span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-white text-dark-blue">$X,XXX</span></div>
+                    <div class="flex items-center justify-between"><span>Fees (per year)</span><span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-white text-dark-blue">$XXX</span></div>
+                    <div class="flex items-center justify-between"><span>Lab/Materials (per year)</span><span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-white text-dark-blue">$XXX</span></div>
+                  </div>
+                  <p class="mt-4 text-sm text-dark-blue/70">Scholarships and financial aid are available for eligible students.</p>
+                </div>
+  
+                <!-- Important Dates -->
+                <div class="bg-light-lavender rounded-2xl p-8 border border-brand-100 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-lg">
+                  <h3 class="font-heading text-2xl text-dark-blue mb-4">Important Dates</h3>
+                  <ul class="space-y-3 text-dark-blue/80">
+                    <li><span class="text-dark-blue">Fall Intake:</span> Applications due Aug 1</li>
+                    <li><span class="text-dark-blue">Spring Intake:</span> Applications due Dec 1</li>
+                    <li><span class="text-dark-blue">Decisions:</span> Released on a rolling basis</li>
+                  </ul>
+                </div>
+              </div>
+  
+              <!-- Call to Action -->
+              <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#apply" aria-label="Apply now" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-dark-blue border border-slate-300 hover:bg-slate-100 hover:border-slate-400 hover:text-dark-blue focus:outline-none focus:ring-4 focus:ring-slate-200 transition-colors duration-150 ease-out text-base">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  Apply Now
+                </a>
+                <a href="#contact" aria-label="Contact admissions" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-slate-300 bg-white text-dark-blue hover:bg-slate-100 hover:border-slate-400 hover:text-dark-blue focus:outline-none focus:ring-4 focus:ring-slate-200 transition-colors duration-150 ease-out text-base">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l.8-5A8.8 8.8 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                  Contact Admissions
+                </a>
+              </div>
+            </div>
+        </section>
+
+
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="bg-light-lavender py-24 font-body fade-in-section border-t border-gray-300/60 scroll-mt-24 md:scroll-mt-32">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">What Our Students Say</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">Our Management program empowers students to lead and make an impact. Hear directly from them.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-lg">
+                        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student photo" class="w-24 h-24 rounded-full object-cover flex-shrink-0 border-2 border-[#0A0B3D]">
+                        <div>
+                            <p class="text-dark-blue/80 text-lg italic mb-4">"NUM’s Management curriculum is practical and engaging. Case studies and projects helped me develop leadership and analytical skills that I use daily in my internship."</p>
+                            <p class="text-dark-blue">- Alex Johnson, Year 4</p>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-lg">
+                        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student photo" class="w-24 h-24 rounded-full object-cover flex-shrink-0 border-2 border-[#0A0B3D]">
+                        <div>
+                            <p class="text-dark-blue/80 text-lg italic mb-4">"The faculty are true mentors. Their industry connections and guidance helped me secure a role in a leading company before graduation."</p>
+                            <p class="text-dark-blue">- Samantha Lee, Alumna</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+        </main>
+    </div> <!-- End main-content-container -->
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Page-specific script: scrollspy + curriculum tabs (SPA-friendly) -->
+    <script>
+      (function(){
+        const state = { observers: [], resizeHandler: null, tabHandlers: [], subnavClickHandler: null };
+
+        function setupScrollSpy(){
+          const links = Array.from(document.querySelectorAll('.program-subnav .subnav-link'));
+          if (!links.length) return;
+          const sections = links.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+          const header = document.querySelector('header');
+          const subnav = document.querySelector('.program-subnav');
+          const headerH = header ? header.offsetHeight : 0;
+          const subnavH = subnav ? subnav.offsetHeight : 0;
+          const topMargin = -(headerH + subnavH + 8);
+          const observer = new IntersectionObserver((entries)=>{
+            entries.forEach(entry => {
+              if (!entry.target.id) return;
+              const link = links.find(l => l.getAttribute('href') === '#' + entry.target.id);
+              if (entry.isIntersecting) {
+                links.forEach(l => l.classList.remove('active'));
+                if (link) link.classList.add('active');
+              }
+            });
+          }, { root: null, rootMargin: `${topMargin}px 0px -60% 0px`, threshold: 0.25 });
+          sections.forEach(sec => observer.observe(sec));
+          state.observers.push(observer);
+
+          const hash = window.location.hash;
+          if (hash) {
+            const active = links.find(l => l.getAttribute('href') === hash);
+            if (active) links.forEach(l => l.classList.toggle('active', l === active));
+          } else if (links[0]) {
+            links[0].classList.add('active');
+          }
+        }
+
+        function setupCurriculumTabs(){
+          const tabs = Array.from(document.querySelectorAll('.curriculum-tab'));
+          const cards = Array.from(document.querySelectorAll('.curriculum-year-card'));
+          const container = document.getElementById('curriculum-cards');
+          if (!tabs.length || !cards.length || !container) return;
+
+          const setContainerHeight = () => {
+            const isMobile = window.innerWidth < 1024; // lg breakpoint
+            if (!isMobile) {
+              container.style.height = '';
+              return;
+            }
+            const activeCard = container.querySelector('.curriculum-year-card.active-year') || cards[0];
+            if (activeCard) {
+              // Use scrollHeight to account for content and add a small buffer to avoid rounding/clipping
+              const buffer = 12; // px
+              container.style.height = (activeCard.scrollHeight + buffer) + 'px';
+            }
+          };
+
+          const activateYear = (year) => {
+            const isMobile = window.innerWidth < 1024;
+            if (!isMobile) return; // show-all on desktop
+            const next = cards.find(c => c.dataset.year === year) || cards[0];
+            const prev = container.querySelector('.curriculum-year-card.active-year');
+            if (prev === next) return;
+            // Make next visible first so the two overlap and cross-fade
+            if (next) {
+              next.classList.add('active-year');
+              next.setAttribute('aria-hidden', 'false');
+            }
+            // Allow the browser to paint before fading out prev for a smooth overlap
+            requestAnimationFrame(() => {
+              if (prev) {
+                prev.classList.remove('active-year');
+                prev.setAttribute('aria-hidden', 'true');
+              }
+            });
+            setContainerHeight();
+            // Re-measure shortly after to account for font/image reflow
+            setTimeout(setContainerHeight, 60);
+          };
+
+          const applyVisibility = () => {
+            const isMobile = window.innerWidth < 1024; // lg breakpoint
+            if (!isMobile) {
+              // Desktop: ensure all visible and clear mobile-only classes
+              cards.forEach(c => {
+                c.classList.remove('active-year');
+                c.style.removeProperty('opacity');
+              });
+              container.style.height = '';
+              return;
+            }
+            // Mobile: show only active via cross-fade
+            const activeTab = document.querySelector('.curriculum-tab.active-tab');
+            const year = activeTab ? activeTab.dataset.year : '1';
+            // Ensure one is active
+            if (!container.querySelector('.curriculum-year-card.active-year')) {
+              const first = (cards.find(c => c.dataset.year === year) || cards[0]);
+              first.classList.add('active-year');
+              first.setAttribute('aria-hidden', 'false');
+              // Set aria-hidden on others
+              cards.forEach(c => { if (c !== first) c.setAttribute('aria-hidden', 'true'); });
+            } else {
+              activateYear(year);
+            }
+            setContainerHeight();
+          };
+
+          const onTabClick = (e) => {
+            e.preventDefault();
+            const btn = e.currentTarget;
+            tabs.forEach(t => t.classList.toggle('active-tab', t === btn));
+            // ARIA: update selected state
+            tabs.forEach(t => t.setAttribute('aria-selected', t === btn ? 'true' : 'false'));
+            const year = btn.dataset.year;
+            activateYear(year);
+            if (window.handleProgramTabClick) {
+              window.handleProgramTabClick(btn);
+            }
+          };
+
+          tabs.forEach(t => {
+            const h = (ev) => onTabClick(ev);
+            t.addEventListener('click', h);
+            state.tabHandlers.push({ el: t, type: 'click', h });
+          });
+
+          // Initial state
+          // Ensure ARIA-selected matches active-tab
+          const currentActive = document.querySelector('.curriculum-tab.active-tab') || tabs[0];
+          tabs.forEach(t => t.setAttribute('aria-selected', t === currentActive ? 'true' : 'false'));
+          applyVisibility();
+          // Apply height after fonts/images may affect layout
+          window.addEventListener('load', setContainerHeight, { once: true });
+          // Also adjust after CSS transition completes
+          container.addEventListener('transitionend', (e) => {
+            if (e.propertyName === 'height') return; // ignore height self-transition
+            setContainerHeight();
+          });
+          const resizeHandler = () => applyVisibility();
+          window.addEventListener('resize', resizeHandler);
+          state.resizeHandler = resizeHandler;
+
+          // Keyboard navigation for tabs
+          const moveFocusTo = (index) => {
+            const clamped = (index + tabs.length) % tabs.length;
+            tabs[clamped].focus();
+            tabs[clamped].click();
+          };
+          tabs.forEach((t, idx) => {
+            const keyHandler = (ev) => {
+              switch (ev.key) {
+                case 'ArrowRight': ev.preventDefault(); moveFocusTo(idx + 1); break;
+                case 'ArrowLeft': ev.preventDefault(); moveFocusTo(idx - 1); break;
+                case 'Home': ev.preventDefault(); moveFocusTo(0); break;
+                case 'End': ev.preventDefault(); moveFocusTo(tabs.length - 1); break;
+                default: break;
+              }
+            };
+            t.addEventListener('keydown', keyHandler);
+            state.tabHandlers.push({ el: t, type: 'keydown', h: keyHandler });
+          });
+        }
+
+        function setupSubnavClicks(){
+          const container = document.querySelector('.program-subnav');
+          if (!container) return;
+          const handler = (e) => {
+            const link = e.target.closest('a.subnav-link');
+            if (!link) return;
+            // Allow default smooth scrolling; offsets handled by Tailwind scroll-mt
+          };
+          container.addEventListener('click', handler);
+          state.subnavClickHandler = handler;
+        }
+
+        function setupHeroScrollCue(){
+          const cue = document.getElementById('hero-scroll-cue');
+          if (!cue) return;
+          cue.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Find next section after hero, fallback to href target
+            const hero = document.getElementById('hero');
+            let nextSection = null;
+            if (hero) {
+              let el = hero.nextElementSibling;
+              while (el && el.tagName !== 'SECTION') el = el.nextElementSibling;
+              nextSection = el;
+            }
+            if (!nextSection) {
+              const href = cue.getAttribute('href');
+              if (href && href.startsWith('#')) nextSection = document.querySelector(href);
+            }
+            if (!nextSection) return;
+
+            const header = document.querySelector('header');
+            const headerH = header ? header.offsetHeight : 0;
+            const isMobile = window.innerWidth < 1024; // below lg
+            // Mobile: no extra offset (header collapses). Desktop: subtract header only.
+            const offset = isMobile ? 0 : -headerH;
+            const y = nextSection.getBoundingClientRect().top + window.pageYOffset + offset;
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (prefersReduced.matches) {
+              window.scrollTo(0, y);
+            } else {
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          }, { passive: false });
+        }
+
+        // Project modals removed; no modal setup needed.
+
+        window.initializeManagementPage = function(){
+          try {
+            setupScrollSpy();
+            setupCurriculumTabs();
+            setupSubnavClicks();
+            setupHeroScrollCue();
+          } catch (e) { console.warn('Management init error', e); }
+        };
+
+        window.pageCleanup = function(){
+          try {
+            state.observers.forEach(obs => obs.disconnect());
+            state.observers = [];
+            if (state.resizeHandler) {
+              window.removeEventListener('resize', state.resizeHandler);
+              state.resizeHandler = null;
+            }
+            if (state.tabHandlers && state.tabHandlers.length) {
+              state.tabHandlers.forEach(({el,type,h}) => el.removeEventListener(type || 'click', h));
+              state.tabHandlers = [];
+            }
+            const subnav = document.querySelector('.program-subnav');
+            if (subnav && state.subnavClickHandler) {
+              subnav.removeEventListener('click', state.subnavClickHandler);
+              state.subnavClickHandler = null;
+            }
+          } catch (e) { console.warn('Management cleanup error', e); }
+        };
+
+        if (!window.initializePage) {
+          window.initializePage = function(){
+            if (window.initializeManagementPage) {
+              window.initializeManagementPage();
+            }
+          };
+        }
+      })();
+    </script>
+
+    <script src="../../js/main.js" data-base-path="../.."></script>
+    
+    <!-- Unified Layout Sequence for SPA Navigation -->
+    <script src="../../js/layout-sequence.js"></script>
+</body>
+</html>

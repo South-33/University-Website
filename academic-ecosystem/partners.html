@@ -17,6 +17,7 @@
           colors: {
             'dark-blue': '#0A0A3E',
             'light-lavender': '#E9E8F5',
+            'brand-gold': '#CAA93A', // Added from brochure for accents
           },
           fontFamily: {
             heading: ['Lora', 'serif'],
@@ -28,15 +29,41 @@
     </script>
 
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/i18n.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Typewriter effect */
+        .typewriter-text {
+          display: inline-block;
+          overflow: hidden; /* Hide the text until animation reveals it */
+          border-right: .15em solid #CAA93A; /* The typewriter cursor */
+          white-space: nowrap; /* Keep text on a single line */
+          margin: 0 auto;
+          letter-spacing: .10em; /* Adjust spacing */
+          /* The animation: typing 8s, steps 36 (chars), infinite loop */
+          /* and the blinking cursor */
+          animation: 
+            typing 8s steps(36, end) infinite,
+            blink-caret .75s step-end infinite;
+        }
+
+        /* The typing animation */
+        @keyframes typing {
+          0% { width: 0 }
+          50%, 90% { width: 100% } /* Type out and hold */
+          100% { width: 0 } /* Erase to restart loop */
+        }
+    </style>
 </head>
 <body class="bg-white font-body">
+    <style>
+        /* Local fade-in once the shell marks body as visible */
+        body.is-visible #main-content-container { opacity: 1; }
+    </style>
     <div id="header-placeholder"></div>
+    <div id="main-content-container" class="opacity-0 transition-opacity duration-500 will-change-[opacity]">
     <main>
-        <!-- ===== 1. Dynamic Hero Section (On-Brand) ===== -->
+        <!-- ===== 1. Hero Section (Kept from original) ===== -->
         <section class="relative bg-cover bg-center text-white py-40" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop');">
-             <!-- Replace with a real photo of a partnership event or your campus -->
             <div class="absolute inset-0 bg-dark-blue opacity-80"></div>
             <div class="relative max-w-4xl mx-auto px-5 text-center z-10" data-aos="fade-in">
                 <h1 class="text-4xl md:text-6xl font-black font-heading tracking-tight">Building Bridges to Opportunity</h1>
@@ -46,12 +73,82 @@
             </div>
         </section>
 
-        <!-- ===== 2. Partnership Categories with Icons (On-Brand) ===== -->
+        <!-- ===== NEW 2. Global Partnership Vision (From Brochure) ===== -->
+        <section class="py-24 bg-white">
+            <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Our Vision for Global Partnership</h2>
+                    <p class="mt-4 text-lg text-gray-700 font-body">
+                        The National University of Management (NUM) believes that partnerships are essential to realizing our long-term vision to become a leading research university in advancing entrepreneurship and innovation.
+                    </p>
+                    <p class="mt-4 text-gray-600">
+                        In that sense, NUM has been working effectively to co-operate with domestic and international higher educational institutions, corporations, and organizations. We always look forward to exchanging knowledge and human resources with public and private entities in order to achieve outstanding results together.
+                    </p>
+                </div>
+                <div data-aos="fade-left">
+                    <img src="image/partner.png" alt="University leadership in a partnership meeting" class="rounded-xl shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== NEW 3. Our Global Reach (Map & Countries from Brochure) ===== -->
+        <section class="py-24 bg-light-lavender">
+            <div class="max-w-7xl mx-auto px-5">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue h-16 flex items-center justify-center">
+                        <span class="typewriter-text">An International Network of Partners</span>
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-600 font-body max-w-3xl mx-auto">Our cooperation spans the globe, connecting NUM with leading institutions across continents.</p>
+                </div>
+                <div class="grid lg:grid-cols-5 gap-12 items-center">
+                    <div class="lg:col-span-3" data-aos="zoom-in">
+                         <!-- NOTE: Replace this placeholder with the actual map image from your brochure -->
+                        <img src="image/worldmap.png" alt="World map showing partner locations" class="w-full h-auto object-contain rounded-lg">
+                    </div>
+                    <div class="lg:col-span-2" data-aos="fade-left">
+                        <h3 class="text-2xl font-heading text-dark-blue mb-6">Partner Countries</h3>
+                        
+                        <!-- ===== START OF UPDATED SECTION ===== -->
+                        <!-- Replaced emojis with high-quality SVG flags for a professional look. -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-4 gap-y-4 font-body text-gray-800">
+                            <!-- Helper classes: flex items-center space-x-3 -->
+                            <!-- Img classes: w-6 h-auto rounded-sm shadow-sm -->
+                            
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/au.svg" alt="Flag of Australia" class="w-6 h-auto rounded-sm shadow-sm"><span>Australia</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/be.svg" alt="Flag of Belgium" class="w-6 h-auto rounded-sm shadow-sm"><span>Belgium</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/cn.svg" alt="Flag of China" class="w-6 h-auto rounded-sm shadow-sm"><span>China</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/fr.svg" alt="Flag of France" class="w-6 h-auto rounded-sm shadow-sm"><span>France</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/hu.svg" alt="Flag of Hungary" class="w-6 h-auto rounded-sm shadow-sm"><span>Hungary</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/id.svg" alt="Flag of Indonesia" class="w-6 h-auto rounded-sm shadow-sm"><span>Indonesia</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/in.svg" alt="Flag of India" class="w-6 h-auto rounded-sm shadow-sm"><span>India</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/jp.svg" alt="Flag of Japan" class="w-6 h-auto rounded-sm shadow-sm"><span>Japan</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/la.svg" alt="Flag of Lao PDR" class="w-6 h-auto rounded-sm shadow-sm"><span>Lao PDR</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/lt.svg" alt="Flag of Lithuania" class="w-6 h-auto rounded-sm shadow-sm"><span>Lithuania</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/my.svg" alt="Flag of Malaysia" class="w-6 h-auto rounded-sm shadow-sm"><span>Malaysia</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/mm.svg" alt="Flag of Myanmar" class="w-6 h-auto rounded-sm shadow-sm"><span>Myanmar</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/pl.svg" alt="Flag of Poland" class="w-6 h-auto rounded-sm shadow-sm"><span>Poland</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/kr.svg" alt="Flag of Republic of Korea" class="w-6 h-auto rounded-sm shadow-sm"><span>Rep. of Korea</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/sg.svg" alt="Flag of Singapore" class="w-6 h-auto rounded-sm shadow-sm"><span>Singapore</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/sk.svg" alt="Flag of Slovakia" class="w-6 h-auto rounded-sm shadow-sm"><span>Slovakia</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/th.svg" alt="Flag of Thailand" class="w-6 h-auto rounded-sm shadow-sm"><span>Thailand</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/tr.svg" alt="Flag of Turkey" class="w-6 h-auto rounded-sm shadow-sm"><span>Turkey</span></div>
+                            <div class="flex items-center space-x-3"><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/us.svg" alt="Flag of United States" class="w-6 h-auto rounded-sm shadow-sm"><span>United States</span></div>
+                        </div>
+                        <!-- ===== END OF UPDATED SECTION ===== -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== REDESIGNED 4. Partnership Opportunities (Enhanced Categories) ===== -->
         <section class="py-24 bg-white">
             <div class="max-w-6xl mx-auto px-5">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Types of Partnership</h2>
-                    <p class="mt-4 text-lg text-gray-600 font-body max-w-3xl mx-auto">Our collaborations span across various sectors, creating a rich and diverse ecosystem for our students and faculty.</p>
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Global Learning & Collaboration</h2>
+                    <p class="mt-4 text-lg text-gray-600 font-body max-w-3xl mx-auto">
+                        We provide diverse opportunities for our students, faculty, and staff through strong domestic and international connections.
+                    </p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -60,8 +157,8 @@
                         <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mx-auto mb-6">
                             <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                         </div>
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">Industry Collaborations</h3>
-                        <p class="font-body text-gray-700">Internships, joint research, and industry-relevant curricula with leading companies.</p>
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">Industry & Corporate</h3>
+                        <p class="font-body text-gray-700">Hands-on internships, joint research projects, corporate training, and an industry-relevant curriculum.</p>
                     </div>
 
                     <!-- Card 2: Academic -->
@@ -69,8 +166,8 @@
                         <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mx-auto mb-6">
                             <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M1 12l5.354-3.06l5.354 3.06l-5.354 3.06L1 12z" /></svg>
                         </div>
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">Academic Partnerships</h3>
-                        <p class="font-body text-gray-700">Student exchanges, faculty collaboration, and joint degree programs with global universities.</p>
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">Academic & Research</h3>
+                        <p class="font-body text-gray-700">Student exchanges, faculty collaboration, visiting lecturers, and joint degree programs with global universities.</p>
                     </div>
 
                     <!-- Card 3: International -->
@@ -78,55 +175,83 @@
                         <div class="flex items-center justify-center h-16 w-16 rounded-full bg-dark-blue text-white mx-auto mb-6">
                             <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.881 4.043A9 9 0 1016.119 4.043M12 21a9 9 0 000-18h.008v18h-.008z" /></svg>
                         </div>
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">International Organizations</h3>
-                        <p class="font-body text-gray-700">Engaging with NGOs and global bodies to provide students with international exposure.</p>
+                        <h3 class="text-xl font-heading text-dark-blue mb-2">NGOs & Public Sector</h3>
+                        <p class="font-body text-gray-700">Engaging with NGOs and governmental bodies to host seminars, conduct research, and provide international exposure.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== 3. NEW: Our Partners Logo Wall (On-Brand) ===== -->
-        <section class="py-24 bg-light-lavender">
-            <div class="max-w-6xl mx-auto px-5">
+        <!-- ===== NEW 5. Partners in Action (Gallery from Brochure) ===== -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-5">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">A Selection of Our Valued Partners</h2>
-                    <p class="mt-4 text-lg text-gray-600 font-body">We are proud to collaborate with a diverse range of leading organizations.</p>
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Partners in Action</h2>
+                    <p class="mt-4 text-lg text-gray-600 font-body">Glimpses of our collaborative events, signings, and projects.</p>
                 </div>
-                <!-- This is where you would put the logos of your actual partners -->
-                <div class="flex flex-wrap justify-center items-center gap-x-12 sm:gap-x-16 gap-y-10" data-aos="zoom-in">
-                    <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://logo.clearbit.com/google.com" alt="Google Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://logo.clearbit.com/undp.org" alt="UNDP Logo" class="h-12 sm:h-14 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://logo.clearbit.com/samsung.com" alt="Samsung Logo" class="h-12 sm:h-14 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://logo.clearbit.com/unicef.org" alt="UNICEF Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://logo.clearbit.com/usaid.gov" alt="USAID Logo" class="h-10 sm:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="zoom-in-up">
+                    <!-- NOTE: These are placeholder images inspired by the brochure. Replace with your actual photos. -->
+                    <img src="image/partner1.png" alt="Signing ceremony with international partners" class="rounded-lg object-cover w-full h-64 hover:scale-105 transition-transform duration-300">
+                    <img src="image/partner2.png" alt="Group photo after a successful project launch" class="rounded-lg object-cover w-full h-64 hover:scale-105 transition-transform duration-300">
+                    <img src="image/partner3.png" alt="Students and faculty in a joint seminar" class="rounded-lg object-cover w-full h-64 hover:scale-105 transition-transform duration-300">
+                    <img src="image/partner4.png" alt="Collaborative workshop with an industry partner" class="rounded-lg object-cover w-full h-64 hover:scale-105 transition-transform duration-300">
                 </div>
             </div>
         </section>
 
-        <!-- ===== 4. NEW: Call to Action (On-Brand) ===== -->
+        <!-- ===== 6. Featured Collaborators (Logo Wall) ===== -->
+        <section class="py-24 bg-light-lavender">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">A Selection of Our Valued Collaborators</h2>
+                    <p class="mt-4 text-lg text-gray-600 font-body">We are proud to collaborate with a diverse range of leading organizations.</p>
+                </div>
+                <div class="flex flex-wrap justify-center items-center gap-x-12 sm:gap-x-16 gap-y-10" data-aos="zoom-in">
+                    <img src="image/usaid.png" alt="USAID Logo" class="h-12 object-contain filter grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/undp.org" alt="UNDP Logo" class="h-12 object-contain filter grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/auf.org" alt="AUF Logo" class="h-12 object-contain filter grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/asean.org" alt="ASEAN Logo" class="h-12 object-contain filter grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/core-econ.org" alt="CORE Economics Logo" class="h-12 object-contain filter grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                    <img src="https://logo.clearbit.com/sdsn.org" alt="SDSN Logo" class="h-12 object-contain filter grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 7. Call to Action (Kept from original) ===== -->
         <section class="py-20 bg-dark-blue">
             <div class="max-w-4xl mx-auto px-5 text-center" data-aos="zoom-in">
                 <h2 class="text-3xl font-heading text-white">Become a Partner</h2>
                 <p class="text-lg text-light-lavender mt-4 mb-8 font-body">
                     Join us in shaping the next generation of leaders and innovators. We are always looking for new partners to expand our ecosystem and create new opportunities.
                 </p>
-                <a href="/contact" class="inline-block bg-white text-dark-blue px-8 py-3 rounded-md font-bold font-body hover:bg-light-lavender transition-colors">
+                <a href="contact.html" class="inline-block bg-white text-dark-blue px-8 py-4 rounded-md font-bold font-body hover:bg-light-lavender transition-colors text-lg">
                     Contact Us
                 </a>
             </div>
         </section>
     </main>
+    </div>
 
     <div id="footer-placeholder"></div>
-    <script src="/js/i18n.js"></script>
+    <script src="../js/i18n.js"></script>
     <script src="../js/main.js" data-base-path=".."></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-        });
+        // SPA-compatible lifecycle
+        function initializePage() {
+            if (window.AOS) { AOS.init({ duration: 800, once: true }); }
+            const container = document.getElementById('main-content-container');
+            if (container && getComputedStyle(container).opacity === '0') {
+                if (document.body.classList.contains('is-visible')) {
+                    container.style.opacity = '1';
+                } else {
+                    requestAnimationFrame(() => { container.style.opacity = '1'; });
+                }
+            }
+        }
+        function pageCleanup() {
+            // no persistent listeners
+        }
     </script>
 </body>
 </html>

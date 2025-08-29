@@ -3,283 +3,737 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study With Us - National University of Management</title>
+    <title>Study with us home page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tailwind CSS Theme Configuration -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'dark-blue': '#0A0A3E',
-              'light-lavender': '#E9E8F5',
-            },
-            fontFamily: {
-              heading: ['Lora', 'serif'],
-              body: ['Montserrat', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
+    <script src="../js/theme.js"></script>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/i18n.css">
+    
+    <!-- PAGE-SPECIFIC STYLES (UPDATED) -->
+    <style>
+        /* Local fade-in for SPA container */
+        #main-content-container { opacity: 0; transform: translateY(8px); transition: opacity 300ms ease, transform 300ms ease; }
+        body.is-visible #main-content-container { opacity: 1; transform: none; }
+        /* Animation initial states */
+        #hero-subtitle,
+        #hero-button {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        #animated-heading .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Visible states for animations */
+        #hero-subtitle.visible,
+        #hero-button.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Background image slider styles (Unchanged) */
+        .hero-bg-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            animation: ken-burns 20s infinite;
+        }
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+        .hero-bg-slide.zoom-out {
+             animation-direction: alternate-reverse;
+        }
+        /* Make the overlap more dramatic by increasing the negative margin */
+        .features-section {
+            position: relative;
+            z-index: 20;
+            background-color: transparent;
+        /* CHANGE THIS VALUE to pull the section up even more */
+            margin-top: -10px; 
+        }
+
+        /* No changes needed for the rest */
+        .features-curve {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+        }
+        .features-curve svg {
+            width: 100%;
+            height: 100%;
+        }
+        .feature-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        #parallax-bg {
+        /* Set the background image URL */
+            background-image: url('../Picture/School/13.jpg');
+    
+        /* Position the background */
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+    
+        /* This is important: will-change hints to the browser that we'll be animating this property */
+            will-change: transform;
+        }
+        .stylish-background-section {
+            position: relative; /* Establishes a positioning context for the pseudo-elements */
+            overflow: hidden;   /* Hides the parts of the shapes that extend beyond the section's bounds */
+            background-color: #f8f9fa; /* A very light, soft gray for a clean and modern look */
+        }
+
+        /* "Sticker" element 1: A soft blue shape positioned at the top-left */
+        .stylish-background-section::before {
+            content: '';
+            position: absolute;
+            z-index: 0; /* Places the shape behind the content */
+            top: -80px;
+            left: -120px;
+            width: 350px;
+            height: 350px;
+            background-color: rgba(224, 231, 255, 0.7); /* A semi-transparent, soft indigo */
+            border-radius: 45% 55% 60% 40% / 40% 50% 50% 60%; /* Creates a unique, organic "blob" shape */
+            transform: rotate(-30deg); /* Tilts the shape for a more dynamic feel */
+        }
+
+        /* "Sticker" element 2: A soft green shape positioned at the bottom-right */
+        .stylish-background-section::after {
+            content: '';
+            position: absolute;
+            z-index: 0; /* Places the shape behind the content */
+            bottom: -100px;
+            right: -100px;
+            width: 320px;
+            height: 320px;
+            background-color: rgba(209, 250, 229, 0.7); /* A semi-transparent, soft green */
+            border-radius: 55% 45% 45% 55% / 50% 60% 40% 50%; /* Another unique, organic "blob" shape */
+            transform: rotate(15deg); /* Tilts the shape differently from the first one */
+        }
+
+        /* We need to make sure the actual content of the section (the container with text and cards)
+           sits on top of our new background shapes. */
+        .content-on-top {
+            position: relative;
+            z-index: 1;
+        }
+        /* Card hover animations */
+        .professor-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .professor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        /* Social icon hover animations */
+        .social-link { transition: color 0.3s ease; }
+        .social-link:hover { color: #2563eb; }
+
+        /* Button hover animations */
+        .view-all-button { transition: background-color 0.3s ease, transform 0.2s ease; }
+        .view-all-button:hover {
+            transform: translateY(-2px);
+            background-color: #1d4ed8;
+        }
+
+        /*
+        =====================================================================
+        >>> THE CRUCIAL CSS RULE THAT WAS MISSING <<<
+        This rule tells the browser to hide any element with the 'hidden-card' class.
+        Without this, the cards will always be visible.
+        =====================================================================
+        */
+        .hidden-card {
+            display: none;
+        }
+        @keyframes ken-burns {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body class="bg-white">
-
     <div id="header-placeholder"></div>
+    
+    <!-- MAIN CONTENT -->
+    <main class="pt-20">
+    <div id="main-content-container">
 
-    <main>
-        <!-- Section 1: Hero Section (Inspiration) -->
-        <!-- CRITICAL: Added id="hero" for the layout script in main.js -->
-        <section id="hero" class="relative text-white">
-            <!-- Background Image: Ensure 'academic-collaboration.jpg' is in your /Picture/ folder. -->
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../Picture/study-with-us-picture/image.png');"></div>
-            <!-- Overlay for text readability -->
-            <div class="absolute inset-0 bg-dark-blue/60"></div>
-            
-            <!-- Content -->
-            <div class="relative z-10 max-w-6xl mx-auto px-5 flex flex-col items-center justify-center h-full text-center ">
-                <h1 class="text-4xl md:text-6xl font-heading font-bold">A World-Class Education Awaits.</h1>
-                <p class="text-lg md:text-xl font-body mt-4 max-w-3xl mx-auto">
-                    Discover a community of innovators, a faculty of mentors, and a campus alive with opportunity. Find your path to success with us.
-                </p>
-                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5">
-                <a href="../programs/" class="bg-white hover:scale-110 text-dark-blue font-bold py-3 px-8 rounded-md transition-all duration-150 active:scale-95 w-full sm:w-auto">Explore Programs</a>
-                </div>
-            </div>
-        </section>
+    <!-- ========= HERO SECTION OPTION 3: DYNAMIC ANGLED OVERLAY ========= -->
+<section class="relative h-[calc(100vh-80px)] min-h-[500px] max-h-[720px] w-full flex items-center bg-gray-800 fade-in-section">
 
-        <!-- Section 2: Academic Excellence -->
-        <section id="programs" class="bg-light-lavender py-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">A Commitment to Academic Excellence</h2>
-                    <p class="mt-3 font-body text-lg text-gray-600">Discover programs designed for impact, taught by leaders in their fields.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Card 1: Programs -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
-                        <h3 class="text-2xl font-heading text-dark-blue">Diverse Programs & Degrees</h3>
-                        <p class="mt-2 font-body text-gray-600">Choose from a wide range of fields including Business, Information Technology, English, Engineering, and Fine Arts, all designed to meet global standards.</p>
-                    </div>
-                    <!-- Card 2: Teaching Quality -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
-                        <h3 class="text-2xl font-heading text-dark-blue">Expert Faculty & Practical Learning</h3>
-                        <p class="mt-2 font-body text-gray-600">Learn from experienced professors and industry experts. Our curriculum emphasizes hands-on projects, ensuring you gain practical, real-world skills.</p>
-                    </div>
-                    <!-- Card 3: Accreditations -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
-                        <h3 class="text-2xl font-heading text-dark-blue">Accreditation & Partnerships</h3>
-                        <p class="mt-2 font-body text-gray-600">We are fully accredited and maintain strong partnerships with leading universities and corporations, providing you with a network of opportunities.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Background Image Container (Unchanged) -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <div id="hero-bg-1" class="hero-bg-slide"></div>
+        <div id="hero-bg-2" class="hero-bg-slide"></div>
+    </div>
 
-        <!-- Section 3: Modern Learning Environment -->
-        <section class="bg-white py-20">
-            <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-                <div class="pr-8">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Modern Learning Environment</h2>
-                    <p class="mt-4 font-body text-lg text-gray-700">Our campus is designed to inspire collaboration and innovation. We provide the tools and spaces you need to excel.</p>
-                    <ul class="mt-6 space-y-4 font-body text-gray-600">
-                        <li class="flex items-start"><span class="text-primary-blue font-bold mr-3">✓</span>State-of-the-art libraries, computer labs, and collaborative classrooms.</li>
-                        <li class="flex items-start"><span class="text-primary-blue font-bold mr-3">✓</span>Full technology integration with smart boards and robust online learning platforms.</li>
-                        <li class="flex items-start"><span class="text-primary-blue font-bold mr-3">✓</span>A safe, inclusive, and welcoming atmosphere for all students from all backgrounds.</li>
-                    </ul>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop" alt="Modern university campus with students" class="rounded-xl shadow-2xl">
-                </div>
-            </div>
-        </section>
+    <!-- The overlay now has a dynamic angled shape using clip-path -->
+    <div class="relative z-10 w-full md:w-3/5 lg:w-1/2 h-full bg-blue-900/90 flex items-center [clip-path:polygon(0_0,_100%_0,_85%_100%,_0%_100%)]">
 
-        <!-- Section 4: Student Life -->
-        <section class="bg-light-lavender py-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Vibrant Student Life</h2>
-                    <p class="mt-3 font-body text-lg text-gray-600">Your university experience is more than just lectures and labs.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8 text-center">
-                    <!-- Card 1: Clubs -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-heading text-primary-blue">Clubs & Sports</h3>
-                        <p class="mt-2 font-body text-gray-600">Join over 100 student-led clubs, from coding to debate, or compete in our competitive sports programs.</p>
-                    </div>
-                    <!-- Card 2: Events -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-heading text-primary-blue">Community Events</h3>
-                        <p class="mt-2 font-body text-gray-600">Participate in annual festivals, workshops, and volunteer opportunities that connect you with the local community.</p>
-                    </div>
-                    <!-- Card 3: Community -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-heading text-primary-blue">Supportive Community</h3>
-                        <p class="mt-2 font-body text-gray-600">Become part of a diverse and supportive network of peers, mentors, and friends from around the world.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Section 5: Career Opportunities -->
-        <section class="bg-white py-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">Launch Your Career</h2>
-                    <p class="mt-3 font-body text-lg text-gray-600">We provide the resources to turn your degree into a successful career.</p>
-                </div>
-                <div class="grid md:grid-cols-5 gap-12 items-center">
-                    <div class="md:col-span-3 bg-light-lavender p-8 rounded-xl">
-                        <h3 class="font-bold text-2xl text-black-700">Graduate Success Story</h3>
-                        <blockquote class="mt-4 border-l-4 border-red-500 pl-4 italic text-black-700 font-body">
-                            "The internship program and career services were invaluable. I had a job offer from a top tech firm before I even graduated. The hands-on projects in my IT courses gave me the confidence and skills to excel from day one."
-                            <cite class="block mt-4 not-italic font-bold text-red-500">- Jane Doe, B.Sc. in IT, Class of 2023</cite>
-                        </blockquote>
-                    </div>
-                    <div class="md:col-span-2">
-                        <h3 class="font-bold text-2xl text-black-800">Our Commitment to You:</h3>
-                        <ul class="mt-4 space-y-3 font-body-bold text-black-500">
-                           <li>✓ Dedicated Career Services Team</li>
-                           <li>✓ Guaranteed Internship Placements</li>
-                           <li>✓ Strong Network of Partner Companies</li>
-                           <li>✓ Resume Workshops & Mock Interviews</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Content Block with more padding to avoid the clipped edge -->
+        <div class="w-full px-8 sm:px-12 lg:px-16 lg:pr-24">
+            <p id="hero-subtitle" class="font-montserrat text-sm md:text-base font-light text-white/60 uppercase tracking-widest mb-4">
+                The Best University Of The State
+            </p>
 
-        <!-- Section 6: Scholarships & Financial Aid -->
-        <section class="bg-dark-blue text-white py-20">
-            <div class="max-w-5xl mx-auto px-6 text-center">
-                 <h2 class="text-3xl md:text-4xl font-heading">Scholarships & Financial Aid</h2>
-                 <p class="mt-3 font-body text-lg text-gray-300 max-w-3xl mx-auto">We believe a world-class education should be within reach. We are committed to making your studies affordable.</p>
-                <div class="grid md:grid-cols-2 gap-10 mt-12 text-left">
-                    <div class="bg-white/10 p-8 rounded-xl">
-                        <h3 class="text-2xl font-heading">Available Scholarships</h3>
-                        <p class="mt-2 font-body text-gray-300">We offer a variety of merit-based and need-based scholarships to recognize your achievements and support your educational journey.</p>
-                    </div>
-                    <div class="bg-white/10 p-8 rounded-xl">
-                        <h3 class="text-2xl font-heading">Flexible Tuition Plans</h3>
-                        <p class="mt-2 font-body text-gray-300">Our financial aid office can help you explore flexible payment plans, student loans, and other support programs to fit your budget.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <h1 id="animated-heading" class="font-lora text-4xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 leading-tight text-justify">
+                National University of Management
+            </h1>
 
-        <!-- Section 7: How to Join Us (Corrected for Mobile) -->
-<section class="bg-light-lavender py-20" id="apply">
-    <div class="max-w-4xl mx-auto px-6">
-        <div class="text-center mb-20">
-            <h2 class="text-3xl md:text-4xl font-heading text-dark-blue">How to Join Us</h2>
-            <p class="text-lg text-gray-700 font-body mt-3 max-w-2xl mx-auto">Follow these simple steps to begin your journey with us.</p>
-        </div>
-        
-        <div class="relative">
-            <!-- The vertical timeline line -->
-             <div class="absolute -top-2 left-2 w-full h-0.5 bg-gray-300 md:-top-2 md:-translate-y-1/2" aria-hidden="true"></div>
-            <div class="absolute left-4 -top-2 h-full w-0.5 bg-gray-300 md:left-1/2 md:-translate-x-1/2" aria-hidden="true"></div>
-            
-            <!-- Timeline Item 1 - Left Side -->
-            <div class="relative mb-12">
-                <!-- ✅ CHANGE: Added margin for mobile (ml-12) and reset it for desktop (md:ml-0) -->
-                <div class="ml-12 md:ml-0 md:flex md:justify-end md:text-right"> 
-                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">1. Explore & Choose</h3>
-                        <p class="font-body text-gray-600">Browse our programs and find the one that aligns with your passion and career goals.</p>
-                    </div>
-                </div>
-                <!-- ✅ CHANGE: Correctly positioned the marker on the line (left-4 -translate-x-1/2) -->
-                <div class="absolute left-4 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-dark-blue text-white font-bold md:left-1/2">1</div>
-            </div>
 
-            <!-- Timeline Item 2 - Right Side -->
-            <div class="relative mb-12">
-                 <!-- ✅ CHANGE: Added margin for mobile (ml-12) and reset it for desktop (md:ml-auto) -->
-                <div class="ml-12 md:ml-auto md:flex">
-                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">2. Prepare Your Application</h3>
-                        <p class="font-body text-gray-600">Check the admission requirements and gather necessary documents like transcripts and recommendation letters.</p>
-                    </div>
-                </div>
-                <!-- ✅ CHANGE: Correctly positioned the marker on the line (left-4 -translate-x-1/2) -->
-                <div class="absolute left-4 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-dark-blue text-white font-bold md:left-1/2">2</div>
-            </div>
-
-            <!-- Timeline Item 3 - Apply (You will need to apply the same changes here) -->
-            <div class="relative mb-12">
-                <div class="ml-12 md:ml-0 md:flex md:justify-end md:text-right">
-                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-heading text-dark-blue mb-2">3. Apply Online</h3>
-                        <p class="font-body text-gray-600">Complete our easy-to-use online application form. Our admissions team is here to help if you have questions.</p>
-                    </div>
-                </div>
-                <div class="absolute left-4 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-dark-blue text-white font-bold md:left-1/2">3</div>
-            </div>
-
-            
         </div>
     </div>
 </section>
 
-    <section class="bg-light-lavender py-20 overflow-hidden border-4 border-lavender-dark m-4 rounded-lg">
-        <!-- The 'cta-section' class is a target for our animation script -->
-        <div class="cta-section max-w-4xl mx-auto px-6 text-center opacity-0 translate-y-8 transition-all duration-1000">
-                     
-            <!-- 1. Headline Enhancement -->
-            <h2 class="text-3xl md:text-4xl font-bold text-lavender-dark">Start Your Journey With Us Today</h2>
-            <p class="mt-4 max-w-2xl mx-auto text-lavender-medium">
-                The best way to experience our community is to see it for yourself. Schedule a tour, explore our programs, or start your application today.
-            </p>
-     
-            <!-- 2. Descriptive Buttons with Icons & Responsive Spacing -->
-            <!-- The 'space-y-4' class improves spacing on mobile (when flex-col is active) -->
-            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 space-y-4 sm:space-y-0">
-                             
-                <!-- Apply Now Button -->
-                <a href="#apply" class="flex items-center justify-center btn-primary hover:bg-gray-800 font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full sm:w-auto transform hover:-translate-y-1 hover:shadow-xl">
-                    <!-- Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
-                    </svg>
-                    Apply Now
-                </a>
-                             
-                <!-- Campus Tour Button -->
-                <a href="#" class="flex items-center justify-center bg-transparent border-2 btn-secondary font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full sm:w-auto transform hover:-translate-y-1 hover:shadow-xl">
-                    <!-- Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                    </svg>
-                    Schedule Your Campus Tour
-                </a>
-     
-                
-                
+
+<!-- ========= SECTION: Why Study With Us ========= -->
+<section class="bg-white py-16 sm:py-24">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 items-center">
+
+            <!-- Image Column -->
+            <div class="relative h-96 lg:h-auto">
+                <!-- Decorative background shape -->
+                <div class="absolute inset-0 bg-blue-600 rounded-3xl transform -rotate-6" aria-hidden="true"></div>
+
+                <!-- Image Collage -->
+                <div class="relative grid grid-cols-3 gap-4 h-full">
+                    <div class="col-span-2">
+                        <img class="w-full h-full object-cover rounded-xl shadow-lg" src="../Picture/School/school7.jpg" alt="Students collaborating around a table.">
+                    </div>
+                    <div class="col-span-1 grid grid-rows-2 gap-4">
+                        <img class="w-full h-full object-cover rounded-xl shadow-lg" src="../Picture/School/school6.jpg" alt="Hands of a team coming together.">
+                        <img class="w-full h-full object-cover rounded-xl shadow-lg" src="../Picture/School/school8.jpg" alt="A person working on a laptop.">
+                    </div>
+                </div>
             </div>
-     
-            <!-- 3. Add Testimonial for Trust -->
-            <div class="mt-16 max-w-3xl mx-auto">
-                <blockquote class="italic text-lavender-medium">
-                    "Choosing this university was the best decision I ever made. The support from the faculty and the career opportunities they opened up for me were beyond my expectations."
-                </blockquote>
-                <cite class="block mt-3 not-italic font-bold text-lavender-dark">
-                    - Alex Johnson, Alumnus
-                </cite>
+
+            <!-- Text Column -->
+            <div class="lg:pl-8">
+                <h2 class="text-base font-semibold leading-7 text-blue-600">Why Study With NUM?</h2>
+                <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ">A Commitment to Your Success</p>
+                <p class="mt-6 text-lg leading-8 text-gray-600 text-justify">
+                    The National University of Management (NUM) is one of the top public universities in Cambodia, offering a wide range of academic programs that prepare you for success in your chosen field.
+                </p>
+
+                <div class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                    <!-- Feature 1 -->
+                    <div class="relative pl-9">
+                        <div class="inline-font-semibold text-gray-900">
+                            <svg class="absolute left-1 top-1 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.5 2A.5.5 0 016 2.5v1.879a.75.75 0 00.44.67l3.5 1.75a.75.75 0 00.62 0l3.5-1.75a.75.75 0 00.44-.67V2.5a.5.5 0 011 0v1.879a2.25 2.25 0 01-1.32 2.012l-3.5 1.75a2.25 2.25 0 01-1.86 0l-3.5-1.75A2.25 2.25 0 014 4.379V2.5A.5.5 0 015.5 2z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M7.5 7.5A.5.5 0 018 8v1.879a.75.75 0 00.44.67l3.5 1.75a.75.75 0 00.62 0l3.5-1.75a.75.75 0 00.44-.67V8a.5.5 0 011 0v1.879a2.25 2.25 0 01-1.32 2.012l-3.5 1.75a2.25 2.25 0 01-1.86 0l-3.5-1.75A2.25 2.25 0 016 9.879V8a.5.5 0 011.5 0v-.5z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="font-bold">Comprehensive Programs.</span>
+                        </div>
+                        <p class="inline text-justify"> We offer bachelor's, master's, and doctoral degrees across fields like Management, Finance, IT, and Law.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="relative pl-9">
+                        <div class="inline-font-semibold text-gray-900">
+                            <svg class="absolute left-1 top-1 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M11.983 1.904a.75.75 0 00-1.292-.656l-5.5 9.25a.75.75 0 001.292.656l5.5-9.25z" />
+                                <path d="M3.234 8.75a.75.75 0 000 1.5h13.532a.75.75 0 000-1.5H3.234z" />
+                            </svg>
+                            <span class="font-bold ">Focus on Innovation.</span>
+                        </div>
+                        <p class="inline text-justify"> Our curriculum has a strong emphasis on Research, Innovation, and Entrepreneurship to prepare you for the future.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="relative pl-9">
+                        <div class="inline-font-semibold text-gray-900">
+                            <svg class="absolute left-1 top-1 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a4.5 4.5 0 01.895 8.908a.75.75 0 01-1.06-1.062A3 3 0 0012.5 15h-5a3 3 0 00-1.836 5.346a.75.75 0 01-1.06 1.062A4.5 4.5 0 015.5 9h9z" />
+                            </svg>
+                            <span class="font-bold">Supportive Environment.</span>
+                        </div>
+                        <p class="inline text-justify"> Our experienced faculty are dedicated to fostering an engaging learning environment that encourages critical and creative thinking.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-100 font-sans">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <!-- Grid container for the two main columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16 items-center">
+
+            <!-- Left Column: Text Content -->
+            <div>
+                <h1 class="mt-4 text-4xl sm:text-5xl font-bold text-gray-900 leading-tight ">
+                    Empowering Future Leaders Through Research, Entrepreneurship, &amp; Innovation 🎓
+                </h1>
+                <hr class="w-24 h-1.5 bg-blue-500 my-8 rounded">
+                <p class="mt-6 text-gray-700 leading-relaxed max-w-xl">
+                    NUM has proudly earned global recognition in the 2025 WURI Rankings. Here is a summary of our outstanding achievements:
+                </p>
+
+                <!-- UPDATED: 2x2 Grid with consistent icons -->
+                <div class="mt-8 grid grid-cols-2 gap-4 sm:gap-6">
+
+                    <!-- Award Card 1: Global Top 400 -->
+                    <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                        <!-- ICON CHANGE -->
+                        <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
+                        </svg>
+                        <p class="mt-3 text-2xl font-bold text-blue-800">69th</p>
+                        <p class="text-sm font-medium text-gray-600 mt-1">Global Top 400</p>
+                    </div>
+
+                    <!-- Award Card 2: Empowerment-Based Management -->
+                    <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                        <!-- ICON CHANGE -->
+                        <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
+                        </svg>
+                        <p class="mt-3 text-2xl font-bold text-blue-800">7th</p>
+                        <p class="text-sm font-medium text-gray-600 mt-1">Empowerment-Based Mgt.</p>
+                    </div>
+
+                    <!-- Award Card 3: Infrastructure & Technology -->
+                    <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                        <!-- ICON CHANGE -->
+                        <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
+                        </svg>
+                        <p class="mt-3 text-2xl font-bold text-blue-800">34th</p>
+                        <p class="text-sm font-medium text-gray-600 mt-1">Infrastructure & Tech</p>
+                    </div>
+
+                    <!-- Award Card 4: University Brand & Reputation -->
+                    <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                        <!-- ICON CHANGE -->
+                        <svg class="w-12 h-12 mx-auto text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                            <path d="M15.4 16.65l-2.34-1.56a1.2 1.2 0 0 0-1.12 0L9.6 16.65a.61.61 0 0 0-.35 1l1.52 4.24a.6.6 0 0 0 .57.4h2.32a.6.6 0 0 0 .57-.4l1.52-4.24a.61.61 0 0 0-.35-1z" />
+                        </svg>
+                        <p class="mt-3 text-2xl font-bold text-blue-800">34th</p>
+                        <p class="text-sm font-medium text-gray-600 mt-1">Brand & Reputation</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right Column: Image Collage (Unchanged) -->
+            <div class="grid grid-cols-2 grid-rows-2 gap-4 h-full">
+                <div class="col-span-1 row-span-1">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/wuri.jpg" alt="Two workers welding on a metal frame inside a building.">
+                </div>
+                <div class="col-span-1 row-span-1">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/wuri1.jpg" alt="Welder with helmet working on a metal pipe, creating bright sparks.">
+                </div>
+                <div class="col-span-1 row-span-1">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/wuri2.jpg" alt="Construction worker using surveying equipment on a building site at sunset.">
+                </div>
+                <div class="col-span-1 row-span-1">
+                    <img class="w-full h-full object-cover rounded-lg shadow-lg" src="../Picture/school/wuri3.jpg" alt="Construction worker using surveying equipment on a building site at sunset.">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========= ABOUT & SERVICES SECTION 4 START (CORRECTED) ========= -->
+<section class="bg-[#151a25]">
+
+    <div class="relative overflow-hidden py-16 sm:py-20">
+        <div id="parallax-bg" class="parallax-bg absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('../Picture/School/school11.jpg');">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#151a25] via-[#151a25]/60 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            <!-- Left Column: Title -->
+            <div class="text-white mb-8">
+                <div class="flex items-center mb-4">
+                    <svg class="w-10 h-10 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                    </svg>
+                    <span class="text-2xl font-semibold">National University of Management</span>
+                </div>
+                <!-- UPDATED ACCENT COLOR (was green) -->
+                <h2 class="text-4xl sm:text-5xl font-bold text-blue-400">
+                    About Our University
+                </h2>
+            </div>
+
+            <!-- Right Column: Description -->
+            <div class="bg-white rounded-xl shadow-lg p-8 text-gray-800 space-y-6 font-semibold border border-blue-100">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4">About NUM</h3>
+                <p class="text-lg leading-relaxed">
+                    The National University of Management, located in Cambodia, is a modern educational institution with a history of 42 years. NUM has progressed in capacity, diversity, and quality education, emphasizing research, entrepreneurship, and innovation.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    Ranked <span class="font-extrabold text-blue-600">69th</span> in the World University Rankings for Innovation (WURI) 2025, NUM is committed to developing competent, socially responsible individuals who contribute to Cambodia's socio-economic growth.
+                </p>
+                <p class="text-lg leading-relaxed"></p>
+                    Established for public benefit and recognized nationally, NUM has a proud history of offering access to a wide range of academic opportunities.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
 
+    <!-- Bottom "Services" part with 3 boxes -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <!-- The only change is here: from lg:grid-cols-4 to lg:grid-cols-3 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <!-- Feature 1: Tuition & Fees -->
+            <div class="h-full flex flex-col justify-center">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-400/10 mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Tuition & Fees</h3>
+                    <p class="text-base text-gray-400 mb-5">Tuition fees vary by program and year of study. Please consult the official website for detailed information.</p>
+                    <a href="../study-with-us/fees.html" class="text-base text-blue-400 font-semibold hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Feature 2: News and Events -->
+            <div class="h-full flex flex-col justify-center">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-400/10 mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">News and Events</h3>
+                    <p class="text-base text-gray-400 mb-5">News and events happening at National University of Management.</p>
+                    <a href="../student-activities/events.html" class="text-base text-blue-400 font-semibold hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Feature 3: University Life -->
+            <div class="h-full flex flex-col justify-center">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-400/10 mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">University Life</h3>
+                    <p class="text-base text-gray-400 mb-5">Design your future with us and become a part of our vibrant community.</p>
+                    <a href="../study-with-us/student-mobility.html" class="text-base text-blue-400 font-semibold hover:underline hover:decoration-2 hover:underline-offset-2">Learn More</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========= SECTION 4.5: PROGRAM INFO CARDS ========= -->
+<!-- Add the 'stylish-background-section' class here and remove bg-white -->
+<section class="stylish-background-section py-16 sm:py-24">
+    <!-- Add the 'content-on-top' class to this container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-on-top">
+
+        <!-- Section Title & Description -->
+        <div class="text-center mb-16">
+            <div class="flex flex-col items-center">
+                <!-- Logo circle with icon -->
+                <div class="mb-4 flex items-center justify-center w-16 h-16 rounded-full bg-blue-100">
+                    <svg class="w-8 h-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6" />
+                    </svg>
+                </div>
+                <h2 class="text-4xl font-bold text-gray-900 sm:text-5xl tracking-tight">
+                    Our Programs
+                </h2>
+                <div class="mt-3 w-20 h-1.5 bg-blue-600 rounded"></div>
+            </div>
+            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto text-justify">
+                The National University of Management (NUM) offers
+                <span class="font-bold text-blue-700">Bachelor’s</span>,
+                <span class="font-bold text-blue-700">Master’s</span>, and
+                <span class="font-bold text-blue-700">Doctorate</span> degrees.
+                The <span class="font-bold text-blue-700">Bachelor’s</span> program builds a solid foundation in business and management,
+                the <span class="font-bold text-blue-700">Master’s</span> program develops advanced skills and leadership,
+                and the <span class="font-bold text-blue-700">Doctorate</span> focuses on research and expertise for academic and professional excellence.
+            </p>
+        </div>
+
+        <!-- Main grid container with rounded corners and shadow to lift it off the page -->
+        <div class="grid grid-cols-1 md:grid-cols-3 text-white overflow-hidden rounded-lg shadow-2xl relative">
+
+            <!-- Card 1: Undergraduate -->
+            <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                <!-- Dark blue overlay with a hover effect -->
+                <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+
+                <!-- Content Container with hover animation -->
+                <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 class="font-lora text-2xl lg:text-3xl font-extrabold mb-3 text-white drop-shadow-lg">
+                        Bachelor
+                    </h3>
+                    <p class="font-montserrat text-base font-semibold text-white max-w-xs mx-auto drop-shadow"></p>
+                    Provides students with fundamental knowledge in business, economics, and management to prepare them for professional careers or further study.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2: Graduated & Professional -->
+            <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                <!-- Dark blue overlay with a hover effect -->
+                <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+
+                <!-- Content Container with hover animation -->
+                <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 class="font-lora text-2xl lg:text-3xl font-extrabold mb-3 text-white drop-shadow-lg">
+                        Master
+                    </h3>
+                    <p class="font-montserrat text-base font-semibold text-white max-w-xs mx-auto drop-shadow"></p>
+                    Focuses on advanced skills, leadership, and specialized fields such as finance, marketing, or public administration.
+                    </p>
+                </div>
+            </div>
+            <!-- Card 3: Scholarships & Financial AID -->
+            <div class="relative group bg-cover bg-center min-h-[320px] p-8 sm:p-10 flex flex-col justify-center items-center text-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');">
+                <!-- Dark blue overlay with a hover effect -->
+                <div class="absolute inset-0 bg-blue-900/75 group-hover:bg-blue-900/80 transition-colors duration-300"></div>
+
+                <!-- Content Container with hover animation -->
+                <div class="relative z-10 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 class="font-lora text-2xl lg:text-3xl font-extrabold mb-3 text-white drop-shadow-lg">
+                        Doctorate
+                    </h3>
+                    <p class="font-montserrat text-base font-semibold text-white max-w-xs mx-auto drop-shadow"></p>
+                    Emphasizes research, innovation, and academic excellence, preparing graduates to become experts and contributors to knowledge.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ========= EMBARK ON A JOURNEY SECTION (DARK BLUE THEME) ========= -->
+<!-- UPDATED: Main background color set to a dark slate blue -->
+<section class="relative bg-blue-800 text-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10">
+
+        <!-- Grid container for the two main columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 items-center">
+
+            <!-- Left Column: Main Title & Link -->
+            <div class="relative z-10">
+                <!-- Decorative Icon (color adjusted for blue theme) -->
+                <div class="mb-6">
+                    <svg class="w-12 h-12 text-blue-300/40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-1.060-3.695A50.552 50.552 0 0112 5.25c2.115 0 4.137.348 6.035.987l-1.06 3.695m-15.482 0a48.566 48.566 0 01-1.423 3.666l-1.06 3.695A59.909 59.909 0 0012 21.75a59.909 59.909 0 008.486-4.22l-1.06-3.695a48.568 48.568 0 01-1.423-3.666m-15.482 0l-1.06-3.695M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                    </svg>
+                </div>
+
+                <h2 class="font-lora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
+                    Modern Learning Environment
+                </h2>
+                <div class="mt-3 w-20 h-1.5 bg-red-600 rounded"></div>
+            </div>
+
+            <!-- ========= HERE IS THE MODIFIED CODE SNIPPET ========= -->
+            <div class="relative z-0">
+                <p class="text-white-200/80 leading-relaxed max-w-lg mb-8 text-justify">
+                    Embark on a journey of knowledge, discovery, and growth at National University of Management. Our admissions process is designed to identify bright, motivated individuals who are eager to contribute to our dynamic academic community.
+                </p>
+
+                <!-- Container for the video and the circular decoration -->
+                <div class="relative">
+                    <!-- 
+                MODIFIED PART: 
+                - The <img> tag has been replaced with a video container.
+                - `aspect-w-16 aspect-h-9` creates a responsive 16:9 box.
+                - The <video> tag is set to autoplay, loop, and muted.
+            -->
+                    <div class="relative z-10 w-full rounded-lg shadow-2xl overflow-hidden aspect-w-16 aspect-h-9">
+                        <video fade-on-scroll controls playsinline src="../Video/National University of Management (1).mp4" class="w-full h-full object-cover">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <!-- White circle element - remains unchanged -->
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-white rounded-full z-0 hidden lg:block"></div>
+                </div>
+            </div>
+
+
+            <!-- Background decorative elements (colors adjusted for blue theme) -->
+            <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 border border-blue-400/10 rounded-full z-0"></div>
+            <div class="absolute bottom-10 right-16 w-24 h-24 text-blue-400/10 z-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471M11.42 15.17L5.877 21A2.652 2.652 0 013 17.25l5.877-5.877m0 0l2.471-2.471a.563.563 0 00-.796-.796l-2.471 2.471m6.053 0l-3.46-3.46a.563.563 0 01.796-.796l3.46 3.46m-3.46-3.46a.563.563 0 01.796 0l2.471 2.471" />
+                </svg>
+            </div>
+
+</section>
+
+<!-- ========= TIMELINE SECTION ========= -->
+<section class="bg-gray-100 font-sans py-20 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <p class="font-montserrat text-sm font-semibold text-gray-500 uppercase tracking-[0.2em] mb-3">
+                OUR JOURNEY
+            </p>
+            <h2 class="font-lora text-4xl sm:text-5xl font-bold text-gray-800 leading-tight">
+                The Evolution Of The National University Of Management
+            </h2>
+            <!-- Decorative Line -->
+            <div class="mt-4 w-24 h-1 bg-blue-600 mx-auto"></div>
+        </div>
+
+        <!-- Timeline Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <!-- Timeline Card 1: 1983 - 1989 -->
+            <div class="bg-blue-700 text-white rounded-xl shadow-lg p-8 flex flex-col">
+                <h3 class="font-montserrat text-xl font-bold mb-4">1983 – 1989</h3>
+                <p class="font-montserrat text-base text-white/90 leading-relaxed">
+                    The institution was founded in 1983 as the Economic Institute. It was renamed the Institute of Economic Science (IES) in 1989, providing major fields in economics and commerce.
+                </p>
+            </div>
+
+            <!-- Timeline Card 2: 1990 - 1998 -->
+            <div class="bg-white text-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
+                <h3 class="font-montserrat text-xl font-bold mb-4 text-blue-800">1990 – 1998</h3>
+                <p class="font-montserrat text-base text-gray-600 leading-relaxed">
+                    In 1994, IES became the Faculty of Business (FOB), launching programs in management, marketing, accounting, and finance. By 1998, it was renamed the National Institute of Management (NIM).
+                </p>
+            </div>
+
+            <!-- Timeline Card 3: 1999 - 2003 -->
+            <div class="bg-blue-700 text-white rounded-xl shadow-lg p-8 flex flex-col">
+                <h3 class="font-montserrat text-xl font-bold mb-4">1999 – 2003</h3>
+                <p class="font-montserrat text-base text-white/90 leading-relaxed">
+                    During this period, NIM expanded its curriculum and began offering private tuition programs, solidifying its reputation as a premier institution for business and management education.
+                </p>
+            </div>
+
+            <!-- Timeline Card 4: 2004 - Present -->
+            <div class="bg-white text-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
+                <h3 class="font-montserrat text-xl font-bold mb-4 text-blue-800">2004 – Present</h3>
+                <p class="font-montserrat text-base text-gray-600 leading-relaxed">
+                    The institution transitioned into the National University of Management (NUM) in 2004 and became a public non-profit university in 2005, now offering a full range of bachelor's, master's, and doctoral programs.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+    </div>
     </main>
-
     <div id="footer-placeholder"></div>
 
-    <script src="/js/i18n.js"></script>
-    <script src="../js/main.js" data-base-path=".."></script>
+    <script src="../js/i18n.js"></script>
+    <script>
+      // Page-scoped variables
+      let heroSliderInterval;
+      function handleParallax() {
+        const parallaxBg = document.querySelector('.parallax-bg');
+        if (!parallaxBg) return;
+        const parallaxContainer = parallaxBg.parentElement;
+        if (!parallaxContainer) return;
+        const sectionTop = parallaxContainer.offsetTop;
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        if (scrollY + windowHeight > sectionTop && scrollY < sectionTop + parallaxContainer.offsetHeight) {
+          const relativeScroll = scrollY - sectionTop;
+          parallaxBg.style.transform = `translateY(${relativeScroll * 0.4}px)`;
+        }
+      }
 
+      function initHeroAnimations() {
+        if (heroSliderInterval) clearInterval(heroSliderInterval);
+        window.removeEventListener('scroll', handleParallax);
+        window.addEventListener('scroll', handleParallax);
+        handleParallax();
+
+        const subtitle = document.getElementById('hero-subtitle');
+        const heading = document.getElementById('animated-heading');
+        const textToAnimate = 'National University of Management';
+        if (subtitle) subtitle.classList.remove('visible');
+        if (heading) heading.innerHTML = '';
+        setTimeout(() => { if (subtitle) subtitle.classList.add('visible'); }, 300);
+        if (heading) {
+          textToAnimate.split('').forEach(char => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.innerHTML = (char === ' ') ? '&nbsp;' : char;
+            heading.appendChild(span);
+          });
+          const animationStartTime = 800;
+          const letterStagger = 30;
+          heading.querySelectorAll('.char').forEach((char, index) => {
+            setTimeout(() => {
+              char.style.opacity = '1';
+              char.style.transform = 'translateY(0)';
+            }, animationStartTime + (index * letterStagger));
+          });
+        }
+
+        const slideElements = [document.getElementById('hero-bg-1'), document.getElementById('hero-bg-2')];
+        const images = ['../Picture/school/school1.jpg', '../Picture/school/school10.jpg'];
+        if (images.length >= 2 && slideElements[0] && slideElements[1]) {
+          slideElements[0].style.backgroundImage = `url('${images[0]}')`;
+          slideElements[1].style.backgroundImage = `url('${images[1]}')`;
+          slideElements[0].classList.add('active', 'zoom-out');
+          slideElements[1].classList.remove('active', 'zoom-out');
+          heroSliderInterval = setInterval(() => {
+            const activeSlide = document.querySelector('.hero-bg-slide.active');
+            const nextSlide = Array.from(slideElements).find(el => !el.classList.contains('active'));
+            if (activeSlide && nextSlide) {
+              activeSlide.classList.remove('active', 'zoom-out');
+              nextSlide.classList.add('active', 'zoom-out');
+            }
+          }, 7000);
+        }
+      }
+
+      function initializePage() {
+        document.body.classList.add('is-visible');
+        initHeroAnimations();
+      }
+
+      function pageCleanup() {
+        if (heroSliderInterval) clearInterval(heroSliderInterval);
+        window.removeEventListener('scroll', handleParallax);
+      }
+    </script>
+    <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

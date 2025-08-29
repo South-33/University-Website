@@ -11,9 +11,12 @@
     <script src="../../js/theme.js"></script>
     <link rel="stylesheet" href="../../css/main.css">
     <style>
-
-        
-        
+        /* Program Card Slideshow Styles */
+        .program-slideshow { position: relative; overflow: hidden; min-height: 220px; }
+        .program-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+        .program-slide.active { opacity: 1; }
+        .program-slide img { width: 100%; height: 100%; object-fit: cover; }
+        @media (min-width: 768px) { .program-slideshow { min-height: 0; } }
     </style>
 </head>
 <body class="body-loading bg-light-lavender">
@@ -66,10 +69,84 @@
         <section class="bg-white py-24 font-body border-t border-gray-300/60">
             <div class="max-w-6xl mx-auto px-5 fade-in-section">
                 <div class="space-y-12">
+                    <!-- Program Detail: Finance (International) -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="finance">
+                            <div class="program-slide active">
+                                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1740&auto=format&fit=crop" alt="Financial markets analysis charts">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.unsplash.com/photo-1549421263-28df9b57186e?q=80&w=2069&auto=format&fit=crop" alt="Risk dashboard on multiple screens">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=2069&auto=format&fit=crop" alt="Team reviewing order book data">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Finance</h3>
+                                <p class="text-dark-blue/80 mb-6">Develop expertise in valuation, capital markets, portfolio construction, and risk management through applied, industry‑aligned learning.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Asset Pricing & Valuation</li>
+                                    <li>Investment Analysis & Portfolio</li>
+                                    <li>Financial Markets & Institutions</li>
+                                    <li>Risk Management & Derivatives</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="finance.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Program Detail: BBA in International Finance (moved up) -->
+                    <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="md:w-1/3 program-slideshow" data-program="international-finance">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/7788009/pexels-photo-7788009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="International finance and global markets">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Foreign exchange and currency">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/4968632/pexels-photo-4968632.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Global market strategy meeting">
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
+                                    INTERNATIONAL
+                                </div>
+                                <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor of Business Administration (BBA) in International Finance</h3>
+                                <p class="text-dark-blue/80 mb-6">Navigate global financial markets with expertise in international investment, foreign exchange, and multinational corporate finance. This program prepares you for high-stakes roles in the global economy.</p>
+                                <h4 class="font-bold text-dark-blue mb-2">Core Subjects:</h4>
+                                <ul class="list-disc list-inside text-dark-blue/80 space-y-1">
+                                    <li>Global Financial Management</li>
+                                    <li>Foreign Exchange Markets</li>
+                                    <li>International Banking</li>
+                                    <li>Multinational Corporate Finance</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a href="/programs/bachelors/international-finance" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Program Detail: Accounting -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Accountant working with financial documents">
+                        <div class="md:w-1/3 program-slideshow" data-program="accounting">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Accountant working with financial documents">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Financial graphs on laptop">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/4386375/pexels-photo-4386375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Bookkeeping and calculator">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -87,14 +164,22 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="accounting.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Accounting and Auditing -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Auditor reviewing financial statements">
+                        <div class="md:w-1/3 program-slideshow" data-program="accounting-auditing">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Auditor reviewing financial statements">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Audit checklist and documents">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/8297031/pexels-photo-8297031.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team audit discussion">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -112,14 +197,22 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="accounting-and-auditing.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Accounting and Taxation -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/6863332/pexels-photo-6863332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Tax professional preparing documents">
+                        <div class="md:w-1/3 program-slideshow" data-program="accounting-taxation">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/6863332/pexels-photo-6863332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tax professional preparing documents">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/6696150/pexels-photo-6696150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team reviewing tax forms">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/4386326/pexels-photo-4386326.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Calculator and tax documents">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -137,14 +230,22 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="accounting-and-taxation.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Finance and Banking -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Banking and finance professionals">
+                        <div class="md:w-1/3 program-slideshow" data-program="finance-banking">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Banking and finance professionals">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Stock charts and analysis">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/4386372/pexels-photo-4386372.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Financial planning meeting">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -162,14 +263,22 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="finance-and-banking.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
                     <!-- Program Detail: Finance and Insurance -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Insurance and financial planning">
+                        <div class="md:w-1/3 program-slideshow" data-program="finance-insurance">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Insurance and financial planning">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/4386399/pexels-photo-4386399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Risk assessment discussion">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/4386424/pexels-photo-4386424.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Insurance planning paperwork">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -187,14 +296,23 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="finance-and-insurance.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
+                    
                     <!-- Program Detail: Finance and Security Market -->
                     <div class="bg-light-lavender/40 rounded-xl shadow-lg overflow-hidden md:flex group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="md:w-1/3">
-                            <img src="https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="h-full w-full object-cover" alt="Stock market and securities trading">
+                        <div class="md:w-1/3 program-slideshow" data-program="finance-security-market">
+                            <div class="program-slide active">
+                                <img src="https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Stock market and securities trading">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/6696156/pexels-photo-6696156.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Market research meeting">
+                            </div>
+                            <div class="program-slide">
+                                <img src="https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Securities trading screen">
+                            </div>
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
@@ -212,10 +330,12 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="finance-and-security-market.html" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
+
+                    
                 </div>
             </div>
         </section>
@@ -346,6 +466,29 @@
             // DOM is already loaded, initialize immediately
             initializeStatsAnimation();
         }
+        
+        // Program Slideshow Functionality
+        function initializeProgramSlideshows() {
+            const slideshows = document.querySelectorAll('.program-slideshow');
+            slideshows.forEach((slideshow, index) => {
+                const slides = slideshow.querySelectorAll('.program-slide');
+                if (slides.length <= 1) return;
+                let currentSlide = 0;
+                function showNextSlide() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+                // Wave effect: stagger start time based on index
+                setTimeout(() => {
+                    setInterval(showNextSlide, 4000);
+                }, index * 100);
+            });
+        }
+        // Initialize program slideshows
+        document.addEventListener('DOMContentLoaded', initializeProgramSlideshows);
+        if (document.readyState !== 'loading') { initializeProgramSlideshows(); }
+        window.initializeProgramSlideshows = initializeProgramSlideshows;
     </script>
     
     <!-- Unified Layout Sequence for SPA Navigation -->

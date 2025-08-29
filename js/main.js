@@ -12,8 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
         '/programs': '/programs/index.html',
         '/programs/': '/programs/index.html',
         '/programs/bachelors': '/programs/bachelors.html',
+        '/programs/bachelors/': '/programs/bachelors.html',
         '/programs/masters': '/programs/masters.html',
+        '/programs/masters/': '/programs/masters.html',
         '/programs/doctoral': '/programs/doctoral.html',
+        '/programs/doctoral/': '/programs/doctoral.html',
         '/study-with-us/': '/study-with-us/index.html',
         '/study-with-us/admissions': '/study-with-us/admissions.html',
         '/study-with-us/student-support': '/study-with-us/student-support.html',
@@ -48,6 +51,38 @@ document.addEventListener('DOMContentLoaded', function() {
         '/programs/bachelors/faculty-of-it': '/programs/bachelors/faculty-of-it.html',
         '/programs/bachelors/faculty-of-robotic-engineering': '/programs/bachelors/robotic-engineering.html',
 
+        // Bachelor's program detail pages (clean URLs → actual files)
+        '/programs/bachelors/management': '/programs/bachelors/management.html',
+        '/programs/bachelors/marketing': '/programs/bachelors/marketing.html',
+        '/programs/bachelors/entrepreneurship': '/programs/bachelors/entrepreneurship.html',
+        '/programs/bachelors/accounting': '/programs/bachelors/accounting.html',
+        '/programs/bachelors/accounting-and-auditing': '/programs/bachelors/accounting-and-auditing.html',
+        '/programs/bachelors/accounting-and-taxation': '/programs/bachelors/accounting-and-taxation.html',
+        '/programs/bachelors/finance-and-banking': '/programs/bachelors/finance-and-banking.html',
+        '/programs/bachelors/finance-and-insurance': '/programs/bachelors/finance-and-insurance.html',
+        '/programs/bachelors/finance-and-security-market': '/programs/bachelors/finance-and-security-market.html',
+        '/programs/bachelors/information-technology': '/programs/bachelors/information-technology.html',
+        '/programs/bachelors/business-information-technology': '/programs/bachelors/business-information-technology.html',
+        '/programs/bachelors/computer-science': '/programs/bachelors/computer-science.html',
+        '/programs/bachelors/business-economics': '/programs/bachelors/business-economics.html',
+        '/programs/bachelors/economic-development': '/programs/bachelors/economic-development.html',
+        '/programs/bachelors/tourism-management': '/programs/bachelors/tourism-management.html',
+        '/programs/bachelors/hospitality-management': '/programs/bachelors/hospitality-management.html',
+        '/programs/bachelors/law': '/programs/bachelors/law.html',
+        '/programs/bachelors/public-administration': '/programs/bachelors/public-administration.html',
+        '/programs/bachelors/english': '/programs/bachelors/english.html',
+        '/programs/bachelors/chinese': '/programs/bachelors/chinese.html',
+        // Newly added Bachelor's programs
+        '/programs/bachelors/international-business': '/programs/bachelors/international-business.html',
+        '/programs/bachelors/global-entrepreneurship-and-innovation': '/programs/bachelors/global-entrepreneurship-and-innovation.html',
+        '/programs/bachelors/supply-chain-management': '/programs/bachelors/supply-chain-management.html',
+        '/programs/bachelors/finance': '/programs/bachelors/finance.html',
+        '/programs/bachelors/public-policy': '/programs/bachelors/public-policy.html',
+        '/programs/bachelors/digital-economy': '/programs/bachelors/digital-economy.html',
+        '/programs/bachelors/financial-technology': '/programs/bachelors/financial-technology.html',
+        '/programs/bachelors/smart-city-planning-management': '/programs/bachelors/smart-city-planning-management.html',
+        '/programs/bachelors/ilaw': '/programs/bachelors/ilaw.html',
+
         // Masters program detail pages (clean URLs → actual files)
         '/programs/masters/mba-management': '/programs/masters/mba-management.html',
         '/programs/masters/mba-marketing': '/programs/masters/mba-marketing.html',
@@ -64,9 +99,25 @@ document.addEventListener('DOMContentLoaded', function() {
         '/programs/masters/msc-finance': '/programs/masters/msc-finance.html',
         '/programs/masters/msc-environmental-management': '/programs/masters/msc-environmental-management.html',
         '/programs/masters/msc-digital-economy': '/programs/masters/msc-digital-economy.html',
-        '/programs/masters/comparative-law': '/programs/masters/comparative-law.html',
+        // LL.M Comparative Law — canonical mapping to a single file
+        '/programs/masters/comparative-law': '/programs/masters/llm-comparative-law.html',
+        '/programs/masters/llm-comparative-law': '/programs/masters/llm-comparative-law.html',
+        '/programs/masters/law-comparative-law': '/programs/masters/llm-comparative-law.html',
+        // Newly added Master's programs
+        '/programs/masters/mba-global-innovation-management': '/programs/masters/mba-global-innovation-management.html',
         '/programs/masters/mpa-public-administration': '/programs/masters/mpa-public-administration.html',
-        '/programs/masters/mpp-public-policy': '/programs/masters/mpp-public-policy.html'
+        '/programs/masters/mpp-public-policy': '/programs/masters/mpp-public-policy.html',
+
+        // Doctoral program detail pages (clean URLs → actual files)
+        // Short alias URLs (kept for convenience/testing) — listed first so reverse mapping prefers full names below
+        '/programs/doctoral/phd': '/programs/doctoral/doctor-of-philosophy.html',
+        '/programs/doctoral/dba': '/programs/doctoral/doctor-of-business-administration.html',
+        '/programs/doctoral/public-policy': '/programs/doctoral/doctoral-program-in-public-policy.html',
+
+        // Preferred full-name URLs (listed after aliases so reverse mapping uses these)
+        '/programs/doctoral/doctor-of-philosophy': '/programs/doctoral/doctor-of-philosophy.html',
+        '/programs/doctoral/doctor-of-business-administration': '/programs/doctoral/doctor-of-business-administration.html',
+        '/programs/doctoral/doctoral-program-in-public-policy': '/programs/doctoral/doctoral-program-in-public-policy.html'
     };
     
     // Reverse mapping for converting file paths back to clean URLs
@@ -106,10 +157,16 @@ document.addEventListener('DOMContentLoaded', function() {
         initializePageTransitions();
         initializeLazyLoading(document);
         triggerPageAnimations(document);
+        initializeTouchHoverEmulation();
+        if (window.initializeImageToTextSlideshow) {
+            try { window.initializeImageToTextSlideshow(); } catch (e) { console.warn('Slideshow init failed:', e); }
+        }
         
-        if (window.SimpleBilingualManager) {
+        // Initialize i18n only if not already initialized by i18n.js
+        if (window.SimpleBilingualManager && !window.__i18nInitialized) {
             try {
                 new SimpleBilingualManager();
+                window.__i18nInitialized = true;
             } catch (error) {
                 console.error('Failed to initialize bilingual system:', error);
             }
@@ -511,30 +568,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // Defer any other wide "initialize* / init*" functions to idle time to avoid jank
-                const deferOtherInits = () => {
-                    try {
-                        const initFunctionPatterns = /^(initialize|init)[A-Z]/;
-                        Object.getOwnPropertyNames(window).forEach(prop => {
-                            if (quickInits.includes(prop)) return; // already handled
-                            if (initFunctionPatterns.test(prop) && typeof window[prop] === 'function') {
-                                try {
-                                    window[prop]();
-                                } catch (error) {
-                                    console.error(`Error calling ${prop}:`, error);
-                                }
-                            }
-                        });
-                    } catch (err) {
-                        console.warn('Deferred initializers encountered an error:', err);
-                    }
-                };
-
-                if ('requestIdleCallback' in window) {
-                    window.requestIdleCallback(deferOtherInits, { timeout: 400 });
-                } else {
-                    setTimeout(deferOtherInits, 120);
-                }
+                // IMPORTANT: Avoid reflectively calling every initialize*/init* function on window.
+                // This was causing multiple re-initializations (e.g., homepage features, header),
+                // leading to duplicated listeners/instances and occasional blank states.
+                // We now rely on:
+                // - page-level window.initializePage()
+                // - explicit quickInits above
+                // If more initializers are needed, register them explicitly in quickInits.
                 
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
@@ -595,6 +635,85 @@ document.addEventListener('DOMContentLoaded', function() {
         sections.forEach(section => observer.observe(section));
     }
 
+    // ---------------------------------------------------------------------
+    // Unified Wave Animation for Program Cards (Image ↔ Text Crossfade)
+    // Centralized implementation used by Bachelors/Masters/Doctoral pages.
+    // ---------------------------------------------------------------------
+    function initializeImageToTextSlideshow() {
+        const cards = document.querySelectorAll('.image-to-text-card');
+        const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!cards.length) return;
+
+        // Clear any existing timers to prevent duplicates during SPA navigation
+        cards.forEach(card => {
+            if (card.slideshowInterval) {
+                clearInterval(card.slideshowInterval);
+                card.slideshowInterval = null;
+            }
+            if (card.slideshowTimeout) {
+                clearTimeout(card.slideshowTimeout);
+                card.slideshowTimeout = null;
+            }
+        });
+
+        const cardsArray = Array.from(cards);
+        const baseInterval = 5000; // global cadence for flips
+        const waveGap = 25;       // ms between neighboring cards (crisper wave)
+        const maxJitter = 8;      // small jitter to avoid re-sync
+
+        cardsArray.forEach(card => {
+            const image = card.querySelector('img');
+            // Select only the direct overlay container
+            const textOverlay = card.querySelector(':scope > div');
+
+            if (!image || !textOverlay) {
+                console.warn('Image-to-text card missing required elements:', card);
+                return;
+            }
+
+            // Ensure starting state: image visible, text hidden
+            image.classList.add('opacity-100');
+            image.classList.remove('opacity-0');
+            textOverlay.classList.add('opacity-0');
+            textOverlay.classList.remove('opacity-100');
+
+            // Respect reduced motion: set initial state but do not animate
+            if (isReducedMotion) {
+                return;
+            }
+
+            let isImageVisible = true;
+
+            const toggle = () => {
+                if (isImageVisible) {
+                    image.classList.remove('opacity-100');
+                    image.classList.add('opacity-0');
+                    textOverlay.classList.remove('opacity-0');
+                    textOverlay.classList.add('opacity-100');
+                } else {
+                    textOverlay.classList.remove('opacity-100');
+                    textOverlay.classList.add('opacity-0');
+                    image.classList.remove('opacity-0');
+                    image.classList.add('opacity-100');
+                }
+                isImageVisible = !isImageVisible;
+            };
+
+            const index = cardsArray.indexOf(card);
+            const jitter = Math.floor(Math.random() * maxJitter);
+            const startDelay = index * waveGap + jitter;
+
+            // Kick off first flip after base interval plus staggered delay, then continue on base cadence
+            card.slideshowTimeout = setTimeout(() => {
+                toggle();
+                card.slideshowInterval = setInterval(toggle, baseInterval);
+            }, startDelay + baseInterval);
+        });
+    }
+
+    // Expose globally so SPA transitions and pages can call it
+    window.initializeImageToTextSlideshow = initializeImageToTextSlideshow;
+
     // Global utility function for program tab scrolling (used by multiple pages)
     window.handleProgramTabClick = function(tabEl) {
         const programSection = tabEl.closest('.program-tabs-section');
@@ -641,4 +760,76 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Unhandled promise rejection:', event.reason);
     });
 
+    // ---------------------------------------------------------------------
+    // Touch Hover Emulation (site-wide)
+    // Adds `.is-hovered` on tap and when centered in viewport on touch devices
+    // ---------------------------------------------------------------------
+    function initializeTouchHoverEmulation() {
+        const isCoarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+        const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+        if (!(isCoarsePointer || hasTouch)) return; // Only for touch / coarse devices
+
+        document.documentElement.classList.add('touch-hover');
+
+        // Elements to emulate hover for (extendable)
+        const selectors = [
+            '.btn',
+            '.btn-primary',
+            '.btn-secondary',
+            '.btn-glass',
+            '.program-subnav .subnav-link',
+            '[data-simulate-hover]'
+        ];
+
+        // Delegate tap to toggle temporary hover state
+        document.addEventListener('touchstart', (e) => {
+            const target = e.target.closest(selectors.join(','));
+            if (!target) return;
+            applyTempHover(target, 850);
+        }, { passive: true, capture: true });
+
+        // Intersection-based hover: when an element is near viewport center
+        const candidates = () => Array.from(document.querySelectorAll(selectors.join(',')));
+        const centerObserver = new IntersectionObserver((entries) => {
+            const vh = window.innerHeight || document.documentElement.clientHeight;
+            const vw = window.innerWidth || document.documentElement.clientWidth;
+            const centerY = vh / 2;
+            const centerX = vw / 2;
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    entry.target.classList.remove('is-hovered');
+                    return;
+                }
+                const rect = entry.target.getBoundingClientRect();
+                const inCenter = rect.top < centerY && rect.bottom > centerY && rect.left < centerX && rect.right > centerX;
+                if (inCenter) {
+                    entry.target.classList.add('is-hovered');
+                } else {
+                    entry.target.classList.remove('is-hovered');
+                }
+            });
+        }, { root: null, threshold: [0, 0.25, 0.5, 0.75, 1], rootMargin: '-20% 0px -20% 0px' });
+
+        const observeAll = () => {
+            candidates().forEach(el => centerObserver.observe(el));
+        };
+        observeAll();
+
+        // Re-observe when DOM changes during SPA transitions
+        const mo = new MutationObserver(() => {
+            centerObserver.disconnect();
+            observeAll();
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
+
+        function applyTempHover(el, duration = 800) {
+            el.classList.add('is-hovered');
+            window.clearTimeout(el.__hoverTimer);
+            el.__hoverTimer = window.setTimeout(() => {
+                el.classList.remove('is-hovered');
+            }, duration);
+        }
+    }
+
+    initializeTouchHoverEmulation();
 });

@@ -3,475 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Support Hub - National University of Management</title>
-    
-    <!-- Google Fonts -->
+    <title>Campus - National University of Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Tailwind CSS Theme Configuration -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'dark-blue': '#0A0A3E',
-              'light-lavender': '#E9E8F5',
-              'accent-red': '#F11032',
-            },
-            fontFamily: {
-              heading: ['Lora', 'serif'],
-              body: ['Montserrat', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
+    <script src="../js/theme.js"></script>
+    <link rel="stylesheet" href="../css/main.css">  
+<style>
+    /* Local fade-in container for SPA */
+    #main-content-container { opacity: 0; transform: translateY(8px); transition: opacity 300ms ease, transform 300ms ease; }
+    body.is-visible #main-content-container { opacity: 1; transform: none; }
+    /* Custom CSS for the dot pattern on the cards */
+    .pattern-bg {
+        background-color: #7A2022; /* A deep maroon color */
+        /* A subtle, repeating dot pattern using a radial gradient */
+        background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+        background-size: 12px 12px;
+    }
+</style>
+
 </head>
-<body class="bg-white overflow-x-hidden">
+<body class="bg-white">
     <div id="header-placeholder"></div>
-        <!-- Hero Section -->
-        <section id="home" class="relative gradient-bg text-white section-spacing parallax-bg overflow-hidden">
-            <div class="absolute inset-0 bg-black/30"></div>
+    <main>
+    <div id="main-content-container">
+<!-- Hero Section with new background image -->
+<section class="relative bg-cover bg-center text-white" style="background-image: url('../Picture/school/46.jpg');">
+    
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Content Container -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center min-h-screen lg:min-h-[700px] py-24">
             
-            <!-- Floating Elements -->
-            <div class="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full floating-animation"></div>
-            <div class="absolute bottom-20 right-10 w-32 h-32 bg-white/5 rounded-full floating-animation" style="animation-delay: 1s;"></div>
-            
-            <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
-                    Your Success is Our <span class="gradient-text">Mission</span>
-                </h1>
-                <p class="text-lg sm:text-xl md:text-2xl mb-8 max-w-4xl mx-auto animate-fade-in opacity-90" style="animation-delay: 0.2s;">
-                    Comprehensive support for your academic journey, mental wellness, and personal growth. We're here 24/7.
+            <!-- Text Content -->
+            <div class="max-w-xl text-left">
+                <!-- Eyebrow Text -->
+                <p class="font-lora italic text-lg text-gray-200">
+                    Welcome To National University of Management
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style="animation-delay: 0.4s;">
-                    <a href="#contact" class="btn-primary text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 hover:scale-105">
-                        <i class="fas fa-comments mr-2"></i>Get Support Now
-                    </a>
-                    <a href="#services" class="glass-effect text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 hover:bg-white/20">
-                        <i class="fas fa-arrow-down mr-2"></i>Explore Services
-                    </a>
-                </div>
-            </div>
-        </section>
 
-        <!-- Quick Contact Section -->
-        <section id="contact" class="section-spacing bg-light-lavender">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="bg-white rounded-3xl shadow-2xl p-8 lg:p-12 animate-fade-in">
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <!-- Contact Info -->
-                        <div class="animate-slide-in">
-                            <h2 class="text-3xl lg:text-4xl font-bold text-dark-blue mb-6">
-                                Ready to Get Support?
-                            </h2>
-                            <p class="text-gray-600 mb-8 text-lg">
-                                Connect with our dedicated support team. We're here to help you succeed in every aspect of your university experience.
-                            </p>
-                            
-                            <div class="space-y-6">
-                                <div class="flex items-center p-4 bg-gray-50 rounded-xl">
-                                    <div class="bg-accent-red text-white p-3 rounded-lg mr-4">
-                                        <i class="fas fa-user-tie"></i>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-dark-blue">Jane Doe</p>
-                                        <p class="text-gray-600">Director of Student Success</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="grid sm:grid-cols-2 gap-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-envelope text-accent-red w-6 mr-3"></i>
-                                        <span class="text-gray-700">j.doe@university.edu</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-clock text-accent-red w-6 mr-3"></i>
-                                        <span class="text-gray-700">Mon-Fri, 9 AM-5 PM</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-phone text-accent-red w-6 mr-3"></i>
-                                        <span class="text-gray-700">(555) 123-4567</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-map-marker-alt text-accent-red w-6 mr-3"></i>
-                                        <span class="text-gray-700">Student Union, Room 201</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Quick Contact Form -->
-                        <div class="contact-form p-8 rounded-2xl animate-fade-in" style="animation-delay: 0.2s;">
-                            <h3 class="text-2xl font-bold text-dark-blue mb-6">Quick Contact</h3>
-                            <form id="contact-form" class="space-y-4">
-                                <div>
-                                    <input type="text" id="name" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors">
-                                </div>
-                                <div>
-                                    <input type="email" id="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors">
-                                </div>
-                                <div>
-                                    <select id="support-type" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors">
-                                        <option value="">Select Support Type</option>
-                                        <option value="academic">Academic Support</option>
-                                        <option value="counseling">Counseling & Mental Health</option>
-                                        <option value="technical">Technical Support</option>
-                                        <option value="career">Career Services</option>
-                                        <option value="financial">Financial Aid</option>
-                                        <option value="administrative">Administrative Help</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <textarea id="message" rows="4" placeholder="Describe how we can help you..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent-red focus:outline-none transition-colors resize-none"></textarea>
-                                </div>
-                                <button type="submit" class="btn-primary w-full text-white font-semibold py-3 rounded-lg text-lg">
-                                    <i class="fas fa-paper-plane mr-2"></i>Send Message
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <!-- Main Headline -->
+                <h1 class="font-lora text-5xl md:text-6xl font-bold mt-4 leading-tight">
+                    This is our campus, where dreams take flight.
+                </h1>
 
-        <!-- Services Section -->
-        <section id="services" class="section-spacing bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16 animate-fade-in">
-                    <h2 class="text-4xl lg:text-5xl font-bold text-dark-blue mb-4">
-                        Comprehensive Support Services
-                    </h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        From academic excellence to personal wellbeing, we provide free, confidential support for every aspect of your student journey.
-                    </p>
-                </div>
+                <!-- Description -->
+                <p class="mt-6 text-lg text-gray-300">
+                    Our campus is designed to provide a supportive and enriching environment for all students. From academic resources to personal development, we are committed to your success.
+                </p>
+
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Academic Support -->
-                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.1s;">
-                        <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
-                            <i class="fas fa-graduation-cap text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Academic Support</h3>
-                        <p class="text-gray-600 mb-6">Expert tutoring, study skills workshops, writing center assistance, and academic coaching to help you excel.</p>
-                        <ul class="text-sm text-gray-500 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>One-on-one tutoring</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Study groups</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Writing assistance</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Exam preparation</li>
-                        </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-50 py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center">
+            <h2 class="font-lora text-4xl sm:text-5xl font-bold text-gray-900">
+                News & Announcements
+            </h2>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                Stay updated with the latest happenings, important dates, and opportunities on campus.
+            </p>
+        </div>
+
+        <!-- Grid Container for the cards (Updated to 3 columns) -->
+        <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+            <!-- Card 1: Upcoming Events -->
+            <div class="flex flex-col bg-white rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="flex-grow p-8">
+                    <!-- Icon -->
+                    <div class="inline-block bg-blue-100 text-blue-600 p-3 rounded-xl mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
                     </div>
-                    
-                    <!-- Mental Health -->
-                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.2s;">
-                        <div class="bg-gradient-to-br from-pink-500 to-red-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
-                            <i class="fas fa-heart text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Mental Health & Counseling</h3>
-                        <p class="text-gray-600 mb-6">Confidential counseling services, stress management, and wellness programs for your mental health.</p>
-                        <ul class="text-sm text-gray-500 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Individual counseling</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Group therapy</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Crisis intervention</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Wellness workshops</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Technical Support -->
-                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.3s;">
-                        <div class="bg-gradient-to-br from-green-500 to-teal-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
-                            <i class="fas fa-laptop-code text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Technical Support</h3>
-                        <p class="text-gray-600 mb-6">Help with campus technology, online platforms, and digital learning tools.</p>
-                        <ul class="text-sm text-gray-500 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Account assistance</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Platform training</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Wi-Fi support</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Software help</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Career Services -->
-                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.4s;">
-                        <div class="bg-gradient-to-br from-yellow-500 to-orange-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
-                            <i class="fas fa-briefcase text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Career Services</h3>
-                        <p class="text-gray-600 mb-6">Professional development, job search assistance, and career planning guidance.</p>
-                        <ul class="text-sm text-gray-500 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Resume building</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Interview prep</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Job fairs</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Networking events</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Financial Aid -->
-                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.5s;">
-                        <div class="bg-gradient-to-br from-indigo-500 to-blue-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
-                            <i class="fas fa-hand-holding-dollar text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Financial Aid</h3>
-                        <p class="text-gray-600 mb-6">Support with financial aid applications, scholarships, and budget planning.</p>
-                        <ul class="text-sm text-gray-500 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>FAFSA assistance</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Scholarship search</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Budget planning</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Payment plans</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Administrative Help -->
-                    <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.6s;">
-                        <div class="bg-gradient-to-br from-purple-500 to-pink-500 text-white p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6">
-                            <i class="fas fa-id-card text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark-blue mb-4">Administrative Support</h3>
-                        <p class="text-gray-600 mb-6">Help with enrollment, registration, transcripts, and other administrative needs.</p>
-                        <ul class="text-sm text-gray-500 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Registration help</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Transcript requests</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>ID card issues</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Policy guidance</li>
-                        </ul>
-                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">Upcoming Events</h3>
+                    <ul class="mt-4 space-y-3 text-gray-600">
+                        <li><a href="#" class="hover:text-blue-600">Robotic competition</a></li>
+                        <li><a href="#" class="hover:text-blue-600">Programming challenge</a></li>
+                    </ul>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="#" class="font-semibold text-blue-600 hover:text-blue-800">View All Events →</a>
                 </div>
             </div>
-        </section>
 
-        <!-- FAQ Section -->
-        <section id="faq" class="section-spacing bg-light-lavender">
-            <div class="max-w-4xl mx-auto px-6">
-                <div class="text-center mb-16 animate-fade-in">
-                    <h2 class="text-4xl lg:text-5xl font-bold text-dark-blue mb-4">
-                        Frequently Asked Questions
-                    </h2>
-                    <p class="text-xl text-gray-600">
-                        Quick answers to common questions about our support services
-                    </p>
+            <!-- Card 2: Registration Deadlines -->
+            <div class="flex flex-col bg-white rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="flex-grow p-8">
+                    <!-- Icon -->
+                    <div class="inline-block bg-red-100 text-red-600 p-3 rounded-xl mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">Registration Deadlines</h3>
+                    <ul class="mt-4 space-y-3 text-gray-600">
+                        <li><a href="#" class="hover:text-red-600">Spring 2026 Class Registration</a></li>
+                        <li><a href="#" class="hover:text-red-600">Study Abroad Program Apps</a></li>
+                        <li><a href="#" class="hover:text-red-600">Winter Intramural Sports Sign-up</a></li>
+                    </ul>
                 </div>
-                
-                <div class="space-y-4">
-                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.1s;">
-                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
-                            How do I reset my student portal password?
-                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
-                        </summary>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed">
-                                You can reset your password by visiting the student portal login page and clicking "Forgot Password?". You'll receive a reset link via email. If you need additional help, contact our Technical Support team at (555) 555-TECH or visit us in the IT Help Desk on the first floor of the library.
-                            </p>
-                        </div>
-                    </details>
-                    
-                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.2s;">
-                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
-                            Where can I get help with stress and anxiety?
-                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
-                        </summary>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed">
-                                Our Counseling & Mental Health services offer confidential support for stress, anxiety, and other mental health concerns. You can schedule an appointment online through the student portal, call (555) 123-HELP, or visit the Health & Wellness Center. All services are completely free and confidential for students.
-                            </p>
-                        </div>
-                    </details>
-                    
-                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.3s;">
-                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
-                            How do I find a tutor for my classes?
-                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
-                        </summary>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed">
-                                The Academic Support Center manages all tutoring services. Log into the student portal and navigate to "Academic Resources" to view available tutors, schedules, and book sessions. We offer both individual and group tutoring for most subjects, and all services are free for students.
-                            </p>
-                        </div>
-                    </details>
-                    
-                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.4s;">
-                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
-                            What financial aid resources are available?
-                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
-                        </summary>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed">
-                                Our Financial Aid office helps with FAFSA applications, scholarship searches, emergency grants, and budget planning. We also offer workshops on financial literacy and managing student debt. Visit us in the Student Services building or schedule an appointment online.
-                            </p>
-                        </div>
-                    </details>
-                    
-                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.5s;">
-                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
-                            How do I access career counseling services?
-                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
-                        </summary>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed">
-                                Career Services offers resume reviews, interview practice, job search assistance, and career planning. Book an appointment through the student portal under "Career Services" or visit us on the second floor of the Student Union. We also host regular career fairs and networking events.
-                            </p>
-                        </div>
-                    </details>
-                    
-                    <details class="group bg-white p-6 rounded-xl shadow-lg cursor-pointer animate-fade-in" style="animation-delay: 0.6s;">
-                        <summary class="font-semibold text-lg flex justify-between items-center text-dark-blue">
-                            Are these services really free for all students?
-                            <i class="fas fa-chevron-down chevron-rotate transition-transform duration-300 text-accent-red"></i>
-                        </summary>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed">
-                                Yes! All student support services are completely free and included in your student fees. This includes tutoring, counseling, career services, technical support, and administrative assistance. Our goal is to ensure every student has access to the resources they need to succeed.
-                            </p>
-                        </div>
-                    </details>
+                <div class="p-8 pt-0">
+                    <a href="#" class="font-semibold text-red-600 hover:text-red-800">See Academic Calendar →</a>
                 </div>
             </div>
-        </section>
 
-        <!-- Testimonials Section -->
-        <section class="section-spacing bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16 animate-fade-in">
-                    <h2 class="text-4xl lg:text-5xl font-bold text-dark-blue mb-4">
-                        Student Success Stories
-                    </h2>
-                    <p class="text-xl text-gray-600">
-                        Real experiences from students who found support when they needed it most
-                    </p>
+            <!-- Card 3: Scholarship Announcements -->
+            <div class="flex flex-col bg-white rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="flex-grow p-8">
+                    <!-- Icon -->
+                    <div class="inline-block bg-amber-100 text-amber-600 p-3 rounded-xl mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">Scholarship News</h3>
+                    <ul class="mt-4 space-y-3 text-gray-600">
+                        <li><a href="#" class="hover:text-amber-600">Innovation in Science Grant Opens</a></li>
+                        <li><a href="#" class="hover:text-amber-600">Alumni Arts Fellowship Winners</a></li>
+                        <li><a href="#" class="hover:text-amber-600">First-Generation Scholar Fund</a></li>
+                    </ul>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg animate-fade-in" style="animation-delay: 0.1s;">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
-                                S
-                            </div>
-                            <div class="ml-4">
-                                <p class="font-semibold text-dark-blue">Sarah M.</p>
-                                <p class="text-sm text-gray-600">Business Major</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 italic mb-4">
-                            "The tutoring program saved my GPA. I was struggling with statistics, but my tutor made everything click. Now I'm helping other students too!"
+                <div class="p-8 pt-0">
+                    <a href="#" class="font-semibold text-amber-600 hover:text-amber-800">Find Opportunities →</a>
+                </div>
+            </div>
+
+            <!-- The "Programs" card has been removed -->
+
+        </div>
+
+    </div>
+</section>
+
+<section class="bg-gray-100 py-16 px-4">
+    <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-8 tracking-wider">STUDENT SERVICES</h2>
+        
+        <!-- Main content block with blue background and white border -->
+        <div class="bg-[#3b4fe0] border-[10px] border-white p-8 sm:p-12">
+            
+            <!-- Grid container for the four services -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+
+                <!-- 1. Admissions -->
+                <div class="flex items-start fade-in-section">
+                    <div class="flex-shrink-0 w-20 h-20 border-2 border-white flex items-center justify-center mr-6">
+                        <span class="text-4xl font-bold text-white">1</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Admissions</h3>
+                        <p class="text-white opacity-90 leading-relaxed">
+                            Our admissions team provides comprehensive support to prospective students, guiding you through the application process, from understanding requirements to submitting your final application.
                         </p>
-                        <div class="flex text-yellow-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg animate-fade-in" style="animation-delay: 0.2s;">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold">
-                                M
-                            </div>
-                            <div class="ml-4">
-                                <p class="font-semibold text-dark-blue">Marcus J.</p>
-                                <p class="text-sm text-gray-600">Psychology Major</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 italic mb-4">
-                            "The counseling services helped me through a really tough time. The staff is compassionate and really understands student challenges."
-                        </p>
-                        <div class="flex text-yellow-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg animate-fade-in" style="animation-delay: 0.3s;">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold">
-                                A
-                            </div>
-                            <div class="ml-4">
-                                <p class="font-semibold text-dark-blue">Aisha K.</p>
-                                <p class="text-sm text-gray-600">Computer Science</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 italic mb-4">
-                            "Career services helped me land my dream internship. The resume workshop and mock interviews made all the difference!"
-                        </p>
-                        <div class="flex text-yellow-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Emergency Resources Section -->
-        <section class="section-spacing bg-gradient-to-r from-red-600 to-pink-600 text-white">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-                <div class="animate-fade-in">
-                    <h2 class="text-4xl lg:text-5xl font-bold mb-6">
-                        Emergency Support Available 24/7
-                    </h2>
-                    <p class="text-xl mb-8 opacity-90">
-                        If you're experiencing a crisis or emergency, help is always available. Don't wait – reach out now.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <div class="glass-effect p-6 rounded-xl">
-                            <i class="fas fa-phone text-4xl mb-4 pulse-animation"></i>
-                            <h3 class="text-2xl font-bold mb-2">Crisis Hotline</h3>
-                            <p class="text-lg font-semibold">(555) 123-9876</p>
-                            <p class="text-sm opacity-80">Available 24/7</p>
-                        </div>
-                        
-                        <div class="glass-effect p-6 rounded-xl">
-                            <i class="fas fa-comments text-4xl mb-4 pulse-animation"></i>
-                            <h3 class="text-2xl font-bold mb-2">Text Support</h3>
-                            <p class="text-lg font-semibold">Text "HELP" to 741741</p>
-                            <p class="text-sm opacity-80">Crisis Text Line</p>
-                        </div>
+                <!-- 3. Research (Placed second visually in the top row) -->
+                <div class="flex items-start fade-in-section">
+                    <div class="flex-shrink-0 w-20 h-20 border-2 border-white flex items-center justify-center mr-6">
+                        <span class="text-4xl font-bold text-white">3</span>
                     </div>
-                    
-                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md">
-                        <h4 class="text-xl font-bold mb-4">Other Emergency Contacts</h4>
-                        <div class="flex flex-wrap justify-center gap-6 text-sm">
-                            <div>
-                                <strong>Campus Security:</strong> (555) 555-SAFE
-                            </div>
-                            <div>
-                                <strong>Medical Emergency:</strong> 911
-                            </div>
-                            <div>
-                                <strong>Suicide Prevention:</strong> 988
-                            </div>
-                        </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Research</h3>
+                        <p class="text-white opacity-90 leading-relaxed">
+                            We connect students with groundbreaking research opportunities, providing access to faculty-led projects and resources to help you develop critical analytical and investigative skills.
+                        </p>
                     </div>
                 </div>
+
+                <!-- 2. Mentorship -->
+                <div class="flex items-start fade-in-section">
+                    <div class="flex-shrink-0 w-20 h-20 border-2 border-white flex items-center justify-center mr-6">
+                        <span class="text-4xl font-bold text-white">2</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Mentorship</h3>
+                        <p class="text-white opacity-90 leading-relaxed">
+                            Our mentorship program pairs students with experienced faculty and industry professionals to foster personal growth, academic success, and professional development throughout your journey.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 4. Career Guidance -->
+                <div class="flex items-start fade-in-section">
+                    <div class="flex-shrink-0 w-20 h-20 border-2 border-white flex items-center justify-center mr-6">
+                        <span class="text-4xl font-bold text-white">4</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Career Guidance</h3>
+                        <p class="text-white opacity-90 leading-relaxed">
+                            Receive expert career counseling, from resume building and interview preparation to internship placements, ensuring you are fully equipped to achieve your professional aspirations after graduation.
+                        </p>
+                    </div>
+                </div>
+
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-    </main>
-
-
-    </main>
+    </div>
+</main>
 
     <div id="footer-placeholder"></div>
-
-    <script src="/js/i18n.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script>
+      function initializePage() {
+        document.body.classList.add('is-visible');
+      }
+      function pageCleanup() {
+        // Add cleanup if future listeners/intervals are added
+      }
+    </script>
     <script src="../js/main.js" data-base-path=".."></script>
 </body>
 </html>

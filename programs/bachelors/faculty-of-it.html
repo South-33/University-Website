@@ -17,6 +17,8 @@
         .program-slideshow {
             position: relative;
             overflow: hidden;
+            /* On mobile, absolutely positioned slides don't contribute to height -> set a minimum */
+            min-height: 220px;
         }
         
         .program-slide {
@@ -37,6 +39,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        @media (min-width: 768px) {
+            /* Clear the mobile min-height on md+ so desktop layout remains as designed */
+            .program-slideshow { min-height: 0; }
         }
         
     </style>
@@ -73,14 +79,26 @@
         <section class="bg-light-lavender py-24 font-body">
             <div class="max-w-5xl mx-auto px-5 flex flex-col md:flex-row items-center gap-12 fade-in-section">
                 <div class="md:w-1/3 text-center">
-                    <img src="https://plus.unsplash.com/premium_photo-1683140661222-59e4fc995a41?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dr. Sophea Chea, Dean of IT" class="w-48 h-48 rounded-full mx-auto object-cover ring-4 ring-dark-blue/20 shadow-xl">
-                    <h3 class="font-heading text-2xl mt-6 text-dark-blue">Dr. Sophea Chea</h3>
+                    <img src="https://fit.num.edu.kh/images/203%2C186x220%2B0%2B1/18334689/Dady-EHQ8aqRKHvcaYBk0atL2oA-mUqG72WqMrcmOIpsKZ4NDA.jpg" alt="Prof. CHAY PHANG, Dean of the Faculty of Information Technology" class="w-48 h-48 md:w-56 md:h-56 rounded-full mx-auto object-cover ring-4 ring-dark-blue/20 shadow-xl">
+                    <h3 class="font-heading text-2xl mt-6 text-dark-blue">Prof. CHAY PHANG</h3>
                     <p class="text-dark-blue/70 font-medium">Dean, Faculty of Information Technology</p>
                 </div>
                 <div class="md:w-2/3 text-center md:text-left">
-                    <blockquote class="relative text-center md:text-left max-w-prose mx-auto md:mx-0">
-
-                        <p class="font-heading text-2xl md:text-3xl text-dark-blue leading-snug">"We are not just teaching technology; we are cultivating the next generation of innovators and leaders who will drive Cambodia's digital future."</p>
+                    <blockquote class="relative text-center md:text-left md:max-w-prose lg:max-w-[62ch] space-y-4 mx-auto md:mx-0">
+                        <p class="text-dark-blue/85 md:text-[1.05rem] leading-relaxed md:leading-8">
+                            Dear Prospective Students,
+                        </p>
+                        <p class="text-dark-blue/85 md:text-[1.05rem] leading-relaxed md:leading-8">
+                            Following the inspiring message from our Rector, I warmly invite you to explore the opportunities within the Faculty of Information Technology at the National University of Management (NUM). We are proud of a dynamic environment where learning meets innovation.
+                        </p>
+                        <p class="text-dark-blue/85 md:text-[1.05rem] leading-relaxed md:leading-8">
+                            Our curriculum blends solid theory with practical skills to help you thrive in the fast‑evolving tech landscape. We believe every student can lead in tech—and our mission is to equip you with the tools, knowledge, and confidence to make real impact.
+                        </p>
+                        <p class="mt-6 text-dark-blue font-semibold">Warm regards,</p>
+                        <p class="mt-2 text-dark-blue font-semibold text-base md:text-lg">
+                            Prof. CHAY PHANG<br>
+                            Dean of the Faculty of Information Technology
+                        </p>
                     </blockquote>
                 </div>
             </div>
@@ -176,11 +194,11 @@
                         <div class="bg-white/60 backdrop-blur-sm border border-indigo-100 rounded-xl p-6 shadow-sm hover:shadow-none ring-1 ring-indigo-100/60 hover:ring-[1.5px] hover:ring-indigo-300/60 transition duration-300 flex flex-col">
                             <p class="text-dark-blue/70 text-sm mb-5 text-center md:text-left">Hands-on tracks where you can build, iterate, and showcase real projects with peers and mentors.</p>
                             <div class="flex flex-wrap gap-2 sm:gap-3 justify-center md:justify-start">
-                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Website Development</span>
-                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Networking</span>
-                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Mobile & Device Applications</span>
-                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Robotics</span>
-                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20">Drone Technology</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200 cursor-pointer">Website Development</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200 cursor-pointer">Networking</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200 cursor-pointer">Mobile & Device Applications</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200 cursor-pointer">Robotics</span>
+                                <span class="bg-indigo-600/10 text-indigo-800 text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200 cursor-pointer">Drone Technology</span>
                             </div>
                             <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div class="flex items-start gap-2 text-dark-blue/80 text-sm">
@@ -220,8 +238,13 @@
                         </div>
                         <div class="p-8 md:w-2/3 flex flex-col">
                             <div class="flex-grow">
-                                <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 shadow-sm">
-                                    INTERNATIONAL
+                                <div class="flex items-center gap-2 mb-3">
+                                    <div class="inline-block bg-[#ff4747] text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                                        INTERNATIONAL
+                                    </div>
+                                    <div class="inline-block bg-indigo-700 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                                        NATIONAL
+                                    </div>
                                 </div>
                                 <h3 class="font-heading text-2xl text-dark-blue mb-3">Bachelor's Degree in Computer Science</h3>
                                 <p class="text-dark-blue/80  mb-6">Dive deep into programming, algorithms, and software architecture to build the technologies of tomorrow. This program provides a rigorous foundation in computational theory and practical software development.</p>
@@ -234,7 +257,7 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/computer-science" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -267,7 +290,7 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/information-technology" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -300,7 +323,7 @@
                                 </ul>
                             </div>
                             <div class="mt-auto pt-6">
-                                <a href="/programs/bachelors" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
+                                <a href="/programs/bachelors/business-information-technology" class="bg-dark-blue text-white rounded-full px-6 py-3 inline-block font-medium hover:opacity-85 transition-opacity">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -370,6 +393,127 @@
         </section>
 
         
+
+        <!-- FIT Club Section -->
+        <section id="fit-club" class="bg-white py-24 font-body border-t border-gray-300/60">
+            <div class="max-w-6xl mx-auto px-5 fade-in-section">
+                <div class="text-center mb-12">
+                    <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-3">FIT Club</h2>
+                    <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">A student‑led community where builders, tinkerers, and innovators collaborate to learn by doing. Join weekly meetups, ship projects, compete, and grow with peers and mentors.</p>
+                </div>
+
+                <!-- Intro / Collage -->
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div>
+                        <h3 class="font-heading text-2xl text-dark-blue mb-4">Build skills. Ship projects. Have fun.</h3>
+                        <p class="text-dark-blue/80 mb-5">From hack nights to robotics and drone squads, the FIT Club is your playground for tech exploration. Whether you're just starting or already advanced, there’s a crew and challenge for you.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-sm bg-indigo-600/10 text-indigo-800 font-medium px-3 py-1.5 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200">Weekly meetups</span>
+                            <span class="text-sm bg-indigo-600/10 text-indigo-800 font-medium px-3 py-1.5 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200">Competitions</span>
+                            <span class="text-sm bg-indigo-600/10 text-indigo-800 font-medium px-3 py-1.5 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200">Open to all levels</span>
+                            <span class="text-sm bg-indigo-600/10 text-indigo-800 font-medium px-3 py-1.5 rounded-full border border-indigo-600/20 hover:bg-indigo-600/20 hover:border-indigo-600/40 hover:text-indigo-900 transition-colors duration-200">Mentorship</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <img src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Students coding together" class="rounded-xl shadow-md h-36 sm:h-40 w-full object-cover transition-transform duration-300 ease-out hover:scale-[1.03] hover:shadow-lg">
+                        <img src="https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Robotics practice" class="rounded-xl shadow-md h-36 sm:h-40 w-full object-cover transition-transform duration-300 ease-out hover:scale-[1.03] hover:shadow-lg">
+                        <img src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team collaboration" class="rounded-xl shadow-md h-36 sm:h-40 w-full object-cover transition-transform duration-300 ease-out hover:scale-[1.03] hover:shadow-lg">
+                        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Project demo" class="rounded-xl shadow-md h-36 sm:h-40 w-full object-cover transition-transform duration-300 ease-out hover:scale-[1.03] hover:shadow-lg">
+                    </div>
+                </div>
+
+                <!-- What we do -->
+                <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-light-lavender/40 rounded-xl p-5 border border-indigo-100 shadow-sm transition-colors hover:shadow-md ring-1 ring-transparent hover:ring-indigo-200 hover:border-indigo-200 hover:bg-white" data-simulate-hover>
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center mb-3 ring-1 ring-indigo-200">
+                            <!-- Brackets icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 3.75 12l4.5 5.25M15.75 6.75 20.25 12l-4.5 5.25"/></svg>
+                        </div>
+                        <h4 class="font-semibold text-dark-blue mb-1">Hack Nights</h4>
+                        <p class="text-sm text-dark-blue/80">Rapid prototyping sessions to learn by building with peers.</p>
+                    </div>
+                    <div class="bg-light-lavender/40 rounded-xl p-5 border border-indigo-100 shadow-sm transition-colors hover:shadow-md ring-1 ring-transparent hover:ring-indigo-200 hover:border-indigo-200 hover:bg-white" data-simulate-hover>
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center mb-3 ring-1 ring-indigo-200">
+                            <!-- Rocket icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.63 8.41m5.96 5.96a14.93 14.93 0 0 1-5.84 2.58m-.12-8.54a6 6 0 0 0-7.38 5.84h4.8"/></svg>
+                        </div>
+                        <h4 class="font-semibold text-dark-blue mb-1">Robotics & Drone Squad</h4>
+                        <p class="text-sm text-dark-blue/80">Hands‑on mechatronics, flight tuning, and competitions.</p>
+                    </div>
+                    <div class="bg-light-lavender/40 rounded-xl p-5 border border-indigo-100 shadow-sm transition-colors hover:shadow-md ring-1 ring-transparent hover:ring-indigo-200 hover:border-indigo-200 hover:bg-white" data-simulate-hover>
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center mb-3 ring-1 ring-indigo-200">
+                            <!-- Device icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3h-3A1.75 1.75 0 0 0 5 4.75v14.5A1.75 1.75 0 0 0 6.75 21h3M14.25 21h3A1.75 1.75 0 0 0 19 19.25V4.75A1.75 1.75 0 0 0 17.25 3h-3"/></svg>
+                        </div>
+                        <h4 class="font-semibold text-dark-blue mb-1">Web & Mobile Dev</h4>
+                        <p class="text-sm text-dark-blue/80">Ship real apps for campus and community users.</p>
+                    </div>
+                    <div class="bg-light-lavender/40 rounded-xl p-5 border border-indigo-100 shadow-sm transition-colors hover:shadow-md ring-1 ring-transparent hover:ring-indigo-200 hover:border-indigo-200 hover:bg-white" data-simulate-hover>
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center mb-3 ring-1 ring-indigo-200">
+                            <!-- Chart icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 19.5h16.5M6 17.25v-6M12 17.25V9M18 17.25v-3"/></svg>
+                        </div>
+                        <h4 class="font-semibold text-dark-blue mb-1">Data & AI Circle</h4>
+                        <p class="text-sm text-dark-blue/80">From analytics to ML—learn pipelines, models, and deployments.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Inline Student Projects Showcase (within FIT Club section) -->
+            <div class="mt-16 pt-16 border-t border-gray-300/60 font-body fade-in-section">
+                <div class="max-w-6xl mx-auto px-5">
+                    <div class="text-center mb-16">
+                        <h2 class="font-heading text-3xl md:text-4xl text-dark-blue mb-4">Student Project Showcase</h2>
+                        <p class="text-lg text-dark-blue/80 max-w-3xl mx-auto">See what our students are creating. From autonomous drones to intelligent prosthetics, the possibilities are endless.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Project 1 -->
+                        <div class="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Autonomous delivery drone" class="absolute inset-0 w-full h-96 lg:h-[26rem] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                            <div class="relative h-96 lg:h-[26rem]"></div>
+                            <div class="absolute inset-x-0 bottom-0 p-5 text-center">
+                                <h3 class="font-heading text-xl text-white drop-shadow mb-1">Autonomous Delivery Drone</h3>
+                                <p class="text-white/95 text-sm md:text-base leading-relaxed">GPS-guided quadcopter with obstacle avoidance AI for urban delivery.</p>
+                                <div class="mt-3 flex justify-center">
+                                    <a href="../../projects/autonomous-delivery-drone.html" class="btn btn-glass inline-flex items-center">Learn more</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Project 2 -->
+                        <div class="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <img src="https://images.pexels.com/photos/220357/pexels-photo-220357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Robotic arm sorting objects" class="absolute inset-0 w-full h-96 lg:h-[26rem] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                            <div class="relative h-96 lg:h-[26rem]"></div>
+                            <div class="absolute inset-x-0 bottom-0 p-5 text-center">
+                                <h3 class="font-heading text-xl text-white drop-shadow mb-1">AI-Powered Sorting Robot</h3>
+                                <p class="text-white/95 text-sm md:text-base leading-relaxed">Computer-vision robot for conveyor sorting with 99% accuracy.</p>
+                                <div class="mt-3 flex justify-center">
+                                    <a href="../../projects/ai-powered-sorting-robot.html" class="btn btn-glass inline-flex items-center">Learn more</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Project 3 -->
+                        <div class="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-96 lg:h-[26rem] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+                                <source src="https://videos.pexels.com/video-files/6153064/6153064-uhd_2732_1440_25fps.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                            <div class="relative h-96 lg:h-[26rem]"></div>
+                            <div class="absolute inset-x-0 bottom-0 p-5 text-center">
+                                <h3 class="font-heading text-xl text-white drop-shadow mb-1">Smart Prosthetic Hand</h3>
+                                <p class="text-white/95 text-sm md:text-base leading-relaxed">Myoelectric prosthetic with adaptive grip and haptic feedback.</p>
+                                <div class="mt-3 flex justify-center">
+                                    <a href="../../projects/smart-prosthetic-hand.html" class="btn btn-glass inline-flex items-center">Learn more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Meet Our Expert Faculty -->
         <section class="bg-white py-24 font-body border-t border-gray-300/60">
